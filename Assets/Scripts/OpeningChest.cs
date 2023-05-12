@@ -19,20 +19,10 @@ public class OpeningChest : MonoBehaviour
 
     public bool[] listLock = new bool [4];
 
-    public bool lastLock;
+    private int lastLock;
 
-    public int nbForOpen;
+    private int nbForOpen;
 
-    private void Start()
-    {
-
-        
-    }
-
-    private void Update()
-    {
-
-    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -41,28 +31,48 @@ public class OpeningChest : MonoBehaviour
             Debug.Log("toucher");
             listLock[0] = true;
 
-            listLock[0] = lastLock;
+            if(lastLock == 1 || 3 == lastLock)
+            {
+                listLock[lastLock] = true;
+            }
+
+            lastLock = 0;
 
         }
         else if(collision.gameObject.tag == "Locker2")
         {
             listLock[1] = true;
 
-            listLock[1] = lastLock;
+            if (lastLock == 0 || 2 == lastLock)
+            {
+                listLock[lastLock] = true;
+            }
+
+            lastLock = 1;
 
         }
         else if(collision.gameObject.tag == "Locker3")
         {
             listLock[2] = true;
 
-            listLock[2] = lastLock;
+            if (lastLock == 1 || 3 == lastLock)
+            {
+                listLock[lastLock] = true;
+            }
+
+            lastLock = 2;
 
         }
         else if(collision.gameObject.tag == "Locker4")
         {
             listLock[3] = true;
 
-            listLock[3] = lastLock;
+            if (lastLock == 0 || 2 == lastLock)
+            {
+                listLock[lastLock] = true;
+            }
+
+            lastLock = 3;
 
         }
 
