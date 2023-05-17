@@ -4,11 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - jigsaw
-  - Locker1
-  - Locker2
-  - Locker3
-  - Locker4
+  - Object
+  - Ground
+  - Bar
+  - Simon
+  - Cursor
   layers:
   - Default
   - TransparentFX
@@ -16,6 +16,7 @@ TagManager:
   - 
   - Water
   - UI
+  - Cube
   - 
   - 
   - 
@@ -41,7 +42,6 @@ TagManager:
   - 
   - 
   - 
-  - PosProcesing
   m_SortingLayers:
   - name: Default
     uniqueID: 0
