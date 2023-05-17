@@ -15,8 +15,6 @@ public class Simon : MonoBehaviour
     {
 
         AddLights();
-
-
     }
 
     // Update is called once per frame
@@ -24,7 +22,7 @@ public class Simon : MonoBehaviour
     {
         if (ComparativeGame.Count == infiniteGame.Count)
         {
-
+            //Permet de voir si nous avons appuyer dans le bon ordre des boutons
             int nbrCorrect = 0;
             for (int i = 0; i < ComparativeGame.Count; i++)
             {
@@ -36,27 +34,21 @@ public class Simon : MonoBehaviour
 
                     if (nbrCorrect == ComparativeGame.Count)
                     {
-
+                        //Si il est bon on va pouvoir rajouter une couleur
                         foreach (string Comparative in ComparativeGame.ToList())
                         {
                             ComparativeGame.Remove(Comparative);
                         }
                         AddLights();
                     }
-                    else
-                    {
-
-                    }
-
                 }
             }
-
-
         }
     }
 
     void AddLights()
     {
+        //Permet de rajouter une couleur au hasard
         switch (Random.Range(0, 3))
         {
             case 0:
@@ -73,6 +65,7 @@ public class Simon : MonoBehaviour
     }
     IEnumerator ShowLight()
     {
+        //Permet d'afficher la couleur qu'on va devoir appuyer
         yield return new WaitForSeconds(0.2f);
         foreach (string light in infiniteGame)
         {
@@ -87,6 +80,7 @@ public class Simon : MonoBehaviour
     }
     public void AddToComparative(string theNew)
     {
+        //Indique quel bouton on a appuyer
         switch (theNew)
         {
             case "PlayButton":
@@ -99,6 +93,7 @@ public class Simon : MonoBehaviour
                 GetComponent<Simon>().ComparativeGame.Add("Settings");
                 break;
         }
+        //Permet de comparer le dernier bouton appuyer à la liste de couleur faite au hasard, si le bouton est mauvais alors le jeu es perdu
         if (ComparativeGame[ComparativeGame.Count - 1] != infiniteGame[ComparativeGame.Count - 1])
         {
             UIText.text = "Defeat";

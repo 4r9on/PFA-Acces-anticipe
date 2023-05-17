@@ -26,28 +26,34 @@ public class DragAndDrop : MonoBehaviour
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-
+        
+        //Utilise un raycast limité par un certain layer pour éviter de prendre en compte tout les objets
         if (dragged && Physics.Raycast(ray, out hit, 100, layersToHit) && draggedObject != null)
         {
             draggedObject.transform.position = hit.point;
         }
+
         else if (Physics.Raycast(ray, out hit, 10000))
         {
             GameObject thisObject = hit.transform.gameObject;
             if (isButtonDown)
             {
+                //Quand l'objet est posé on va pouvoir faire tourner l'objet dans lequel il est introduit
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.up = ((hit.point - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.position).normalized);
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles = new Vector3(0, 0, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.z);
+
+                //On va faire augmenter notre jauge ici
                 if (ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w > lastRotation || (lastRotation -ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w   > 1 &&  lastRotation > 0))
                 {
                     value++;
                 }
+
+                //On va faire décrémenter notre jauge ici
                 else if(ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w != lastRotation)
                 {
                     value--;
                 }
                 lastRotation = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w;
-                Debug.Log(ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w);
             }
             if (Input.GetMouseButtonDown(0))
             {
@@ -56,6 +62,7 @@ public class DragAndDrop : MonoBehaviour
                     draggedObject = thisObject;
                     if (draggedObject.GetComponent<ObjectToDrag>() != null)
                     {
+                        //Permet de faire tomber l'UI lorsqu'on aura clicker suffisamment dessus
                         if (draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity > 0)
                         {
                             draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity--;
@@ -87,6 +94,8 @@ public class DragAndDrop : MonoBehaviour
                 {
                     isButtonDown = true;
                 }
+
+                //Donne le nom de l'UI que l'on a cliqué dessus
                 else if(thisObject.tag == "Simon")
                 {
                     GetComponent<Simon>().AddToComparative(thisObject.name);
@@ -95,6 +104,8 @@ public class DragAndDrop : MonoBehaviour
 
 
         }
+
+        //Permet d'avoir un curseur qui nous suit
         if (CanMoveCursor)
         {
             Cursor.transform.position = new Vector3(hit.point.x, hit.point.y, 0f);

@@ -39,15 +39,23 @@ public class SliceSprite : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        //Si notre curseur touche l'UI alors on va divisé en 2 parties l'UI
+        //Plus tard on changera le curseur par un objet que notre curseur va récupérer comme un marteau
         if(collision.gameObject.tag == "Cursor" && canBreakIt)
         {
+            //Le but ici est de trouver à quel endroit est-ce qu'on a touché l'UI 
             SpriteRenderer thisSprite = GetComponent<SpriteRenderer>();
             float pourcentOfSliceX = (collision.GetContact(0).point.x - thisSprite.bounds.min.x) / (thisSprite.bounds.max.x - thisSprite.bounds.min.x);
-            Debug.Log(GetComponent<BoxCollider2D>().bounds.size);
+            
+            //On va créer un morceau de notre UI en enlevant l'autre partie
             mySprite = Sprite.Create(tex, new Rect(0, 0, tex.width * pourcentOfSliceX, tex.height), new Vector2(0.5f/pourcentOfSliceX/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3*/, 0.5f), 100.0f);
             sr.sprite = mySprite;
+
+            //On va faire suivre le collider pour éviter d'avoir un collider qui ne suit pas le morceau d'UI
             GetComponent<BoxCollider2D>().size = (mySprite.bounds.size);
+
            // GetComponent<BoxCollider2D>().offset = new Vector2(-0.5f * pourcentOfSliceX/2, 0);
+           //On va créer notre seconde partie de l'UI
             GameObject newUI = Instantiate(NewUI);
             newUI.GetComponent<SliceSprite>().mySprite = Sprite.Create(tex, new Rect(0, 0, - (tex.width - tex.width * pourcentOfSliceX), tex.height), new Vector2(0.5f / (1-pourcentOfSliceX), 0.5f), 100.0f);
             newUI.GetComponent<SliceSprite>().sr.sprite = newUI.GetComponent<SliceSprite>().mySprite;
@@ -70,6 +78,7 @@ public class SliceSprite : MonoBehaviour
 
     IEnumerator WaitToBreakIt()
     {
+        //Evite de casser en boucle l'UI
         yield return new WaitForSeconds(0.2f);
         canBreakIt = true;
     }
