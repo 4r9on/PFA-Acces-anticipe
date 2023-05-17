@@ -28,6 +28,7 @@ public class ObjectToDrag : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        //Permet de détruire certains objets quand on les laisse tomber
         if(collision.gameObject.tag == "Ground" && destroyOnGravity)
         {
             Destroy(gameObject);
