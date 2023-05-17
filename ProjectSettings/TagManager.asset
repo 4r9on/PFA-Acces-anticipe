@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Object
   - Ground
+  - Bar
+  - Simon
+  - Cursor
   layers:
   - Default
   - TransparentFX
