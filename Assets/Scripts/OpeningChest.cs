@@ -19,59 +19,58 @@ public class OpeningChest : MonoBehaviour
 
     public bool[] listLock = new bool [4];
 
-    private int lastLock;
+    public int lastLock;
 
-    private int nbForOpen;
+    public int nbForOpen;
 
 
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Locker1") // si l'objet rentre en colition avec ce tag alors
         {
-            listLock[0] = true; // l'élément de la liste passe à true
-
-            lastLock = 0; // on défit la valeur de lastLock
+            listLock[0] = true; // l'élément de la liste passe à true  
 
             if (lastLock == 1 || 3 == lastLock) // si lastLock poséde l'une des deux valeur alors
             {
                 listLock[lastLock] = true; // listLock garde l'index auquel il corespond activé
             }
 
+            lastLock = 0; // on défit la valeur de lastLock
         }
         else if(collision.gameObject.tag == "Locker2")
         {
             listLock[1] = true;
 
-            lastLock = 1;
-
             if (lastLock == 0 || 2 == lastLock)
             {
                 listLock[lastLock] = true;
             }
+
+            lastLock = 1;
 
         }
         else if(collision.gameObject.tag == "Locker3")
         {
             listLock[2] = true;
 
-            lastLock = 2;
-
             if (lastLock == 1 || 3 == lastLock)
             {
                 listLock[lastLock] = true;
             }
+
+            lastLock = 2;
 
         }
         else if(collision.gameObject.tag == "Locker4")
         {
             listLock[3] = true;
 
-            lastLock = 3;
-
             if (lastLock == 0 || 2 == lastLock)
             {
                 listLock[lastLock] = true;
             }
+
+            lastLock = 3;
 
         }
 
