@@ -849,6 +849,7 @@ MonoBehaviour:
   value: 0
   Cursor: {fileID: 1243701056}
   CanMoveCursor: 1
+  anim: {fileID: 0}
 --- !u!114 &892342285
 MonoBehaviour:
   m_ObjectHideFlags: 0

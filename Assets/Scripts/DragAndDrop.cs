@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class DragAndDrop : MonoBehaviour
 {
@@ -14,83 +15,94 @@ public class DragAndDrop : MonoBehaviour
     public GameObject Cursor;
     public bool CanMoveCursor = true;
     public RaycastHit lastHit;
+    public Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        //anim = gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-            //Barre de chargement
-            if (MovingBar)
+        //Barre de chargement
+        if (MovingBar)
+        {
+            //Quand l'objet est posé on va pouvoir faire tourner l'objet dans lequel il est introduit
+            if (value < 2.29f)
             {
-                //Quand l'objet est posé on va pouvoir faire tourner l'objet dans lequel il est introduit
-                if (value < 2.29f)
+                ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.up = ((lastHit.point - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.position).normalized);
+                ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles = new Vector3(0, 0, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.z);
+
+                //On va faire augmenter notre jauge ici
+                if (ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w > lastRotation || (lastRotation - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w > 1 && lastRotation > 0))
                 {
-                    ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.up = ((lastHit.point - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.position).normalized);
-                    ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles = new Vector3(0, 0, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.z);
+                    float theValue = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w;
 
-                    //On va faire augmenter notre jauge ici
-                    if (ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w > lastRotation || (lastRotation - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w > 1 && lastRotation > 0))
+                    if (theValue < 0)
                     {
-                        float theValue = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w;
-
-                        if (theValue < 0)
+                        if (theValue > lastRotation)
                         {
-                            if(theValue > lastRotation)
-                            {
-                                theValue = lastRotation - theValue;
-                            }
-                            theValue *= -1;
+                            theValue = lastRotation - theValue;
                         }
-                        else
+                        theValue *= -1;
+                    }
+                    else
+                    {
+                        if (theValue > lastRotation)
                         {
-                            if (theValue > lastRotation)
-                            {
-                                theValue = theValue - lastRotation;
-                            }
+                            theValue = theValue - lastRotation;
                         }
 
-                        Debug.Log("gain");
-                        value += theValue;
                     }
 
-                    //On va faire décrémenter notre jauge ici
-                    else if (ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w != lastRotation)
-                    {
-                        float theValue = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w;
-
-                        if (theValue < 0)
-                        {
-                            if (theValue < lastRotation)
-                            {
-                                theValue =  theValue - lastRotation;
-                            }
-                        }
-                        else
-                        {
-                            if (theValue < lastRotation)
-                            {
-                                theValue =   lastRotation - theValue;
-                            }
-                            theValue *= -1;
-                        }
-
-                        Debug.Log("lost");
-                        value += theValue;
-                    }
-                    lastRotation = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w;
+                    Debug.Log("gain");
+                    value += theValue;
                 }
-            }
-            if (Input.GetMouseButtonDown(0))
-            {
-                OnClicked();
+
+                //On va faire décrémenter notre jauge ici
+                else if (ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w != lastRotation)
+                {
+                    float theValue = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w;
+
+                    if (theValue < 0)
+                    {
+                        if (theValue < lastRotation)
+                        {
+                            theValue = theValue - lastRotation;
+                        }
+                    }
+                    else
+                    {
+                        if (theValue < lastRotation)
+                        {
+                            theValue = lastRotation - theValue;
+                        }
+                        theValue *= -1;
+                    }
+
+                    Debug.Log("lost");
+                    value += theValue;
+                }
+                lastRotation = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w;
             }
 
-       
-        
+            else
+            {
+                anim.SetBool("play", true);
+                anim.Play("Left_Handle_Animation");
+                Debug.Log("Non");
+            }
+
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            OnClicked();
+        }
+
+
+
 
         if (Input.GetMouseButtonUp(0))
         {
@@ -115,7 +127,7 @@ public class DragAndDrop : MonoBehaviour
     public void MoveCursor(RaycastHit hit)
     {
         //nous permet de rendre la souris invisible et non utilisable
-       // UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        // UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         if (CanMoveCursor)
         {
             Cursor.transform.position = new Vector3(hit.point.x, hit.point.y, 0f);
