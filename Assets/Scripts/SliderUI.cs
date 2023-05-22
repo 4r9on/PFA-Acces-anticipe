@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class SliderUI : MonoBehaviour
 {
     public Slider slider;
-    // Start is called before the first frame update
+    
+
     void Start()
     {
         
@@ -19,9 +20,18 @@ public class SliderUI : MonoBehaviour
     }
     public void sliderValueChanged()
     {
-        if(slider.value < 0.1f)
+
+
+
+        if(slider.value >= 10.0f)
         {
             Debug.Log("anim");
+
+        }
+        else if(slider.value <= 10.0f)
+        {
+            Debug.Log("diminu");
+            slider.value -= 1f;
         }
     }
 }
