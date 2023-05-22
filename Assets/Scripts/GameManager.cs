@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance => _instance;
     List<GameObject> ObjectPut = new List<GameObject>();
     public GameObject ObjectHover;
-    public List<GameObject> SimonUI = new List<GameObject>();
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -32,5 +31,4 @@ public class GameManager : MonoBehaviour
     {
         
     }
-
 }
