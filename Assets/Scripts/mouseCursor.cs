@@ -9,7 +9,7 @@ public class mouseCursor : MonoBehaviour
     void Start()
     {
         // Cursor.lockState = CursorLockMode.Locked ;   
-        Cursor.visible = false;
+       // Cursor.visible = false;
        // StartCoroutine(waitStop());
     }
 

@@ -82,7 +82,6 @@ public class SliceSprite : MonoBehaviour
             newTex.SetPixels(newTexturePixels);
             newTex.filterMode = FilterMode.Point;
             newTex.Apply();
-            Debug.Log(newTex);
         }
 
         // Debug.Log(transformA.position);
