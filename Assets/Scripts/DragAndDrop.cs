@@ -145,6 +145,10 @@ public class DragAndDrop : MonoBehaviour
                     {
 
                     }
+                    else if (ObjectPut.tag == "Simon" && draggedObject == ObjectPut)
+                    {
+                        Debug.Log("ez");
+                    }
                     else
                     {
                         draggedObject.GetComponent<ObjectToDrag>().destroyOnGravity = false;
@@ -182,6 +186,7 @@ public class DragAndDrop : MonoBehaviour
                     draggedObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
                     draggedObject.GetComponent<ObjectToDrag>().isPut = true;
                     ObjectPut = draggedObject;
+
                 }
 
                 StartCoroutine(draggedObject.GetComponent<ObjectToDrag>().BecomeDestroyable());
