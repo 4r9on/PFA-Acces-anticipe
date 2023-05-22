@@ -1,8 +1,15 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/TestPreProd/AurePreProd/LightingData.asset.meta
 guid: 799c2e11968f7f047a153d8b32d965ac
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 112000000
+========
+guid: d242592b3844bba4b9711b1cab4fac35
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+>>>>>>>> 53661df (drawing gauge):Assets/Prefab/Asset final/Tableau 1/Loading_bar/GameObject.controller.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 
