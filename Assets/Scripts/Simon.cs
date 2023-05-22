@@ -9,6 +9,7 @@ public class Simon : MonoBehaviour
     public List<string> infiniteGame = new List<string>();
     public List<string> ComparativeGame = new List<string>();
     public TextMeshProUGUI UIText;
+    public GameObject Jukebox;
 
     // Start is called before the first frame update
     void Start()
@@ -48,20 +49,28 @@ public class Simon : MonoBehaviour
 
     void AddLights()
     {
-        //Permet de rajouter une couleur au hasard
-        switch (Random.Range(0, 3))
+        if (infiniteGame.Count == 5)
         {
-            case 0:
-                infiniteGame.Add("Play");
-                break;
-            case 1:
-                infiniteGame.Add("Quit");
-                break;
-            case 2:
-                infiniteGame.Add("Settings");
-                break;
+            Jukebox.SetActive(true);
         }
-        StartCoroutine(ShowLight());
+
+        else
+        {
+            //Permet de rajouter une couleur au hasard
+            switch (Random.Range(0, 3))
+            {
+                case 0:
+                    infiniteGame.Add("Play");
+                    break;
+                case 1:
+                    infiniteGame.Add("Quit");
+                    break;
+                case 2:
+                    infiniteGame.Add("Settings");
+                    break;
+            }
+            StartCoroutine(ShowLight());
+        }
     }
     IEnumerator ShowLight()
     {

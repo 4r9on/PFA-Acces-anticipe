@@ -9,6 +9,7 @@ public class ObjectToDrag : MonoBehaviour
     public bool isPut;
     public int BornWithoutGravity;
     public GameObject objectToPutOn;
+    public GameObject objectCreateAfterFalling;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +32,9 @@ public class ObjectToDrag : MonoBehaviour
         //Permet de détruire certains objets quand on les laisse tomber
         if(collision.gameObject.tag == "Ground" && destroyOnGravity)
         {
+            GameObject newObject = Instantiate(objectCreateAfterFalling);
+            newObject.transform.position = gameObject.transform.position;
+            newObject.GetComponent<ObjectToDrag>().objectToPutOn = objectToPutOn;
             Destroy(gameObject);
         }
     }
