@@ -49,6 +49,9 @@ TagManager:
   - name: Background
     uniqueID: 841571169
     locked: 0
+  - name: Gear & rampe
+    uniqueID: 3444570535
+    locked: 0
   - name: Wall
     uniqueID: 4253371693
     locked: 0
