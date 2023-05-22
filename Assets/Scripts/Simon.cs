@@ -36,10 +36,7 @@ public class Simon : MonoBehaviour
                     if (nbrCorrect == ComparativeGame.Count)
                     {
                         //Si il est bon on va pouvoir rajouter une couleur
-                        foreach (string Comparative in ComparativeGame.ToList())
-                        {
-                            ComparativeGame.Remove(Comparative);
-                        }
+                        RemoveStringFromList(ComparativeGame);
                         AddLights();
                     }
                 }
@@ -51,6 +48,7 @@ public class Simon : MonoBehaviour
     {
         if (infiniteGame.Count == 5)
         {
+            RemoveStringFromList(infiniteGame);
             Jukebox.SetActive(true);
         }
 
@@ -106,10 +104,8 @@ public class Simon : MonoBehaviour
         if (ComparativeGame[ComparativeGame.Count - 1] != infiniteGame[ComparativeGame.Count - 1])
         {
             UIText.text = "Defeat";
-            foreach (string theGame in infiniteGame.ToList())
-            {
-                infiniteGame.Remove(theGame);
-            }
+            RemoveStringFromList(infiniteGame);
+            RemoveStringFromList(ComparativeGame);
             AddLights();
         }
         if (ComparativeGame.Count == infiniteGame.Count)
@@ -126,15 +122,19 @@ public class Simon : MonoBehaviour
 
                     if (nbrCorrect == ComparativeGame.Count)
                     {
-
-                        foreach (string Comparative in ComparativeGame.ToList())
-                        {
-                            ComparativeGame.Remove(Comparative);
-                        }
+                        RemoveStringFromList(ComparativeGame);
                         AddLights();
                     }
                 }
             }
+        }
+    }
+
+    void RemoveStringFromList(List<string> TheList)
+    {
+        foreach (string stringFromList in TheList.ToList())
+        {
+            TheList.Remove(stringFromList);
         }
     }
 }

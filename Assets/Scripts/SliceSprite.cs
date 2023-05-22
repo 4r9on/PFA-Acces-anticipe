@@ -42,7 +42,7 @@ public class SliceSprite : MonoBehaviour
     {
         //Si notre curseur touche l'UI alors on va divisé en 2 parties l'UI
         //Plus tard on changera le curseur par un objet que notre curseur va récupérer comme un marteau
-        if(collision.gameObject.tag == "Cursor" && canBreakIt)
+        if(collision.gameObject.tag == "Hammer" && canBreakIt)
         {
             //Le but ici est de trouver à quel endroit est-ce qu'on a touché l'UI 
             SpriteRenderer thisSprite = GetComponent<SpriteRenderer>();

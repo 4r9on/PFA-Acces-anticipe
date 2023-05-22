@@ -9,6 +9,7 @@ TagManager:
   - Bar
   - Simon
   - Cursor
+  - Hammer
   layers:
   - Default
   - TransparentFX
