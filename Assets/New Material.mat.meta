@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/New Material.mat.meta
 guid: 25271009f60b5a941aa14233036c04d9
+========
+guid: cb3f454740c6aec4e8c6acc8738ee49f
+>>>>>>>> 61ef2f52 (Ajout light & drop shadow):Assets/Prefab/Asset final/Soft round.mat.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000

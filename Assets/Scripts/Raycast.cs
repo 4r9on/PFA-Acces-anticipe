@@ -39,6 +39,31 @@ public class Raycast : MonoBehaviour
             HitToStopMouse = hit;
         }
         GetComponent<DragAndDrop>().lastHit = hit;
+     
+
+
+
+
+    /*    if (Physics2D.Raycast(ray, out hit, 10000))
+        {
+            if (!GetComponent<DragAndDrop>().dragged)
+            {
+                GetComponent<DragAndDrop>().DragSimple(hit);
+            }
+        }
+
+        //Utilise un raycast limité par un certain layer pour éviter de prendre en compte tout les objets
+
+        if (GetComponent<DragAndDrop>().dragged && Physics.Raycast(ray, out hit, 100, layersToHit) && GetComponent<DragAndDrop>().draggedObject != null)
+        {
+            GetComponent<DragAndDrop>().DragOnUsableObject(hit);
+        }
+
+        if (GetComponent<DragAndDrop>().nbrOfTimeWeTouch == 1)
+        {
+            HitToStopMouse = hit;
+        }
+        GetComponent<DragAndDrop>().lastHit = hit;*/
     }
 }
 
