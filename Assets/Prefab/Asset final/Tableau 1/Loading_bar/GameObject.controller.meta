@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/Antho/Global Volume Profile.asset.meta
+guid: d701f9a53623f7a449f4d5b3d3073386
+========
 guid: d242592b3844bba4b9711b1cab4fac35
+>>>>>>>> 27651df3 (drawing gauge):Assets/Prefab/Asset final/Tableau 1/Loading_bar/GameObject.controller.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 9100000

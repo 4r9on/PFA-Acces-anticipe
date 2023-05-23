@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Prefab/Asset final/Soft round.mat.meta
 guid: cb3f454740c6aec4e8c6acc8738ee49f
+========
+guid: db46df655c697434ea707f1ea3517abc
+>>>>>>>> 61ef2f52 (Ajout light & drop shadow):Assets/Scenes/Antho/Global Volume Profile.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000

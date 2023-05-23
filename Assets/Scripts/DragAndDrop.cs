@@ -34,7 +34,7 @@ public class DragAndDrop : MonoBehaviour
         //Barre de chargement
         if (MovingBar)
         {
-            //Quand l'objet est posé on va pouvoir faire tourner l'objet dans lequel il est introduit
+            //Quand l'objet est posï¿½ on va pouvoir faire tourner l'objet dans lequel il est introduit
             if (value < 2.29f)
             {
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.up = ((lastHit.point - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.position).normalized);
@@ -65,7 +65,7 @@ public class DragAndDrop : MonoBehaviour
                     value += theValue;
                 }
 
-                //On va faire décrémenter notre jauge ici
+                //On va faire dï¿½crï¿½menter notre jauge ici
                 else if (ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w != lastRotation)
                 {
                     float theValue = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w;
@@ -119,7 +119,7 @@ public class DragAndDrop : MonoBehaviour
 
     //Permet d'avoir un curseur qui nous suit
     //Pour changer de curseur il faut changer la texture info en curseur
-    //Ce move curseur sera utile UNIQUEMENT quand on va arrêter le curseur
+    //Ce move curseur sera utile UNIQUEMENT quand on va arrï¿½ter le curseur
 
     void OnClicked()
     {
@@ -146,7 +146,10 @@ public class DragAndDrop : MonoBehaviour
                     {
 
                     }
-
+                    else if (ObjectPut.tag == "Simon" && draggedObject == ObjectPut)
+                    {
+                        Debug.Log("ez");
+                    }
                     else
                     {
                         draggedObject.GetComponent<ObjectToDrag>().destroyOnGravity = false;
@@ -163,7 +166,7 @@ public class DragAndDrop : MonoBehaviour
             MovingBar = true;
         }
 
-        //Donne le nom de l'UI que l'on a cliqué dessus
+        //Donne le nom de l'UI que l'on a cliquï¿½ dessus
         else if (GameManager.Instance.ObjectHover.tag == "Simon")
         {
             if (ObjectPut != null)
@@ -189,11 +192,11 @@ public class DragAndDrop : MonoBehaviour
                                         Debug.Log("touche une seconde fois");
                                         break;
                                     case 2:
-                                        Debug.Log("Détruit l'UI");
+                                        Debug.Log("Dï¿½truit l'UI");
                                         //nous permet de rendre la souris invisible et non utilisable
                                         Cursor.lockState = CursorLockMode.Locked;
                                         
-                                        //On va utiliser un faux curseur pour empêcher le joueur de l'utiliser
+                                        //On va utiliser un faux curseur pour empï¿½cher le joueur de l'utiliser
                                         cursor.SetActive(true);
                                         cursor.transform.position = new Vector3(GetComponent<Raycast>().HitToStopMouse.point.x, GetComponent<Raycast>().HitToStopMouse.point.y, 0f);
                                         break;
