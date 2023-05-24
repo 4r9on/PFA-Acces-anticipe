@@ -114,6 +114,7 @@ public class DragAndDrop : MonoBehaviour
     public void DragOnUsableObject(RaycastHit hit)
     {
         GameManager.Instance.ObjectHover = hit.transform.gameObject;
+        Debug.Log(hit.point);
         draggedObject.transform.position = hit.point;
     }
 
