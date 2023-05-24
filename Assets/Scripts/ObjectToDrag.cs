@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class ObjectToDrag : MonoBehaviour
+public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public bool destroyOnGravity;
     public bool canPutObject;
@@ -13,7 +15,7 @@ public class ObjectToDrag : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -37,5 +39,39 @@ public class ObjectToDrag : MonoBehaviour
             newObject.GetComponent<ObjectToDrag>().objectToPutOn = objectToPutOn;
             Destroy(gameObject);
         }
+    }
+
+    public void OnPointerExit(PointerEventData pointerEventData)
+    {
+        GameManager.Instance.ObjectHover = null;
+        //Output the following message with the GameObject's name
+    }
+    public void OnPointerEnter(PointerEventData pointerEventData)
+    {
+        GameManager.Instance.ObjectHover = gameObject;
+        //Output to console the GameObject's name and the following message
+    }
+    public void OnPointerDown(PointerEventData pointerEventData)
+    {
+        GameManager.Instance.GetComponent<DragAndDrop>().OnClicked();
+        //Output the name of the GameObject that is being clicked
+       
+        GameManager.Instance.GetComponent<Physics2DRaycaster>().eventMask = 118;
+       
+    }
+
+    public void OnPointerUp(PointerEventData pointerEventData)
+    {
+      //  Debug.Log(gameObject.name);
+        GameManager.Instance.GetComponent<Physics2DRaycaster>().eventMask = int.MaxValue;
+        if (gameObject.layer == 6)
+        {
+            GameManager.Instance.ObjectHover = gameObject;
+        }
+        else if(GameManager.Instance.GetComponent<DragAndDrop>().draggedObject == gameObject)
+        {
+            GameManager.Instance.GetComponent<DragAndDrop>().StopClick();
+        }
+        
     }
 }
