@@ -56,6 +56,9 @@ TagManager:
   - name: Wall
     uniqueID: 4253371693
     locked: 0
+  - name: Jukebox Light
+    uniqueID: 3048918879
+    locked: 0
   - name: Principal Subject
     uniqueID: 1912269735
     locked: 0
