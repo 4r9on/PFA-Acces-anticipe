@@ -62,6 +62,9 @@ TagManager:
   - name: Principal Subject
     uniqueID: 1912269735
     locked: 0
+  - name: Test shadow cast
+    uniqueID: 3937466391
+    locked: 0
   - name: Particles
     uniqueID: 3754234063
     locked: 0
