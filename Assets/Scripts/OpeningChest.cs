@@ -116,6 +116,7 @@ public class OpeningChest : MonoBehaviour
         if (nbForOpen == 4)
         {
             enterChest.transform.position = new Vector3(0, 0, -1);
+            Debug.Log("Open");
         }
     }
 
