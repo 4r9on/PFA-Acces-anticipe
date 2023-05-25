@@ -186,6 +186,7 @@ public class DragAndDrop : MonoBehaviour
                     {
                         if (SimonUI.name == "PlayButton")
                         {
+                            float timing = 0;
                             if (SimonUI.GetComponent<SpriteRenderer>().color == Color.white)
                             {
                                 SimonUI.GetComponent<SpriteRenderer>().color = oldColor;
@@ -196,12 +197,15 @@ public class DragAndDrop : MonoBehaviour
                                 {
                                     case 0:
                                         Debug.Log("touche une fois");
+                                        timing = 0.5f;
                                         break;
                                     case 1:
                                         Debug.Log("touche une seconde fois");
+                                        timing = 0.4f;
                                         break;
                                     case 2:
                                         Debug.Log("Detruit l'UI");
+                                        timing = 0.3f;
                                         //nous permet de rendre la souris invisible et non utilisable
                                         Cursor.lockState = CursorLockMode.Locked;
                                         
@@ -210,6 +214,7 @@ public class DragAndDrop : MonoBehaviour
                                         cursor.transform.position = new Vector3(GetComponent<Raycast>().HitToStopMouse.point.x, GetComponent<Raycast>().HitToStopMouse.point.y, 0f);
                                         break;
                                 }
+                                StartCoroutine(TouchUI(SimonUI, timing));
                                 SimonUI.GetComponent<SpriteRenderer>().color = Color.white;
                                 nbrOfTimeWeTouch++;
                             }
@@ -250,6 +255,12 @@ public class DragAndDrop : MonoBehaviour
         draggedObject = null;
 
 
+    }
+
+    IEnumerator TouchUI(GameObject SimonUI, float timing)
+    {
+        yield return new WaitForSeconds(timing);
+        SimonUI.GetComponent<SpriteRenderer>().color = oldColor;
     }
 
 

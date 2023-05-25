@@ -36,7 +36,13 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(painting && collision.gameObject.tag == "Ground")
+        if (painting)
+        {
+
+            objectToPutOn.SetActive(true);
+            objectToPutOn = null;
+        }
+        if (painting && collision.gameObject.tag == "Ground")
         {
             foreach(Transform children in transform)
             {
@@ -48,6 +54,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             //Permet de détruire certains objets quand on les laisse tomber
             else if (collision.gameObject.tag == "Ground" && destroyOnGravity)
         {
+            
             GameObject newObject = Instantiate(objectCreateAfterFalling);
             newObject.transform.position = gameObject.transform.position;
             newObject.GetComponent<ObjectToDrag>().objectToPutOn = objectToPutOn;

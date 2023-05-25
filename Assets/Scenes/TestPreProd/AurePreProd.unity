@@ -497,6 +497,7 @@ Transform:
   - {fileID: 1951025008}
   - {fileID: 970120282}
   - {fileID: 20104436}
+  - {fileID: 1718532249}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1485,7 +1486,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &370834767
 Transform:
   m_ObjectHideFlags: 0
@@ -1504,7 +1505,6 @@ Transform:
   - {fileID: 793679858}
   - {fileID: 430929134}
   - {fileID: 1655836139}
-  - {fileID: 1718532249}
   m_Father: {fileID: 89547616}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2778,7 +2778,7 @@ MonoBehaviour:
   canPutObject: 0
   isPut: 0
   BornWithoutGravity: 1
-  objectToPutOn: {fileID: 0}
+  objectToPutOn: {fileID: 370834766}
   objectCreateAfterFalling: {fileID: 0}
   painting: 1
   child: 0
@@ -4271,7 +4271,7 @@ GameObject:
   - component: {fileID: 1718532252}
   - component: {fileID: 1718532251}
   - component: {fileID: 1718532250}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere (1)
   m_TagString: Object
   m_Icon: {fileID: 0}
@@ -4286,12 +4286,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1718532248}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.479, y: -0.434, z: 0}
-  m_LocalScale: {x: 0.39598194, y: 0.40095514, z: 3}
+  m_LocalPosition: {x: -15.409346, y: 1.4423542, z: 61.74}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 370834767}
-  m_RootOrder: 6
+  m_Father: {fileID: 89547616}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1718532250
 Rigidbody2D:
