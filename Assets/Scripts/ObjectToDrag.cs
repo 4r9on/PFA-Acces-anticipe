@@ -12,6 +12,8 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public int BornWithoutGravity;
     public GameObject objectToPutOn;
     public GameObject objectCreateAfterFalling;
+    public bool painting;
+    public bool child;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +23,10 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     // Update is called once per frame
     void Update()
     {
-        
+        if (child)
+        {
+            transform.localPosition = new Vector2(0, 0);
+        }
     }
 
     public IEnumerator BecomeDestroyable()
@@ -31,8 +36,17 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //Permet de détruire certains objets quand on les laisse tomber
-        if(collision.gameObject.tag == "Ground" && destroyOnGravity)
+        if(painting && collision.gameObject.tag == "Ground")
+        {
+            foreach(Transform children in transform)
+            {
+                children.GetComponent<Rigidbody2D>().gravityScale = 0;
+                children.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+               
+            }
+        }
+            //Permet de détruire certains objets quand on les laisse tomber
+            else if (collision.gameObject.tag == "Ground" && destroyOnGravity)
         {
             GameObject newObject = Instantiate(objectCreateAfterFalling);
             newObject.transform.position = gameObject.transform.position;
@@ -53,10 +67,13 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     }
     public void OnPointerDown(PointerEventData pointerEventData)
     {
-        Debug.Log("here we are");   
+        if (child)
+        {
+            child = false;  
+            transform.SetParent(transform.parent.transform.parent, true);
+        }
         GameManager.Instance.GetComponent<DragAndDrop>().OnClicked();
         //Output the name of the GameObject that is being clicked
-       
         GameManager.Instance.GetComponent<Physics2DRaycaster>().eventMask = 118;
        
     }

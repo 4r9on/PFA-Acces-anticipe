@@ -14,7 +14,7 @@ public class HammerPhysics : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      //  GetComponent<Rigidbody>().angularVelocity = transform.forward * 3;
+       GetComponent<Rigidbody2D>().rotation =  100;
      /*   transform.up = direction.transform.position;
         transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z);*/
     }

@@ -10,6 +10,11 @@ TagManager:
   - Simon
   - Cursor
   - Hammer
+  - Locker2
+  - Locker4
+  - Locker3
+  - Locker1
+  - jigsaw
   layers:
   - Default
   - TransparentFX
@@ -18,7 +23,7 @@ TagManager:
   - Water
   - UI
   - Cube
-  - 
+  - Object
   - 
   - 
   - 

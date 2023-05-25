@@ -140,6 +140,11 @@ public class DragAndDrop : MonoBehaviour
                     if (draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity == 0)
                     {
                         draggedObject.GetComponent<Rigidbody2D>().gravityScale = 1;
+                        foreach (Transform children in draggedObject.transform)
+                        {
+                            Debug.Log(children);
+                            children.GetComponent<Rigidbody2D>().gravityScale = 1;
+                        }
                     }
                     draggedObject = null;
                 }
