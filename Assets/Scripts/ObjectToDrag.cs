@@ -29,7 +29,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         yield return new WaitForSeconds(1f);
         destroyOnGravity = true;
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         //Permet de détruire certains objets quand on les laisse tomber
         if(collision.gameObject.tag == "Ground" && destroyOnGravity)
@@ -53,6 +53,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     }
     public void OnPointerDown(PointerEventData pointerEventData)
     {
+        Debug.Log("here we are");   
         GameManager.Instance.GetComponent<DragAndDrop>().OnClicked();
         //Output the name of the GameObject that is being clicked
        

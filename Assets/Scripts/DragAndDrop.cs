@@ -129,7 +129,6 @@ public class DragAndDrop : MonoBehaviour
     {
         if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer")
         {
-            Debug.Log("take");
             draggedObject = GameManager.Instance.ObjectHover;
             if (draggedObject.GetComponent<ObjectToDrag>() != null)
             {
@@ -139,7 +138,7 @@ public class DragAndDrop : MonoBehaviour
                     draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity--;
                     if (draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity == 0)
                     {
-                      //  draggedObject.GetComponent<Rigidbody>().useGravity = true;
+                        draggedObject.GetComponent<Rigidbody2D>().gravityScale = 1;
                     }
                     draggedObject = null;
                 }
