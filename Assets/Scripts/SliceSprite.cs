@@ -45,22 +45,19 @@ public class SliceSprite : MonoBehaviour
             Debug.Log(collision.GetContact(0).point.x - thisSprite.bounds.max.x);
             Debug.Log(collision.GetContact(0).point.y - thisSprite.bounds.max.y);
             Debug.Log(collision.GetContact(0).normal);
-            bool isX = true;
             if (Mathf.Abs(collision.GetContact(0).normal.x) < Mathf.Abs(collision.GetContact(0).normal.y))
             {
-                isX = false;
+                sliceX(collision, thisSprite);
             }
             else
             {
-                float pourcentOfSliceY = (collision.GetContact(0).point.y - thisSprite.bounds.min.y) / (thisSprite.bounds.max.y - thisSprite.bounds.min.y);
-                mySprite = Sprite.Create(tex, new Rect(0, 0, tex.width, (int)(tex.height * pourcentOfSliceY)), new Vector2(0.5f /*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3*/, 0.5f / pourcentOfSliceY), 100.0f);
-                sr.sprite = mySprite;
+                sliceY(collision, thisSprite);
             }
-            // Debug.Log(collision.contacts.LongLength);
+          /*  // Debug.Log(collision.contacts.LongLength);
             float pourcentOfSliceX = (collision.GetContact(0).point.x - thisSprite.bounds.min.x) / (thisSprite.bounds.max.x - thisSprite.bounds.min.x);
 
             //On va creer un morceau de notre UI en enlevant l'autre partie
-            mySprite = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * pourcentOfSliceX), tex.height), new Vector2(0.5f/pourcentOfSliceX/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3*/, 0.5f), 100.0f);
+            mySprite = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * pourcentOfSliceX), tex.height), new Vector2(0.5f/pourcentOfSliceX/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3*//*, 0.5f), 100.0f);
             sr.sprite = mySprite;
             
             //On va faire suivre le collider pour eviter d'avoir un collider qui ne suit pas le morceau d'UI
@@ -96,7 +93,7 @@ public class SliceSprite : MonoBehaviour
             Color[] newTexturePixels = newSprite.texture.GetPixels((int)newSprite.textureRect.x, (int)newSprite.textureRect.y, -(int)newSprite.textureRect.width, (int)newSprite.textureRect.height);
             newTex.SetPixels(newTexturePixels);
             newTex.filterMode = FilterMode.Point;
-            newTex.Apply();
+            newTex.Apply();*/
         }
 
         // Debug.Log(transformA.position);
@@ -118,5 +115,92 @@ public class SliceSprite : MonoBehaviour
         //Evite de casser en boucle l'UI
         yield return new WaitForSeconds(0.2f);
         canBreakIt = true;
+    }
+
+    void sliceX(Collision2D collision, SpriteRenderer thisSprite)
+    {
+
+        float pourcentOfSliceX = (collision.GetContact(0).point.x - thisSprite.bounds.min.x) / (thisSprite.bounds.max.x - thisSprite.bounds.min.x);
+
+        //On va creer un morceau de notre UI en enlevant l'autre partie
+        mySprite = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * pourcentOfSliceX), tex.height), new Vector2(0.5f / pourcentOfSliceX/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3*/, 0.5f), 100.0f);
+        sr.sprite = mySprite;
+
+        //On va faire suivre le collider pour eviter d'avoir un collider qui ne suit pas le morceau d'UI
+        BoxCollider2D theCollider = GetComponent<BoxCollider2D>();
+        float sizeXTotal = theCollider.size.x;
+        theCollider.size = (mySprite.bounds.size);
+        theCollider.offset = new Vector2((-sizeXTotal + theCollider.size.x) / 2, 0);
+
+
+        //On va creer notre seconde partie de l'UI
+        Debug.Log("another one");
+        GameObject newUI = Instantiate(NewUI);
+        newUI.transform.parent = transform.parent;
+        newUI.transform.position = transform.position;
+        Sprite newSprite = newUI.GetComponent<SliceSprite>().mySprite;
+
+        newSprite = Sprite.Create(tex, new Rect(0, 0, -(int)(tex.width - tex.width * pourcentOfSliceX), tex.height), new Vector2(0.5f / (1 - pourcentOfSliceX), 0.5f), 100.0f);
+
+        newUI.GetComponent<SliceSprite>().sr.sprite = newSprite;
+
+        newUI.GetComponent<BoxCollider2D>().size = (newSprite.bounds.size);
+        newUI.GetComponent<BoxCollider2D>().offset = new Vector2((sizeXTotal - newUI.GetComponent<BoxCollider2D>().size.x) / 2, 0);
+        // GetComponent<Rigidbody2D>().gravityScale = 1.0f;
+
+        tex = new Texture2D((int)mySprite.rect.width, (int)mySprite.rect.height);
+        Color[] TexturePixels = mySprite.texture.GetPixels((int)mySprite.textureRect.x, (int)mySprite.textureRect.y, (int)mySprite.textureRect.width, (int)mySprite.textureRect.height);
+        tex.SetPixels(TexturePixels);
+        tex.filterMode = FilterMode.Point;
+        tex.Apply();
+
+        Texture2D newTex = newUI.GetComponent<SliceSprite>().tex;
+        newTex = new Texture2D(-(int)newSprite.rect.width, (int)newSprite.rect.height);
+        Color[] newTexturePixels = newSprite.texture.GetPixels((int)newSprite.textureRect.x, (int)newSprite.textureRect.y, -(int)newSprite.textureRect.width, (int)newSprite.textureRect.height);
+        newTex.SetPixels(newTexturePixels);
+        newTex.filterMode = FilterMode.Point;
+        newTex.Apply();
+    }
+    void sliceY(Collision2D collision, SpriteRenderer thisSprite)
+    {
+        //On va creer un morceau de notre UI en enlevant l'autre partie
+        float pourcentOfSlice = (collision.GetContact(0).point.y - thisSprite.bounds.min.y) / (thisSprite.bounds.max.y - thisSprite.bounds.min.y);
+        mySprite = Sprite.Create(tex, new Rect(0, 0, tex.width, (int)(tex.height * pourcentOfSlice)), new Vector2(0.5f /*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3*/, 0.5f / pourcentOfSlice), 100.0f);
+        sr.sprite = mySprite;
+
+        //On va faire suivre le collider pour eviter d'avoir un collider qui ne suit pas le morceau d'UI
+        BoxCollider2D theCollider = GetComponent<BoxCollider2D>();
+        float sizeTotal = theCollider.size.y;
+        theCollider.size = (mySprite.bounds.size);
+        theCollider.offset = new Vector2(0, (-sizeTotal + theCollider.size.y) / 2);
+
+
+        //On va creer notre seconde partie de l'UI
+        Debug.Log("another one");
+        GameObject newUI = Instantiate(NewUI);
+        newUI.transform.parent = transform.parent;
+        newUI.transform.position = transform.position;
+        Sprite newSprite = newUI.GetComponent<SliceSprite>().mySprite;
+
+        newSprite = Sprite.Create(tex, new Rect(0, 0, tex.width, -(int)(tex.height - tex.height * pourcentOfSlice)), new Vector2(0.5f, 0.5f / (1 - pourcentOfSlice)), 100.0f);
+
+        newUI.GetComponent<SliceSprite>().sr.sprite = newSprite;
+
+        newUI.GetComponent<BoxCollider2D>().size = (newSprite.bounds.size);
+        newUI.GetComponent<BoxCollider2D>().offset = new Vector2(0, (sizeTotal - newUI.GetComponent<BoxCollider2D>().size.y) / 2);
+        // GetComponent<Rigidbody2D>().gravityScale = 1.0f;
+
+        tex = new Texture2D((int)mySprite.rect.width, (int)mySprite.rect.height);
+        Color[] TexturePixels = mySprite.texture.GetPixels((int)mySprite.textureRect.x, (int)mySprite.textureRect.y, (int)mySprite.textureRect.width, (int)mySprite.textureRect.height);
+        tex.SetPixels(TexturePixels);
+        tex.filterMode = FilterMode.Point;
+        tex.Apply();
+
+        Texture2D newTex = newUI.GetComponent<SliceSprite>().tex;
+        newTex = new Texture2D(-(int)newSprite.rect.width, (int)newSprite.rect.height);
+        Color[] newTexturePixels = newSprite.texture.GetPixels((int)newSprite.textureRect.x, (int)newSprite.textureRect.y, -(int)newSprite.textureRect.width, (int)newSprite.textureRect.height);
+        newTex.SetPixels(newTexturePixels);
+        newTex.filterMode = FilterMode.Point;
+        newTex.Apply();
     }
 }
