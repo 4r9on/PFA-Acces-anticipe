@@ -33,29 +33,29 @@ public class SliceSprite : MonoBehaviour
 
 
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        //Si notre curseur touche l'UI alors on va divisé en 2 parties l'UI
-        //Plus tard on changera le curseur par un objet que notre curseur va récupérer comme un marteau
+        //Si notre curseur touche l'UI alors on va divisï¿½ en 2 parties l'UI
+        //Plus tard on changera le curseur par un objet que notre curseur va rï¿½cupï¿½rer comme un marteau
         if (collision.gameObject.tag == "Hammer" && canBreakIt)
         {
             
-            //Le but ici est de trouver à quel endroit est-ce qu'on a touché l'UI 
+            //Le but ici est de trouver ï¿½ quel endroit est-ce qu'on a touchï¿½ l'UI 
             SpriteRenderer thisSprite = GetComponent<SpriteRenderer>();
             float pourcentOfSliceX = (collision.GetContact(0).point.x - thisSprite.bounds.min.x) / (thisSprite.bounds.max.x - thisSprite.bounds.min.x);
 
-            //On va créer un morceau de notre UI en enlevant l'autre partie
+            //On va crï¿½er un morceau de notre UI en enlevant l'autre partie
             mySprite = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * pourcentOfSliceX), tex.height), new Vector2(0.5f/pourcentOfSliceX/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3*/, 0.5f), 100.0f);
             sr.sprite = mySprite;
             
-            //On va faire suivre le collider pour éviter d'avoir un collider qui ne suit pas le morceau d'UI
-            BoxCollider theCollider = GetComponent<BoxCollider>();
+            //On va faire suivre le collider pour ï¿½viter d'avoir un collider qui ne suit pas le morceau d'UI
+            BoxCollider2D theCollider = GetComponent<BoxCollider2D>();
             float sizeXTotal = theCollider.size.x;
             theCollider.size = (mySprite.bounds.size);
-            theCollider.center = new Vector2((-sizeXTotal + theCollider.size.x)/2, 0);
+            theCollider.offset = new Vector2((-sizeXTotal + theCollider.size.x)/2, 0);
 
 
-            //On va créer notre seconde partie de l'UI
+            //On va crï¿½er notre seconde partie de l'UI
             Debug.Log("another one");
             GameObject newUI = Instantiate(NewUI);
             newUI.transform.parent = transform.parent;
@@ -66,8 +66,8 @@ public class SliceSprite : MonoBehaviour
             
             newUI.GetComponent<SliceSprite>().sr.sprite = newSprite;
 
-            newUI.GetComponent<BoxCollider>().size = (newSprite.bounds.size);
-            newUI.GetComponent<BoxCollider>().center = new Vector2((sizeXTotal - newUI.GetComponent<BoxCollider>().size.x) / 2, 0);
+            newUI.GetComponent<BoxCollider2D>().size = (newSprite.bounds.size);
+            newUI.GetComponent<BoxCollider2D>().offset = new Vector2((sizeXTotal - newUI.GetComponent<BoxCollider2D>().size.x) / 2, 0);
             // GetComponent<Rigidbody2D>().gravityScale = 1.0f;
 
             tex = new Texture2D((int)mySprite.rect.width, (int)mySprite.rect.height);

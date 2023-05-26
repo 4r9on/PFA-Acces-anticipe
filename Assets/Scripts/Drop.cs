@@ -32,7 +32,7 @@ public class Drop : MonoBehaviour
         Debug.Log("Tourner");
         turn = true;
        
-        if(turn = true)
+        if(turn)
         {
             Transform randomPoint = spawPoints[Random.Range(0, spawPoints.Length)];
             GameObject instantiated = Instantiate(test);
