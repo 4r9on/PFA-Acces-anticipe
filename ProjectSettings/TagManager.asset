@@ -15,6 +15,7 @@ TagManager:
   - Locker3
   - Locker1
   - jigsaw
+  - ButtonON
   layers:
   - Default
   - TransparentFX

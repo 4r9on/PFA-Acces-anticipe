@@ -251,6 +251,10 @@ public class DragAndDrop : MonoBehaviour
             }
 
         }
+        else if(GameManager.Instance.ObjectHover.tag == "ButtonON")
+        {
+            GameManager.Instance.AllText.GetComponent<ElevateText>().RotateIt();
+        }
     }
     public void StopClick()
     {
