@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public GameObject ObjectHover;
     public GameObject AllText;
     public List<GameObject> SimonUI = new List<GameObject>();
+    public List<GameObject> breakableUI = new List<GameObject>();
+    string tableau;
     private void Awake()
     {
         if (_instance != null && _instance != this)

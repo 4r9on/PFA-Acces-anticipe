@@ -37,6 +37,11 @@ public class SliceSprite : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground")
         {
+            GameManager.Instance.breakableUI.Remove(gameObject);
+            if (GameManager.Instance.breakableUI.Count == 0 )
+            {
+                GameManager.Instance.GetComponent<LaunchBat>().ExitAppThenRestart();
+            }
             Destroy(gameObject);
         }
         //Si notre curseur touche l'UI alors on va divise en 2 parties l'UI
@@ -136,6 +141,7 @@ public class SliceSprite : MonoBehaviour
 
         //On va creer notre seconde partie de l'UI
         GameObject newUI = Instantiate(NewUI);
+        GameManager.Instance.breakableUI.Add(newUI);
         newUI.transform.parent = transform.parent;
         newUI.transform.position = transform.position;
         Sprite newSprite = newUI.GetComponent<SliceSprite>().mySprite;
