@@ -148,10 +148,8 @@ public class SliceSprite : MonoBehaviour
         newUI.GetComponent<BoxCollider2D>().size = (newSprite.bounds.size);
         newUI.GetComponent<BoxCollider2D>().offset = new Vector2((sizeXTotal - newUI.GetComponent<BoxCollider2D>().size.x) / 2, 0);
         // GetComponent<Rigidbody2D>().gravityScale = 1.0f;
-        print((int)mySprite.textureRect.x);
-        print((int)mySprite.textureRect.y);
-        print((int)mySprite.textureRect.width);
-        print((int)mySprite.textureRect.height);
+        GetComponent<Rigidbody2D>().velocity = new Vector2(-1, -2)*5;
+
         tex = new Texture2D((int)mySprite.rect.width, (int)mySprite.rect.height);
         Color[] TexturePixels = mySprite.texture.GetPixels((int)mySprite.textureRect.x, (int)mySprite.textureRect.y, (int)mySprite.textureRect.width, (int)mySprite.textureRect.height);
         tex.SetPixels(TexturePixels);
@@ -193,6 +191,7 @@ public class SliceSprite : MonoBehaviour
         newUI.GetComponent<BoxCollider2D>().size = (newSprite.bounds.size);
         newUI.GetComponent<BoxCollider2D>().offset = new Vector2(0, (sizeTotal - newUI.GetComponent<BoxCollider2D>().size.y) / 2);
         // GetComponent<Rigidbody2D>().gravityScale = 1.0f;
+        GetComponent<Rigidbody2D>().velocity = new Vector2(-1, -2);
 
         tex = new Texture2D((int)mySprite.rect.width, (int)mySprite.rect.height);
         Color[] TexturePixels = mySprite.texture.GetPixels((int)mySprite.textureRect.x, (int)mySprite.textureRect.y, (int)mySprite.textureRect.width, (int)mySprite.textureRect.height);
