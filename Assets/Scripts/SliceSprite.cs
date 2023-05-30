@@ -35,6 +35,10 @@ public class SliceSprite : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.tag == "Ground")
+        {
+            Destroy(gameObject);
+        }
         //Si notre curseur touche l'UI alors on va divise en 2 parties l'UI
         //Plus tard on changera le curseur par un objet que notre curseur va recuperer comme un marteau
         if (collision.gameObject.tag == "Hammer" && canBreakIt)
@@ -42,16 +46,13 @@ public class SliceSprite : MonoBehaviour
             
             //Le but ici est de trouver a quel endroit est-ce qu'on a touche l'UI 
             SpriteRenderer thisSprite = GetComponent<SpriteRenderer>();
-            Debug.Log(collision.GetContact(0).point.x - thisSprite.bounds.max.x);
-            Debug.Log(collision.GetContact(0).point.y - thisSprite.bounds.max.y);
-            Debug.Log(collision.GetContact(0).normal);
             if (Mathf.Abs(collision.GetContact(0).normal.x) < Mathf.Abs(collision.GetContact(0).normal.y))
             {
-                sliceX(collision, thisSprite);
+               sliceX(collision, thisSprite);
             }
             else
             {
-                sliceY(collision, thisSprite);
+               sliceY(collision, thisSprite);
             }
           /*  // Debug.Log(collision.contacts.LongLength);
             float pourcentOfSliceX = (collision.GetContact(0).point.x - thisSprite.bounds.min.x) / (thisSprite.bounds.max.x - thisSprite.bounds.min.x);
@@ -134,12 +135,12 @@ public class SliceSprite : MonoBehaviour
 
 
         //On va creer notre seconde partie de l'UI
-        Debug.Log("another one");
         GameObject newUI = Instantiate(NewUI);
         newUI.transform.parent = transform.parent;
         newUI.transform.position = transform.position;
         Sprite newSprite = newUI.GetComponent<SliceSprite>().mySprite;
-
+        print(-(int)(tex.width - tex.width * pourcentOfSliceX));
+        print(tex.width);
         newSprite = Sprite.Create(tex, new Rect(0, 0, -(int)(tex.width - tex.width * pourcentOfSliceX), tex.height), new Vector2(0.5f / (1 - pourcentOfSliceX), 0.5f), 100.0f);
 
         newUI.GetComponent<SliceSprite>().sr.sprite = newSprite;
@@ -147,6 +148,7 @@ public class SliceSprite : MonoBehaviour
         newUI.GetComponent<BoxCollider2D>().size = (newSprite.bounds.size);
         newUI.GetComponent<BoxCollider2D>().offset = new Vector2((sizeXTotal - newUI.GetComponent<BoxCollider2D>().size.x) / 2, 0);
         // GetComponent<Rigidbody2D>().gravityScale = 1.0f;
+        
 
         tex = new Texture2D((int)mySprite.rect.width, (int)mySprite.rect.height);
         Color[] TexturePixels = mySprite.texture.GetPixels((int)mySprite.textureRect.x, (int)mySprite.textureRect.y, (int)mySprite.textureRect.width, (int)mySprite.textureRect.height);
@@ -155,11 +157,25 @@ public class SliceSprite : MonoBehaviour
         tex.Apply();
 
         Texture2D newTex = newUI.GetComponent<SliceSprite>().tex;
-        newTex = new Texture2D(-(int)newSprite.rect.width, (int)newSprite.rect.height);
+        newUI.GetComponent<SliceSprite>().tex = new Texture2D(-(int)newSprite.rect.width, (int)newSprite.rect.height);
         Color[] newTexturePixels = newSprite.texture.GetPixels((int)newSprite.textureRect.x, (int)newSprite.textureRect.y, -(int)newSprite.textureRect.width, (int)newSprite.textureRect.height);
-        newTex.SetPixels(newTexturePixels);
-        newTex.filterMode = FilterMode.Point;
-        newTex.Apply();
+        newUI.GetComponent<SliceSprite>().tex.SetPixels(newTexturePixels);
+        newUI.GetComponent<SliceSprite>().tex.filterMode = FilterMode.Point;
+        newUI.GetComponent<SliceSprite>().tex.Apply();
+
+        GetComponent<Rigidbody2D>().gravityScale = 1.0f;
+        newUI.GetComponent<Rigidbody2D>().gravityScale = 1.0f;
+        if (collision.GetContact(0).normal.y > 0)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(-1, 0) * 5;
+            newUI.GetComponent<Rigidbody2D>().velocity = new Vector2(1, 0) * 5;
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(-1, -2) * 5;
+            newUI.GetComponent<Rigidbody2D>().velocity = new Vector2(1, -2) * 5;
+        }
+
     }
     void sliceY(Collision2D collision, SpriteRenderer thisSprite)
     {
@@ -176,7 +192,6 @@ public class SliceSprite : MonoBehaviour
 
 
         //On va creer notre seconde partie de l'UI
-        Debug.Log("another one");
         GameObject newUI = Instantiate(NewUI);
         newUI.transform.parent = transform.parent;
         newUI.transform.position = transform.position;
@@ -187,8 +202,7 @@ public class SliceSprite : MonoBehaviour
         newUI.GetComponent<SliceSprite>().sr.sprite = newSprite;
 
         newUI.GetComponent<BoxCollider2D>().size = (newSprite.bounds.size);
-        newUI.GetComponent<BoxCollider2D>().offset = new Vector2(0, (sizeTotal - newUI.GetComponent<BoxCollider2D>().size.y) / 2);
-        // GetComponent<Rigidbody2D>().gravityScale = 1.0f;
+        newUI.GetComponent<BoxCollider2D>().offset = new Vector2(0, (sizeTotal - newUI.GetComponent<BoxCollider2D>().size.y) / 2);  
 
         tex = new Texture2D((int)mySprite.rect.width, (int)mySprite.rect.height);
         Color[] TexturePixels = mySprite.texture.GetPixels((int)mySprite.textureRect.x, (int)mySprite.textureRect.y, (int)mySprite.textureRect.width, (int)mySprite.textureRect.height);
@@ -197,10 +211,41 @@ public class SliceSprite : MonoBehaviour
         tex.Apply();
 
         Texture2D newTex = newUI.GetComponent<SliceSprite>().tex;
-        newTex = new Texture2D(-(int)newSprite.rect.width, (int)newSprite.rect.height);
-        Color[] newTexturePixels = newSprite.texture.GetPixels((int)newSprite.textureRect.x, (int)newSprite.textureRect.y, -(int)newSprite.textureRect.width, (int)newSprite.textureRect.height);
-        newTex.SetPixels(newTexturePixels);
-        newTex.filterMode = FilterMode.Point;
-        newTex.Apply();
+        newUI.GetComponent<SliceSprite>().tex = new Texture2D((int)newSprite.rect.width, -(int)newSprite.rect.height);
+        Color[] newTexturePixels = newSprite.texture.GetPixels((int)newSprite.textureRect.x, (int)newSprite.textureRect.y, (int)newSprite.textureRect.width, -(int)newSprite.textureRect.height);
+        newUI.GetComponent<SliceSprite>().tex.SetPixels(newTexturePixels);
+        newUI.GetComponent<SliceSprite>().tex.filterMode = FilterMode.Point;
+        newUI.GetComponent<SliceSprite>().tex.Apply();
+        // newUI.GetComponent<SliceSprite>().tex = newTex;
+
+        
+
+
+        GetComponent<Rigidbody2D>().gravityScale = 1.0f;
+        newUI.GetComponent<Rigidbody2D>().gravityScale = 1.0f;
+        if (collision.GetContact(0).normal.x > 0)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(1, 0) * 5;
+            newUI.GetComponent<Rigidbody2D>().velocity = new Vector2(1, -2) * 5;
+            Debug.Log("x.+");
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(-1, 0) * 5;
+            newUI.GetComponent<Rigidbody2D>().velocity = new Vector2(-1, -2) * 5;
+            Debug.Log("x.-");
+        }
+        
+
+
+
+
+       
+    }
+
+    void ChangeForceAfterHit(GameObject TheOtherSide)
+    {
+        GetComponent<Rigidbody2D>().velocity = new Vector2(-1, -2) * 5;
+        TheOtherSide.GetComponent<Rigidbody2D>().velocity = new Vector2(-1, -2) * 5;
     }
 }

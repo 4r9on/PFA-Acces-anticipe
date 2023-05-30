@@ -10,6 +10,9 @@ public class Raycast : MonoBehaviour
     public bool DraggedAnObject;
     public LayerMask layersToHit;
     public RaycastHit HitToStopMouse;
+
+    public List<Transform> spawnPoint;
+    public GameObject pointOn;
     // Start is called before the first frame update
 
 
@@ -27,6 +30,18 @@ public class Raycast : MonoBehaviour
             {
                 GetComponent<DragAndDrop>().DragSimple(hit);
             }
+            /*string tagFromHit = hit.transform.gameObject.name;
+            if (tagFromHit == "On")
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    Transform randomPoint = spawnPoint[Random.Range(0, spawnPoint.Count)];
+                    GameObject instantiated = Instantiate(pointOn);
+                    instantiated.transform.position = randomPoint.position;
+                    Destroy(this.gameObject);  
+
+                }
+            }*/
         }
 
         //Utilise un raycast limité par un certain layer pour éviter de prendre en compte tout les objets
@@ -42,8 +57,6 @@ public class Raycast : MonoBehaviour
         }
         GetComponent<DragAndDrop>().lastHit = hit;
 
-
-        
 
 
         /*    if (Physics2D.Raycast(ray, out hit, 10000))
