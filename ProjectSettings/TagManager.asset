@@ -16,7 +16,7 @@ TagManager:
   - Locker1
   - jigsaw
   - ButtonON
-  - Slider
+  - Background
   layers:
   - Default
   - TransparentFX
