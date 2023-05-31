@@ -5,17 +5,13 @@ using System.Diagnostics;
 
 public class LaunchBat : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public void ExitAppThenRestart()
     {
         Process process = new Process();
         process.StartInfo.FileName = Application.dataPath + "/Scripts/ScriptBat/LauncherAfterGameBroken.bat";
         process.Start();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Application.Quit();
     }
 }

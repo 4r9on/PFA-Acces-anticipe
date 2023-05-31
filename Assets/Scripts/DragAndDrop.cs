@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class DragAndDrop : MonoBehaviour
 {
@@ -16,6 +18,19 @@ public class DragAndDrop : MonoBehaviour
     public RaycastHit lastHit;
     public int nbrOfTimeWeTouch;
     Color oldColor;
+    public Slider slider;
+    private SpriteRenderer sr;
+    private Sprite mySprite;
+    public Animator animator;
+
+
+
+
+    private void Awake()
+    {
+        sr = gameObject.GetComponent<SpriteRenderer>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +41,7 @@ public class DragAndDrop : MonoBehaviour
                 oldColor = SimonUI.GetComponent<SpriteRenderer>().color;
             }
         }
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -90,6 +106,12 @@ public class DragAndDrop : MonoBehaviour
                     value += theValue;
                 }
                 lastRotation = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w;
+            }
+            else
+            {
+                animator.SetBool("Play", true);
+                animator.SetBool("Logo", true);
+
             }
         }
         if(draggedObject != null)
@@ -229,6 +251,10 @@ public class DragAndDrop : MonoBehaviour
                 GetComponent<Simon>().AddToComparative(GameManager.Instance.ObjectHover.name);
             }
 
+        }
+        else if(GameManager.Instance.ObjectHover.tag == "ButtonON")
+        {
+            GameManager.Instance.AllText.GetComponent<ElevateText>().RotateIt();
         }
     }
     public void StopClick()
