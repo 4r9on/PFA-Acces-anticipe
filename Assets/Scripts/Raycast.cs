@@ -12,7 +12,7 @@ public class Raycast : MonoBehaviour
     public RaycastHit HitToStopMouse;
 
     public List<Transform> spawnPoint;
-    public GameObject pointOn;
+    public GameObject Lampe;
     // Start is called before the first frame update
 
 
@@ -30,18 +30,14 @@ public class Raycast : MonoBehaviour
             {
                 GetComponent<DragAndDrop>().DragSimple(hit);
             }
-            /*string tagFromHit = hit.transform.gameObject.name;
-            if (tagFromHit == "On")
-            {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    Transform randomPoint = spawnPoint[Random.Range(0, spawnPoint.Count)];
-                    GameObject instantiated = Instantiate(pointOn);
-                    instantiated.transform.position = randomPoint.position;
-                    Destroy(this.gameObject);  
 
-                }
-            }*/
+            string tagFromHit = hit.transform.gameObject.name;
+            
+            if (tagFromHit == "LP")
+            {
+                Lampe.SetActive(true);
+                Debug.Log("AAAAAhhhhhhh");
+            }
         }
 
         //Utilise un raycast limité par un certain layer pour éviter de prendre en compte tout les objets
