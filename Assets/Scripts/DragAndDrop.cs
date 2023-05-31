@@ -127,9 +127,8 @@ public class DragAndDrop : MonoBehaviour
                     posInit = draggedObject.transform.position.x;
                     draggedObject.transform.parent = draggedObject.transform.parent.transform.parent;
                 }
-                Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition).x);
-                Debug.Log(posInit);
-                Debug.Log(posMaxInit);
+         
+
                 draggedObject.transform.position = new Vector2( Camera.main.ScreenToWorldPoint(Input.mousePosition).x, draggedObject.transform.position.y);
 
                 if(draggedObject.transform.position.x > posInit)
@@ -145,7 +144,7 @@ public class DragAndDrop : MonoBehaviour
             else
             {
                 draggedObject.transform.position = new Vector2( Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
-                Debug.Log(draggedObject.tag);
+              
             }
 
         }
@@ -290,6 +289,7 @@ public class DragAndDrop : MonoBehaviour
     }
     public void StopClick()
     {
+        Debug.Log("eaz");
         MovingBar = false;
         if (draggedObject != null)
         {
