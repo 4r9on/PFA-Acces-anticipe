@@ -53,8 +53,8 @@ public class DragAndDrop : MonoBehaviour
         //Barre de chargement
         if (MovingBar)
         {
-            //Quand l'objet est pos� on va pouvoir faire tourner l'objet dans lequel il est introduit
-            if (value < 2.29f)
+            //Quand l'objet est pose on va pouvoir faire tourner l'objet dans lequel il est introduit
+            if (value < 2.29f && ObjectPut!= null)
             {
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.up = ((Camera.main.ScreenToWorldPoint(Input.mousePosition) - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.position).normalized);
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles = new Vector3(0, 0, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.z);
@@ -110,7 +110,7 @@ public class DragAndDrop : MonoBehaviour
                 }
                 lastRotation = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w;
             }
-            else
+            else if(animator != null)
             {
                 animator.SetBool("Play", true);
                 animator.SetBool("Logo", true);
@@ -121,12 +121,15 @@ public class DragAndDrop : MonoBehaviour
         {
             if(draggedObject.tag == "Slider")
             {
-                draggedObject.transform.parent = draggedObject.transform.parent.transform.parent;
+               
                 if (posInit == 10000.0f)
                 {
                     posInit = draggedObject.transform.position.x;
+                    draggedObject.transform.parent = draggedObject.transform.parent.transform.parent;
                 }
                 Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition).x);
+                Debug.Log(posInit);
+                Debug.Log(posMaxInit);
                 draggedObject.transform.position = new Vector2( Camera.main.ScreenToWorldPoint(Input.mousePosition).x, draggedObject.transform.position.y);
 
                 if(draggedObject.transform.position.x > posInit)
