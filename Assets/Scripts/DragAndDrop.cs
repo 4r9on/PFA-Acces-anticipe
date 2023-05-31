@@ -110,6 +110,7 @@ public class DragAndDrop : MonoBehaviour
             else
             {
                 animator.SetBool("Play", true);
+                animator.SetBool("Logo", true);
 
             }
         }
