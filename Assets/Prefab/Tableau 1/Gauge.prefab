@@ -365,7 +365,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4768707117996712566}
-  - component: {fileID: 5435630219340980551}
   - component: {fileID: 5435630219340980548}
   m_Layer: 6
   m_Name: Gauge
@@ -401,26 +400,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5435630219340980551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5435630219340980547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd7c6855e5af1c742b02d0bc19af22fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destroyOnGravity: 0
-  canPutObject: 0
-  isPut: 0
-  BornWithoutGravity: 0
-  objectToPutOn: {fileID: 0}
-  objectCreateAfterFalling: {fileID: 0}
-  painting: 0
-  child: 0
 --- !u!61 &5435630219340980548
 BoxCollider2D:
   m_ObjectHideFlags: 0

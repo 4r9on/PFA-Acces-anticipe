@@ -22,7 +22,8 @@ public class DragAndDrop : MonoBehaviour
     private SpriteRenderer sr;
     private Sprite mySprite;
     public Animator animator;
-
+    public float posInit = 10000.0f;
+    public float posMaxInit;
 
 
 
@@ -42,6 +43,8 @@ public class DragAndDrop : MonoBehaviour
             }
         }
         animator = GetComponent<Animator>();
+
+        
     }
 
     // Update is called once per frame
@@ -116,7 +119,32 @@ public class DragAndDrop : MonoBehaviour
         }
         if(draggedObject != null)
         {
-            draggedObject.transform.position = new Vector2( Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+            if(draggedObject.tag == "Slider")
+            {
+                draggedObject.transform.parent = draggedObject.transform.parent.transform.parent;
+                if (posInit == 10000.0f)
+                {
+                    posInit = draggedObject.transform.position.x;
+                }
+                Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition).x);
+                draggedObject.transform.position = new Vector2( Camera.main.ScreenToWorldPoint(Input.mousePosition).x, draggedObject.transform.position.y);
+
+                if(draggedObject.transform.position.x > posInit)
+                {
+                    draggedObject.transform.position = new Vector2(posInit, draggedObject.transform.position.y);
+                }
+                if (draggedObject.transform.position.x < posMaxInit)
+                {
+                    draggedObject.transform.position = new Vector2(posMaxInit, draggedObject.transform.position.y);
+                }
+                
+            }
+            else
+            {
+                draggedObject.transform.position = new Vector2( Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+                Debug.Log(draggedObject.tag);
+            }
+
         }
        /* if (Input.GetMouseButtonDown(0))
         {
@@ -150,10 +178,10 @@ public class DragAndDrop : MonoBehaviour
 
     public void OnClicked()
     {
-        if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer")
+        if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer" || GameManager.Instance.ObjectHover.tag == "Slider")
         {
             draggedObject = GameManager.Instance.ObjectHover;
-            if (draggedObject.GetComponent<ObjectToDrag>() != null)
+            if (draggedObject.GetComponent<ObjectToDrag>() != null && GameManager.Instance.ObjectHover.tag != "Slider")
             {
                 //Permet de faire tomber l'UI lorsqu'on aura clicker suffisamment dessus
                 if (draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity > 0)

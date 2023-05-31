@@ -38,7 +38,6 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     {
         if (painting)
         {
-
             objectToPutOn.SetActive(true);
             objectToPutOn = null;
         }
