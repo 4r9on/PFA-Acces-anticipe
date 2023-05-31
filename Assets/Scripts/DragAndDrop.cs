@@ -121,10 +121,11 @@ public class DragAndDrop : MonoBehaviour
         {
             if(draggedObject.tag == "Slider")
             {
-                draggedObject.transform.parent = draggedObject.transform.parent.transform.parent;
                 if (posInit == 10000.0f)
                 {
                     posInit = draggedObject.transform.position.x;
+                    draggedObject.transform.parent = draggedObject.transform.parent.transform.parent;
+
                 }
                 Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition).x);
                 draggedObject.transform.position = new Vector2( Camera.main.ScreenToWorldPoint(Input.mousePosition).x, draggedObject.transform.position.y);
