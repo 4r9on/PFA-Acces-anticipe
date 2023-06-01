@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using static System.Net.Mime.MediaTypeNames;
 
 
 public class DragAndDrop : MonoBehaviour
@@ -20,12 +22,14 @@ public class DragAndDrop : MonoBehaviour
     Color oldColor;
     public Slider slider;
     private SpriteRenderer sr;
-    private Sprite mySprite;
+    public SpriteRenderer mySpriteBar;
+    public Texture2D tex;
     public Animator animator;
     public float posInit = 10000.0f;
     public float posMaxInit;
-
-
+    public float totalSliderValue;
+    public GameObject engrenage;
+    private Rigidbody2D _Rigidbody;
 
     private void Awake()
     {
@@ -127,40 +131,51 @@ public class DragAndDrop : MonoBehaviour
                     posInit = draggedObject.transform.position.x;
                     draggedObject.transform.parent = draggedObject.transform.parent.transform.parent;
                 }
-                Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition).x);
-                Debug.Log(posInit);
-                Debug.Log(posMaxInit);
+                //Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition).x);
+                //Debug.Log(posInit);
+                //Debug.Log(posMaxInit);
                 draggedObject.transform.position = new Vector2( Camera.main.ScreenToWorldPoint(Input.mousePosition).x, draggedObject.transform.position.y);
 
                 if(draggedObject.transform.position.x > posInit)
                 {
                     draggedObject.transform.position = new Vector2(posInit, draggedObject.transform.position.y);
+
                 }
                 if (draggedObject.transform.position.x < posMaxInit)
                 {
                     draggedObject.transform.position = new Vector2(posMaxInit, draggedObject.transform.position.y);
+
                 }
-                
+                float maxValue = posInit - posMaxInit;
+                totalSliderValue = 1-(posInit - draggedObject.transform.position.x) / maxValue;
+
+                if (totalSliderValue >= 0.25f)
+                {
+                    mySpriteBar.sprite = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * totalSliderValue), tex.height), new Vector2(0.5f / totalSliderValue/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3*/, 0.5f), 100.0f);
+                    ValueSlider();
+                }
+
+
+
             }
             else
             {
                 draggedObject.transform.position = new Vector2( Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
                 Debug.Log(draggedObject.tag);
             }
-
         }
-       /* if (Input.GetMouseButtonDown(0))
-        {
-            OnClicked();
-        }
+        /* if (Input.GetMouseButtonDown(0))
+         {
+             OnClicked();
+         }
 
 
 
 
-        if (Input.GetMouseButtonUp(0))
-        {
-            StopClick();
-        }*/
+         if (Input.GetMouseButtonUp(0))
+         {
+             StopClick();
+         }*/
 
     }
 
@@ -320,5 +335,17 @@ public class DragAndDrop : MonoBehaviour
         SimonUI.GetComponent<SpriteRenderer>().color = oldColor;
     }
 
+    public void ValueSlider()
+    {
+        if(totalSliderValue <= 0.5f)
+        {
+           //_Rigidbody.AddForce 
+            
 
+        }
+        else
+        {
+            
+        }
+    }
 }
