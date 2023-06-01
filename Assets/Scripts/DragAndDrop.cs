@@ -30,6 +30,8 @@ public class DragAndDrop : MonoBehaviour
     public float totalSliderValue;
     public GameObject engrenage;
     private Rigidbody2D _Rigidbody;
+    public GameObject sliderNight;
+    public GameObject Logo;
 
     private void Awake()
     {
@@ -159,6 +161,8 @@ public class DragAndDrop : MonoBehaviour
                 if (totalSliderValue == 1.0f)
                 {
                     animator.SetBool("Logo", true);
+                    sliderNight.SetActive(true);
+                    Logo.SetActive(false);
                 }
 
             }
