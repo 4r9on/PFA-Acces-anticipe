@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 
 public class DragAndDrop : MonoBehaviour
@@ -24,8 +27,8 @@ public class DragAndDrop : MonoBehaviour
     public Animator animator;
     public float posInit = 10000.0f;
     public float posMaxInit;
-
-
+    public AnimatorController clip;
+    public Texture2D tex;
 
     private void Awake()
     {
@@ -35,6 +38,7 @@ public class DragAndDrop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+     
         foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
         {
             if (SimonUI.name == "PlayButton")
@@ -139,7 +143,12 @@ public class DragAndDrop : MonoBehaviour
                 {
                     draggedObject.transform.position = new Vector2(posMaxInit, draggedObject.transform.position.y);
                 }
+
+                float maxValue = posInit - posMaxInit;
+                float pourcentageValue = 1 - (posInit - draggedObject.transform.position.x) / maxValue;
+                //Aide de AgeTDev sur https://answers.unity.com/questions/1245599/how-to-get-all-sprites-used-in-a-2d-animator.html    
                 
+               
             }
             else
             {
@@ -297,7 +306,7 @@ public class DragAndDrop : MonoBehaviour
             {
                 if (draggedObject.GetComponent<ObjectToDrag>().canPutObject && GameManager.Instance.ObjectHover == draggedObject.GetComponent<ObjectToDrag>().objectToPutOn)
                 {
-                    draggedObject.transform.position = new Vector3(GameManager.Instance.ObjectHover.transform.position.x, GameManager.Instance.ObjectHover.transform.position.y, GameManager.Instance.ObjectHover.transform.position.z - 1);
+                    draggedObject.transform.position = new Vector3(GameManager.Instance.ObjectHover.transform.position.x, GameManager.Instance.ObjectHover.transform.position.y, GameManager.Instance.ObjectHover.transform.position.z);
                     draggedObject.GetComponent<Rigidbody2D>().gravityScale = 0;
                     draggedObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
                     draggedObject.GetComponent<ObjectToDrag>().isPut = true;

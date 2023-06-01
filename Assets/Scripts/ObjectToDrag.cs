@@ -78,6 +78,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             child = false;  
             transform.SetParent(transform.parent.transform.parent, true);
         }
+        
         GameManager.Instance.GetComponent<DragAndDrop>().OnClicked();
         //Output the name of the GameObject that is being clicked
         GameManager.Instance.GetComponent<Physics2DRaycaster>().eventMask = 118;
@@ -86,16 +87,21 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     public void OnPointerUp(PointerEventData pointerEventData)
     {
-      //  Debug.Log(gameObject.name);
+        
         GameManager.Instance.GetComponent<Physics2DRaycaster>().eventMask = int.MaxValue;
         if (gameObject.layer == 6)
         {
+            Debug.Log(GameManager.Instance.GetComponent<DragAndDrop>().draggedObject);
+            Debug.Log(gameObject);
             GameManager.Instance.ObjectHover = gameObject;
         }
+       
         else if(GameManager.Instance.GetComponent<DragAndDrop>().draggedObject == gameObject)
         {
+            Debug.Log(gameObject);
             GameManager.Instance.GetComponent<DragAndDrop>().StopClick();
         }
-        
+      
+
     }
 }
