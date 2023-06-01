@@ -27,13 +27,15 @@ public class DragAndDrop : MonoBehaviour
     public SpriteRenderer mySpriteBar;
     public Texture2D tex;
     public Animator animator;
-    public float posInit = 10000.0f;
+    public float posInit;
     public float posMaxInit;
     public AnimatorController clip;
     public Texture2D tex;
     public float totalSliderValue;
     public GameObject engrenage;
     private Rigidbody2D _Rigidbody;
+    public GameObject sliderNight;
+    public GameObject Logo;
 
     private void Awake()
     {
@@ -122,15 +124,15 @@ public class DragAndDrop : MonoBehaviour
             else if(animator != null)
             {
                 animator.SetBool("Play", true);
-                animator.SetBool("Logo", true);
+
 
             }
         }
         if(draggedObject != null)
         {
-            if(draggedObject.tag == "Slider")
+            if (draggedObject.tag == "Slider")
             {
-               
+
                 if (posInit == 10000.0f)
                 {
                     posInit = draggedObject.transform.position.x;
@@ -139,9 +141,9 @@ public class DragAndDrop : MonoBehaviour
                 //Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition).x);
                 //Debug.Log(posInit);
                 //Debug.Log(posMaxInit);
-                draggedObject.transform.position = new Vector2( Camera.main.ScreenToWorldPoint(Input.mousePosition).x, draggedObject.transform.position.y);
+                draggedObject.transform.position = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, draggedObject.transform.position.y);
 
-                if(draggedObject.transform.position.x > posInit)
+                if (draggedObject.transform.position.x > posInit)
                 {
                     draggedObject.transform.position = new Vector2(posInit, draggedObject.transform.position.y);
 
@@ -152,12 +154,20 @@ public class DragAndDrop : MonoBehaviour
 
                 }
                 float maxValue = posInit - posMaxInit;
-                totalSliderValue = 1-(posInit - draggedObject.transform.position.x) / maxValue;
+                totalSliderValue = 1 - (posInit - draggedObject.transform.position.x) / maxValue;
+
 
                 if (totalSliderValue >= 0.25f)
                 {
                     mySpriteBar.sprite = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * totalSliderValue), tex.height), new Vector2(0.5f / totalSliderValue/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3*/, 0.5f), 100.0f);
-                    ValueSlider();
+                    
+                    
+                }
+                if (totalSliderValue == 1.0f)
+                {
+                    animator.SetBool("Logo", true);
+                    sliderNight.SetActive(true);
+                    Logo.SetActive(false);
                 }
 
 
@@ -171,8 +181,8 @@ public class DragAndDrop : MonoBehaviour
             }
             else
             {
-                draggedObject.transform.position = new Vector2( Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
-              
+                draggedObject.transform.position = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+
             }
         }
         /* if (Input.GetMouseButtonDown(0))
@@ -322,6 +332,8 @@ public class DragAndDrop : MonoBehaviour
         {
             if (draggedObject.GetComponent<ObjectToDrag>() != null)
             {
+                
+
                 if (draggedObject.GetComponent<ObjectToDrag>().canPutObject && GameManager.Instance.ObjectHover == draggedObject.GetComponent<ObjectToDrag>().objectToPutOn)
                 {
                     draggedObject.transform.position = new Vector3(GameManager.Instance.ObjectHover.transform.position.x, GameManager.Instance.ObjectHover.transform.position.y, GameManager.Instance.ObjectHover.transform.position.z);
@@ -330,9 +342,14 @@ public class DragAndDrop : MonoBehaviour
                     draggedObject.GetComponent<ObjectToDrag>().isPut = true;
                     ObjectPut = draggedObject;
 
+                   
+                       
+                    
                 }
-
                 StartCoroutine(draggedObject.GetComponent<ObjectToDrag>().BecomeDestroyable());
+
+                
+
             }
         }
         dragged = false;
@@ -349,15 +366,18 @@ public class DragAndDrop : MonoBehaviour
 
     public void ValueSlider()
     {
-        if(totalSliderValue <= 0.5f)
+        if (totalSliderValue <= 0.40f)
         {
-           //_Rigidbody.AddForce 
-            
+            totalSliderValue = 1;
+
+
+            //_Rigidbody.AddForce 
+
 
         }
         else
         {
-            
+            // totalSliderValue = ;
         }
     }
 }
