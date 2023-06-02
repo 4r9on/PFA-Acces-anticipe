@@ -27,11 +27,15 @@ public class DragAndDrop : MonoBehaviour
     public SpriteRenderer mySpriteBar;
     public SpriteRenderer testBar;
     public Texture2D tex;
-    public Animator animator;
+    public Animator animatorBar;
+    public Animator animatorLogo;
     public float posInit;
     public float posMaxInit;
+    public float posInitTop;
+    public float posMaxInitTop;
     public AnimatorController clip;
     public float totalSliderValue;
+    public float totalSliderValueTop;
     public GameObject engrenage;
     private Rigidbody2D _Rigidbody;
     public GameObject sliderNight;
@@ -46,17 +50,16 @@ public class DragAndDrop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-     
+        animatorBar = GetComponent<Animator>();
+        animatorLogo = GetComponent<Animator>();
+
         foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
         {
             if (SimonUI.name == "PlayButton")
             {
                 oldColor = SimonUI.GetComponent<SpriteRenderer>().color;
             }
-        }
-        animator = GetComponent<Animator>();
-
-        
+        }     
     }
 
     // Update is called once per frame
@@ -96,6 +99,8 @@ public class DragAndDrop : MonoBehaviour
                     value += theValue;
                 }
 
+
+
                 //On va faire decrementer notre jauge ici
                 else if (ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w != lastRotation)
                 {
@@ -121,46 +126,50 @@ public class DragAndDrop : MonoBehaviour
                     value += theValue;
                 }
                 lastRotation = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w;
+
+
+                
             }
+
             else
             {
-                if (animator != null)
-                {
-                    animator.SetBool("Play", true);
 
-
-                }
+                
 
             }
-           
+            animatorBar.SetBool("Play", true);
+            animatorLogo.SetBool("Logo", true);
+            Debug.Log("aaaaaa");
+
+
         }
-        if(draggedObject != null)
+        if (draggedObject != null)
         {
             if (draggedObject.tag == "Slider" && draggedObject.GetComponent<ObjectToDrag>().canSlide)
             {
 
                 if (posInit == 10000.0f)
                 {
-                    posInit = draggedObject.transform.position.x;
+                    posInit = draggedObject.transform.position.y;
                     draggedObject.transform.parent = draggedObject.transform.parent.transform.parent;
                 }
                 //Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition).x);
                 //Debug.Log(posInit);
                 //Debug.Log(posMaxInit);
-                draggedObject.transform.position = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, draggedObject.transform.position.y);
+                draggedObject.transform.position = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).y, draggedObject.transform.position.x);
 
-                if (draggedObject.transform.position.x > posInit)
+                if (draggedObject.transform.position.y > posInit)
                 {
                     draggedObject.transform.position = new Vector2(posInit, draggedObject.transform.position.y);
 
                 }
-                if (draggedObject.transform.position.x < posMaxInit)
+                if (draggedObject.transform.position.y < posMaxInit)
                 {
-                    draggedObject.transform.position = new Vector2(posMaxInit, draggedObject.transform.position.y);
+                    draggedObject.transform.position = new Vector2(draggedObject.transform.position.x, posInit);
 
                 }
                 float maxValue = posInit - posMaxInit;
-                totalSliderValue = 1 - (posInit - draggedObject.transform.position.x) / maxValue;
+                totalSliderValue = 1 - (posInit - draggedObject.transform.position.y) / maxValue;
 
 
 
@@ -172,8 +181,7 @@ public class DragAndDrop : MonoBehaviour
                 }
                 if (totalSliderValue == 1.0f)
                 {
-                    animator.SetBool("Logo", true);
-                    sliderNight.SetActive(true);
+                   // sliderNight.SetActive(true);
                     Logo.SetActive(false);
                     foreach (AnimationClip Clips in clip.animationClips)
                     {
@@ -224,22 +232,8 @@ public class DragAndDrop : MonoBehaviour
 
             }
         }
-        /* if (Input.GetMouseButtonDown(0))
-         {
-             OnClicked();
-         }
-
-
-
-
-         if (Input.GetMouseButtonUp(0))
-         {
-             StopClick();
-         }*/
-
     }
-
-    public void DragSimple(RaycastHit hit)
+     public void DragSimple(RaycastHit hit)
     {
         GameManager.Instance.ObjectHover = hit.transform.gameObject;
     }
