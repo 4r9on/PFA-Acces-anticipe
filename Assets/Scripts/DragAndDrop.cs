@@ -312,7 +312,7 @@ public class DragAndDrop : MonoBehaviour
                 {
                     foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                     {
-                        if (SimonUI.name == "PlayButton")
+                        if (SimonUI.name == "Button_Play")
                         {
                             float timing = 0;
                             if (SimonUI.GetComponent<SpriteRenderer>().color == Color.white)

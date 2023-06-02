@@ -94,13 +94,13 @@ public class Simon : MonoBehaviour
         //Indique quel bouton on a appuyer
         switch (theNew)
         {
-            case "PlayButton":
+            case "Button_Play":
                 GetComponent<Simon>().ComparativeGame.Add("Play");
                 break;
-            case "QuitButton":
+            case "Button_Credit":
                 GetComponent<Simon>().ComparativeGame.Add("Quit");
                 break;
-            case "SettingsButton":
+            case "Button_Option":
                 GetComponent<Simon>().ComparativeGame.Add("Settings");
                 break;
         }
