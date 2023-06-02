@@ -52,9 +52,8 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             }
         }
             //Permet de détruire certains objets quand on les laisse tomber
-            else if (collision.gameObject.tag == "Ground" && destroyOnGravity)
+        else if (collision.gameObject.tag == "Ground" && destroyOnGravity)
         {
-            
             GameObject newObject = Instantiate(objectCreateAfterFalling);
             newObject.transform.position = gameObject.transform.position;
             newObject.GetComponent<ObjectToDrag>().objectToPutOn = objectToPutOn;
