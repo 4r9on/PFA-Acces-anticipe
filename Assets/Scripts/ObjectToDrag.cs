@@ -104,4 +104,6 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
       
 
     }
+
+
 }
