@@ -1,7 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using static System.Net.Mime.MediaTypeNames;
 
 
 public class DragAndDrop : MonoBehaviour
@@ -20,11 +24,18 @@ public class DragAndDrop : MonoBehaviour
     Color oldColor;
     public Slider slider;
     private SpriteRenderer sr;
-    private Sprite mySprite;
+    public SpriteRenderer mySpriteBar;
+    public Texture2D tex;
     public Animator animator;
-
-
-
+    public float posInit;
+    public float posMaxInit;
+    public AnimatorController clip;
+    public Texture2D tex;
+    public float totalSliderValue;
+    public GameObject engrenage;
+    private Rigidbody2D _Rigidbody;
+    public GameObject sliderNight;
+    public GameObject Logo;
 
     private void Awake()
     {
@@ -34,6 +45,7 @@ public class DragAndDrop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+     
         foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
         {
             if (SimonUI.name == "PlayButton")
@@ -42,6 +54,8 @@ public class DragAndDrop : MonoBehaviour
             }
         }
         animator = GetComponent<Animator>();
+
+        
     }
 
     // Update is called once per frame
@@ -50,8 +64,8 @@ public class DragAndDrop : MonoBehaviour
         //Barre de chargement
         if (MovingBar)
         {
-            //Quand l'objet est pos� on va pouvoir faire tourner l'objet dans lequel il est introduit
-            if (value < 2.29f)
+            //Quand l'objet est pose on va pouvoir faire tourner l'objet dans lequel il est introduit
+            if (value < 2.29f && ObjectPut!= null)
             {
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.up = ((Camera.main.ScreenToWorldPoint(Input.mousePosition) - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.position).normalized);
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles = new Vector3(0, 0, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.z);
@@ -107,28 +121,82 @@ public class DragAndDrop : MonoBehaviour
                 }
                 lastRotation = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w;
             }
-            else
+            else if(animator != null)
             {
                 animator.SetBool("Play", true);
+
 
             }
         }
         if(draggedObject != null)
         {
-            draggedObject.transform.position = new Vector2( Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+            if (draggedObject.tag == "Slider")
+            {
+
+                if (posInit == 10000.0f)
+                {
+                    posInit = draggedObject.transform.position.x;
+                    draggedObject.transform.parent = draggedObject.transform.parent.transform.parent;
+                }
+                //Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition).x);
+                //Debug.Log(posInit);
+                //Debug.Log(posMaxInit);
+                draggedObject.transform.position = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, draggedObject.transform.position.y);
+
+                if (draggedObject.transform.position.x > posInit)
+                {
+                    draggedObject.transform.position = new Vector2(posInit, draggedObject.transform.position.y);
+
+                }
+                if (draggedObject.transform.position.x < posMaxInit)
+                {
+                    draggedObject.transform.position = new Vector2(posMaxInit, draggedObject.transform.position.y);
+
+                }
+                float maxValue = posInit - posMaxInit;
+                totalSliderValue = 1 - (posInit - draggedObject.transform.position.x) / maxValue;
+
+
+                if (totalSliderValue >= 0.25f)
+                {
+                    mySpriteBar.sprite = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * totalSliderValue), tex.height), new Vector2(0.5f / totalSliderValue/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3*/, 0.5f), 100.0f);
+                    
+                    
+                }
+                if (totalSliderValue == 1.0f)
+                {
+                    animator.SetBool("Logo", true);
+                    sliderNight.SetActive(true);
+                    Logo.SetActive(false);
+                }
+
+
+
+
+                float maxValue = posInit - posMaxInit;
+                float pourcentageValue = 1 - (posInit - draggedObject.transform.position.x) / maxValue;
+                //Aide de AgeTDev sur https://answers.unity.com/questions/1245599/how-to-get-all-sprites-used-in-a-2d-animator.html    
+                
+               
+            }
+            else
+            {
+                draggedObject.transform.position = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+
+            }
         }
-       /* if (Input.GetMouseButtonDown(0))
-        {
-            OnClicked();
-        }
+        /* if (Input.GetMouseButtonDown(0))
+         {
+             OnClicked();
+         }
 
 
 
 
-        if (Input.GetMouseButtonUp(0))
-        {
-            StopClick();
-        }*/
+         if (Input.GetMouseButtonUp(0))
+         {
+             StopClick();
+         }*/
 
     }
 
@@ -149,10 +217,10 @@ public class DragAndDrop : MonoBehaviour
 
     public void OnClicked()
     {
-        if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer")
+        if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer" || GameManager.Instance.ObjectHover.tag == "Slider")
         {
             draggedObject = GameManager.Instance.ObjectHover;
-            if (draggedObject.GetComponent<ObjectToDrag>() != null)
+            if (draggedObject.GetComponent<ObjectToDrag>() != null && GameManager.Instance.ObjectHover.tag != "Slider")
             {
                 //Permet de faire tomber l'UI lorsqu'on aura clicker suffisamment dessus
                 if (draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity > 0)
@@ -251,25 +319,37 @@ public class DragAndDrop : MonoBehaviour
             }
 
         }
+        else if(GameManager.Instance.ObjectHover.tag == "ButtonON")
+        {
+            GameManager.Instance.AllText.GetComponent<ElevateText>().RotateIt();
+        }
     }
     public void StopClick()
     {
+        Debug.Log("eaz");
         MovingBar = false;
         if (draggedObject != null)
         {
             if (draggedObject.GetComponent<ObjectToDrag>() != null)
             {
+                
+
                 if (draggedObject.GetComponent<ObjectToDrag>().canPutObject && GameManager.Instance.ObjectHover == draggedObject.GetComponent<ObjectToDrag>().objectToPutOn)
                 {
-                    draggedObject.transform.position = new Vector3(GameManager.Instance.ObjectHover.transform.position.x, GameManager.Instance.ObjectHover.transform.position.y, GameManager.Instance.ObjectHover.transform.position.z - 1);
+                    draggedObject.transform.position = new Vector3(GameManager.Instance.ObjectHover.transform.position.x, GameManager.Instance.ObjectHover.transform.position.y, GameManager.Instance.ObjectHover.transform.position.z);
                     draggedObject.GetComponent<Rigidbody2D>().gravityScale = 0;
                     draggedObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
                     draggedObject.GetComponent<ObjectToDrag>().isPut = true;
                     ObjectPut = draggedObject;
 
+                   
+                       
+                    
                 }
-
                 StartCoroutine(draggedObject.GetComponent<ObjectToDrag>().BecomeDestroyable());
+
+                
+
             }
         }
         dragged = false;
@@ -284,5 +364,20 @@ public class DragAndDrop : MonoBehaviour
         SimonUI.GetComponent<SpriteRenderer>().color = oldColor;
     }
 
+    public void ValueSlider()
+    {
+        if (totalSliderValue <= 0.40f)
+        {
+            totalSliderValue = 1;
 
+
+            //_Rigidbody.AddForce 
+
+
+        }
+        else
+        {
+            // totalSliderValue = ;
+        }
+    }
 }
