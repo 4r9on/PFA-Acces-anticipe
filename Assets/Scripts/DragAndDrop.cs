@@ -66,7 +66,7 @@ public class DragAndDrop : MonoBehaviour
         if (MovingBar)
         {
             //Quand l'objet est pose on va pouvoir faire tourner l'objet dans lequel il est introduit
-            if (value < 2.29f && ObjectPut!= null)
+            if (value < 6.7f && ObjectPut!= null)
             {
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.up = ((Camera.main.ScreenToWorldPoint(Input.mousePosition) - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.position).normalized);
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles = new Vector3(0, 0, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.z);
@@ -122,16 +122,21 @@ public class DragAndDrop : MonoBehaviour
                 }
                 lastRotation = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w;
             }
-            else if(animator != null)
+            else
             {
-                animator.SetBool("Play", true);
+                if (animator != null)
+                {
+                    animator.SetBool("Play", true);
 
+
+                }
 
             }
+           
         }
         if(draggedObject != null)
         {
-            if (draggedObject.tag == "Slider")
+            if (draggedObject.tag == "Slider" && draggedObject.GetComponent<ObjectToDrag>().canSlide)
             {
 
                 if (posInit == 10000.0f)
@@ -213,7 +218,7 @@ public class DragAndDrop : MonoBehaviour
                 
                
             }
-            else
+            else if (draggedObject.tag != "Slider")
             {
                 draggedObject.transform.position = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
 
