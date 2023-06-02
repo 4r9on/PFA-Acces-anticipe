@@ -61,28 +61,32 @@ public class Simon : MonoBehaviour
                     infiniteGame.Add("Play");
                     break;
                 case 1:
-                    infiniteGame.Add("Quit");
+                    infiniteGame.Add("Credits");
                     break;
                 case 2:
                     infiniteGame.Add("Settings");
                     break;
             }
+            
             StartCoroutine(ShowLight());
         }
     }
     IEnumerator ShowLight()
     {
-        //Permet d'afficher la couleur qu'on va devoir appuyer
-        yield return new WaitForSeconds(0.2f);
-        foreach (string light in infiniteGame)
+        if (UIText != null)
         {
-            UIText.text = light;
+            //Permet d'afficher la couleur qu'on va devoir appuyer
+            yield return new WaitForSeconds(0.2f);
+            foreach (string light in infiniteGame)
+            {
+                UIText.text = light;
+                yield return new WaitForSeconds(0.2f);
+                UIText.text = "";
+                yield return new WaitForSeconds(0.1f);
+            }
             yield return new WaitForSeconds(0.2f);
             UIText.text = "";
-            yield return new WaitForSeconds(0.1f);
         }
-        yield return new WaitForSeconds(0.2f);
-        UIText.text = "";
 
     }
     public void AddToComparative(string theNew)
