@@ -14,6 +14,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public GameObject objectCreateAfterFalling;
     public bool painting;
     public bool child;
+    public bool canSlide;
     // Start is called before the first frame update
     void Start()
     {
@@ -81,14 +82,13 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         
         GameManager.Instance.GetComponent<DragAndDrop>().OnClicked();
         //Output the name of the GameObject that is being clicked
-        GameManager.Instance.GetComponent<Physics2DRaycaster>().eventMask = 118;
+        GameManager.Instance.Raycaster2D.eventMask = 118;
        
     }
 
     public void OnPointerUp(PointerEventData pointerEventData)
     {
-        
-        GameManager.Instance.GetComponent<Physics2DRaycaster>().eventMask = int.MaxValue;
+        GameManager.Instance.Raycaster2D.eventMask = int.MaxValue;
         if (gameObject.layer == 6)
         {
             Debug.Log(GameManager.Instance.GetComponent<DragAndDrop>().draggedObject);
