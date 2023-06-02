@@ -25,15 +25,16 @@ public class DragAndDrop : MonoBehaviour
     public Slider slider;
     private SpriteRenderer sr;
     public SpriteRenderer mySpriteBar;
+    public SpriteRenderer testBar;
     public Texture2D tex;
     public Animator animator;
     public float posInit = 10000.0f;
     public float posMaxInit;
     public AnimatorController clip;
-    public Texture2D tex;
     public float totalSliderValue;
     public GameObject engrenage;
     private Rigidbody2D _Rigidbody;
+    public AnimationWindow a;
 
     private void Awake()
     {
@@ -154,17 +155,48 @@ public class DragAndDrop : MonoBehaviour
                 float maxValue = posInit - posMaxInit;
                 totalSliderValue = 1-(posInit - draggedObject.transform.position.x) / maxValue;
 
+
                 if (totalSliderValue >= 0.25f)
                 {
-                    mySpriteBar.sprite = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * totalSliderValue), tex.height), new Vector2(0.5f / totalSliderValue/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3*/, 0.5f), 100.0f);
-                    ValueSlider();
+                    foreach (AnimationClip Clips in clip.animationClips)
+                    {
+                        Debug.Log(Clips);
+                        foreach (UnityEditor.EditorCurveBinding frames in AnimationUtility.GetObjectReferenceCurveBindings(Clips))
+                        {
+                            ObjectReferenceKeyframe[] keyFrames = AnimationUtility.GetObjectReferenceCurve(Clips, frames);
+
+                            Debug.Log(keyFrames);
+                            foreach (var frame in keyFrames)
+                            {
+                                Debug.Log(frame.time);
+                                Sprite SpriteInFrame = (Sprite)frame.value;
+                                tex = SpriteInFrame.texture;
+                              //  Debug.Log(tex.name);
+                              //  Debug.Log(testBar.sprite.rect.width);
+                                SpriteInFrame = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * totalSliderValue), tex.height), new Vector2(0.5f / totalSliderValue/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3*/, 0.5f), 100.0f);
+                                testBar.sprite = SpriteInFrame;
+                                ValueSlider();
+                                //Debug.Log(testBar.sprite.rect.width);
+
+                                AnimationUtility.SetObjectReferenceCurve(Clips, frames, keyFrames);
+                            }
+                            // StartCoroutine(testWaiting(keyFrames));
+
+                        }
+
+                        /*
+                        List<Sprite> allSprite = new List<Sprite>();
+                        allSprite.AddRange(GetSpritesFromClip(Clips));
+                        foreach (Sprite sprite in GetSpritesFromClip(Clips))
+                        {
+
+                        }
+                        */
+                    }
+                   
                 }
 
 
-
-
-                float maxValue = posInit - posMaxInit;
-                float pourcentageValue = 1 - (posInit - draggedObject.transform.position.x) / maxValue;
                 //Aide de AgeTDev sur https://answers.unity.com/questions/1245599/how-to-get-all-sprites-used-in-a-2d-animator.html    
                 
                
@@ -358,6 +390,24 @@ public class DragAndDrop : MonoBehaviour
         else
         {
             
+        }
+    }
+
+    IEnumerator testWaiting(ObjectReferenceKeyframe[] keyFrames)
+    {
+        foreach (var frame in keyFrames)
+        {
+
+            Sprite SpriteInFrame = (Sprite)frame.value;
+            tex = SpriteInFrame.texture;
+            Debug.Log(tex.name);
+            Debug.Log(testBar.sprite.rect.width);
+            SpriteInFrame = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * totalSliderValue), tex.height), new Vector2(0.5f / totalSliderValue/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3*/, 0.5f), 100.0f);
+            testBar.sprite = SpriteInFrame;
+            ValueSlider();
+            Debug.Log(testBar.sprite.rect.width);
+
+            yield return new WaitForSeconds(0.1f);
         }
     }
 }
