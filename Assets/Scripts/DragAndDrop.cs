@@ -30,8 +30,11 @@ public class DragAndDrop : MonoBehaviour
     public Animator animator;
     public float posInit;
     public float posMaxInit;
+    public float posInitTop;
+    public float posMaxInitTop;
     public AnimatorController clip;
     public float totalSliderValue;
+    public float totalSliderValueTop;
     public GameObject engrenage;
     private Rigidbody2D _Rigidbody;
     public GameObject sliderNight;
@@ -136,26 +139,26 @@ public class DragAndDrop : MonoBehaviour
 
                 if (posInit == 10000.0f)
                 {
-                    posInit = draggedObject.transform.position.x;
+                    posInit = draggedObject.transform.position.y;
                     draggedObject.transform.parent = draggedObject.transform.parent.transform.parent;
                 }
                 //Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition).x);
                 //Debug.Log(posInit);
                 //Debug.Log(posMaxInit);
-                draggedObject.transform.position = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, draggedObject.transform.position.y);
+                draggedObject.transform.position = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).y, draggedObject.transform.position.x);
 
-                if (draggedObject.transform.position.x > posInit)
+                if (draggedObject.transform.position.y > posInit)
                 {
                     draggedObject.transform.position = new Vector2(posInit, draggedObject.transform.position.y);
 
                 }
-                if (draggedObject.transform.position.x < posMaxInit)
+                if (draggedObject.transform.position.y < posMaxInit)
                 {
-                    draggedObject.transform.position = new Vector2(posMaxInit, draggedObject.transform.position.y);
+                    draggedObject.transform.position = new Vector2(draggedObject.transform.position.x, posInit);
 
                 }
                 float maxValue = posInit - posMaxInit;
-                totalSliderValue = 1 - (posInit - draggedObject.transform.position.x) / maxValue;
+                totalSliderValue = 1 - (posInit - draggedObject.transform.position.y) / maxValue;
 
 
 
@@ -213,25 +216,13 @@ public class DragAndDrop : MonoBehaviour
                 
                
             }
+           
             else
             {
                 draggedObject.transform.position = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
 
             }
         }
-        /* if (Input.GetMouseButtonDown(0))
-         {
-             OnClicked();
-         }
-
-
-
-
-         if (Input.GetMouseButtonUp(0))
-         {
-             StopClick();
-         }*/
-
     }
 
     public void DragSimple(RaycastHit hit)
