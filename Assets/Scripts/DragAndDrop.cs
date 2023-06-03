@@ -270,7 +270,6 @@ public class DragAndDrop : MonoBehaviour
                         draggedObject.GetComponent<Rigidbody2D>().gravityScale = 1;
                         foreach (Transform children in draggedObject.transform)
                         {
-                            Debug.Log(children);
                             children.GetComponent<Rigidbody2D>().gravityScale = 1;
                         }
                     }
@@ -304,8 +303,12 @@ public class DragAndDrop : MonoBehaviour
         }
 
         //Donne le nom de l'UI que l'on a clique dessus
-        else if (GameManager.Instance.ObjectHover.tag == "Simon")
+        else if (GameManager.Instance.ObjectHover.tag == "Simon" )
         {
+            if(GetComponent<Simon>().infiniteGame.Count == 0 && GameManager.Instance.ObjectHover.name == "Button_Pause")
+            {
+                GetComponent<Simon>().AddLights();
+            }
             if (ObjectPut != null)
             {
                 if (GameManager.Instance.ObjectHover == ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn)

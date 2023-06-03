@@ -3,19 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Linq;
+using UnityEngine.Rendering.Universal;
 
 public class Simon : MonoBehaviour
 {
     public List<string> infiniteGame = new List<string>();
     public List<string> ComparativeGame = new List<string>();
+    public List<Light2D> AllLight = new List<Light2D>();
     public TextMeshProUGUI UIText;
     public GameObject Jukebox;
-
+    public Light2D LightUp;
+    public Light2D LightLeft;
+    public Light2D LightRight;
     // Start is called before the first frame update
     void Start()
     {
-
-        AddLights();
+        Light2D firstLight = LightUp;
+        Light2D secondLight = LightRight;
+        Light2D thirdLight = LightLeft;
+        Light2D[] light2Ds = { firstLight, secondLight, thirdLight };
+        AllLight.AddRange(light2Ds);
     }
 
     // Update is called once per frame
@@ -44,7 +51,7 @@ public class Simon : MonoBehaviour
         }
     }
 
-    void AddLights()
+    public void AddLights()
     {
         if (infiniteGame.Count == 5)
         {
@@ -79,18 +86,73 @@ public class Simon : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
             foreach (string light in infiniteGame)
             {
-                UIText.text = light;
+             /*   UIText.text = light;
                 yield return new WaitForSeconds(0.2f);
                 UIText.text = "";
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.1f);*/
+
+                switch (light)
+                {
+                    case "Play":
+                        LightUp.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                        LightRight.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                        LightLeft.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                        break;
+                    case "Credits":
+                        LightUp.color = new Color(1, 0.7112604f, 0, 1);
+                        LightRight.color = new Color(1, 0.7112604f, 0, 1);
+                        LightLeft.color = new Color(1, 0.7112604f, 0, 1);
+                        break;
+                    case "Settings":
+                        LightUp.color = new Color(0, 0.2810159f, 1, 1);
+                        LightRight.color = new Color(0, 0.2810159f, 1, 1);
+                        LightLeft.color = new Color(0, 0.2810159f, 1, 1);
+                        break;
+                }
+                yield return new WaitForSeconds(0.5f);
+                LightUp.color = AllLight[0].color;
+                LightRight.color = AllLight[1].color;
+                LightLeft.color = AllLight[2].color;
+                yield return new WaitForSeconds(0.5f);
             }
-            yield return new WaitForSeconds(0.2f);
-            UIText.text = "";
+          /*  yield return new WaitForSeconds(0.2f);
+            UIText.text = "";*/
         }
 
-    }
+        foreach (string light in infiniteGame)
+        {
+            /*   UIText.text = light;
+               yield return new WaitForSeconds(0.2f);
+               UIText.text = "";
+               yield return new WaitForSeconds(0.1f);*/
+            LightUp.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+            LightRight.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+            LightLeft.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+            yield return new WaitForSeconds(0.5f);
+            switch (light)
+            {
+                case "Play":
+                    LightUp.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                    LightRight.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                    LightLeft.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                    break;
+                case "Credits":
+                    LightUp.color = new Color(1, 0.7112604f, 0, 1);
+                    LightRight.color = new Color(1, 0.7112604f, 0, 1);
+                    LightLeft.color = new Color(1, 0.7112604f, 0, 1);
+                    break;
+                case "Settings":
+                    LightUp.color = new Color(0, 0.2810159f, 1, 1);
+                    LightRight.color = new Color(0, 0.2810159f, 1, 1);
+                    LightLeft.color = new Color(0, 0.2810159f, 1, 1);
+                    break;
+            }
+            yield return new WaitForSeconds(0.5f);
+        }
+        }
     public void AddToComparative(string theNew)
     {
+        
         //Indique quel bouton on a appuyer
         switch (theNew)
         {
@@ -98,12 +160,13 @@ public class Simon : MonoBehaviour
                 GetComponent<Simon>().ComparativeGame.Add("Play");
                 break;
             case "Button_Credit":
-                GetComponent<Simon>().ComparativeGame.Add("Quit");
+                GetComponent<Simon>().ComparativeGame.Add("Credits");
                 break;
             case "Button_Option":
                 GetComponent<Simon>().ComparativeGame.Add("Settings");
                 break;
         }
+        StartCoroutine(PlayWithLight(theNew));
         //Permet de comparer le dernier bouton appuyer à la liste de couleur faite au hasard, si le bouton est mauvais alors le jeu es perdu
         if (ComparativeGame[ComparativeGame.Count - 1] != infiniteGame[ComparativeGame.Count - 1])
         {
@@ -140,5 +203,31 @@ public class Simon : MonoBehaviour
         {
             TheList.Remove(stringFromList);
         }
+    }
+
+    IEnumerator PlayWithLight(string ButtonName)
+    {
+       
+        switch (ButtonName)
+        {
+            case "Button_Play":
+                LightUp.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                LightRight.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                LightLeft.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                break;
+            case "Button_Credit":
+                LightUp.color = new Color(1, 0.7112604f, 0, 1);
+                LightRight.color = new Color(1, 0.7112604f, 0, 1);
+                LightLeft.color = new Color(1, 0.7112604f, 0, 1);
+                break;
+            case "Button_Option":
+                LightUp.color = new Color(0, 0.2810159f, 1, 1);
+                LightRight.color = new Color(0, 0.2810159f, 1, 1);
+                LightLeft.color = new Color(0, 0.2810159f, 1, 1);
+                break;
+        }
+          yield return new WaitForSeconds(1);
+
+
     }
 }
