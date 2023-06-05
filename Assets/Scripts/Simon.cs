@@ -9,7 +9,7 @@ public class Simon : MonoBehaviour
 {
     public List<string> infiniteGame = new List<string>();
     public List<string> ComparativeGame = new List<string>();
-    public List<Light2D> AllLight = new List<Light2D>();
+    public List<Color> AllLight = new List<Color>();
     public TextMeshProUGUI UIText;
     public GameObject Jukebox;
     public Light2D LightUp;
@@ -21,7 +21,7 @@ public class Simon : MonoBehaviour
         Light2D firstLight = LightUp;
         Light2D secondLight = LightRight;
         Light2D thirdLight = LightLeft;
-        Light2D[] light2Ds = { firstLight, secondLight, thirdLight };
+        Color[] light2Ds = { firstLight.color, secondLight.color, thirdLight.color };
         AllLight.AddRange(light2Ds);
     }
 
@@ -110,9 +110,9 @@ public class Simon : MonoBehaviour
                         break;
                 }
                 yield return new WaitForSeconds(0.5f);
-                LightUp.color = AllLight[0].color;
-                LightRight.color = AllLight[1].color;
-                LightLeft.color = AllLight[2].color;
+                LightUp.color = AllLight[0];
+                LightRight.color = AllLight[1];
+                LightLeft.color = AllLight[2];
                 yield return new WaitForSeconds(0.5f);
             }
           /*  yield return new WaitForSeconds(0.2f);
@@ -125,10 +125,10 @@ public class Simon : MonoBehaviour
                yield return new WaitForSeconds(0.2f);
                UIText.text = "";
                yield return new WaitForSeconds(0.1f);*/
-            LightUp.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+         /*-   LightUp.color = new Color(0.9528302f, 0.0759992f, 0, 1);
             LightRight.color = new Color(0.9528302f, 0.0759992f, 0, 1);
-            LightLeft.color = new Color(0.9528302f, 0.0759992f, 0, 1);
-            yield return new WaitForSeconds(0.5f);
+            LightLeft.color = new Color(0.9528302f, 0.0759992f, 0, 1);*/
+          
             switch (light)
             {
                 case "Play":
@@ -147,6 +147,10 @@ public class Simon : MonoBehaviour
                     LightLeft.color = new Color(0, 0.2810159f, 1, 1);
                     break;
             }
+            yield return new WaitForSeconds(0.5f);
+            LightUp.color = AllLight[0];
+            LightRight.color = AllLight[1];
+            LightLeft.color = AllLight[2];
             yield return new WaitForSeconds(0.5f);
         }
         }
