@@ -69,7 +69,7 @@ public class DragAndDrop : MonoBehaviour
         if (MovingBar)
         {
             //Quand l'objet est pose on va pouvoir faire tourner l'objet dans lequel il est introduit
-            if (value < 6.7f && ObjectPut!= null)
+            if (value < 5.3f && ObjectPut!= null)
             {
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.up = ((Camera.main.ScreenToWorldPoint(Input.mousePosition) - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.position).normalized);
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles = new Vector3(0, 0, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.z);
@@ -134,7 +134,7 @@ public class DragAndDrop : MonoBehaviour
             else
             {
 
-                
+                ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().canSlide = true;  
 
             }
             animatorBar.SetBool("Play", true);
