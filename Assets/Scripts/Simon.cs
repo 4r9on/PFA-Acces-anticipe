@@ -56,7 +56,7 @@ public class Simon : MonoBehaviour
         if (infiniteGame.Count == 5)
         {
             RemoveStringFromList(infiniteGame);
-            Jukebox.SetActive(true);
+            GameManager.Instance.AfterGainSimon();
         }
 
         else

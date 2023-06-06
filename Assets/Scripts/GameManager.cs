@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject AllText;
     public List<GameObject> SimonUI = new List<GameObject>();
     public List<GameObject> breakableUI = new List<GameObject>();
+    public GameObject StockCD;
     public Physics2DRaycaster Raycaster2D;
     string tableau;
     private void Awake()
@@ -38,4 +39,11 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void AfterGainSimon()
+    {
+        //faire l'anim où le narrateur va appuyer sur le bouton pause
+        //faire tomber le disque
+        StockCD.GetComponent<Rigidbody2D>().gravityScale = 1.0f;
+        StockCD.tag = "Object";
+    }
 }
