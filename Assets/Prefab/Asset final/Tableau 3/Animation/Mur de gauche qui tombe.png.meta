@@ -101,6 +101,18 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -110,10 +122,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 270
-        width: 500
+        width: 600
         height: 135
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -129,12 +141,12 @@ TextureImporter:
       name: Mur de gauche qui tombe_1
       rect:
         serializedVersion: 2
-        x: 500
+        x: 600
         y: 270
-        width: 500
+        width: 600
         height: 135
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -150,12 +162,12 @@ TextureImporter:
       name: Mur de gauche qui tombe_2
       rect:
         serializedVersion: 2
-        x: 1000
+        x: 1200
         y: 270
-        width: 500
+        width: 600
         height: 135
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -173,10 +185,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 135
-        width: 500
+        width: 600
         height: 135
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -192,12 +204,12 @@ TextureImporter:
       name: Mur de gauche qui tombe_4
       rect:
         serializedVersion: 2
-        x: 500
+        x: 600
         y: 135
-        width: 500
+        width: 600
         height: 135
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -213,12 +225,12 @@ TextureImporter:
       name: Mur de gauche qui tombe_5
       rect:
         serializedVersion: 2
-        x: 1000
+        x: 1200
         y: 135
-        width: 500
+        width: 600
         height: 135
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -236,10 +248,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 500
+        width: 600
         height: 135
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -255,12 +267,12 @@ TextureImporter:
       name: Mur de gauche qui tombe_7
       rect:
         serializedVersion: 2
-        x: 500
+        x: 600
         y: 0
-        width: 500
+        width: 600
         height: 135
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -281,7 +293,9 @@ TextureImporter:
     indices: 
     edges: []
     weights: []
-    secondaryTextures: []
+    secondaryTextures:
+    - texture: {fileID: 2800000, guid: 27c1509affbd2bd49b24ce2d0cc41058, type: 3}
+      name: Emissive map
     nameFileIdTable:
       Mur de gauche qui tombe_5: 1105468558
       Mur de gauche qui tombe_0: 1363075312
