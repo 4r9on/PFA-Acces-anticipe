@@ -13,6 +13,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public GameObject objectToPutOn;
     public GameObject objectCreateAfterFalling;
     public bool painting;
+    public bool CD;
     public bool child;
     public bool canSlide;
     // Start is called before the first frame update
@@ -87,6 +88,11 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     public void OnPointerUp(PointerEventData pointerEventData)
     {
+        Debug.Log(gameObject.name);
+        if (gameObject.tag == "Simon")
+        {
+            GameManager.Instance.ObjectHover.GetComponent<Animator>().SetBool("IsClicked", false);
+        }
         GameManager.Instance.Raycaster2D.eventMask = int.MaxValue;
         if (gameObject.layer == 6)
         {
