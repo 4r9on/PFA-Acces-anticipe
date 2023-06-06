@@ -450,7 +450,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &89547616
 Transform:
   m_ObjectHideFlags: 0
@@ -1325,7 +1325,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &276774606
 Transform:
   m_ObjectHideFlags: 0
@@ -2785,7 +2785,8 @@ MonoBehaviour:
   mySpriteBar: {fileID: 1229125602}
   testBar: {fileID: 1989493941}
   tex: {fileID: 2800000, guid: 1ddddf2d896c09449a53b06c462a1ae0, type: 3}
-  animator: {fileID: 0}
+  animatorBar: {fileID: 0}
+  animatorLogo: {fileID: 0}
   posInit: 10000
   posMaxInit: 23.5
   posInitTop: 0
@@ -2811,8 +2812,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   infiniteGame: []
   ComparativeGame: []
+  AllLight: []
   UIText: {fileID: 2136776881}
   Jukebox: {fileID: 666481467}
+  LightUp: {fileID: 0}
+  LightLeft: {fileID: 0}
+  LightRight: {fileID: 0}
 --- !u!114 &892342286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2849,6 +2854,7 @@ MonoBehaviour:
   - {fileID: 987503339}
   - {fileID: 1295869483}
   - {fileID: 649067534}
+  StockCD: {fileID: 0}
   Raycaster2D: {fileID: 0}
 --- !u!114 &892342289
 MonoBehaviour:
