@@ -43,6 +43,13 @@ public class GameManager : MonoBehaviour
     {
         //faire l'anim où le narrateur va appuyer sur le bouton pause
         //faire tomber le disque
+        foreach(GameObject obj in SimonUI)
+        {
+            if (obj.name == "Button_Pause")
+            {
+                obj.SetActive(false);
+            }
+        }
         StockCD.GetComponent<Rigidbody2D>().gravityScale = 1.0f;
         StockCD.tag = "Object";
     }
