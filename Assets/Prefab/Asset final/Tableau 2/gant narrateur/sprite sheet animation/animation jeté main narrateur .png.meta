@@ -33,16 +33,16 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 0
     wrapV: 0
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -53,7 +53,7 @@ TextureImporter:
   alphaUsage: 1
   alphaIsTransparency: 0
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -103,18 +103,348 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: "animation jet\xE9 main narrateur _0"
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 854
+        width: 82
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de68fa17f8ba4f44ca54071f701d3170
+      internalID: 1631848829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "animation jet\xE9 main narrateur _1"
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 856
+        width: 84
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d770af227557814eb6d5b7ca52cc78d
+      internalID: 1069826533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "animation jet\xE9 main narrateur _2"
+      rect:
+        serializedVersion: 2
+        x: 590
+        y: 854
+        width: 93
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c742322c668b8424696faa98c657b02d
+      internalID: 1781715784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "animation jet\xE9 main narrateur _3"
+      rect:
+        serializedVersion: 2
+        x: 842
+        y: 855
+        width: 94
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2c40b92291c70f44a2177cf4a9820ee
+      internalID: 411300206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "animation jet\xE9 main narrateur _4"
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 599
+        width: 94
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87a2b3f0b8fdc8446acce4f534c3c480
+      internalID: 261896158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "animation jet\xE9 main narrateur _5"
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 599
+        width: 94
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 446eec95903cdc5409ca2d7b13c96fc7
+      internalID: -536372732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "animation jet\xE9 main narrateur _6"
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 599
+        width: 94
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c66205d3f936374a8f5f5539ba8d392
+      internalID: -613688024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "animation jet\xE9 main narrateur _7"
+      rect:
+        serializedVersion: 2
+        x: 843
+        y: 592
+        width: 105
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a476bde1f15dff943a47c003200f734d
+      internalID: -1235219888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "animation jet\xE9 main narrateur _8"
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 335
+        width: 107
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 584295263dc102e498621191588d98ca
+      internalID: -1903825278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "animation jet\xE9 main narrateur _9"
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 344
+        width: 115
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1915af6d3d030542a87c533fd0f47ea
+      internalID: 12088294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "animation jet\xE9 main narrateur _10"
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 344
+        width: 115
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebe13b0fcb663134c82d162af0affdee
+      internalID: 38947401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "animation jet\xE9 main narrateur _11"
+      rect:
+        serializedVersion: 2
+        x: 842
+        y: 344
+        width: 115
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 804aa3f40f248fb4fa14a577766e8a94
+      internalID: -1487646260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "animation jet\xE9 main narrateur _12"
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 84
+        width: 100
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04ba3bae40f29f140ba9efcfebc23d49
+      internalID: -264680630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "animation jet\xE9 main narrateur _13"
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 108
+        width: 92
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 460e59ab9ebd8ac4c8bba265e5d908ae
+      internalID: -1483809777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "animation jet\xE9 main narrateur _14"
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 92
+        width: 84
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4a2f08898ee5fc44996e6ee0e74a6ed
+      internalID: -1974315522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: d6b0c406fdf274a4a8b2a06ef3f1c1bf
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      "animation jet\xE9 main narrateur _11": -1487646260
+      "animation jet\xE9 main narrateur _7": -1235219888
+      "animation jet\xE9 main narrateur _6": -613688024
+      "animation jet\xE9 main narrateur _1": 1069826533
+      "animation jet\xE9 main narrateur _14": -1974315522
+      "animation jet\xE9 main narrateur _8": -1903825278
+      "animation jet\xE9 main narrateur _4": 261896158
+      "animation jet\xE9 main narrateur _0": 1631848829
+      "animation jet\xE9 main narrateur _3": 411300206
+      "animation jet\xE9 main narrateur _5": -536372732
+      "animation jet\xE9 main narrateur _2": 1781715784
+      "animation jet\xE9 main narrateur _12": -264680630
+      "animation jet\xE9 main narrateur _13": -1483809777
+      "animation jet\xE9 main narrateur _10": 38947401
+      "animation jet\xE9 main narrateur _9": 12088294
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
