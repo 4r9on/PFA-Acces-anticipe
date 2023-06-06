@@ -299,18 +299,22 @@ public class DragAndDrop : MonoBehaviour
         //Donne le nom de l'UI que l'on a clique dessus
         else if (GameManager.Instance.ObjectHover.tag == "Simon" )
         {
-            if(GetComponent<Simon>().infiniteGame.Count == 0 && GameManager.Instance.ObjectHover.name == "Button_Pause")
+            GameManager.Instance.ObjectHover.GetComponent<Animator>().SetBool("IsClicked", true);
+            if (GetComponent<Simon>().infiniteGame.Count == 0 && GameManager.Instance.ObjectHover.name == "Button_Pause")
             {
                 GetComponent<Simon>().AddLights();
             }
             if (ObjectPut != null)
             {
-                if (GameManager.Instance.ObjectHover == ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn)
+
+                foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                 {
-                    foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
+                    if (SimonUI.GetComponent<ObjectToDrag>().CD)
                     {
-                        if (SimonUI.name == "Button_Play")
+                        if (SimonUI == GameManager.Instance.ObjectHover && 1 == 2)
                         {
+
+
                             float timing = 0;
                             if (SimonUI.GetComponent<SpriteRenderer>().color == Color.white)
                             {
@@ -333,7 +337,7 @@ public class DragAndDrop : MonoBehaviour
                                         timing = 0.3f;
                                         //nous permet de rendre la souris invisible et non utilisable
                                         Cursor.lockState = CursorLockMode.Locked;
-                                        
+
                                         //On va utiliser un faux curseur pour empecher le joueur de l'utiliser
                                         cursor.SetActive(true);
                                         cursor.transform.position = new Vector3(GetComponent<Raycast>().HitToStopMouse.point.x, GetComponent<Raycast>().HitToStopMouse.point.y, 0f);
@@ -362,7 +366,6 @@ public class DragAndDrop : MonoBehaviour
     }
     public void StopClick()
     {
-        Debug.Log("eaz");
         MovingBar = false;
         if (draggedObject != null)
         {
@@ -376,16 +379,16 @@ public class DragAndDrop : MonoBehaviour
                     draggedObject.GetComponent<Rigidbody2D>().gravityScale = 0;
                     draggedObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
                     draggedObject.GetComponent<ObjectToDrag>().isPut = true;
-                    ObjectPut = draggedObject;
-
-                   
-                       
-                    
+                    if (draggedObject.GetComponent<ObjectToDrag>().CD)
+                    {
+                        draggedObject.tag = "Simon";
+                        draggedObject.layer = 6;
+                        GameManager.Instance.SimonUI.Add(draggedObject);
+                        draggedObject.GetComponent <ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().enabled = false;
+                    }
+                    ObjectPut = draggedObject;  
                 }
                 StartCoroutine(draggedObject.GetComponent<ObjectToDrag>().BecomeDestroyable());
-
-                
-
             }
         }
         dragged = false;
