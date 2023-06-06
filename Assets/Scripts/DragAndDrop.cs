@@ -1,7 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using static System.Net.Mime.MediaTypeNames;
 
 
 public class DragAndDrop : MonoBehaviour
@@ -20,11 +24,23 @@ public class DragAndDrop : MonoBehaviour
     Color oldColor;
     public Slider slider;
     private SpriteRenderer sr;
-    private Sprite mySprite;
-    public Animator animator;
-
-
-
+    public SpriteRenderer mySpriteBar;
+    public SpriteRenderer testBar;
+    public Texture2D tex;
+    public Animator animatorBar;
+    public Animator animatorLogo;
+    public float posInit;
+    public float posMaxInit;
+    public float posInitTop;
+    public float posMaxInitTop;
+    public AnimatorController clip;
+    public float totalSliderValue;
+    public float totalSliderValueTop;
+    public GameObject engrenage;
+    private Rigidbody2D _Rigidbody;
+    public GameObject sliderNight;
+    public GameObject Logo;
+    public AnimationWindow a;
 
     private void Awake()
     {
@@ -34,6 +50,9 @@ public class DragAndDrop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        animatorBar = GetComponent<Animator>();
+        animatorLogo = GetComponent<Animator>();
+
         foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
         {
             if (SimonUI.name == "PlayButton")
@@ -41,7 +60,10 @@ public class DragAndDrop : MonoBehaviour
                 oldColor = SimonUI.GetComponent<SpriteRenderer>().color;
             }
         }
-        animator = GetComponent<Animator>();
+
+        //animatorBar.SetBool("Play", true);
+        //animatorLogo.SetBool("Logo", true);
+        Debug.Log("aaaaaa");
     }
 
     // Update is called once per frame
@@ -50,9 +72,10 @@ public class DragAndDrop : MonoBehaviour
         //Barre de chargement
         if (MovingBar)
         {
-            //Quand l'objet est pos� on va pouvoir faire tourner l'objet dans lequel il est introduit
-            if (value < 2.29f)
+            //Quand l'objet est pose on va pouvoir faire tourner l'objet dans lequel il est introduit
+            if (value < 5.3f && ObjectPut!= null)
             {
+
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.up = ((Camera.main.ScreenToWorldPoint(Input.mousePosition) - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.position).normalized);
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles = new Vector3(0, 0, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.z);
 
@@ -81,6 +104,8 @@ public class DragAndDrop : MonoBehaviour
                     value += theValue;
                 }
 
+
+
                 //On va faire decrementer notre jauge ici
                 else if (ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w != lastRotation)
                 {
@@ -106,33 +131,112 @@ public class DragAndDrop : MonoBehaviour
                     value += theValue;
                 }
                 lastRotation = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w;
+
+
+                
             }
+
             else
             {
-                animator.SetBool("Play", true);
-                animator.SetBool("Logo", true);
+
+                ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().canSlide = true;  
 
             }
+            animatorBar.SetBool("Play", true);
+            animatorLogo.SetBool("Logo", true);
+            Debug.Log("aaaaaa");
+
+
         }
-        if(draggedObject != null)
+        if (draggedObject != null)
         {
-            draggedObject.transform.position = new Vector2( Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+            if (draggedObject.tag == "Slider" && draggedObject.GetComponent<ObjectToDrag>().canSlide)
+            {
+
+                if (posInit == 10000.0f)
+                {
+                    posInit = draggedObject.transform.position.y;
+                    draggedObject.transform.parent = draggedObject.transform.parent.transform.parent;
+                }
+                //Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition).x);
+                //Debug.Log(posInit);
+                //Debug.Log(posMaxInit);
+                draggedObject.transform.position = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).y, draggedObject.transform.position.x);
+
+                if (draggedObject.transform.position.y > posInit)
+                {
+                    draggedObject.transform.position = new Vector2(posInit, draggedObject.transform.position.y);
+
+                }
+                if (draggedObject.transform.position.y < posMaxInit)
+                {
+                    draggedObject.transform.position = new Vector2(draggedObject.transform.position.x, posInit);
+
+                }
+                float maxValue = posInit - posMaxInit;
+                totalSliderValue = 1 - (posInit - draggedObject.transform.position.y) / maxValue;
+
+
+
+                if (totalSliderValue >= 0.25f)
+                {
+                    mySpriteBar.sprite = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * totalSliderValue), tex.height), new Vector2(0.5f / totalSliderValue/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3*/, 0.5f), 100.0f);
+                    
+                    
+                }
+                if (totalSliderValue == 1.0f)
+                {
+                   // sliderNight.SetActive(true);
+                    Logo.SetActive(false);
+                    foreach (AnimationClip Clips in clip.animationClips)
+                    {
+                        Debug.Log(Clips);
+                        foreach (UnityEditor.EditorCurveBinding frames in AnimationUtility.GetObjectReferenceCurveBindings(Clips))
+                        {
+                            ObjectReferenceKeyframe[] keyFrames = AnimationUtility.GetObjectReferenceCurve(Clips, frames);
+
+                            Debug.Log(keyFrames);
+                            foreach (var frame in keyFrames)
+                            {
+                                Debug.Log(frame.time);
+                                Sprite SpriteInFrame = (Sprite)frame.value;
+                                tex = SpriteInFrame.texture;
+                              //  Debug.Log(tex.name);
+                              //  Debug.Log(testBar.sprite.rect.width);
+                                SpriteInFrame = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * totalSliderValue), tex.height), new Vector2(0.5f / totalSliderValue/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3*/, 0.5f), 100.0f);
+                                testBar.sprite = SpriteInFrame;
+                                ValueSlider();
+                                //Debug.Log(testBar.sprite.rect.width);
+
+                                AnimationUtility.SetObjectReferenceCurve(Clips, frames, keyFrames);
+                            }
+                            // StartCoroutine(testWaiting(keyFrames));
+
+                        }
+
+                        /*
+                        List<Sprite> allSprite = new List<Sprite>();
+                        allSprite.AddRange(GetSpritesFromClip(Clips));
+                        foreach (Sprite sprite in GetSpritesFromClip(Clips))
+                        {
+
+                        }
+                        */
+                    }
+                   
+                }
+
+
+                //Aide de AgeTDev sur https://answers.unity.com/questions/1245599/how-to-get-all-sprites-used-in-a-2d-animator.html    
+                
+               
+            }
+            else if (draggedObject.tag != "Slider")
+            {
+                draggedObject.transform.position = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+            }
         }
-       /* if (Input.GetMouseButtonDown(0))
-        {
-            OnClicked();
-        }
-
-
-
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            StopClick();
-        }*/
-
     }
-
     public void DragSimple(RaycastHit hit)
     {
         GameManager.Instance.ObjectHover = hit.transform.gameObject;
@@ -150,10 +254,10 @@ public class DragAndDrop : MonoBehaviour
 
     public void OnClicked()
     {
-        if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer")
+        if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer" || GameManager.Instance.ObjectHover.tag == "Slider")
         {
             draggedObject = GameManager.Instance.ObjectHover;
-            if (draggedObject.GetComponent<ObjectToDrag>() != null)
+            if (draggedObject.GetComponent<ObjectToDrag>() != null && GameManager.Instance.ObjectHover.tag != "Slider")
             {
                 //Permet de faire tomber l'UI lorsqu'on aura clicker suffisamment dessus
                 if (draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity > 0)
@@ -164,7 +268,6 @@ public class DragAndDrop : MonoBehaviour
                         draggedObject.GetComponent<Rigidbody2D>().gravityScale = 1;
                         foreach (Transform children in draggedObject.transform)
                         {
-                            Debug.Log(children);
                             children.GetComponent<Rigidbody2D>().gravityScale = 1;
                         }
                     }
@@ -198,15 +301,19 @@ public class DragAndDrop : MonoBehaviour
         }
 
         //Donne le nom de l'UI que l'on a clique dessus
-        else if (GameManager.Instance.ObjectHover.tag == "Simon")
+        else if (GameManager.Instance.ObjectHover.tag == "Simon" )
         {
+            if(GetComponent<Simon>().infiniteGame.Count == 0 && GameManager.Instance.ObjectHover.name == "Button_Pause")
+            {
+                GetComponent<Simon>().AddLights();
+            }
             if (ObjectPut != null)
             {
                 if (GameManager.Instance.ObjectHover == ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn)
                 {
                     foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                     {
-                        if (SimonUI.name == "PlayButton")
+                        if (SimonUI.name == "Button_Play")
                         {
                             float timing = 0;
                             if (SimonUI.GetComponent<SpriteRenderer>().color == Color.white)
@@ -259,22 +366,30 @@ public class DragAndDrop : MonoBehaviour
     }
     public void StopClick()
     {
+        Debug.Log("eaz");
         MovingBar = false;
         if (draggedObject != null)
         {
             if (draggedObject.GetComponent<ObjectToDrag>() != null)
             {
+                
+
                 if (draggedObject.GetComponent<ObjectToDrag>().canPutObject && GameManager.Instance.ObjectHover == draggedObject.GetComponent<ObjectToDrag>().objectToPutOn)
                 {
-                    draggedObject.transform.position = new Vector3(GameManager.Instance.ObjectHover.transform.position.x, GameManager.Instance.ObjectHover.transform.position.y, GameManager.Instance.ObjectHover.transform.position.z - 1);
+                    draggedObject.transform.position = new Vector3(GameManager.Instance.ObjectHover.transform.position.x, GameManager.Instance.ObjectHover.transform.position.y, GameManager.Instance.ObjectHover.transform.position.z);
                     draggedObject.GetComponent<Rigidbody2D>().gravityScale = 0;
                     draggedObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
                     draggedObject.GetComponent<ObjectToDrag>().isPut = true;
                     ObjectPut = draggedObject;
 
+                   
+                       
+                    
                 }
-
                 StartCoroutine(draggedObject.GetComponent<ObjectToDrag>().BecomeDestroyable());
+
+                
+
             }
         }
         dragged = false;
@@ -289,5 +404,38 @@ public class DragAndDrop : MonoBehaviour
         SimonUI.GetComponent<SpriteRenderer>().color = oldColor;
     }
 
+    public void ValueSlider()
+    {
+        if (totalSliderValue <= 0.40f)
+        {
+            totalSliderValue = 1;
 
+
+            //_Rigidbody.AddForce 
+
+
+        }
+        else
+        {
+            // totalSliderValue = ;
+        }
+    }
+
+    IEnumerator testWaiting(ObjectReferenceKeyframe[] keyFrames)
+    {
+        foreach (var frame in keyFrames)
+        {
+
+            Sprite SpriteInFrame = (Sprite)frame.value;
+            tex = SpriteInFrame.texture;
+            Debug.Log(tex.name);
+            Debug.Log(testBar.sprite.rect.width);
+            SpriteInFrame = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * totalSliderValue), tex.height), new Vector2(0.5f / totalSliderValue/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3*/, 0.5f), 100.0f);
+            testBar.sprite = SpriteInFrame;
+            ValueSlider();
+            Debug.Log(testBar.sprite.rect.width);
+
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
 }

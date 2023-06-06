@@ -3,19 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Linq;
+using UnityEngine.Rendering.Universal;
 
 public class Simon : MonoBehaviour
 {
     public List<string> infiniteGame = new List<string>();
     public List<string> ComparativeGame = new List<string>();
+    public List<Color> AllLight = new List<Color>();
     public TextMeshProUGUI UIText;
     public GameObject Jukebox;
-
+    public Light2D LightUp;
+    public Light2D LightLeft;
+    public Light2D LightRight;
     // Start is called before the first frame update
     void Start()
     {
-
-        AddLights();
+        Light2D firstLight = LightUp;
+        Light2D secondLight = LightRight;
+        Light2D thirdLight = LightLeft;
+        Color[] light2Ds = { firstLight.color, secondLight.color, thirdLight.color };
+        AllLight.AddRange(light2Ds);
     }
 
     // Update is called once per frame
@@ -44,12 +51,12 @@ public class Simon : MonoBehaviour
         }
     }
 
-    void AddLights()
+    public void AddLights()
     {
         if (infiniteGame.Count == 5)
         {
             RemoveStringFromList(infiniteGame);
-            Jukebox.SetActive(true);
+            GameManager.Instance.AfterGainSimon();
         }
 
         else
@@ -61,45 +68,109 @@ public class Simon : MonoBehaviour
                     infiniteGame.Add("Play");
                     break;
                 case 1:
-                    infiniteGame.Add("Quit");
+                    infiniteGame.Add("Credits");
                     break;
                 case 2:
                     infiniteGame.Add("Settings");
                     break;
             }
+            
             StartCoroutine(ShowLight());
         }
     }
     IEnumerator ShowLight()
     {
-        //Permet d'afficher la couleur qu'on va devoir appuyer
-        yield return new WaitForSeconds(0.2f);
+        if (UIText != null)
+        {
+            //Permet d'afficher la couleur qu'on va devoir appuyer
+            yield return new WaitForSeconds(0.2f);
+            foreach (string light in infiniteGame)
+            {
+             /*   UIText.text = light;
+                yield return new WaitForSeconds(0.2f);
+                UIText.text = "";
+                yield return new WaitForSeconds(0.1f);*/
+
+                switch (light)
+                {
+                    case "Play":
+                        LightUp.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                        LightRight.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                        LightLeft.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                        break;
+                    case "Credits":
+                        LightUp.color = new Color(1, 0.7112604f, 0, 1);
+                        LightRight.color = new Color(1, 0.7112604f, 0, 1);
+                        LightLeft.color = new Color(1, 0.7112604f, 0, 1);
+                        break;
+                    case "Settings":
+                        LightUp.color = new Color(0, 0.2810159f, 1, 1);
+                        LightRight.color = new Color(0, 0.2810159f, 1, 1);
+                        LightLeft.color = new Color(0, 0.2810159f, 1, 1);
+                        break;
+                }
+                yield return new WaitForSeconds(0.5f);
+                LightUp.color = AllLight[0];
+                LightRight.color = AllLight[1];
+                LightLeft.color = AllLight[2];
+                yield return new WaitForSeconds(0.5f);
+            }
+          /*  yield return new WaitForSeconds(0.2f);
+            UIText.text = "";*/
+        }
+
         foreach (string light in infiniteGame)
         {
-            UIText.text = light;
-            yield return new WaitForSeconds(0.2f);
-            UIText.text = "";
-            yield return new WaitForSeconds(0.1f);
+            /*   UIText.text = light;
+               yield return new WaitForSeconds(0.2f);
+               UIText.text = "";
+               yield return new WaitForSeconds(0.1f);*/
+         /*-   LightUp.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+            LightRight.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+            LightLeft.color = new Color(0.9528302f, 0.0759992f, 0, 1);*/
+          
+            switch (light)
+            {
+                case "Play":
+                    LightUp.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                    LightRight.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                    LightLeft.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                    break;
+                case "Credits":
+                    LightUp.color = new Color(1, 0.7112604f, 0, 1);
+                    LightRight.color = new Color(1, 0.7112604f, 0, 1);
+                    LightLeft.color = new Color(1, 0.7112604f, 0, 1);
+                    break;
+                case "Settings":
+                    LightUp.color = new Color(0, 0.2810159f, 1, 1);
+                    LightRight.color = new Color(0, 0.2810159f, 1, 1);
+                    LightLeft.color = new Color(0, 0.2810159f, 1, 1);
+                    break;
+            }
+            yield return new WaitForSeconds(0.5f);
+            LightUp.color = AllLight[0];
+            LightRight.color = AllLight[1];
+            LightLeft.color = AllLight[2];
+            yield return new WaitForSeconds(0.5f);
         }
-        yield return new WaitForSeconds(0.2f);
-        UIText.text = "";
-
-    }
+        }
     public void AddToComparative(string theNew)
     {
+        
         //Indique quel bouton on a appuyer
         switch (theNew)
         {
-            case "PlayButton":
+            case "Button_Play":
                 GetComponent<Simon>().ComparativeGame.Add("Play");
                 break;
-            case "QuitButton":
-                GetComponent<Simon>().ComparativeGame.Add("Quit");
+            case "Button_Credit":
+                GetComponent<Simon>().ComparativeGame.Add("Credits");
                 break;
-            case "SettingsButton":
+            case "Button_Option":
                 GetComponent<Simon>().ComparativeGame.Add("Settings");
                 break;
         }
+        StartCoroutine(PlayWithLight(theNew));
         //Permet de comparer le dernier bouton appuyer à la liste de couleur faite au hasard, si le bouton est mauvais alors le jeu es perdu
         if (ComparativeGame[ComparativeGame.Count - 1] != infiniteGame[ComparativeGame.Count - 1])
         {
@@ -136,5 +207,31 @@ public class Simon : MonoBehaviour
         {
             TheList.Remove(stringFromList);
         }
+    }
+
+    IEnumerator PlayWithLight(string ButtonName)
+    {
+       
+        switch (ButtonName)
+        {
+            case "Button_Play":
+                LightUp.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                LightRight.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                LightLeft.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                break;
+            case "Button_Credit":
+                LightUp.color = new Color(1, 0.7112604f, 0, 1);
+                LightRight.color = new Color(1, 0.7112604f, 0, 1);
+                LightLeft.color = new Color(1, 0.7112604f, 0, 1);
+                break;
+            case "Button_Option":
+                LightUp.color = new Color(0, 0.2810159f, 1, 1);
+                LightRight.color = new Color(0, 0.2810159f, 1, 1);
+                LightLeft.color = new Color(0, 0.2810159f, 1, 1);
+                break;
+        }
+          yield return new WaitForSeconds(1);
+
+
     }
 }

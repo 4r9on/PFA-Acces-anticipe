@@ -14,6 +14,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public GameObject objectCreateAfterFalling;
     public bool painting;
     public bool child;
+    public bool canSlide;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +39,6 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     {
         if (painting)
         {
-
             objectToPutOn.SetActive(true);
             objectToPutOn = null;
         }
@@ -52,9 +52,8 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             }
         }
             //Permet de détruire certains objets quand on les laisse tomber
-            else if (collision.gameObject.tag == "Ground" && destroyOnGravity)
+        else if (collision.gameObject.tag == "Ground" && destroyOnGravity)
         {
-            
             GameObject newObject = Instantiate(objectCreateAfterFalling);
             newObject.transform.position = gameObject.transform.position;
             newObject.GetComponent<ObjectToDrag>().objectToPutOn = objectToPutOn;
@@ -79,24 +78,31 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             child = false;  
             transform.SetParent(transform.parent.transform.parent, true);
         }
+        
         GameManager.Instance.GetComponent<DragAndDrop>().OnClicked();
         //Output the name of the GameObject that is being clicked
-        GameManager.Instance.GetComponent<Physics2DRaycaster>().eventMask = 118;
+        GameManager.Instance.Raycaster2D.eventMask = 118;
        
     }
 
     public void OnPointerUp(PointerEventData pointerEventData)
     {
-      //  Debug.Log(gameObject.name);
-        GameManager.Instance.GetComponent<Physics2DRaycaster>().eventMask = int.MaxValue;
+        GameManager.Instance.Raycaster2D.eventMask = int.MaxValue;
         if (gameObject.layer == 6)
         {
+            Debug.Log(GameManager.Instance.GetComponent<DragAndDrop>().draggedObject);
+            Debug.Log(gameObject);
             GameManager.Instance.ObjectHover = gameObject;
         }
+       
         else if(GameManager.Instance.GetComponent<DragAndDrop>().draggedObject == gameObject)
         {
+            Debug.Log(gameObject);
             GameManager.Instance.GetComponent<DragAndDrop>().StopClick();
         }
-        
+      
+
     }
+
+
 }
