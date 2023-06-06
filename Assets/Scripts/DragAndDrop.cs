@@ -59,7 +59,11 @@ public class DragAndDrop : MonoBehaviour
             {
                 oldColor = SimonUI.GetComponent<SpriteRenderer>().color;
             }
-        }     
+        }
+
+        //animatorBar.SetBool("Play", true);
+        //animatorLogo.SetBool("Logo", true);
+        Debug.Log("aaaaaa");
     }
 
     // Update is called once per frame
@@ -71,6 +75,7 @@ public class DragAndDrop : MonoBehaviour
             //Quand l'objet est pose on va pouvoir faire tourner l'objet dans lequel il est introduit
             if (value < 5.3f && ObjectPut!= null)
             {
+
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.up = ((Camera.main.ScreenToWorldPoint(Input.mousePosition) - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.position).normalized);
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles = new Vector3(0, 0, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.z);
 
@@ -229,11 +234,10 @@ public class DragAndDrop : MonoBehaviour
             else if (draggedObject.tag != "Slider")
             {
                 draggedObject.transform.position = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
-
             }
         }
     }
-     public void DragSimple(RaycastHit hit)
+    public void DragSimple(RaycastHit hit)
     {
         GameManager.Instance.ObjectHover = hit.transform.gameObject;
     }
