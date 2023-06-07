@@ -433,6 +433,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
 --- !u!1 &89547615
@@ -450,7 +451,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &89547616
 Transform:
   m_ObjectHideFlags: 0
@@ -667,6 +668,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
 --- !u!1 &120890752
@@ -1167,6 +1169,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 1787131333}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
 --- !u!50 &230878497
@@ -1325,7 +1328,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &276774606
 Transform:
   m_ObjectHideFlags: 0
@@ -2545,6 +2548,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
 --- !u!61 &840915670
@@ -2798,6 +2802,7 @@ MonoBehaviour:
   sliderNight: {fileID: 0}
   Logo: {fileID: 0}
   a: {fileID: 0}
+  canPressTheButton: 0
 --- !u!114 &892342285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2855,6 +2860,7 @@ MonoBehaviour:
   - {fileID: 1295869483}
   - {fileID: 649067534}
   StockCD: {fileID: 0}
+  Narrator: {fileID: 0}
   Raycaster2D: {fileID: 0}
 --- !u!114 &892342289
 MonoBehaviour:
@@ -3266,6 +3272,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 370834766}
   objectCreateAfterFalling: {fileID: 0}
   painting: 1
+  CD: 0
   child: 0
   canSlide: 0
 --- !u!1 &977741132 stripped
@@ -3936,6 +3943,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
 --- !u!43 &1172215075
@@ -4233,6 +4241,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
 --- !u!1 &1223673630
@@ -4581,6 +4590,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
 --- !u!114 &1276755577
@@ -5139,6 +5149,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 1210863516}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
 --- !u!61 &1365605323
@@ -5329,7 +5340,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1434278414
 Transform:
   m_ObjectHideFlags: 0
@@ -5665,6 +5676,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
 --- !u!1 &1606364227
@@ -6079,6 +6091,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
 --- !u!114 &1718532254
@@ -6129,6 +6142,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
 --- !u!4 &1787131339 stripped
@@ -7118,6 +7132,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 20104435}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 1
   canSlide: 0
 --- !u!1001 &2094870296
