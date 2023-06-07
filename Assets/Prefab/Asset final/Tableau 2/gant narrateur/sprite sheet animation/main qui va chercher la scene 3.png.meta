@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -101,6 +101,18 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -108,145 +120,19 @@ TextureImporter:
       name: main qui va chercher la scene 3_0
       rect:
         serializedVersion: 2
-        x: 19
-        y: 276
-        width: 82
-        height: 96
+        x: 0
+        y: 0
+        width: 0
+        height: 0
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: f64d2ac037b0f6e4e98da9787287266e
-      internalID: -437282031
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: main qui va chercher la scene 3_1
-      rect:
-        serializedVersion: 2
-        x: 155
-        y: 277
-        width: 83
-        height: 91
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 716c04a477b4e3444a0e939a7aa82274
-      internalID: -1996224689
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: main qui va chercher la scene 3_2
-      rect:
-        serializedVersion: 2
-        x: 276
-        y: 284
-        width: 96
-        height: 81
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0e43f1e0da951054081a2628ca6dc2ce
-      internalID: 896660089
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: main qui va chercher la scene 3_3
-      rect:
-        serializedVersion: 2
-        x: 5
-        y: 163
-        width: 120
-        height: 84
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 916811e2167f5ee45825d48e5188d541
-      internalID: -1898526968
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: main qui va chercher la scene 3_4
-      rect:
-        serializedVersion: 2
-        x: 131
-        y: 147
-        width: 122
-        height: 105
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ef7be396857d5d748bec705e78528e7c
-      internalID: -683905023
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: main qui va chercher la scene 3_5
-      rect:
-        serializedVersion: 2
-        x: 259
-        y: 147
-        width: 122
-        height: 105
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5fec30606c5a9bf40a915a37a77f6a93
-      internalID: 552999701
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: main qui va chercher la scene 3_6
-      rect:
-        serializedVersion: 2
-        x: 3
-        y: 19
-        width: 122
-        height: 105
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7002fc18ac738a84889c7bb75bf06ff0
-      internalID: 790811620
+      spriteID: 90fb01e4b87879680800000000000000
+      internalID: -8748374718763974903
       vertices: []
       indices: 
       edges: []
@@ -254,7 +140,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 619b2a34bb02bf84cb01a7d83a2a2e07
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -262,13 +148,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      main qui va chercher la scene 3_0: -437282031
-      main qui va chercher la scene 3_4: -683905023
-      main qui va chercher la scene 3_6: 790811620
-      main qui va chercher la scene 3_1: -1996224689
-      main qui va chercher la scene 3_2: 896660089
-      main qui va chercher la scene 3_3: -1898526968
-      main qui va chercher la scene 3_5: 552999701
+      main qui va chercher la scene 3_0: -8748374718763974903
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

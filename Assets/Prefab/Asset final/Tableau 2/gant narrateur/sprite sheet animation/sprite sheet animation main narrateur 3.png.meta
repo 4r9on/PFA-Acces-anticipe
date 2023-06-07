@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -101,6 +101,18 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -108,376 +120,19 @@ TextureImporter:
       name: sprite sheet animation main narrateur 3_0
       rect:
         serializedVersion: 2
-        x: 92
-        y: 858
-        width: 82
-        height: 96
+        x: 0
+        y: 0
+        width: 0
+        height: 0
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 885db59f1e4785f4eb0d68832cdb7f80
-      internalID: -1439972979
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite sheet animation main narrateur 3_1
-      rect:
-        serializedVersion: 2
-        x: 342
-        y: 867
-        width: 89
-        height: 94
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 901ca782b0af037489114da22a33c2ca
-      internalID: 1775249604
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite sheet animation main narrateur 3_2
-      rect:
-        serializedVersion: 2
-        x: 588
-        y: 861
-        width: 110
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e4325548f049fb94898ec8b4dd30afe1
-      internalID: 1776003524
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite sheet animation main narrateur 3_3
-      rect:
-        serializedVersion: 2
-        x: 848
-        y: 866
-        width: 107
-        height: 85
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d21b0954740ed8b47ad1db54b1b72606
-      internalID: 1511724230
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite sheet animation main narrateur 3_4
-      rect:
-        serializedVersion: 2
-        x: 1101
-        y: 865
-        width: 108
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 158b2fc284b0e0d4b872b13af29529de
-      internalID: 1490830397
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite sheet animation main narrateur 3_5
-      rect:
-        serializedVersion: 2
-        x: 74
-        y: 607
-        width: 109
-        height: 99
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8a7211668287ed44c8351d1c646ecd98
-      internalID: -1958646534
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite sheet animation main narrateur 3_6
-      rect:
-        serializedVersion: 2
-        x: 330
-        y: 606
-        width: 108
-        height: 102
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f9cefc9cb6e75344aad8894caedfe3fd
-      internalID: 331765600
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite sheet animation main narrateur 3_7
-      rect:
-        serializedVersion: 2
-        x: 586
-        y: 605
-        width: 107
-        height: 102
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 72bfa8b60e675b44f8143b54c08f00e8
-      internalID: -255507812
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite sheet animation main narrateur 3_8
-      rect:
-        serializedVersion: 2
-        x: 841
-        y: 603
-        width: 107
-        height: 102
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1fb8a911bea8f0c4fa9ef4b97814b802
-      internalID: -101130694
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite sheet animation main narrateur 3_9
-      rect:
-        serializedVersion: 2
-        x: 1096
-        y: 603
-        width: 107
-        height: 102
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bf20739c9b6b7ad45baf066887fa5ba2
-      internalID: 1233677255
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite sheet animation main narrateur 3_10
-      rect:
-        serializedVersion: 2
-        x: 73
-        y: 347
-        width: 107
-        height: 102
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7e3f75eab14759b418bc411adb8dd7f4
-      internalID: 583050384
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite sheet animation main narrateur 3_11
-      rect:
-        serializedVersion: 2
-        x: 330
-        y: 347
-        width: 109
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ece24cb99a176074e8a74045636f014f
-      internalID: 334122255
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite sheet animation main narrateur 3_12
-      rect:
-        serializedVersion: 2
-        x: 586
-        y: 348
-        width: 109
-        height: 99
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 14e8b126df7d87e4eaf431b85b7ff5b1
-      internalID: 86954995
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite sheet animation main narrateur 3_13
-      rect:
-        serializedVersion: 2
-        x: 846
-        y: 349
-        width: 107
-        height: 93
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 042224cfc2c5a3a4f9933f7ece00ff9f
-      internalID: -1201223189
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite sheet animation main narrateur 3_14
-      rect:
-        serializedVersion: 2
-        x: 1096
-        y: 350
-        width: 110
-        height: 89
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3178c6104eca1824d926f65445b44cb8
-      internalID: 1756393014
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite sheet animation main narrateur 3_15
-      rect:
-        serializedVersion: 2
-        x: 69
-        y: 90
-        width: 110
-        height: 99
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7b707d76e1670ee4a965ffdfb4be524c
-      internalID: 903925124
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite sheet animation main narrateur 3_16
-      rect:
-        serializedVersion: 2
-        x: 342
-        y: 99
-        width: 89
-        height: 94
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 45c0ab8f184d04c4998ce2ed19fe12f3
-      internalID: -1357722711
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: sprite sheet animation main narrateur 3_17
-      rect:
-        serializedVersion: 2
-        x: 604
-        y: 90
-        width: 82
-        height: 96
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2c6decbf2834a994cb68d9b6ab7571de
-      internalID: 1591540046
+      spriteID: 98b5765bd8ad84a00800000000000000
+      internalID: 741082440871140233
       vertices: []
       indices: 
       edges: []
@@ -485,7 +140,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 0d0c4008da3e69245b6f1daeee36e7ef
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -493,24 +148,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      sprite sheet animation main narrateur 3_4: 1490830397
-      sprite sheet animation main narrateur 3_17: 1591540046
-      sprite sheet animation main narrateur 3_2: 1776003524
-      sprite sheet animation main narrateur 3_11: 334122255
-      sprite sheet animation main narrateur 3_5: -1958646534
-      sprite sheet animation main narrateur 3_12: 86954995
-      sprite sheet animation main narrateur 3_16: -1357722711
-      sprite sheet animation main narrateur 3_14: 1756393014
-      sprite sheet animation main narrateur 3_10: 583050384
-      sprite sheet animation main narrateur 3_0: -1439972979
-      sprite sheet animation main narrateur 3_1: 1775249604
-      sprite sheet animation main narrateur 3_7: -255507812
-      sprite sheet animation main narrateur 3_15: 903925124
-      sprite sheet animation main narrateur 3_6: 331765600
-      sprite sheet animation main narrateur 3_8: -101130694
-      sprite sheet animation main narrateur 3_13: -1201223189
-      sprite sheet animation main narrateur 3_3: 1511724230
-      sprite sheet animation main narrateur 3_9: 1233677255
+      sprite sheet animation main narrateur 3_0: 741082440871140233
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

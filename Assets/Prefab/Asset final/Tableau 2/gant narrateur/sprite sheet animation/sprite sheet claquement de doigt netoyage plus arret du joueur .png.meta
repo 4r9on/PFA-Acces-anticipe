@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -101,6 +101,18 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -119,8 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b9f3112950ee5b445960019436541e50
-      internalID: 1026363832
+      spriteID: d2853cecf8140db4fbbeb69f1a267638
+      internalID: 1921245276
       vertices: []
       indices: 
       edges: []
@@ -140,8 +152,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 672f82edb72f8754d816863c09289e0b
-      internalID: 2000511948
+      spriteID: 0868f64eeab87a54eae781081f4409c7
+      internalID: 1915031657
       vertices: []
       indices: 
       edges: []
@@ -161,8 +173,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1aaf935f80b1216409e8f7b514370fc7
-      internalID: -1836421252
+      spriteID: c6486b27f3d493e46b67d048570fd5b5
+      internalID: -931420952
       vertices: []
       indices: 
       edges: []
@@ -182,8 +194,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c369fa57eba49ad43a45047cd3fba73e
-      internalID: 1751201832
+      spriteID: 874dc23b1415d754dad6af61e3eb0a5c
+      internalID: -1522484554
       vertices: []
       indices: 
       edges: []
@@ -203,8 +215,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 421d988b8adfafd4c8c6049c2f32d2e4
-      internalID: 1413754162
+      spriteID: 2d394242facf6c345946671a9cbc620e
+      internalID: -1921416563
       vertices: []
       indices: 
       edges: []
@@ -224,8 +236,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca57b33a686f79e4c97f2705add98690
-      internalID: 2069825100
+      spriteID: 80a1e3f30fb00244db6aa34604a408c7
+      internalID: 122164097
       vertices: []
       indices: 
       edges: []
@@ -245,8 +257,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5ff2d7f8babe0945923b15f9178630a
-      internalID: -593497646
+      spriteID: 4bf94a9b5184171488b53558e76af448
+      internalID: 1859329295
       vertices: []
       indices: 
       edges: []
@@ -266,8 +278,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 87c1554807d9ba3438fa4793a45784eb
-      internalID: -1892415355
+      spriteID: f8cf964ce3b9f8c4193c802affdeacd8
+      internalID: 2142355159
       vertices: []
       indices: 
       edges: []
@@ -287,8 +299,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa6bb4b2653cbb34fa7a25da8dbee39e
-      internalID: -1480509929
+      spriteID: 668d6b64e303bae4eb154710b99fdfa4
+      internalID: 911272973
       vertices: []
       indices: 
       edges: []
@@ -308,8 +320,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8246ec7eb9fa17f46b28f97716b1728c
-      internalID: 797053356
+      spriteID: da43bd690200e5043b0e1a1b7ed8c9bc
+      internalID: -1801198135
       vertices: []
       indices: 
       edges: []
@@ -329,8 +341,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 12b787c1af9d74f4c852685732b1843b
-      internalID: -621285352
+      spriteID: e7d59877f1679944ea595ecf8ae7ad9c
+      internalID: -412915801
       vertices: []
       indices: 
       edges: []
@@ -350,8 +362,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 92e7b69121aa1bb47a2e5e59bdb2ed4b
-      internalID: 1053765399
+      spriteID: bfb67e3db7b2b8043a2cd3783f4b0fa3
+      internalID: 426051480
       vertices: []
       indices: 
       edges: []
@@ -371,8 +383,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 27696bd9d40489c4e989f3097c369c5f
-      internalID: 1390815046
+      spriteID: 4bdb4aad43c790140aceadb5ba5e2029
+      internalID: -180289509
       vertices: []
       indices: 
       edges: []
@@ -392,8 +404,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 121dc70db86b37240ab3045f13a532fd
-      internalID: -788424377
+      spriteID: 94c5eecbc391e834ca07330fde89937a
+      internalID: -1356652568
       vertices: []
       indices: 
       edges: []
@@ -413,8 +425,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05667135cf6c53e4286b969d2ae1422b
-      internalID: -299300668
+      spriteID: b24e723e5bd30dc47b6fbf4adffe827e
+      internalID: -1773781028
       vertices: []
       indices: 
       edges: []
@@ -434,8 +446,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4972bcafd82eca048bfa5b72926b2355
-      internalID: -376805056
+      spriteID: bce38b28ffc12d74da375b8c810e8020
+      internalID: -1380018271
       vertices: []
       indices: 
       edges: []
@@ -443,7 +455,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 0f0c188408fdec245936dcfb026b1832
+    spriteID: 705c3a0b1bfc5e54cab1f7ddd4c277c6
     internalID: 0
     vertices: []
     indices: 
@@ -451,22 +463,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      sprite sheet claquement de doigt netoyage plus arret du joueur _9: 797053356
-      sprite sheet claquement de doigt netoyage plus arret du joueur _0: 1026363832
-      sprite sheet claquement de doigt netoyage plus arret du joueur _2: -1836421252
-      sprite sheet claquement de doigt netoyage plus arret du joueur _12: 1390815046
-      sprite sheet claquement de doigt netoyage plus arret du joueur _1: 2000511948
-      sprite sheet claquement de doigt netoyage plus arret du joueur _8: -1480509929
-      sprite sheet claquement de doigt netoyage plus arret du joueur _10: -621285352
-      sprite sheet claquement de doigt netoyage plus arret du joueur _13: -788424377
-      sprite sheet claquement de doigt netoyage plus arret du joueur _4: 1413754162
-      sprite sheet claquement de doigt netoyage plus arret du joueur _11: 1053765399
-      sprite sheet claquement de doigt netoyage plus arret du joueur _5: 2069825100
-      sprite sheet claquement de doigt netoyage plus arret du joueur _6: -593497646
-      sprite sheet claquement de doigt netoyage plus arret du joueur _14: -299300668
-      sprite sheet claquement de doigt netoyage plus arret du joueur _3: 1751201832
-      sprite sheet claquement de doigt netoyage plus arret du joueur _7: -1892415355
-      sprite sheet claquement de doigt netoyage plus arret du joueur _15: -376805056
+      sprite sheet claquement de doigt netoyage plus arret du joueur _9: -1801198135
+      sprite sheet claquement de doigt netoyage plus arret du joueur _0: 1921245276
+      sprite sheet claquement de doigt netoyage plus arret du joueur _2: -931420952
+      sprite sheet claquement de doigt netoyage plus arret du joueur _12: -180289509
+      sprite sheet claquement de doigt netoyage plus arret du joueur _1: 1915031657
+      sprite sheet claquement de doigt netoyage plus arret du joueur _8: 911272973
+      sprite sheet claquement de doigt netoyage plus arret du joueur _10: -412915801
+      sprite sheet claquement de doigt netoyage plus arret du joueur _13: -1356652568
+      sprite sheet claquement de doigt netoyage plus arret du joueur _4: -1921416563
+      sprite sheet claquement de doigt netoyage plus arret du joueur _11: 426051480
+      sprite sheet claquement de doigt netoyage plus arret du joueur _5: 122164097
+      sprite sheet claquement de doigt netoyage plus arret du joueur _6: 1859329295
+      sprite sheet claquement de doigt netoyage plus arret du joueur _14: -1773781028
+      sprite sheet claquement de doigt netoyage plus arret du joueur _3: -1522484554
+      sprite sheet claquement de doigt netoyage plus arret du joueur _7: 2142355159
+      sprite sheet claquement de doigt netoyage plus arret du joueur _15: -1380018271
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
