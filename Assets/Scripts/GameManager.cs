@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
         {
             case 0:
                 Debug.Log("touche une fois");
-                Narrator.GetComponent<Animator>().SetInteger();
+                //Narrator.GetComponent<Animator>().SetInteger();
                // timing = 0.5f;
                 break;
             case 1:
