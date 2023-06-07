@@ -88,10 +88,14 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     public void OnPointerUp(PointerEventData pointerEventData)
     {
-        Debug.Log(gameObject.name);
         if (gameObject.tag == "Simon")
         {
-            GameManager.Instance.ObjectHover.GetComponent<Animator>().SetBool("IsClicked", false);
+            gameObject.GetComponent<Animator>().SetBool("IsClicked", false);
+            
+            if (CD)
+            {
+                GameManager.Instance.GetComponent<DragAndDrop>().StopClick();
+            }
         }
         GameManager.Instance.Raycaster2D.eventMask = int.MaxValue;
         if (gameObject.layer == 6)
