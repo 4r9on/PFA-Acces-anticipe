@@ -402,6 +402,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
 --- !u!1 &25130005
@@ -776,6 +777,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
 --- !u!1 &105696000
@@ -1465,6 +1467,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 840915665}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
 --- !u!50 &230878497
@@ -2299,7 +2302,7 @@ Animator:
   m_GameObject: {fileID: 364482256}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c9404a968df575b43925bf03a55d978d, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5bb1336f62530cb439050aeea437b908, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4074,7 +4077,7 @@ Animator:
   m_GameObject: {fileID: 679523410}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c9404a968df575b43925bf03a55d978d, type: 2}
+  m_Controller: {fileID: 9100000, guid: d195531430cf3014da528d41d598630d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4552,6 +4555,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
 --- !u!61 &840915670
@@ -5811,6 +5815,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 370834766}
   objectCreateAfterFalling: {fileID: 0}
   painting: 1
+  CD: 0
   child: 0
   canSlide: 0
 --- !u!1 &977741132 stripped
@@ -6225,7 +6230,7 @@ Animator:
   m_GameObject: {fileID: 987600467}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c9404a968df575b43925bf03a55d978d, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0e83f9f995c3331498736dc1c9a7baf3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -6786,6 +6791,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
 --- !u!1 &1108077235
@@ -7385,6 +7391,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
 --- !u!114 &1276755577
@@ -8905,6 +8912,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
 --- !u!1 &1606364227
@@ -9949,6 +9957,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
 --- !u!114 &1718532254
@@ -11089,6 +11098,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 20104435}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 1
   canSlide: 0
 --- !u!1 &2005775489
