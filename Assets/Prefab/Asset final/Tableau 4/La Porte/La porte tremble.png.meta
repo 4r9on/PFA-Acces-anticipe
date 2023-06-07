@@ -1,0 +1,2345 @@
+fileFormatVersion: 2
+guid: 7d52cb21591d3204695379797b8f91d9
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: La porte tremble_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1080
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3de344adb9de844daf5df29128f7455
+      internalID: -2142317973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_1
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 1080
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a466406e321ebc94f9af0328ba22b0b2
+      internalID: 1848493409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_2
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 1080
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f21b52aa02335404b972884eb23a102a
+      internalID: 1526511335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_3
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 1080
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c830751e8df7ce147a70264482168f32
+      internalID: 438960287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_4
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 1080
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a6944d447486cd4d80d933f0b4fd8dd
+      internalID: 1622494333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_5
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 1080
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de7adfc9050a31147ab0b1edb0c23ebc
+      internalID: -931179087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_6
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 1080
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8986d6a2c0a2e334082051bb0765ff3d
+      internalID: -119729628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_7
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 1080
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fbb8b38f17ab844bb196c73e42a0984
+      internalID: -2096763525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_8
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 1080
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 801391ea0284d08429c5bd7ebf365a52
+      internalID: -1431152119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_9
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 1080
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 897e3038a8b2b8142b647b7131c859ec
+      internalID: 1498499787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_10
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 1080
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6e25b0a68d83864e985c4c3a5959baf
+      internalID: 14248550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_11
+      rect:
+        serializedVersion: 2
+        x: 1100
+        y: 1080
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d20996b315930f4ca4ccccce6796771
+      internalID: -5072266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 945
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df2c4a5af391e63418d7928ba06665f9
+      internalID: 348834153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_13
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 945
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7f0737218a0a8045bb206e8e93d4299
+      internalID: -1018569363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_14
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 945
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9b81f959c8c46f42a6161347aeb9615
+      internalID: 1755690506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_15
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 945
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d71e9db605fc452438ff44066b6412ec
+      internalID: -400267832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_16
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 945
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cf973bd82f56e64dac6d7700a25c1d3
+      internalID: 302911990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_17
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 945
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 324df7ce765227f46b794e4c5e9d7cc2
+      internalID: 1427423483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_18
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 945
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81b33d9b652465440928ca366644db89
+      internalID: 1476288296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_19
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 945
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 838e387edb4d8cb43bf8b23baff9cfce
+      internalID: -1316215024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_20
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 945
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31418cebbacc43a46b74bd55379bdb30
+      internalID: 1676118689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_21
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 945
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3074eeafbbb48d4aae73a2946986c21
+      internalID: 1957764314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_22
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 945
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 517b207dbb1a92042b32d0c4f5ab7415
+      internalID: -828652273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_23
+      rect:
+        serializedVersion: 2
+        x: 1100
+        y: 945
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 061a7c095974ad94eba4c697b6c79a35
+      internalID: -1812592024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 810
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 204107538b4df854c9ddfdee273f8e99
+      internalID: -927574244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_25
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 810
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34a16e96034a1af47b9c6aebdb16671c
+      internalID: 1501854097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_26
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 810
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa530facb955bfa409b5ce7c4b3fda0d
+      internalID: -906150436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_27
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 810
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56b333a2e344cdf4584250d21fcc3fe3
+      internalID: -1862211601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_28
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 810
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ceb64c3824671464190cd94e30439fd7
+      internalID: -93255352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_29
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 810
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f25aa69342756ba48bf5a7e2b2539659
+      internalID: -434994580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_30
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 810
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d9eeb64f332ccd4a84e8af0e1cf17b9
+      internalID: 1965216360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_31
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 810
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15ce68f8a3a3d5c4aa461d4238cfc6ee
+      internalID: 1197726238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_32
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 810
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c5c1281c13f4694c9315e5c5c15ab9c
+      internalID: 1367554376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_33
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 810
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15874d26c6b3fc845b696a8054ff8b2a
+      internalID: -960480723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_34
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 810
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 954aec5289cd55b4696f8a115d9a7a0d
+      internalID: -227796874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_35
+      rect:
+        serializedVersion: 2
+        x: 1100
+        y: 810
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee334edf9a1810d448fc39ed550bb011
+      internalID: -16353890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_36
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 675
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2286261f833dd9840a100a1e1fe39664
+      internalID: 1111825411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_37
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 675
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 284db824cf3c3164aa573781138e33d7
+      internalID: 1257197957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_38
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 675
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a400e7b24286cd4b8793b067cc7f4ae
+      internalID: 1672959190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_39
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 675
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2daee959cfd799b43a5511d2e85c0e86
+      internalID: 1688807383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_40
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 675
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 357376f454ce29f4690ce9335b8a5ca8
+      internalID: -448366695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_41
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 675
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7798f78b175085d41833016686ac0e3c
+      internalID: -1353683585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_42
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 675
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41ff10e8f4288f347bc216571da63a45
+      internalID: -377904567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_43
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 675
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52229a68e0a31324b8ae0198b4f5ac28
+      internalID: 1993526467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_44
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 675
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e3d57e4e3e84cd4bb2a48aa9b91dd8c
+      internalID: 1086917984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_45
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 675
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec16b6fef8120e44caaea25c2df2e883
+      internalID: 1665273511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_46
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 675
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e222bd67211f964ea0ebe8b1ceed62d
+      internalID: 1442399189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_47
+      rect:
+        serializedVersion: 2
+        x: 1100
+        y: 675
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb1e5c46b68b28a4dae627254a9b518a
+      internalID: -1044983494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_48
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 540
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e8ce4d5a30d0c0409237d242c9f2ae4
+      internalID: 1455704792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_49
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 540
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2a186363dcdc0c428b1bf42890720c4
+      internalID: -1032972245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_50
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 540
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83ab71300ee5d224f9b2383d038ab419
+      internalID: -2019497685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_51
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 540
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58964944783f5dc4d9fa0733dd74e91c
+      internalID: 1252497450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_52
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 540
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a418c28d3cb803f42aa757ae61201109
+      internalID: -1274127883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_53
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 540
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eaaaad08f74de364d8b51b6608a72aa0
+      internalID: 302877496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_54
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 540
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd42c1ef24759244f952824556de5bdd
+      internalID: -2144707521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_55
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 540
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ddef2c1ed3bbed43bd553f05846bae2
+      internalID: -1039939285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_56
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 540
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5703c141252459c4da8394f6692479c8
+      internalID: -576823948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_57
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 540
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1877cfea41d80d74f961e0dc15461e4b
+      internalID: 1004132803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_58
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 540
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b53816da8368e0942a02b28d87140e93
+      internalID: -1981431811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_59
+      rect:
+        serializedVersion: 2
+        x: 1100
+        y: 540
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56d2b87aa8699f64783d02ed3a410469
+      internalID: 84579499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_60
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 405
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ec66d053e7c8a445b0b3becdacd643e
+      internalID: 1544203406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_61
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 405
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59711e165cb20394fbec9a01c39e2661
+      internalID: -1483330429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_62
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 405
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2961ca7032901da43942af1f561c2b48
+      internalID: 1363122699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_63
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 405
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36910969351306d41925b9d3c3e647e8
+      internalID: -842299667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_64
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 405
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4157e5cbe7a1d4e4381bf1751e26e5b3
+      internalID: -704927076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_65
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 405
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34e821f336dbe3548b399d0af38f3d7d
+      internalID: 248610211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_66
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 405
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ff390e6f2652e64ab8ad2ac09d4882e
+      internalID: 1380371077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_67
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 405
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76c5877604663c94c85aebadc55c68a7
+      internalID: 1191723467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_68
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 405
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bdffad12977e26469f1ab516cec50de
+      internalID: -471009487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_69
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 405
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f0562a49d2ff9346b5a3a95eaa680e3
+      internalID: 131110673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_70
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 405
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df34d04e662827b4fb24a6ba6886c580
+      internalID: 549057050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_71
+      rect:
+        serializedVersion: 2
+        x: 1100
+        y: 405
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98f702504dc3be144889fa8ccf7204da
+      internalID: -1406175127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_72
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 270
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 773921adaeefd344897c36cc0a0d2adc
+      internalID: -845476015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_73
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 270
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da47a21ea5cb9954f9af4cd16725f7a1
+      internalID: 1533893822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_74
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 270
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aabcdff161d5b84468a8a5c90facb2bd
+      internalID: -303432246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_75
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 270
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4d22f2a3cf8e444587050aada32defd
+      internalID: 783067443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_76
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 270
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ca3f2528e9d2df4aa1b109e57ab7756
+      internalID: 832215682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_77
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 270
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb2f5b9c04caee14e9fff80e5c604744
+      internalID: 187438192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_78
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 270
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2fae27538be102438184414e41e137b
+      internalID: 912671000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_79
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 270
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77b0976a386c68047b48176e14754487
+      internalID: 1567229330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_80
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 270
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e97f70b9163e4e4793d83eac53d7b96
+      internalID: 381816543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_81
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 270
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2efc8903c6f326c4bbeda45194ed8c44
+      internalID: 1563648936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_82
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 270
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e180a2655e4e63444bb30148bb68c564
+      internalID: -2064563796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_83
+      rect:
+        serializedVersion: 2
+        x: 1100
+        y: 270
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b16136202434d9408663a659c37b6fa
+      internalID: 301599594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_84
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 135
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc4885cf1cdfb8142a1d8a77a2d3b882
+      internalID: -812546510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_85
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 135
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2c87036d0e675d47a5a0064ef2463c5
+      internalID: -1412146806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_86
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 135
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a517199acaf91447aef2006c83cd565
+      internalID: 368079393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_87
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 135
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe291e86e7a223e43ba7d36bc841b661
+      internalID: 1558573326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_88
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 135
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ea1084754f298e47bb7b716fa73cdab
+      internalID: -1389108111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_89
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 135
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e8156b110eeeb042aa2064893b89de2
+      internalID: -1202467689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_90
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 135
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6cda8029c8f8b1f44b364eff10ee5ed8
+      internalID: -1585954729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_91
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 135
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37c78c0deb17ced45a865be19a0304f9
+      internalID: 1989728409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_92
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 135
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65ac0ef0be1ccb743a66cd48f10e95f9
+      internalID: 1402141685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_93
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 135
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d3bbf310d1fde542a08f631b74429a4
+      internalID: 519546329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_94
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 135
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 306afa84c421c9e429e8cdeeb3baf132
+      internalID: -160970398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_95
+      rect:
+        serializedVersion: 2
+        x: 1100
+        y: 135
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f911fd11864fc5542bb18e991fd6a1dd
+      internalID: 193287256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_96
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8624b3f877e939478978875322818df
+      internalID: 390280945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_97
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c914c33fafd319c408330d902f4449ed
+      internalID: -2140576780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_98
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a9aaf5747117bb4bb00c7ccf4a474b1
+      internalID: -1481493872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_99
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 0
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bff2bcfe17a6d142b315d7000cd4d72
+      internalID: -1734967212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: La porte tremble_100
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 0
+        width: 100
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ab8465d8c5562143a43d6cfcf0dcba0
+      internalID: 1584584211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 1315a1060c8331847b0e08c5ae62aa13
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      La porte tremble_98: -1481493872
+      La porte tremble_3: 438960287
+      La porte tremble_97: -2140576780
+      La porte tremble_51: 1252497450
+      La porte tremble_87: 1558573326
+      La porte tremble_85: -1412146806
+      La porte tremble_73: 1533893822
+      La porte tremble_60: 1544203406
+      La porte tremble_71: -1406175127
+      La porte tremble_25: 1501854097
+      La porte tremble_66: 1380371077
+      La porte tremble_41: -1353683585
+      La porte tremble_70: 549057050
+      La porte tremble_4: 1622494333
+      La porte tremble_26: -906150436
+      La porte tremble_72: -845476015
+      La porte tremble_96: 390280945
+      La porte tremble_48: 1455704792
+      La porte tremble_77: 187438192
+      La porte tremble_15: -400267832
+      La porte tremble_79: 1567229330
+      La porte tremble_18: 1476288296
+      La porte tremble_94: -160970398
+      La porte tremble_6: -119729628
+      La porte tremble_86: 368079393
+      La porte tremble_33: -960480723
+      La porte tremble_89: -1202467689
+      La porte tremble_93: 519546329
+      La porte tremble_19: -1316215024
+      La porte tremble_29: -434994580
+      La porte tremble_56: -576823948
+      La porte tremble_58: -1981431811
+      La porte tremble_83: 301599594
+      La porte tremble_0: -2142317973
+      La porte tremble_62: 1363122699
+      La porte tremble_65: 248610211
+      La porte tremble_35: -16353890
+      La porte tremble_50: -2019497685
+      La porte tremble_75: 783067443
+      La porte tremble_32: 1367554376
+      La porte tremble_46: 1442399189
+      La porte tremble_45: 1665273511
+      La porte tremble_61: -1483330429
+      La porte tremble_37: 1257197957
+      La porte tremble_16: 302911990
+      La porte tremble_91: 1989728409
+      La porte tremble_52: -1274127883
+      La porte tremble_84: -812546510
+      La porte tremble_67: 1191723467
+      La porte tremble_10: 14248550
+      La porte tremble_47: -1044983494
+      La porte tremble_95: 193287256
+      La porte tremble_23: -1812592024
+      La porte tremble_7: -2096763525
+      La porte tremble_59: 84579499
+      La porte tremble_78: 912671000
+      La porte tremble_43: 1993526467
+      La porte tremble_82: -2064563796
+      La porte tremble_68: -471009487
+      La porte tremble_2: 1526511335
+      La porte tremble_69: 131110673
+      La porte tremble_17: 1427423483
+      La porte tremble_11: -5072266
+      La porte tremble_22: -828652273
+      La porte tremble_57: 1004132803
+      La porte tremble_49: -1032972245
+      La porte tremble_40: -448366695
+      La porte tremble_44: 1086917984
+      La porte tremble_90: -1585954729
+      La porte tremble_1: 1848493409
+      La porte tremble_92: 1402141685
+      La porte tremble_38: 1672959190
+      La porte tremble_24: -927574244
+      La porte tremble_9: 1498499787
+      La porte tremble_64: -704927076
+      La porte tremble_80: 381816543
+      La porte tremble_63: -842299667
+      La porte tremble_53: 302877496
+      La porte tremble_39: 1688807383
+      La porte tremble_34: -227796874
+      La porte tremble_13: -1018569363
+      La porte tremble_42: -377904567
+      La porte tremble_30: 1965216360
+      La porte tremble_55: -1039939285
+      La porte tremble_28: -93255352
+      La porte tremble_100: 1584584211
+      La porte tremble_14: 1755690506
+      La porte tremble_20: 1676118689
+      La porte tremble_81: 1563648936
+      La porte tremble_36: 1111825411
+      La porte tremble_21: 1957764314
+      La porte tremble_99: -1734967212
+      La porte tremble_8: -1431152119
+      La porte tremble_27: -1862211601
+      La porte tremble_74: -303432246
+      La porte tremble_88: -1389108111
+      La porte tremble_31: 1197726238
+      La porte tremble_76: 832215682
+      La porte tremble_12: 348834153
+      La porte tremble_5: -931179087
+      La porte tremble_54: -2144707521
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
