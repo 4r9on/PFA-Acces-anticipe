@@ -19,6 +19,15 @@ public class GameManager : MonoBehaviour
     
     public Physics2DRaycaster Raycaster2D;
     string tableau;
+
+    public GameObject tableau1;
+    public GameObject tableau2;  
+    public GameObject tableau3;
+    public GameObject tableau4;
+    public GameObject tableau5;
+
+    public DragAndDrop dAD;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -45,7 +54,7 @@ public class GameManager : MonoBehaviour
 
     public void AfterGainSimon()
     {
-        //faire l'anim où le narrateur va appuyer sur le bouton pause
+        //faire l'anim oï¿½ le narrateur va appuyer sur le bouton pause
         //faire tomber le disque
         foreach(GameObject obj in SimonUI)
         {
@@ -58,6 +67,28 @@ public class GameManager : MonoBehaviour
         StockCD.tag = "Object";
     }
 
+    public void LoadNextLevel()
+    {
+        if(dAD.sliderLogo.value == 1.0f)
+        {
+            tableau1.SetActive(false);
+            tableau2.SetActive(true);        
+        }
+        /*else if ()
+        {
+            tableau2.SetActive(false); 
+            tableau3.SetActive(true);
+        }
+        else if ()
+        {
+            tableau3.SetActive(false);
+            tableau4.SetActive(true);
+        }
+        else if ()
+        {
+            tableau4.SetActive(false);
+            tableau5.SetActive(true);
+        }*/
     public void TouchCD(int numberOfTouch)
     {
         Narrator.GetComponent<Animator>().SetInteger("nrbOfTouch", numberOfTouch);

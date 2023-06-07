@@ -1067,6 +1067,7 @@ MonoBehaviour:
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
   child: 0
+  canSlide: 0
 --- !u!1 &327143248
 GameObject:
   m_ObjectHideFlags: 0
@@ -1208,7 +1209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &352885600
 Transform:
   m_ObjectHideFlags: 0
@@ -1352,6 +1353,7 @@ MonoBehaviour:
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
   child: 0
+  canSlide: 0
 --- !u!212 &401065476
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2018,6 +2020,7 @@ MonoBehaviour:
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
   child: 0
+  canSlide: 0
 --- !u!114 &516937808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2315,6 +2318,7 @@ MonoBehaviour:
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
   child: 0
+  canSlide: 0
 --- !u!61 &596714945
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2408,7 +2412,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &600633284
 Transform:
   m_ObjectHideFlags: 0
@@ -2424,7 +2428,7 @@ Transform:
   - {fileID: 572311535}
   - {fileID: 774468107}
   - {fileID: 596714942}
-  - {fileID: 1634009326}
+  - {fileID: 1634009328}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2619,6 +2623,7 @@ MonoBehaviour:
   objectCreateAfterFalling: {fileID: 0}
   painting: 1
   child: 0
+  canSlide: 0
 --- !u!1 &697049664
 GameObject:
   m_ObjectHideFlags: 0
@@ -2721,6 +2726,7 @@ MonoBehaviour:
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
   child: 0
+  canSlide: 0
 --- !u!212 &697049669
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2783,9 +2789,9 @@ GameObject:
   m_Component:
   - component: {fileID: 744713806}
   - component: {fileID: 744713810}
+  - component: {fileID: 744713807}
   - component: {fileID: 744713809}
   - component: {fileID: 744713808}
-  - component: {fileID: 744713807}
   m_Layer: 7
   m_Name: Moon
   m_TagString: Object
@@ -2927,6 +2933,7 @@ MonoBehaviour:
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
   child: 1
+  canSlide: 0
 --- !u!1 &774468106
 GameObject:
   m_ObjectHideFlags: 0
@@ -3007,6 +3014,7 @@ MonoBehaviour:
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
   child: 0
+  canSlide: 0
 --- !u!43 &850248239
 Mesh:
   m_ObjectHideFlags: 0
@@ -3333,12 +3341,21 @@ MonoBehaviour:
   nbrOfTimeWeTouch: 0
   slider: {fileID: 0}
   mySpriteBar: {fileID: 175167801}
+  testBar: {fileID: 0}
   tex: {fileID: 2800000, guid: 1ddddf2d896c09449a53b06c462a1ae0, type: 3}
-  animator: {fileID: 0}
+  animatorBar: {fileID: 0}
+  animatorLogo: {fileID: 0}
   posInit: 10000
   posMaxInit: 23.5
+  posInitTop: 0
+  posMaxInitTop: 0
+  clip: {fileID: 0}
   totalSliderValue: 0
+  totalSliderValueTop: 0
   engrenage: {fileID: 0}
+  sliderNight: {fileID: 0}
+  Logo: {fileID: 0}
+  a: {fileID: 0}
 --- !u!20 &882669274
 Camera:
   m_ObjectHideFlags: 0
@@ -3466,6 +3483,8 @@ MonoBehaviour:
   - {fileID: 1417408101}
   - {fileID: 2028571975}
   - {fileID: 1778975004}
+  StockCD: {fileID: 0}
+  Raycaster2D: {fileID: 0}
 --- !u!114 &882669279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3493,8 +3512,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   infiniteGame: []
   ComparativeGame: []
+  AllLight: []
   UIText: {fileID: 2127506357}
   Jukebox: {fileID: 1930587431}
+  LightUp: {fileID: 0}
+  LightLeft: {fileID: 0}
+  LightRight: {fileID: 0}
 --- !u!81 &882669281
 AudioListener:
   m_ObjectHideFlags: 0
@@ -4764,6 +4787,7 @@ MonoBehaviour:
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
   child: 0
+  canSlide: 0
 --- !u!61 &1370236063
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5703,11 +5727,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5435630219340980547, guid: f1bcd01e619247846bba4dfee18ab4d5, type: 3}
   m_PrefabInstance: {fileID: 1261341232}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &1634009326 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4768707117996712566, guid: f1bcd01e619247846bba4dfee18ab4d5, type: 3}
-  m_PrefabInstance: {fileID: 1261341232}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1634009327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5728,6 +5747,12 @@ MonoBehaviour:
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
   child: 0
+  canSlide: 0
+--- !u!4 &1634009328 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7768679449688954485, guid: f1bcd01e619247846bba4dfee18ab4d5, type: 3}
+  m_PrefabInstance: {fileID: 1261341232}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1655655898
 GameObject:
   m_ObjectHideFlags: 0
@@ -6245,6 +6270,7 @@ MonoBehaviour:
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
   child: 0
+  canSlide: 0
 --- !u!61 &1800348673
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6392,6 +6418,7 @@ MonoBehaviour:
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
   child: 0
+  canSlide: 0
 --- !u!61 &1817841561
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7099,6 +7126,7 @@ MonoBehaviour:
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
   child: 0
+  canSlide: 0
 --- !u!61 &2061453239
 BoxCollider2D:
   m_ObjectHideFlags: 0
