@@ -120,10 +120,10 @@ TextureImporter:
       name: main qui va chercher la scene 3_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 0
-        height: 0
+        x: 19
+        y: 276
+        width: 82
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,10 +137,136 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: main qui va chercher la scene 3_1
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 277
+        width: 83
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 092f6864aca93b848a0b10ee7e9fcbef
+      internalID: -384034859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: main qui va chercher la scene 3_2
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 284
+        width: 96
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1202c1d25a78384faaf57d00d8eb59f
+      internalID: 2026587455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: main qui va chercher la scene 3_3
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 163
+        width: 120
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79e52bb3b72ca474cb74d577f5f93e75
+      internalID: 1464797411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: main qui va chercher la scene 3_4
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 147
+        width: 122
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94e52f1dacf54ff4db5698bc97f7b232
+      internalID: 1984496143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: main qui va chercher la scene 3_5
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 147
+        width: 122
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7f0d0aa9211df64592d6daa7334f578
+      internalID: 1352937528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: main qui va chercher la scene 3_6
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 19
+        width: 122
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a90874ba91bb5b346bcb4dcb032e1a98
+      internalID: -1586371435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: c5ac781eb24eb0c489b2d2d9a74e79ad
     internalID: 0
     vertices: []
     indices: 
@@ -149,6 +275,12 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       main qui va chercher la scene 3_0: -8748374718763974903
+      main qui va chercher la scene 3_4: 1984496143
+      main qui va chercher la scene 3_6: -1586371435
+      main qui va chercher la scene 3_1: -384034859
+      main qui va chercher la scene 3_2: 2026587455
+      main qui va chercher la scene 3_3: 1464797411
+      main qui va chercher la scene 3_5: 1352937528
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -120,10 +120,10 @@ TextureImporter:
       name: sprite sheet animation main narrateur bouton pause 2 _0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 0
-        height: 0
+        x: 91
+        y: 859
+        width: 82
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,10 +137,262 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: sprite sheet animation main narrateur bouton pause 2 _1
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 866
+        width: 98
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e6b34c7445bb8f48a68bc8fd5863a23
+      internalID: 731226846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet animation main narrateur bouton pause 2 _2
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 873
+        width: 113
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 977ee939c8bcb484faebc64087487a4f
+      internalID: 719848330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet animation main narrateur bouton pause 2 _3
+      rect:
+        serializedVersion: 2
+        x: 843
+        y: 884
+        width: 114
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81c693e60125d4941a4128ba6ef5c687
+      internalID: 1520094451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet animation main narrateur bouton pause 2 _4
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 627
+        width: 114
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 088263aecf132554bada369e1256a959
+      internalID: -182908646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet animation main narrateur bouton pause 2 _5
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 627
+        width: 114
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: feb0cc7740e06ad4abe2384fbaf0902f
+      internalID: 1252318310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet animation main narrateur bouton pause 2 _6
+      rect:
+        serializedVersion: 2
+        x: 587
+        y: 627
+        width: 113
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c552437471bdb024883a95ac0ea24acc
+      internalID: -1439118229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet animation main narrateur bouton pause 2 _7
+      rect:
+        serializedVersion: 2
+        x: 844
+        y: 634
+        width: 116
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0460b76ac4efae04c934f0210f51e69d
+      internalID: -89863184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet animation main narrateur bouton pause 2 _8
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 377
+        width: 114
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67f7d80b6efcf6a47afe632a2594d8bf
+      internalID: -1936667711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet animation main narrateur bouton pause 2 _9
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 373
+        width: 109
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ae8ebd023c134d4188d61f760a33752
+      internalID: -1599306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet animation main narrateur bouton pause 2 _10
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 359
+        width: 113
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f00a053a19c4acf40b9db455fddde3bb
+      internalID: -1588773747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet animation main narrateur bouton pause 2 _11
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 353
+        width: 95
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b563155f32ce2494fb24ba9bc292cdbb
+      internalID: -268808517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet animation main narrateur bouton pause 2 _12
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 92
+        width: 82
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1dc2555033880c64a9d7009b9fb370ae
+      internalID: 1362091429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 4cd28fb2dfa86234ea265804db0116a1
     internalID: 0
     vertices: []
     indices: 
@@ -149,6 +401,18 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       sprite sheet animation main narrateur bouton pause 2 _0: -4841508486950309000
+      sprite sheet animation main narrateur bouton pause 2 _1: 731226846
+      sprite sheet animation main narrateur bouton pause 2 _7: -89863184
+      sprite sheet animation main narrateur bouton pause 2 _11: -268808517
+      sprite sheet animation main narrateur bouton pause 2 _8: -1936667711
+      sprite sheet animation main narrateur bouton pause 2 _12: 1362091429
+      sprite sheet animation main narrateur bouton pause 2 _10: -1588773747
+      sprite sheet animation main narrateur bouton pause 2 _4: -182908646
+      sprite sheet animation main narrateur bouton pause 2 _9: -1599306
+      sprite sheet animation main narrateur bouton pause 2 _3: 1520094451
+      sprite sheet animation main narrateur bouton pause 2 _6: -1439118229
+      sprite sheet animation main narrateur bouton pause 2 _2: 719848330
+      sprite sheet animation main narrateur bouton pause 2 _5: 1252318310
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
