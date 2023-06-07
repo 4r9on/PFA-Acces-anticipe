@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
 
     public void AfterGainSimon()
     {
-        //faire l'anim o� le narrateur va appuyer sur le bouton pause
+        //faire l'anim ou le narrateur va appuyer sur le bouton pause
         //faire tomber le disque
         foreach(GameObject obj in SimonUI)
         {
@@ -69,10 +69,10 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        if(dAD.sliderLogo.value == 1.0f)
+        if (dAD.sliderLogo.value == 1.0f)
         {
             tableau1.SetActive(false);
-            tableau2.SetActive(true);        
+            tableau2.SetActive(true);
         }
         /*else if ()
         {
@@ -89,6 +89,7 @@ public class GameManager : MonoBehaviour
             tableau4.SetActive(false);
             tableau5.SetActive(true);
         }*/
+    }
     public void TouchCD(int numberOfTouch)
     {
         Narrator.GetComponent<Animator>().SetInteger("nrbOfTouch", numberOfTouch);

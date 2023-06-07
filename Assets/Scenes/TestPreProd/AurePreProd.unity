@@ -451,7 +451,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &89547616
 Transform:
   m_ObjectHideFlags: 0
@@ -1328,7 +1328,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &276774606
 Transform:
   m_ObjectHideFlags: 0
@@ -2861,6 +2861,7 @@ MonoBehaviour:
   - {fileID: 649067534}
   StockCD: {fileID: 0}
   Narrator: {fileID: 0}
+  ON: []
   Raycaster2D: {fileID: 0}
 --- !u!114 &892342289
 MonoBehaviour:
@@ -5340,7 +5341,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1434278414
 Transform:
   m_ObjectHideFlags: 0
