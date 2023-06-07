@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public List<GameObject> breakableUI = new List<GameObject>();
     public GameObject StockCD;
     public GameObject Narrator;
+
+    public List<GameObject> ON = new List<GameObject>();
     
     public Physics2DRaycaster Raycaster2D;
     string tableau;
@@ -58,11 +60,12 @@ public class GameManager : MonoBehaviour
 
     public void TouchCD(int numberOfTouch)
     {
+        Narrator.GetComponent<Animator>().SetInteger("nrbOfTouch", numberOfTouch);
         switch (numberOfTouch)
         {
             case 0:
                 Debug.Log("touche une fois");
-                //Narrator.GetComponent<Animator>().SetInteger();
+                
                // timing = 0.5f;
                 break;
             case 1:

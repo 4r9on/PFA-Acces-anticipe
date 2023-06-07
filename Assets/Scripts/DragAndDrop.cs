@@ -41,6 +41,7 @@ public class DragAndDrop : MonoBehaviour
     public GameObject sliderNight;
     public GameObject Logo;
     public AnimationWindow a;
+    public bool canPressTheButton;
 
     private void Awake()
     {
@@ -63,7 +64,6 @@ public class DragAndDrop : MonoBehaviour
 
         //animatorBar.SetBool("Play", true);
         //animatorLogo.SetBool("Logo", true);
-        Debug.Log("aaaaaa");
     }
 
     // Update is called once per frame
@@ -73,7 +73,7 @@ public class DragAndDrop : MonoBehaviour
         if (MovingBar)
         {
             //Quand l'objet est pose on va pouvoir faire tourner l'objet dans lequel il est introduit
-            if (value < 5.3f && ObjectPut!= null)
+            if (value < 5.3f && ObjectPut != null)
             {
 
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.up = ((Camera.main.ScreenToWorldPoint(Input.mousePosition) - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.position).normalized);
@@ -133,13 +133,13 @@ public class DragAndDrop : MonoBehaviour
                 lastRotation = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w;
 
 
-                
+
             }
 
             else
             {
 
-                ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().canSlide = true;  
+                ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().canSlide = true;
 
             }
             animatorBar.SetBool("Play", true);
@@ -181,12 +181,12 @@ public class DragAndDrop : MonoBehaviour
                 if (totalSliderValue >= 0.25f)
                 {
                     mySpriteBar.sprite = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * totalSliderValue), tex.height), new Vector2(0.5f / totalSliderValue/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3*/, 0.5f), 100.0f);
-                    
-                    
+
+
                 }
                 if (totalSliderValue == 1.0f)
                 {
-                   // sliderNight.SetActive(true);
+                    // sliderNight.SetActive(true);
                     Logo.SetActive(false);
                     foreach (AnimationClip Clips in clip.animationClips)
                     {
@@ -201,8 +201,8 @@ public class DragAndDrop : MonoBehaviour
                                 Debug.Log(frame.time);
                                 Sprite SpriteInFrame = (Sprite)frame.value;
                                 tex = SpriteInFrame.texture;
-                              //  Debug.Log(tex.name);
-                              //  Debug.Log(testBar.sprite.rect.width);
+                                //  Debug.Log(tex.name);
+                                //  Debug.Log(testBar.sprite.rect.width);
                                 SpriteInFrame = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * totalSliderValue), tex.height), new Vector2(0.5f / totalSliderValue/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3*/, 0.5f), 100.0f);
                                 testBar.sprite = SpriteInFrame;
                                 ValueSlider();
@@ -223,13 +223,13 @@ public class DragAndDrop : MonoBehaviour
                         }
                         */
                     }
-                   
+
                 }
 
 
                 //Aide de AgeTDev sur https://answers.unity.com/questions/1245599/how-to-get-all-sprites-used-in-a-2d-animator.html    
-                
-               
+
+
             }
             else if (draggedObject.tag != "Slider")
             {
@@ -282,7 +282,7 @@ public class DragAndDrop : MonoBehaviour
                     }
                     else if (ObjectPut.tag == "Simon" && draggedObject == ObjectPut)
                     {
-                    
+
                     }
                     else
                     {
@@ -301,7 +301,7 @@ public class DragAndDrop : MonoBehaviour
         }
 
         //Donne le nom de l'UI que l'on a clique dessus
-        else if (GameManager.Instance.ObjectHover.tag == "Simon" )
+        else if (GameManager.Instance.ObjectHover.tag == "Simon")
         {
             GameManager.Instance.ObjectHover.GetComponent<Animator>().SetBool("IsClicked", true);
             if (GetComponent<Simon>().infiniteGame.Count == 0 && GameManager.Instance.ObjectHover.name == "Button_Pause")
@@ -310,48 +310,14 @@ public class DragAndDrop : MonoBehaviour
             }
             if (ObjectPut != null)
             {
-
                 foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                 {
+
                     if (SimonUI.GetComponent<ObjectToDrag>().CD)
                     {
-                        if (SimonUI == GameManager.Instance.ObjectHover && 1 == 2)
+                        if (SimonUI == GameManager.Instance.ObjectHover)
                         {
-
-
-                            float timing = 0;
-                            if (SimonUI.GetComponent<SpriteRenderer>().color == Color.white)
-                            {
-                                SimonUI.GetComponent<SpriteRenderer>().color = oldColor;
-                            }
-                            else
-                            {
-                                switch (nbrOfTimeWeTouch)
-                                {
-                                    case 0:
-                                        Debug.Log("touche une fois");
-                                        timing = 0.5f;
-                                        break;
-                                    case 1:
-                                        Debug.Log("touche une seconde fois");
-                                        timing = 0.4f;
-                                        break;
-                                    case 2:
-                                        Debug.Log("Detruit l'UI");
-                                        timing = 0.3f;
-                                        //nous permet de rendre la souris invisible et non utilisable
-                                        Cursor.lockState = CursorLockMode.Locked;
-
-                                        //On va utiliser un faux curseur pour empecher le joueur de l'utiliser
-                                        cursor.SetActive(true);
-                                        cursor.transform.position = new Vector3(GetComponent<Raycast>().HitToStopMouse.point.x, GetComponent<Raycast>().HitToStopMouse.point.y, 0f);
-                                        break;
-                                }
-                                StartCoroutine(TouchUI(SimonUI, timing));
-                                SimonUI.GetComponent<SpriteRenderer>().color = Color.white;
-                                nbrOfTimeWeTouch++;
-                            }
-
+                            nbrOfTimeWeTouch++;
                         }
                     }
                 }
@@ -363,19 +329,54 @@ public class DragAndDrop : MonoBehaviour
             }
 
         }
-        else if(GameManager.Instance.ObjectHover.tag == "ButtonON")
+        else if (GameManager.Instance.ObjectHover.tag == "ButtonON")
         {
             GameManager.Instance.AllText.GetComponent<ElevateText>().RotateIt();
         }
     }
     public void StopClick()
     {
+
+        if (GameManager.Instance.ObjectHover.tag == "Simon" && nbrOfTimeWeTouch > 0)
+        {
+            foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
+            {
+                if (SimonUI.GetComponent<ObjectToDrag>().CD && SimonUI == GameManager.Instance.ObjectHover)
+                {
+                    float timing = 0;
+
+                    GameManager.Instance.TouchCD(nbrOfTimeWeTouch);
+                    switch (nbrOfTimeWeTouch)
+                    {
+                        case 0:
+                            Debug.Log("touche une fois");
+                            timing = 0.5f;
+                            break;
+                        case 1:
+                            Debug.Log("touche une seconde fois");
+                            timing = 0.4f;
+                            break;
+                        case 2:
+                            Debug.Log("Detruit l'UI");
+                            timing = 0.3f;
+                            //nous permet de rendre la souris invisible et non utilisable
+                            Cursor.lockState = CursorLockMode.Locked;
+
+                            //On va utiliser un faux curseur pour empecher le joueur de l'utiliser
+                            cursor.SetActive(true);
+                            cursor.transform.position = new Vector3(GetComponent<Raycast>().HitToStopMouse.point.x, GetComponent<Raycast>().HitToStopMouse.point.y, 0f);
+                            break;
+                    }
+                  //  StartCoroutine(TouchUI(SimonUI, timing));
+                }
+            }
+        }
         MovingBar = false;
         if (draggedObject != null)
         {
             if (draggedObject.GetComponent<ObjectToDrag>() != null)
             {
-                
+
 
                 if (draggedObject.GetComponent<ObjectToDrag>().canPutObject && GameManager.Instance.ObjectHover == draggedObject.GetComponent<ObjectToDrag>().objectToPutOn)
                 {
@@ -388,9 +389,9 @@ public class DragAndDrop : MonoBehaviour
                         draggedObject.tag = "Simon";
                         draggedObject.layer = 6;
                         GameManager.Instance.SimonUI.Add(draggedObject);
-                        draggedObject.GetComponent <ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().enabled = false;
+                        draggedObject.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().enabled = false;
                     }
-                    ObjectPut = draggedObject;  
+                    ObjectPut = draggedObject;
                 }
                 StartCoroutine(draggedObject.GetComponent<ObjectToDrag>().BecomeDestroyable());
             }
@@ -404,7 +405,6 @@ public class DragAndDrop : MonoBehaviour
     IEnumerator TouchUI(GameObject SimonUI, float timing)
     {
         yield return new WaitForSeconds(timing);
-        SimonUI.GetComponent<SpriteRenderer>().color = oldColor;
     }
 
     public void ValueSlider()

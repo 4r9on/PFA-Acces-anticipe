@@ -8,13 +8,20 @@ public class ElevateText : MonoBehaviour
     void Start()
     {
         GetComponent<Rigidbody2D>().velocity = new Vector2 (0, 1);
-        foreach (Transform t in transform)
+        foreach (GameObject ONGameObject in GameManager.Instance.ON)
+        {
+            if (ONGameObject.GetComponent<Rigidbody2D>() != null)
+            {
+                ONGameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 1);
+            }
+        }
+        /*foreach (Transform child in transform)
         {
             if (t.GetComponent<Rigidbody2D>() != null)
             {
                 t.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 1);
             }
-        }
+        }*/
 
         StartCoroutine(StopCredit());
     }
@@ -49,12 +56,19 @@ public class ElevateText : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        foreach (Transform t in transform)
+        foreach (GameObject ONGameObject in GameManager.Instance.ON)
+        {
+            if(ONGameObject.GetComponent<Rigidbody2D>() != null)
+            {
+                ONGameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            }
+        }
+     /*   foreach (Transform t in transform)
         {
             if (t.GetComponent<Rigidbody2D>() != null)
             {
                 t.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             }
-        }
+        }*/
     }
 }
