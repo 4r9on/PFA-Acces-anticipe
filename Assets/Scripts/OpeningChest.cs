@@ -7,10 +7,7 @@ public class OpeningChest : MonoBehaviour
 {
     public GameObject enterChest;
 
-    public GameObject lockObject1;
-    public GameObject lockObject2;
-    public GameObject lockObject3;
-    public GameObject lockObject4;
+    public GameObject Light;
 
     public GameObject opening1;
     public GameObject opening2;
@@ -170,6 +167,7 @@ public class OpeningChest : MonoBehaviour
         {
             enterChest.transform.position = new Vector3(0, 0, -1);
             Debug.Log("Open");
+            Light.SetActive(true);
         }
     }
 

@@ -42,6 +42,9 @@ public class DragAndDrop : MonoBehaviour
     public GameObject Logo;
     public AnimationWindow a;
 
+    public GameObject Night;
+    public GameObject NightMain;
+
     private void Awake()
     {
         sr = gameObject.GetComponent<SpriteRenderer>();
@@ -142,8 +145,8 @@ public class DragAndDrop : MonoBehaviour
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().canSlide = true;  
 
             }
-            animatorBar.SetBool("Play", true);
-            animatorLogo.SetBool("Logo", true);
+            //animatorBar.SetBool("Play", true);
+            //animatorLogo.SetBool("Logo", true);
             Debug.Log("aaaaaa");
 
 
@@ -359,6 +362,7 @@ public class DragAndDrop : MonoBehaviour
             }
 
         }
+
         else if(GameManager.Instance.ObjectHover.tag == "ButtonON")
         {
             GameManager.Instance.AllText.GetComponent<ElevateText>().RotateIt();
