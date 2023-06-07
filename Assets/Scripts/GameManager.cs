@@ -15,6 +15,15 @@ public class GameManager : MonoBehaviour
     public GameObject StockCD;
     public Physics2DRaycaster Raycaster2D;
     string tableau;
+
+    public GameObject tableau1;
+    public GameObject tableau2;  
+    public GameObject tableau3;
+    public GameObject tableau4;
+    public GameObject tableau5;
+
+    public DragAndDrop dAD;
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -52,5 +61,29 @@ public class GameManager : MonoBehaviour
         }
         StockCD.GetComponent<Rigidbody2D>().gravityScale = 1.0f;
         StockCD.tag = "Object";
+    }
+
+    public void LoadNextLevel()
+    {
+        if(dAD.sliderLogo.value == 1.0f)
+        {
+            tableau1.SetActive(false);
+            tableau2.SetActive(true);        
+        }
+        /*else if ()
+        {
+            tableau2.SetActive(false); 
+            tableau3.SetActive(true);
+        }
+        else if ()
+        {
+            tableau3.SetActive(false);
+            tableau4.SetActive(true);
+        }
+        else if ()
+        {
+            tableau4.SetActive(false);
+            tableau5.SetActive(true);
+        }*/
     }
 }

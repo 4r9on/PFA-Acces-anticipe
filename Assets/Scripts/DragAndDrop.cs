@@ -7,7 +7,6 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using static System.Net.Mime.MediaTypeNames;
 
-
 public class DragAndDrop : MonoBehaviour
 {
     public bool dragged = false;
@@ -27,23 +26,24 @@ public class DragAndDrop : MonoBehaviour
     public SpriteRenderer mySpriteBar;
     public SpriteRenderer testBar;
     public Texture2D tex;
-    public Animator animatorBar;
-    public Animator animatorLogo;
+    public Animator animator;
     public float posInit;
     public float posMaxInit;
     public float posInitTop;
-    public float posMaxInitTop;
     public AnimatorController clip;
     public float totalSliderValue;
     public float totalSliderValueTop;
-    public GameObject engrenage;
     private Rigidbody2D _Rigidbody;
-    public GameObject sliderNight;
-    public GameObject Logo;
+
     public AnimationWindow a;
 
     public GameObject Night;
     public GameObject NightMain;
+
+    public Slider sliderLogo;
+    public GameObject Logo;
+    public GameObject logoSlider;
+
 
     private void Awake()
     {
@@ -53,8 +53,7 @@ public class DragAndDrop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animatorBar = GetComponent<Animator>();
-        animatorLogo = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
 
         foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
         {
@@ -72,6 +71,8 @@ public class DragAndDrop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         //Barre de chargement
         if (MovingBar)
         {
@@ -138,14 +139,13 @@ public class DragAndDrop : MonoBehaviour
 
                 
             }
-
             else
             {
 
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().canSlide = true;  
 
             }
-            //animatorBar.SetBool("Play", true);
+            animator.SetBool("Play", true);
             //animatorLogo.SetBool("Logo", true);
             Debug.Log("aaaaaa");
 
@@ -155,29 +155,29 @@ public class DragAndDrop : MonoBehaviour
         {
             if (draggedObject.tag == "Slider" && draggedObject.GetComponent<ObjectToDrag>().canSlide)
             {
-
+                Debug.Log("ddddsfdgfg");
                 if (posInit == 10000.0f)
                 {
-                    posInit = draggedObject.transform.position.y;
+                    posInit = draggedObject.transform.position.x;
                     draggedObject.transform.parent = draggedObject.transform.parent.transform.parent;
                 }
                 //Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition).x);
                 //Debug.Log(posInit);
                 //Debug.Log(posMaxInit);
-                draggedObject.transform.position = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).y, draggedObject.transform.position.x);
+                draggedObject.transform.position = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, draggedObject.transform.position.y);
 
-                if (draggedObject.transform.position.y > posInit)
-                {
-                    draggedObject.transform.position = new Vector2(posInit, draggedObject.transform.position.y);
-
-                }
-                if (draggedObject.transform.position.y < posMaxInit)
+                if (draggedObject.transform.position.x > posInit)
                 {
                     draggedObject.transform.position = new Vector2(draggedObject.transform.position.x, posInit);
 
                 }
+                if (draggedObject.transform.position.x < posMaxInit)
+                {
+                    draggedObject.transform.position = new Vector2(draggedObject.transform.position.x, posMaxInit);
+
+                }
                 float maxValue = posInit - posMaxInit;
-                totalSliderValue = 1 - (posInit - draggedObject.transform.position.y) / maxValue;
+                totalSliderValue = 1 - (posInit - draggedObject.transform.position.x) / maxValue;
 
 
 
@@ -191,7 +191,11 @@ public class DragAndDrop : MonoBehaviour
                 {
                    // sliderNight.SetActive(true);
                     Logo.SetActive(false);
-                    foreach (AnimationClip Clips in clip.animationClips)
+                    logoSlider.SetActive(true);
+
+
+
+                   /* foreach (AnimationClip Clips in clip.animationClips)
                     {
                         Debug.Log(Clips);
                         foreach (UnityEditor.EditorCurveBinding frames in AnimationUtility.GetObjectReferenceCurveBindings(Clips))
@@ -204,28 +208,28 @@ public class DragAndDrop : MonoBehaviour
                                 Debug.Log(frame.time);
                                 Sprite SpriteInFrame = (Sprite)frame.value;
                                 tex = SpriteInFrame.texture;
-                              //  Debug.Log(tex.name);
-                              //  Debug.Log(testBar.sprite.rect.width);
-                                SpriteInFrame = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * totalSliderValue), tex.height), new Vector2(0.5f / totalSliderValue/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3*/, 0.5f), 100.0f);
+                                Debug.Log(tex.name);
+                                Debug.Log(testBar.sprite.rect.width);
+                                SpriteInFrame = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * totalSliderValue), tex.height), new Vector2(0.5f / totalSliderValue/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3, 0.5f), 100.0f);
                                 testBar.sprite = SpriteInFrame;
                                 ValueSlider();
-                                //Debug.Log(testBar.sprite.rect.width);
+                                Debug.Log(testBar.sprite.rect.width);
 
                                 AnimationUtility.SetObjectReferenceCurve(Clips, frames, keyFrames);
                             }
-                            // StartCoroutine(testWaiting(keyFrames));
+                             StartCoroutine(testWaiting(keyFrames));
 
                         }
 
-                        /*
+                        
                         List<Sprite> allSprite = new List<Sprite>();
                         allSprite.AddRange(GetSpritesFromClip(Clips));
                         foreach (Sprite sprite in GetSpritesFromClip(Clips))
                         {
 
                         }
-                        */
-                    }
+                        
+                    }*/
                    
                 }
 
@@ -445,4 +449,6 @@ public class DragAndDrop : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
     }
+
+    
 }
