@@ -69,10 +69,10 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        if(dAD.sliderLogo.value == 1.0f)
+        if (dAD.sliderLogo.value == 1.0f)
         {
             tableau1.SetActive(false);
-            tableau2.SetActive(true);        
+            tableau2.SetActive(true);
         }
         /*else if ()
         {
@@ -89,6 +89,7 @@ public class GameManager : MonoBehaviour
             tableau4.SetActive(false);
             tableau5.SetActive(true);
         }*/
+    }
     public void TouchCD(int numberOfTouch)
     {
         Narrator.GetComponent<Animator>().SetInteger("nrbOfTouch", numberOfTouch);
