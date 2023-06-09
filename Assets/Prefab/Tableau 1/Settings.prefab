@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2416359574812716425}
   - component: {fileID: 2416359574812716427}
   - component: {fileID: 2416359574812716469}
+  - component: {fileID: 5711098153446803273}
   m_Layer: 0
   m_Name: Settings
   m_TagString: Object
@@ -132,7 +133,9 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
+  canSlide: 0
 --- !u!50 &2416359574812716469
 Rigidbody2D:
   serializedVersion: 4
@@ -154,3 +157,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &5711098153446803273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2416359574812716431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61d9ab0585da4b34f990ca9cec97aef0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enterChest: {fileID: 0}
+  Light: {fileID: 0}
+  opening1: {fileID: 0}
+  opening2: {fileID: 0}
+  opening3: {fileID: 0}
+  opening4: {fileID: 0}
+  listLock: 00000000
+  lastLock: 0
+  nbForOpen: 0

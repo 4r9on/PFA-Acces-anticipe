@@ -43,6 +43,10 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             objectToPutOn.SetActive(true);
             objectToPutOn = null;
+            if(objectToPutOn.tag == "sun")
+            {
+                //Activer light et animation
+            }
         }
         if (painting && collision.gameObject.tag == "Ground")
         {

@@ -49,6 +49,13 @@ public class DragAndDrop : MonoBehaviour
     public GameObject Logo;
     public int TableauActual;
 
+    public GameObject flashinglight;
+    public GameObject flashingHand;
+    public GameObject digicode;
+    public GameObject coliderDigiCode;
+    public GameObject Woll1;
+    public GameObject Woll2;
+
 
     private void Awake()
     {
@@ -297,7 +304,7 @@ public class DragAndDrop : MonoBehaviour
 
     public void OnClicked()
     {
-        if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer" || GameManager.Instance.ObjectHover.tag == "Slider")
+        if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer" || GameManager.Instance.ObjectHover.tag == "Slider" || GameManager.Instance.ObjectHover.tag == "Light")
         {
             draggedObject = GameManager.Instance.ObjectHover;
             if (draggedObject.GetComponent<ObjectToDrag>() != null && GameManager.Instance.ObjectHover.tag != "Slider")
@@ -332,6 +339,8 @@ public class DragAndDrop : MonoBehaviour
                         draggedObject.GetComponent<ObjectToDrag>().destroyOnGravity = false;
                     }
                 }
+
+
 
             }
 
@@ -380,6 +389,27 @@ public class DragAndDrop : MonoBehaviour
         else if(GameManager.Instance.ObjectHover.tag == "ButtonON")
         {
             GameManager.Instance.AllText.GetComponent<ElevateText>().RotateIt();
+        }
+
+        else if(GameManager.Instance.ObjectHover.tag == "Light")
+        {
+            flashinglight.SetActive(false);
+            flashingHand.SetActive(true);
+
+            Woll1.SetActive(false);
+            Woll2.SetActive(true);
+        }
+
+        else if(GameManager.Instance.ObjectHover.tag == "Digi")
+        {
+            digicode.SetActive(true);
+            coliderDigiCode.SetActive(true);
+
+            if(GameManager.Instance.ObjectHover.tag == "Digi2")
+            {
+                digicode.SetActive(false);
+                coliderDigiCode.SetActive(false);
+            }
         }
     }
     public void StopClick()
