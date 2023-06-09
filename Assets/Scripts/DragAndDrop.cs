@@ -27,9 +27,13 @@ public class DragAndDrop : MonoBehaviour
     public SpriteRenderer testBar;
     public Texture2D tex;
     public Animator animator;
+
     public float posInit;
     public float posMaxInit;
     public float posInitTop;
+    public float MinScale;
+    public float MaxScale;
+
     public AnimatorController clip;
     public float totalSliderValue;
     public float totalSliderValueTop;
@@ -43,7 +47,14 @@ public class DragAndDrop : MonoBehaviour
 
     public Slider sliderLogo;
     public GameObject Logo;
-    public GameObject logoSlider;
+    public int TableauActual;
+
+    public GameObject flashinglight;
+    public GameObject flashingHand;
+    public GameObject digicode;
+    public GameObject coliderDigiCode;
+    public GameObject Woll1;
+    public GameObject Woll2;
 
 
     private void Awake()
@@ -71,8 +82,6 @@ public class DragAndDrop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
         //Barre de chargement
         if (MovingBar)
         {
@@ -141,9 +150,9 @@ public class DragAndDrop : MonoBehaviour
             }
             else
             {
-
+                MovingBar = false;
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().canSlide = true;
-
+                ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles = new Vector3 (ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.x, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.y, -90);
             }
             animator.SetBool("Play", true);
             //animatorLogo.SetBool("Logo", true);
@@ -153,7 +162,41 @@ public class DragAndDrop : MonoBehaviour
         }
         if (draggedObject != null)
         {
-            if (draggedObject.tag == "Slider" && draggedObject.GetComponent<ObjectToDrag>().canSlide)
+            Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition).y < GameManager.Instance.S2ATPoints[0].y);
+            if (draggedObject.tag == "Slider" && draggedObject.GetComponent<ObjectToDrag>().S2ATSlide )
+            {
+                float valueMaxPoint = 0;
+                float pourcentageActualPoint = 0;
+                float scaleValue = MaxScale - MinScale;
+                if (Camera.main.ScreenToWorldPoint(Input.mousePosition).y < GameManager.Instance.S2ATPoints[0].y && Camera.main.ScreenToWorldPoint(Input.mousePosition).y > GameManager.Instance.S2ATPoints[1].y)
+                {
+                     valueMaxPoint = GameManager.Instance.S2ATPoints[0].y - GameManager.Instance.S2ATPoints[1].y;
+                     pourcentageActualPoint = (GameManager.Instance.S2ATPoints[0].y - Camera.main.ScreenToWorldPoint(Input.mousePosition).y) / valueMaxPoint;
+
+                    
+                }
+                else if(Camera.main.ScreenToWorldPoint(Input.mousePosition).y < GameManager.Instance.S2ATPoints[1].y)
+                {
+                    pourcentageActualPoint = 1;
+                    Debug.Log("pourcentage1");
+                }
+                else if (Camera.main.ScreenToWorldPoint(Input.mousePosition).y > GameManager.Instance.S2ATPoints[0].y)
+                {
+                    pourcentageActualPoint = 0;
+                    Debug.Log("pourcentage0");
+                    TableauActual = 2;
+                    GameManager.Instance.LoadNextLevel();
+                }
+
+                draggedObject.transform.localScale = new Vector2(draggedObject.transform.localScale.x, scaleValue * (1 - pourcentageActualPoint) + MinScale);
+                draggedObject.transform.position = new Vector2(draggedObject.transform.position.x, ((posMaxInit - posInit) * (1 - pourcentageActualPoint) / 2) + posInit);
+                //3.862632 min
+                //17.5 max
+
+                //   draggedObject.transform.position = new Vector2(draggedObject.transform.position.y, Camera.main.ScreenToWorldPoint(Input.mousePosition).x + 2);
+            }
+            
+            else if (draggedObject.tag == "Slider" && draggedObject.GetComponent<ObjectToDrag>().canSlide)
             {
                 Debug.Log("ddddsfdgfg");
                 if (posInit == 10000.0f)
@@ -164,16 +207,16 @@ public class DragAndDrop : MonoBehaviour
                 //Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition).x);
                 //Debug.Log(posInit);
                 //Debug.Log(posMaxInit);
-                draggedObject.transform.position = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, draggedObject.transform.position.y);
+                draggedObject.transform.position = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x + 2, draggedObject.transform.position.y);
 
                 if (draggedObject.transform.position.x > posInit)
                 {
-                    draggedObject.transform.position = new Vector2(draggedObject.transform.position.x, posInit);
+                    draggedObject.transform.position = new Vector2(posInit, draggedObject.transform.position.y);
 
                 }
                 if (draggedObject.transform.position.x < posMaxInit)
                 {
-                    draggedObject.transform.position = new Vector2(draggedObject.transform.position.x, posMaxInit);
+                    draggedObject.transform.position = new Vector2(posMaxInit, draggedObject.transform.position.y );
 
                 }
                 float maxValue = posInit - posMaxInit;
@@ -191,7 +234,7 @@ public class DragAndDrop : MonoBehaviour
                 {
                     // sliderNight.SetActive(true);
                     Logo.SetActive(false);
-                    logoSlider.SetActive(true);
+                    //logoSlider.SetActive(true);
 
 
 
@@ -261,7 +304,7 @@ public class DragAndDrop : MonoBehaviour
 
     public void OnClicked()
     {
-        if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer" || GameManager.Instance.ObjectHover.tag == "Slider")
+        if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer" || GameManager.Instance.ObjectHover.tag == "Slider" || GameManager.Instance.ObjectHover.tag == "Light")
         {
             draggedObject = GameManager.Instance.ObjectHover;
             if (draggedObject.GetComponent<ObjectToDrag>() != null && GameManager.Instance.ObjectHover.tag != "Slider")
@@ -296,6 +339,8 @@ public class DragAndDrop : MonoBehaviour
                         draggedObject.GetComponent<ObjectToDrag>().destroyOnGravity = false;
                     }
                 }
+
+
 
             }
 
@@ -332,7 +377,11 @@ public class DragAndDrop : MonoBehaviour
 
             else
             {
-                GetComponent<Simon>().AddToComparative(GameManager.Instance.ObjectHover.name);
+                if(GameManager.Instance.ObjectHover.name != "Button_Pause")
+                {
+                    GetComponent<Simon>().AddToComparative(GameManager.Instance.ObjectHover.name);
+                }
+            
             }
 
         }
@@ -341,9 +390,46 @@ public class DragAndDrop : MonoBehaviour
         {
             GameManager.Instance.AllText.GetComponent<ElevateText>().RotateIt();
         }
+
+        else if(GameManager.Instance.ObjectHover.tag == "Light")
+        {
+            flashinglight.SetActive(false);
+            flashingHand.SetActive(true);
+
+            Woll1.SetActive(false);
+            Woll2.SetActive(true);
+        }
+
+        else if(GameManager.Instance.ObjectHover.tag == "Digi")
+        {
+            digicode.SetActive(true);
+            coliderDigiCode.SetActive(true);
+
+            if(GameManager.Instance.ObjectHover.tag == "Digi2")
+            {
+                digicode.SetActive(false);
+                coliderDigiCode.SetActive(false);
+            }
+        }
     }
     public void StopClick()
     {
+        if (draggedObject != null)
+        {
+            if (draggedObject.tag == "Slider")
+            {
+                float maxValue = posInit - posMaxInit;
+                totalSliderValue = (posInit - draggedObject.transform.position.x) / maxValue;
+
+                Debug.Log(totalSliderValue);
+                if (totalSliderValue > 0.75)
+                {
+                    draggedObject.transform.position = new Vector2(posInit, draggedObject.transform.position.y);
+                    GameObject[] gameObjectsToRemove = new GameObject[] { draggedObject, ObjectPut };
+                    StartCoroutine(GameManager.Instance.TakeAwayTheGauge(gameObjectsToRemove));
+                }
+            }
+        }
 
         if (GameManager.Instance.ObjectHover.tag == "Simon" && nbrOfTimeWeTouch > 0)
         {
@@ -449,6 +535,8 @@ public class DragAndDrop : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
     }
+
+    
 
     
 }
