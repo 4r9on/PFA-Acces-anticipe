@@ -154,7 +154,7 @@ public class DragAndDrop : MonoBehaviour
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().canSlide = true;
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles = new Vector3 (ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.x, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.y, -90);
             }
-            animator.SetBool("Play", true);
+          //  animator.SetBool("Play", true);
             //animatorLogo.SetBool("Logo", true);
             Debug.Log("aaaaaa");
 
@@ -172,8 +172,6 @@ public class DragAndDrop : MonoBehaviour
                 {
                      valueMaxPoint = GameManager.Instance.S2ATPoints[0].y - GameManager.Instance.S2ATPoints[1].y;
                      pourcentageActualPoint = (GameManager.Instance.S2ATPoints[0].y - Camera.main.ScreenToWorldPoint(Input.mousePosition).y) / valueMaxPoint;
-
-                    
                 }
                 else if(Camera.main.ScreenToWorldPoint(Input.mousePosition).y < GameManager.Instance.S2ATPoints[1].y)
                 {
@@ -389,6 +387,10 @@ public class DragAndDrop : MonoBehaviour
         else if(GameManager.Instance.ObjectHover.tag == "ButtonON")
         {
             GameManager.Instance.AllText.GetComponent<ElevateText>().RotateIt();
+            foreach (GameObject ObjectON in GameManager.Instance.ON)
+            {
+                ObjectON.GetComponent<ElevateText>().RotateIt();
+            }
         }
 
         else if(GameManager.Instance.ObjectHover.tag == "Light")
