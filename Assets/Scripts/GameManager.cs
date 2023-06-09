@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        if (dAD.sliderLogo.value == 1.0f)
+        if (dAD.TableauActual == 2)
         {
             tableau1.SetActive(false);
             tableau2.SetActive(true);

@@ -47,7 +47,7 @@ public class DragAndDrop : MonoBehaviour
 
     public Slider sliderLogo;
     public GameObject Logo;
-    public GameObject logoSlider;
+    public int TableauActual;
 
 
     private void Awake()
@@ -171,10 +171,14 @@ public class DragAndDrop : MonoBehaviour
                 else if(Camera.main.ScreenToWorldPoint(Input.mousePosition).y < GameManager.Instance.S2ATPoints[1].y)
                 {
                     pourcentageActualPoint = 1;
+                    Debug.Log("pourcentage1");
                 }
                 else if (Camera.main.ScreenToWorldPoint(Input.mousePosition).y > GameManager.Instance.S2ATPoints[0].y)
                 {
                     pourcentageActualPoint = 0;
+                    Debug.Log("pourcentage0");
+                    TableauActual = 2;
+                    GameManager.Instance.LoadNextLevel();
                 }
 
                 draggedObject.transform.localScale = new Vector2(draggedObject.transform.localScale.x, scaleValue * (1 - pourcentageActualPoint) + MinScale);
@@ -223,7 +227,7 @@ public class DragAndDrop : MonoBehaviour
                 {
                     // sliderNight.SetActive(true);
                     Logo.SetActive(false);
-                    logoSlider.SetActive(true);
+                    //logoSlider.SetActive(true);
 
 
 
