@@ -451,7 +451,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &89547616
 Transform:
   m_ObjectHideFlags: 0
@@ -1328,7 +1328,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &276774606
 Transform:
   m_ObjectHideFlags: 0
@@ -2789,20 +2789,20 @@ MonoBehaviour:
   mySpriteBar: {fileID: 1229125602}
   testBar: {fileID: 1989493941}
   tex: {fileID: 2800000, guid: 1ddddf2d896c09449a53b06c462a1ae0, type: 3}
-  animatorBar: {fileID: 0}
-  animatorLogo: {fileID: 0}
+  animator: {fileID: 0}
   posInit: 10000
   posMaxInit: 23.5
   posInitTop: 0
-  posMaxInitTop: 0
   clip: {fileID: 9100000, guid: c78e98bde84803049981f5caf262029a, type: 2}
   totalSliderValue: 0
   totalSliderValueTop: 0
-  engrenage: {fileID: 0}
-  sliderNight: {fileID: 0}
-  Logo: {fileID: 0}
   a: {fileID: 0}
   canPressTheButton: 0
+  Night: {fileID: 0}
+  NightMain: {fileID: 0}
+  sliderLogo: {fileID: 0}
+  Logo: {fileID: 0}
+  logoSlider: {fileID: 0}
 --- !u!114 &892342285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2861,7 +2861,14 @@ MonoBehaviour:
   - {fileID: 649067534}
   StockCD: {fileID: 0}
   Narrator: {fileID: 0}
+  ON: []
   Raycaster2D: {fileID: 0}
+  tableau1: {fileID: 0}
+  tableau2: {fileID: 0}
+  tableau3: {fileID: 0}
+  tableau4: {fileID: 0}
+  tableau5: {fileID: 0}
+  dAD: {fileID: 0}
 --- !u!114 &892342289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5340,7 +5347,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1434278414
 Transform:
   m_ObjectHideFlags: 0
@@ -6107,10 +6114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enterChest: {fileID: 957934638}
-  lockObject1: {fileID: 1534262200}
-  lockObject2: {fileID: 90058834}
-  lockObject3: {fileID: 793679856}
-  lockObject4: {fileID: 430929132}
+  Light: {fileID: 0}
   opening1: {fileID: 1857585235}
   opening2: {fileID: 1223673630}
   opening3: {fileID: 296990006}
