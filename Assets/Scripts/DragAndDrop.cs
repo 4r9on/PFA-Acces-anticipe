@@ -68,7 +68,7 @@ public class DragAndDrop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ChangeLoadingBarScale(0.33f, 1);
+        ChangeLoadingBarScale(0.33f, 1, 0);
 
         animator = GetComponent<Animator>();
 
@@ -148,7 +148,7 @@ public class DragAndDrop : MonoBehaviour
                     Debug.Log("lost");
                     value += theValue;
                 }
-                ChangeLoadingBarScale(value, 5.3f, 2.65f);
+                ChangeLoadingBarScale(value, 5.3f, -2.65f);
                 lastRotation = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w;
 
 
@@ -539,12 +539,12 @@ public class DragAndDrop : MonoBehaviour
 
     float CalculValuePourcentOfSliderScale(float scaleValue, float pourcentageActualPoint)
     {
-        Debug.Log(scaleValue * (1 - pourcentageActualPoint) + MinScale);
-       return (scaleValue * (1 - pourcentageActualPoint) + MinScale);
+        Debug.Log(scaleValue * (pourcentageActualPoint) + MinScale);
+       return (scaleValue * (pourcentageActualPoint) + MinScale);
     }
     float CalculValuePourcentOfSliderPosition(float pourcentageActualPoint, float Min, float Max)
     {
-        return( ((Min - Max) * (1 - pourcentageActualPoint) / 2) + Min);
+        return( ((Min - Max) * pourcentageActualPoint / 2) + Min);
     }
 
     void ChangeLoadingBarScale(float valueGive, float maxValue, float minValue)
@@ -553,11 +553,11 @@ public class DragAndDrop : MonoBehaviour
         {
             if (child.name == "Loading_bar")
             {
-                float pourcentageOfTheValue = (maxValue - minValue) / (valueGive - maxValue);
-
+                float pourcentageOfTheValue = ((maxValue - minValue) - (valueGive - minValue)) / (maxValue - minValue);
+                Debug.Log(pourcentageOfTheValue);
                 MaxScaleLoadingBar = child.localScale.x;
                 float scaleValue = MaxScale - MinScale;
-                child.localScale = new Vector3(CalculValuePourcentOfSliderScale(scaleValue, 0.33f), child.localScale.y, child.localScale.z);
+                child.localScale = new Vector3(CalculValuePourcentOfSliderScale(scaleValue, 1 /pourcentageOfTheValue), child.localScale.y, child.localScale.z);
                 if (posInitLoadingBar < 0)
                 {
                     posInitLoadingBar *= -1;
@@ -568,7 +568,7 @@ public class DragAndDrop : MonoBehaviour
                 }
                 posMaxInitLoadingBar = posMaxInitLoadingBar + posInitLoadingBar;
                 posInitLoadingBar = 0;
-                child.position = new Vector2(CalculValuePourcentOfSliderPosition(0.33f, posInitLoadingBar, posMaxInitLoadingBar), child.position.y);
+                child.position = new Vector2(CalculValuePourcentOfSliderPosition(pourcentageOfTheValue, posInitLoadingBar, posMaxInitLoadingBar), child.position.y);
                 // ((posInitLoadingBar - posMaxInitLoadingBar) * (1 - 0.33f) / 2) + posInitLoadingBar
             }
         }
