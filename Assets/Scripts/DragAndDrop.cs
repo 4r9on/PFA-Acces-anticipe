@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.Animations;
+//using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -34,12 +34,12 @@ public class DragAndDrop : MonoBehaviour
     public float MinScale;
     public float MaxScale;
 
-    public AnimatorController clip;
+    //public AnimatorController clip;
     public float totalSliderValue;
     public float totalSliderValueTop;
     private Rigidbody2D _Rigidbody;
 
-    public AnimationWindow a;
+    //public AnimationWindow a;
     public bool canPressTheButton;
 
     public GameObject Night;
@@ -154,7 +154,7 @@ public class DragAndDrop : MonoBehaviour
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().canSlide = true;
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles = new Vector3 (ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.x, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.y, -90);
             }
-            animator.SetBool("Play", true);
+          //  animator.SetBool("Play", true);
             //animatorLogo.SetBool("Logo", true);
             Debug.Log("aaaaaa");
 
@@ -172,8 +172,6 @@ public class DragAndDrop : MonoBehaviour
                 {
                      valueMaxPoint = GameManager.Instance.S2ATPoints[0].y - GameManager.Instance.S2ATPoints[1].y;
                      pourcentageActualPoint = (GameManager.Instance.S2ATPoints[0].y - Camera.main.ScreenToWorldPoint(Input.mousePosition).y) / valueMaxPoint;
-
-                    
                 }
                 else if(Camera.main.ScreenToWorldPoint(Input.mousePosition).y < GameManager.Instance.S2ATPoints[1].y)
                 {
@@ -389,6 +387,10 @@ public class DragAndDrop : MonoBehaviour
         else if(GameManager.Instance.ObjectHover.tag == "ButtonON")
         {
             GameManager.Instance.AllText.GetComponent<ElevateText>().RotateIt();
+            foreach (GameObject ObjectON in GameManager.Instance.ON)
+            {
+                ObjectON.GetComponent<ElevateText>().RotateIt();
+            }
         }
 
         else if(GameManager.Instance.ObjectHover.tag == "Light")
@@ -518,7 +520,7 @@ public class DragAndDrop : MonoBehaviour
         }
     }
 
-    IEnumerator testWaiting(ObjectReferenceKeyframe[] keyFrames)
+   /* IEnumerator testWaiting(ObjectReferenceKeyframe[] keyFrames)
     {
         foreach (var frame in keyFrames)
         {
@@ -527,14 +529,14 @@ public class DragAndDrop : MonoBehaviour
             tex = SpriteInFrame.texture;
             Debug.Log(tex.name);
             Debug.Log(testBar.sprite.rect.width);
-            SpriteInFrame = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * totalSliderValue), tex.height), new Vector2(0.5f / totalSliderValue/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3*/, 0.5f), 100.0f);
+            SpriteInFrame = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * totalSliderValue), tex.height), new Vector2(0.5f / totalSliderValue/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3, 0.5f), 100.0f);
             testBar.sprite = SpriteInFrame;
             ValueSlider();
             Debug.Log(testBar.sprite.rect.width);
 
             yield return new WaitForSeconds(0.1f);
         }
-    }
+    }*/
 
     
 

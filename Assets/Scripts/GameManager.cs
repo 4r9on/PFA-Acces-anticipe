@@ -96,6 +96,7 @@ public class GameManager : MonoBehaviour
             tableau4.SetActive(false);
             tableau5.SetActive(true);
         }*/
+        dAD.ObjectPut = null;
     }
     public void TouchCD(int numberOfTouch)
     {
