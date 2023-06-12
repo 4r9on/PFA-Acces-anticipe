@@ -56,7 +56,7 @@ public class Simon : MonoBehaviour
 
     public void AddLights()
     {
-        if (infiniteGame.Count == 0)
+        if (infiniteGame.Count == 5)
         {
             RemoveStringFromList(infiniteGame);
             GameManager.Instance.AfterGainSimon();
