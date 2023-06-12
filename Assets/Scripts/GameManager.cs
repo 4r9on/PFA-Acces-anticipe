@@ -51,6 +51,14 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         
+        if (PlayerPrefs.GetInt("GetCrashed") == 1)
+            {
+            PlayerPrefs.SetInt("GetCrashed", 0);
+            dAD.TableauActual = 5;
+                LoadNextLevel();
+            }
+        
+       
     }
 
     // Update is called once per frame
@@ -76,26 +84,27 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
+        tableau1.SetActive(false);
+        tableau2.SetActive(false);
+        tableau3.SetActive(false);
+        tableau4.SetActive(false);
+        tableau5.SetActive(false);
         if (dAD.TableauActual == 2)
         {
-            tableau1.SetActive(false);
             tableau2.SetActive(true);
         }
-        /*else if ()
+        else if (dAD.TableauActual == 3)
         {
-            tableau2.SetActive(false); 
             tableau3.SetActive(true);
         }
-        else if ()
+        else if (dAD.TableauActual == 4)
         {
-            tableau3.SetActive(false);
             tableau4.SetActive(true);
         }
-        else if ()
+        else if (dAD.TableauActual == 5)
         {
-            tableau4.SetActive(false);
             tableau5.SetActive(true);
-        }*/
+        }
         dAD.ObjectPut = null;
     }
     public void TouchCD(int numberOfTouch)
