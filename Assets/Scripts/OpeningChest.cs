@@ -20,6 +20,12 @@ public class OpeningChest : MonoBehaviour
 
     public int nbForOpen;
 
+    public GameObject light;
+    public GameObject lightMain;
+
+    public GameObject Woll1;
+    public GameObject Woll2;
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -30,6 +36,7 @@ public class OpeningChest : MonoBehaviour
             if (lastLock == 1 || 3 == lastLock) // si lastLock poséde l'une des deux valeur alors
             {
                 listLock[lastLock] = true; // listLock garde l'index auquel il corespond activé
+
             }
 
             lastLock = 0; // on défit la valeur de lastLock
@@ -74,59 +81,6 @@ public class OpeningChest : MonoBehaviour
         Open();
 
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Locker1") // si l'objet rentre en colition avec ce tag alors
-        {
-            listLock[0] = true; // l'élément de la liste passe à true  
-
-            if (lastLock == 1 || 3 == lastLock) // si lastLock poséde l'une des deux valeur alors
-            {
-                listLock[lastLock] = true; // listLock garde l'index auquel il corespond activé
-            }
-
-            lastLock = 0; // on défit la valeur de lastLock
-        }
-        else if (collision.gameObject.tag == "Locker2")
-        {
-            listLock[1] = true;
-
-            if (lastLock == 0 || 2 == lastLock)
-            {
-                listLock[lastLock] = true;
-            }
-
-            lastLock = 1;
-
-        }
-        else if (collision.gameObject.tag == "Locker3")
-        {
-            listLock[2] = true;
-
-            if (lastLock == 1 || 3 == lastLock)
-            {
-                listLock[lastLock] = true;
-            }
-
-            lastLock = 2;
-
-        }
-        else if (collision.gameObject.tag == "Locker4")
-        {
-            listLock[3] = true;
-
-            if (lastLock == 0 || 2 == lastLock)
-            {
-                listLock[lastLock] = true;
-            }
-
-            lastLock = 3;
-
-        }
-
-        Open();
-
-    }
 
     public void Open()
     {
@@ -137,6 +91,7 @@ public class OpeningChest : MonoBehaviour
 
             FalseLock1(); // on désactiver les élément de la liste activer
 
+            opening1.SetActive(true);
         }
         if (listLock[2] && listLock[1] == true && !opening2.activeInHierarchy)
         {
@@ -145,6 +100,7 @@ public class OpeningChest : MonoBehaviour
 
             FalseLock2();
 
+            opening2.SetActive(true);
         }
         if (listLock[2] && listLock[3] == true && !opening3.activeInHierarchy)
         {
@@ -153,6 +109,7 @@ public class OpeningChest : MonoBehaviour
 
             FalseLock3();
 
+            opening3.SetActive(true);
         }
         if (listLock[0] && listLock[3] == true && !opening4.activeInHierarchy)
         {
@@ -161,13 +118,12 @@ public class OpeningChest : MonoBehaviour
 
             FalseLock4();
 
+            opening4.SetActive(true);
         }
-
         if (nbForOpen == 4)
         {
             enterChest.transform.position = new Vector3(0, 0, -1);
             Debug.Log("Open");
-            Light.SetActive(true);
         }
     }
 
@@ -194,4 +150,5 @@ public class OpeningChest : MonoBehaviour
         listLock[0] = false;
         listLock[3] = false;
     }
+
 }

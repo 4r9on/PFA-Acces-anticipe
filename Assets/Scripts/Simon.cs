@@ -15,6 +15,9 @@ public class Simon : MonoBehaviour
     public Light2D LightUp;
     public Light2D LightLeft;
     public Light2D LightRight;
+
+    int ID;
+    public List<int> AllID = new List<int>();
     // Start is called before the first frame update
     void Start()
     {
@@ -53,7 +56,7 @@ public class Simon : MonoBehaviour
 
     public void AddLights()
     {
-        if (infiniteGame.Count == 0)
+        if (infiniteGame.Count == 5)
         {
             RemoveStringFromList(infiniteGame);
             GameManager.Instance.AfterGainSimon();
@@ -74,22 +77,25 @@ public class Simon : MonoBehaviour
                     infiniteGame.Add("Settings");
                     break;
             }
-            
+
             StartCoroutine(ShowLight());
         }
     }
     IEnumerator ShowLight()
     {
+        int LightID = ID;
+        ID++;
+        AllID.Add(LightID);
         if (UIText != null)
         {
             //Permet d'afficher la couleur qu'on va devoir appuyer
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.5f);
             foreach (string light in infiniteGame)
             {
-             /*   UIText.text = light;
-                yield return new WaitForSeconds(0.2f);
-                UIText.text = "";
-                yield return new WaitForSeconds(0.1f);*/
+                /*   UIText.text = light;
+                   yield return new WaitForSeconds(0.2f);
+                   UIText.text = "";
+                   yield return new WaitForSeconds(0.1f);*/
 
                 switch (light)
                 {
@@ -110,25 +116,30 @@ public class Simon : MonoBehaviour
                         break;
                 }
                 yield return new WaitForSeconds(0.5f);
-                LightUp.color = AllLight[0];
-                LightRight.color = AllLight[1];
-                LightLeft.color = AllLight[2];
-                yield return new WaitForSeconds(0.5f);
-            }
-          /*  yield return new WaitForSeconds(0.2f);
-            UIText.text = "";*/
-        }
+                if (LightID == AllID[AllID.Count - 1])
+                {
 
+
+                    LightUp.color = AllLight[0];
+                    LightRight.color = AllLight[1];
+                    LightLeft.color = AllLight[2];
+                    yield return new WaitForSeconds(0.5f);
+                }
+            }
+            /*  yield return new WaitForSeconds(0.2f);
+              UIText.text = "";*/
+        }
+        yield return new WaitForSeconds(0.5f);
         foreach (string light in infiniteGame)
         {
             /*   UIText.text = light;
                yield return new WaitForSeconds(0.2f);
                UIText.text = "";
                yield return new WaitForSeconds(0.1f);*/
-         /*-   LightUp.color = new Color(0.9528302f, 0.0759992f, 0, 1);
-            LightRight.color = new Color(0.9528302f, 0.0759992f, 0, 1);
-            LightLeft.color = new Color(0.9528302f, 0.0759992f, 0, 1);*/
-          
+            /*-   LightUp.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+               LightRight.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+               LightLeft.color = new Color(0.9528302f, 0.0759992f, 0, 1);*/
+
             switch (light)
             {
                 case "Play":
@@ -148,15 +159,18 @@ public class Simon : MonoBehaviour
                     break;
             }
             yield return new WaitForSeconds(0.5f);
-            LightUp.color = AllLight[0];
-            LightRight.color = AllLight[1];
-            LightLeft.color = AllLight[2];
-            yield return new WaitForSeconds(0.5f);
+            if (LightID == AllID[AllID.Count - 1])
+            {
+                LightUp.color = AllLight[0];
+                LightRight.color = AllLight[1];
+                LightLeft.color = AllLight[2];
+                yield return new WaitForSeconds(0.5f);
+            }
         }
-        }
+    }
     public void AddToComparative(string theNew)
     {
-        
+
         //Indique quel bouton on a appuyer
         switch (theNew)
         {
@@ -211,7 +225,9 @@ public class Simon : MonoBehaviour
 
     IEnumerator PlayWithLight(string ButtonName)
     {
-       
+        int LightID = ID;
+        ID++;
+        AllID.Add(LightID);
         switch (ButtonName)
         {
             case "Button_Play":
@@ -230,7 +246,14 @@ public class Simon : MonoBehaviour
                 LightLeft.color = new Color(0, 0.2810159f, 1, 1);
                 break;
         }
-          yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
+        if (LightID == AllID[AllID.Count - 1])
+        {
+            LightUp.color = AllLight[0];
+            LightRight.color = AllLight[1];
+            LightLeft.color = AllLight[2];
+            yield return new WaitForSeconds(0.5f);
+        }
 
 
     }

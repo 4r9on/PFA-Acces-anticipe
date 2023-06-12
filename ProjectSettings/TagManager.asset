@@ -18,6 +18,7 @@ TagManager:
   - ButtonON
   - Background
   - Slider
+  - Sun
   layers:
   - Default
   - TransparentFX

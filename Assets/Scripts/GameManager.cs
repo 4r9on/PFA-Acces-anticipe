@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -14,6 +15,12 @@ public class GameManager : MonoBehaviour
     public List<GameObject> breakableUI = new List<GameObject>();
     public GameObject StockCD;
     public GameObject Narrator;
+
+    public GameObject Gauge;
+    public GameObject S2AT;
+    public GameObject S2ATWithWriting;
+
+    public List<Vector2> S2ATPoints;
 
     public List<GameObject> ON = new List<GameObject>();
     
@@ -44,6 +51,14 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         
+        if (PlayerPrefs.GetInt("GetCrashed") == 1)
+            {
+            PlayerPrefs.SetInt("GetCrashed", 0);
+            dAD.TableauActual = 5;
+                LoadNextLevel();
+            }
+        
+       
     }
 
     // Update is called once per frame
@@ -54,7 +69,7 @@ public class GameManager : MonoBehaviour
 
     public void AfterGainSimon()
     {
-        //faire l'anim o� le narrateur va appuyer sur le bouton pause
+        //faire l'anim ou le narrateur va appuyer sur le bouton pause
         //faire tomber le disque
         foreach(GameObject obj in SimonUI)
         {
@@ -69,29 +84,32 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        if(dAD.sliderLogo.value == 1.0f)
+        tableau1.SetActive(false);
+        tableau2.SetActive(false);
+        tableau3.SetActive(false);
+        tableau4.SetActive(false);
+        tableau5.SetActive(false);
+        if (dAD.TableauActual == 2)
         {
-            tableau1.SetActive(false);
-            tableau2.SetActive(true);        
+            tableau2.SetActive(true);
         }
-        /*else if ()
+        else if (dAD.TableauActual == 3)
         {
-            tableau2.SetActive(false); 
             tableau3.SetActive(true);
         }
-        else if ()
+        else if (dAD.TableauActual == 4)
         {
-            tableau3.SetActive(false);
             tableau4.SetActive(true);
         }
-        else if ()
+        else if (dAD.TableauActual == 5)
         {
-            tableau4.SetActive(false);
             tableau5.SetActive(true);
-        }*/
+        }
+        dAD.ObjectPut = null;
+    }
     public void TouchCD(int numberOfTouch)
     {
-        Narrator.GetComponent<Animator>().SetInteger("nrbOfTouch", numberOfTouch);
+      //  Narrator.GetComponent<Animator>().SetInteger("nrbOfTouch", numberOfTouch);
         switch (numberOfTouch)
         {
             case 0:
@@ -113,6 +131,30 @@ public class GameManager : MonoBehaviour
               /*  cursor.SetActive(true);
                 cursor.transform.position = new Vector3(GetComponent<Raycast>().HitToStopMouse.point.x, GetComponent<Raycast>().HitToStopMouse.point.y, 0f);*/
                 break;
+        }
+    }
+
+    public IEnumerator TakeAwayTheGauge(GameObject[] GameObjectToRemove)
+    {
+        yield return new WaitForSeconds(1);
+        Gauge.SetActive(false);
+        S2AT.SetActive(true);
+        S2ATWithWriting.SetActive(false);
+        GetComponent<DragAndDrop>().MinScale = S2AT.transform.localScale.y;
+        foreach (GameObject go in GameObjectToRemove)
+        {
+            go.SetActive(false);
+        }
+        foreach (Transform child in S2AT.transform.GetChild(0))
+        {
+            if(child.gameObject.name == "MaxPos")
+            {
+                GetComponent<DragAndDrop>().posMaxInit = child.position.y;
+            }
+            else
+            {
+                GetComponent<DragAndDrop>().posInit = S2AT.transform.GetChild(0).position.y;
+            }
         }
     }
 }

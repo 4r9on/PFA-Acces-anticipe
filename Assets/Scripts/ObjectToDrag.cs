@@ -16,6 +16,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public bool CD;
     public bool child;
     public bool canSlide;
+    public bool S2ATSlide;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +43,10 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             objectToPutOn.SetActive(true);
             objectToPutOn = null;
+            if(objectToPutOn.tag == "sun")
+            {
+                //Activer light et animation
+            }
         }
         if (painting && collision.gameObject.tag == "Ground")
         {
@@ -49,7 +54,6 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             {
                 children.GetComponent<Rigidbody2D>().gravityScale = 0;
                 children.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-               
             }
         }
             //Permet de détruire certains objets quand on les laisse tomber
