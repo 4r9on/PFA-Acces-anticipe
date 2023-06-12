@@ -19,6 +19,7 @@ TagManager:
   - Background
   - Slider
   - Sun
+  - Light
   layers:
   - Default
   - TransparentFX
