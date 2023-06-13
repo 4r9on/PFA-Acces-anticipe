@@ -334,7 +334,7 @@ public class DragAndDrop : MonoBehaviour
 
     public void OnClicked()
     {
-        if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer" || GameManager.Instance.ObjectHover.tag == "Slider" || GameManager.Instance.ObjectHover.tag == "Light")
+        if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer" || GameManager.Instance.ObjectHover.tag == "Slider" || GameManager.Instance.ObjectHover.tag == "Light" || GameManager.Instance.ObjectHover.tag == "Button")
         {
             draggedObject = GameManager.Instance.ObjectHover;
             if (draggedObject.GetComponent<ObjectToDrag>() != null && GameManager.Instance.ObjectHover.tag != "Slider")
@@ -445,6 +445,11 @@ public class DragAndDrop : MonoBehaviour
                 digicode.SetActive(false);
                 coliderDigiCode.SetActive(false);
             }
+        }
+
+        else if(GameManager.Instance.ObjectHover.tag == "Button")
+        {
+            Debug.Log("azerty");
         }
     }
     public void StopClick()
