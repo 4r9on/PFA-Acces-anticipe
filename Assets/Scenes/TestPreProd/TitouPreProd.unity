@@ -342,7 +342,7 @@ BoxCollider2D:
   m_Offset: {x: -0.9325606, y: -0.010621864}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.13466492, y: 0.50114554}
     oldSize: {x: 2.4, y: 1.35}
     newSize: {x: 2.4, y: 1.35}
     adaptiveTilingThreshold: 0.5
@@ -845,7 +845,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &254553887
 Transform:
   m_ObjectHideFlags: 0
@@ -932,7 +932,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &274729813
 Transform:
   m_ObjectHideFlags: 0
@@ -1066,8 +1066,10 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
+  S2ATSlide: 0
 --- !u!1 &327143248
 GameObject:
   m_ObjectHideFlags: 0
@@ -1352,8 +1354,10 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
+  S2ATSlide: 0
 --- !u!212 &401065476
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1894,7 +1898,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 516937802}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.409346, y: 1.4423542, z: 0}
+  m_LocalPosition: {x: -19.93, y: 1.58, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -2019,8 +2023,10 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
+  S2ATSlide: 0
 --- !u!114 &516937808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2034,10 +2040,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enterChest: {fileID: 137971220}
-  lockObject1: {fileID: 1859954296}
-  lockObject2: {fileID: 1438462029}
-  lockObject3: {fileID: 1655655898}
-  lockObject4: {fileID: 1865492057}
   opening1: {fileID: 1550644948}
   opening2: {fileID: 1015116934}
   opening3: {fileID: 1388049680}
@@ -2045,6 +2047,10 @@ MonoBehaviour:
   listLock: 00000000
   lastLock: 0
   nbForOpen: 0
+  light: {fileID: 0}
+  lightMain: {fileID: 0}
+  lightOff: {fileID: 0}
+  lightOn: {fileID: 0}
 --- !u!1001 &520452614
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2317,8 +2323,10 @@ MonoBehaviour:
   objectToPutOn: {fileID: 1634009325}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
+  S2ATSlide: 0
 --- !u!61 &596714945
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2487,7 +2495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &654828256
 Transform:
   m_ObjectHideFlags: 0
@@ -2622,8 +2630,10 @@ MonoBehaviour:
   objectToPutOn: {fileID: 1699486157}
   objectCreateAfterFalling: {fileID: 0}
   painting: 1
+  CD: 0
   child: 0
   canSlide: 0
+  S2ATSlide: 0
 --- !u!1 &697049664
 GameObject:
   m_ObjectHideFlags: 0
@@ -2725,8 +2735,10 @@ MonoBehaviour:
   objectToPutOn: {fileID: 1370236060}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
+  S2ATSlide: 0
 --- !u!212 &697049669
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2932,8 +2944,10 @@ MonoBehaviour:
   objectToPutOn: {fileID: 274729812}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 1
   canSlide: 0
+  S2ATSlide: 0
 --- !u!1 &774468106
 GameObject:
   m_ObjectHideFlags: 0
@@ -3013,8 +3027,10 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
+  S2ATSlide: 0
 --- !u!43 &850248239
 Mesh:
   m_ObjectHideFlags: 0
@@ -3343,19 +3359,28 @@ MonoBehaviour:
   mySpriteBar: {fileID: 175167801}
   testBar: {fileID: 0}
   tex: {fileID: 2800000, guid: 1ddddf2d896c09449a53b06c462a1ae0, type: 3}
-  animatorBar: {fileID: 0}
-  animatorLogo: {fileID: 0}
+  animator: {fileID: 0}
   posInit: 10000
   posMaxInit: 23.5
   posInitTop: 0
-  posMaxInitTop: 0
+  MinScale: 0
+  MaxScale: 0
   clip: {fileID: 0}
   totalSliderValue: 0
   totalSliderValueTop: 0
-  engrenage: {fileID: 0}
-  sliderNight: {fileID: 0}
-  Logo: {fileID: 0}
   a: {fileID: 0}
+  canPressTheButton: 0
+  Night: {fileID: 0}
+  NightMain: {fileID: 0}
+  sliderLogo: {fileID: 0}
+  Logo: {fileID: 0}
+  TableauActual: 0
+  flashinglight: {fileID: 0}
+  flashingHand: {fileID: 0}
+  digicode: {fileID: 0}
+  coliderDigiCode: {fileID: 0}
+  Woll1: {fileID: 0}
+  Woll2: {fileID: 0}
 --- !u!20 &882669274
 Camera:
   m_ObjectHideFlags: 0
@@ -3484,7 +3509,19 @@ MonoBehaviour:
   - {fileID: 2028571975}
   - {fileID: 1778975004}
   StockCD: {fileID: 0}
+  Narrator: {fileID: 0}
+  Gauge: {fileID: 0}
+  S2AT: {fileID: 0}
+  S2ATWithWriting: {fileID: 0}
+  S2ATPoints: []
+  ON: []
   Raycaster2D: {fileID: 0}
+  tableau1: {fileID: 0}
+  tableau2: {fileID: 0}
+  tableau3: {fileID: 0}
+  tableau4: {fileID: 0}
+  tableau5: {fileID: 0}
+  dAD: {fileID: 0}
 --- !u!114 &882669279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3518,6 +3555,7 @@ MonoBehaviour:
   LightUp: {fileID: 0}
   LightLeft: {fileID: 0}
   LightRight: {fileID: 0}
+  AllID: 
 --- !u!81 &882669281
 AudioListener:
   m_ObjectHideFlags: 0
@@ -3948,7 +3986,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1078298720
 Transform:
   m_ObjectHideFlags: 0
@@ -4786,8 +4824,10 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
+  S2ATSlide: 0
 --- !u!61 &1370236063
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5746,8 +5786,10 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
+  S2ATSlide: 0
 --- !u!4 &1634009328 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7768679449688954485, guid: f1bcd01e619247846bba4dfee18ab4d5, type: 3}
@@ -5953,7 +5995,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1674003530
 Transform:
   m_ObjectHideFlags: 0
@@ -6001,7 +6043,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1699486158
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6269,8 +6311,10 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
+  S2ATSlide: 0
 --- !u!61 &1800348673
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6417,8 +6461,10 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
+  S2ATSlide: 0
 --- !u!61 &1817841561
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6527,7 +6573,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.3567346, y: 0.53453207}
+  m_Offset: {x: -0.3567346, y: 0.5379262}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -6538,7 +6584,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.41690058, y: 0.37419224}
+  m_Size: {x: 0.41690058, y: 0.3809805}
   m_EdgeRadius: 0
 --- !u!4 &1859954298
 Transform:
@@ -7125,8 +7171,10 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  CD: 0
   child: 0
   canSlide: 0
+  S2ATSlide: 0
 --- !u!61 &2061453239
 BoxCollider2D:
   m_ObjectHideFlags: 0
