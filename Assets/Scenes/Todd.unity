@@ -7118,8 +7118,11 @@ MonoBehaviour:
   testBar: {fileID: 0}
   tex: {fileID: 0}
   animator: {fileID: 0}
+  MaxScaleLoadingBar: 0
   posInit: 0
+  posInitLoadingBar: 0
   posMaxInit: 0
+  posMaxInitLoadingBar: 0
   posInitTop: 0
   MinScale: 0
   MaxScale: 0
