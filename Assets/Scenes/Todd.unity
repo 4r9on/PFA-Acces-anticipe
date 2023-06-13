@@ -12108,7 +12108,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1501579945
 Animator:
   serializedVersion: 4
@@ -14390,7 +14390,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enterChest: {fileID: 957934638}
-  Light: {fileID: 0}
   opening1: {fileID: 1857585235}
   opening2: {fileID: 1223673630}
   opening3: {fileID: 296990006}
@@ -14400,8 +14399,6 @@ MonoBehaviour:
   nbForOpen: 0
   light: {fileID: 0}
   lightMain: {fileID: 0}
-  Woll1: {fileID: 0}
-  Woll2: {fileID: 0}
 --- !u!1 &1804532163
 GameObject:
   m_ObjectHideFlags: 0
