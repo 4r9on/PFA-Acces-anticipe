@@ -8,13 +8,20 @@ public class ElevateText : MonoBehaviour
     void Start()
     {
         GetComponent<Rigidbody2D>().velocity = new Vector2 (0, 1);
-        foreach (Transform t in transform)
+        foreach (GameObject ONGameObject in GameManager.Instance.ON)
+        {
+            if (ONGameObject.GetComponent<Rigidbody2D>() != null)
+            {
+                ONGameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 1);
+            }
+        }
+        /*foreach (Transform child in transform)
         {
             if (t.GetComponent<Rigidbody2D>() != null)
             {
                 t.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 1);
             }
-        }
+        }*/
 
         StartCoroutine(StopCredit());
     }
@@ -28,11 +35,11 @@ public class ElevateText : MonoBehaviour
             transform.eulerAngles = new Vector3(0, 0, 180) ;
             GetComponent<Rigidbody2D>().angularVelocity = 0;
             GetComponent<Rigidbody2D>().gravityScale = 1;
-            foreach (Transform t in transform)
+            foreach (Transform child in transform)
             {
-                if (t.GetComponent<Rigidbody2D>() != null)
+                if (child.GetComponent<Rigidbody2D>() != null)
                 {
-                    t.GetComponent<Rigidbody2D>().gravityScale = 1;
+                    child.GetComponent<Rigidbody2D>().gravityScale = 1;
                 }
             }
             Debug.Log("yes");
@@ -42,19 +49,26 @@ public class ElevateText : MonoBehaviour
     public void RotateIt()
     {
         GetComponent<Rigidbody2D>().angularVelocity = 100;
-
     }
+
 
     IEnumerator StopCredit()
     {
         yield return new WaitForSeconds(1);
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        foreach (Transform t in transform)
+        foreach (GameObject ONGameObject in GameManager.Instance.ON)
+        {
+            if(ONGameObject.GetComponent<Rigidbody2D>() != null)
+            {
+                ONGameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            }
+        }
+     /*   foreach (Transform t in transform)
         {
             if (t.GetComponent<Rigidbody2D>() != null)
             {
                 t.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             }
-        }
+        }*/
     }
 }

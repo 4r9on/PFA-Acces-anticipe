@@ -12,6 +12,7 @@ public class LaunchBatScript : MonoBehaviour
         print(Application.dataPath);
         process.StartInfo.FileName = Application.dataPath + "/Scripts/ScriptBat/testLauncher.bat";
         process.Start();
+        Application.Quit();
     }
 
     // Update is called once per frame
