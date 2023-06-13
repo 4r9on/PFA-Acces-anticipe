@@ -33,16 +33,16 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 0
     wrapV: 0
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -53,7 +53,7 @@ TextureImporter:
   alphaUsage: 1
   alphaIsTransparency: 0
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -103,18 +103,898 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 361
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69772854543b37f48bc3893aeb9aa31b
+      internalID: 859485893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _1
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 361
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ca80a014e515fc43b0dda2f8418eb1b
+      internalID: -334754091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 342
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd682947a05821243bbe36c6fa4f375e
+      internalID: -534084714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _3
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 342
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67b7adabd4d7e6d4f81640efb4ca8e71
+      internalID: -411615885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 323
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0354db56dfac79345b9361b82c20c66c
+      internalID: -1031703634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _5
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 323
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9de47dd7d3c96dc488ec2f4ae28fa9cc
+      internalID: -947071042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 304
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57e6dc5f26936d949a0bb14ce5174fa5
+      internalID: -317640168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _7
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 304
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 665d8ab0d8eb16642b918c713d5ebb3d
+      internalID: -1858350942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 285
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61a9f90324d920741b52ed01be6c0836
+      internalID: -1108313070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _9
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 285
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27f847f0aff86904993d1c16bcb85996
+      internalID: -1709088354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 266
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1d76d28b2dfa1f41b6dfd01eccd4fae
+      internalID: -1012965174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _11
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 266
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45c5228ea4c7eab449470c7532de3e87
+      internalID: -330994023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 247
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e8362636a3900a4898dbcf5c557efdd
+      internalID: 1826952118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _13
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 247
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f52eb4cf59c1de14b89178829cfa24ab
+      internalID: -1252725624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 228
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 475732e92e2032942b27d9d700be3003
+      internalID: 1640705228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _15
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 228
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7ad39fd830d12d45961f499ec268ae5
+      internalID: 1648816988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 209
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eba583ccdadd02942ac970461af10354
+      internalID: 2126740968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _17
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 209
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78860c938cdad984ca8a64095e3363c4
+      internalID: 1171178490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 190
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77065932cf55d82458d6b98abb3b8a41
+      internalID: 2006106637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _19
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 190
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cec20ab9263db57468f34e68bebdce45
+      internalID: 1791567211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 171
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9d621f84c856f143893e6b4aa0e61d6
+      internalID: 1791807096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _21
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 171
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21ec5528bd7798c4a933397570fa920c
+      internalID: 1694650044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _22
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 152
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56c89e11529d2f546a1c3dce5d765a8f
+      internalID: 972411967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _23
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 152
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc0d1e0f025ea7a4ab107a05c5ece2e9
+      internalID: -895507303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 133
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8162a4ebb4075f4c81d4154459f45e2
+      internalID: -65360944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _25
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 133
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f784ec7c7e0bede4581b6fc25c075064
+      internalID: -1020917048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 114
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8ac5c4dbce9b3d4b992ece5640a4944
+      internalID: -863156079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _27
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 114
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 202c6211b4fbb264290103bc09fc3b4c
+      internalID: 3349971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 95
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e6cdc016432362449788f324d200008
+      internalID: -53195055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _29
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 95
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6e3154c6e0aa0143ad72b5ae332980e
+      internalID: 868851273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 76
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 527f5d12914f76c40b7db6b92efe7bd9
+      internalID: -1506135446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _31
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 76
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a6fdfb0ba8b3d4498b6e4015188583c
+      internalID: 1389024740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _32
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 57
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8a90fdb1b11eaa4daa7118a31f88d4a
+      internalID: -572926974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _33
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 57
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3536f93f45edb6b4c91c84f6b6ff7cd3
+      internalID: 178535220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _34
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 38
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 473b3f7ea641ce247aa59d2cc9426f23
+      internalID: -1132897215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _35
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 38
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d66451535554294cba3deea13851721
+      internalID: 1947531124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _36
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 19
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5342af27c8ad094296569be90db4b06
+      internalID: -1480494098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _37
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 19
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1faa78b4cadf354f9213b5dfeac526c
+      internalID: 753985122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _38
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35e11cd1f2325df44ade66cb6c0171c0
+      internalID: 2040121514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sprite sheet dialogue narrateur NRV _39
+      rect:
+        serializedVersion: 2
+        x: 1009
+        y: 0
+        width: 1009
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 760016ddcc7a8454d8062692f7a30508
+      internalID: 1037435697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: e700b38676c054e4c9698d6a361864f6
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      sprite sheet dialogue narrateur NRV _1: -334754091
+      sprite sheet dialogue narrateur NRV _12: 1826952118
+      sprite sheet dialogue narrateur NRV _19: 1791567211
+      sprite sheet dialogue narrateur NRV _5: -947071042
+      sprite sheet dialogue narrateur NRV _39: 1037435697
+      sprite sheet dialogue narrateur NRV _28: -53195055
+      sprite sheet dialogue narrateur NRV _33: 178535220
+      sprite sheet dialogue narrateur NRV _15: 1648816988
+      sprite sheet dialogue narrateur NRV _25: -1020917048
+      sprite sheet dialogue narrateur NRV _2: -534084714
+      sprite sheet dialogue narrateur NRV _3: -411615885
+      sprite sheet dialogue narrateur NRV _24: -65360944
+      sprite sheet dialogue narrateur NRV _20: 1791807096
+      sprite sheet dialogue narrateur NRV _31: 1389024740
+      sprite sheet dialogue narrateur NRV _37: 753985122
+      sprite sheet dialogue narrateur NRV _4: -1031703634
+      sprite sheet dialogue narrateur NRV _30: -1506135446
+      sprite sheet dialogue narrateur NRV _21: 1694650044
+      sprite sheet dialogue narrateur NRV _18: 2006106637
+      sprite sheet dialogue narrateur NRV _29: 868851273
+      sprite sheet dialogue narrateur NRV _14: 1640705228
+      sprite sheet dialogue narrateur NRV _38: 2040121514
+      sprite sheet dialogue narrateur NRV _26: -863156079
+      sprite sheet dialogue narrateur NRV _23: -895507303
+      sprite sheet dialogue narrateur NRV _32: -572926974
+      sprite sheet dialogue narrateur NRV _11: -330994023
+      sprite sheet dialogue narrateur NRV _27: 3349971
+      sprite sheet dialogue narrateur NRV _17: 1171178490
+      sprite sheet dialogue narrateur NRV _35: 1947531124
+      sprite sheet dialogue narrateur NRV _0: 859485893
+      sprite sheet dialogue narrateur NRV _7: -1858350942
+      sprite sheet dialogue narrateur NRV _6: -317640168
+      sprite sheet dialogue narrateur NRV _16: 2126740968
+      sprite sheet dialogue narrateur NRV _22: 972411967
+      sprite sheet dialogue narrateur NRV _34: -1132897215
+      sprite sheet dialogue narrateur NRV _13: -1252725624
+      sprite sheet dialogue narrateur NRV _36: -1480494098
+      sprite sheet dialogue narrateur NRV _10: -1012965174
+      sprite sheet dialogue narrateur NRV _8: -1108313070
+      sprite sheet dialogue narrateur NRV _9: -1709088354
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
