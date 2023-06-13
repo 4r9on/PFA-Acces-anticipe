@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.Animations;
+//using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using static System.Net.Mime.MediaTypeNames;
+using UnityEngine.Rendering.Universal;
 
 public class DragAndDrop : MonoBehaviour
 {
@@ -28,18 +29,23 @@ public class DragAndDrop : MonoBehaviour
     public Texture2D tex;
     public Animator animator;
 
+    public float MaxScaleLoadingBar;
     public float posInit;
+    public float posInitLoadingBar;
     public float posMaxInit;
+    public float posMaxInitLoadingBar;
     public float posInitTop;
     public float MinScale;
     public float MaxScale;
 
-    public AnimatorController clip;
+    List<float> LightMaxValue = new List<float>();
+
+    //public AnimatorController clip;
     public float totalSliderValue;
     public float totalSliderValueTop;
     private Rigidbody2D _Rigidbody;
 
-    public AnimationWindow a;
+    //public AnimationWindow a;
     public bool canPressTheButton;
 
     public GameObject Night;
@@ -55,7 +61,8 @@ public class DragAndDrop : MonoBehaviour
     public GameObject coliderDigiCode;
     public GameObject Woll1;
     public GameObject Woll2;
-    
+
+
     private void Awake()
     {
         sr = gameObject.GetComponent<SpriteRenderer>();
@@ -64,6 +71,8 @@ public class DragAndDrop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ChangeLoadingBarScale(0.33f, 1, 0);
+
         animator = GetComponent<Animator>();
 
         foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
@@ -73,7 +82,11 @@ public class DragAndDrop : MonoBehaviour
                 oldColor = SimonUI.GetComponent<SpriteRenderer>().color;
             }
         }
-
+        foreach(Light2D light in GameManager.Instance.lightsOnTableau1)
+        {
+            LightMaxValue.Add(light.intensity);
+            light.intensity = 0;
+        }
         //animatorBar.SetBool("Play", true);
         //animatorLogo.SetBool("Logo", true);
     }
@@ -87,7 +100,8 @@ public class DragAndDrop : MonoBehaviour
             //Quand l'objet est pose on va pouvoir faire tourner l'objet dans lequel il est introduit
             if (value < 5.3f && ObjectPut != null)
             {
-
+                GameManager.Instance.lightsOnTableau1[1].gameObject.GetComponent<Animator>().enabled = true;
+                GameManager.Instance.lightsOnTableau1[1].intensity = 0;
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.up = ((Camera.main.ScreenToWorldPoint(Input.mousePosition) - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.position).normalized);
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles = new Vector3(0, 0, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.z);
 
@@ -142,18 +156,38 @@ public class DragAndDrop : MonoBehaviour
                     Debug.Log("lost");
                     value += theValue;
                 }
+                ChangeLoadingBarScale(value, 5.3f, -2.65f);
+                float valuepourcent = (value - -2.65f) / (5.3f - -2.65f);
                 lastRotation = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w;
 
-
+                for(int i = 0; i < 3; i++)
+                {
+                    if(i != 1)
+                    {
+                        GameManager.Instance.lightsOnTableau1[i].intensity = LightMaxValue[i] * valuepourcent;
+                        Debug.Log(GameManager.Instance.lightsOnTableau1[i].intensity);
+                    }
+                    
+                }
+                
+                var emission = GameManager.Instance.particlesTableau1.emission;
+                emission.rateOverTime = 20 * valuepourcent;
 
             }
             else
             {
+                foreach (Light2D light in GameManager.Instance.lightsOnTableau1)
+                {
+                    if (light.gameObject.GetComponent<Animator>())
+                    {
+                        light.gameObject.GetComponent<Animator>().enabled = true;
+                    }
+                }
                 MovingBar = false;
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().canSlide = true;
-                ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles = new Vector3 (ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.x, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.y, -90);
+                ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles = new Vector3(ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.x, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.y, -90);
             }
-            animator.SetBool("Play", true);
+            //  animator.SetBool("Play", true);
             //animatorLogo.SetBool("Logo", true);
             Debug.Log("aaaaaa");
 
@@ -162,19 +196,17 @@ public class DragAndDrop : MonoBehaviour
         if (draggedObject != null)
         {
             Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition).y < GameManager.Instance.S2ATPoints[0].y);
-            if (draggedObject.tag == "Slider" && draggedObject.GetComponent<ObjectToDrag>().S2ATSlide )
+            if (draggedObject.tag == "Slider" && draggedObject.GetComponent<ObjectToDrag>().S2ATSlide)
             {
                 float valueMaxPoint = 0;
                 float pourcentageActualPoint = 0;
                 float scaleValue = MaxScale - MinScale;
                 if (Camera.main.ScreenToWorldPoint(Input.mousePosition).y < GameManager.Instance.S2ATPoints[0].y && Camera.main.ScreenToWorldPoint(Input.mousePosition).y > GameManager.Instance.S2ATPoints[1].y)
                 {
-                     valueMaxPoint = GameManager.Instance.S2ATPoints[0].y - GameManager.Instance.S2ATPoints[1].y;
-                     pourcentageActualPoint = (GameManager.Instance.S2ATPoints[0].y - Camera.main.ScreenToWorldPoint(Input.mousePosition).y) / valueMaxPoint;
-
-                    
+                    valueMaxPoint = GameManager.Instance.S2ATPoints[0].y - GameManager.Instance.S2ATPoints[1].y;
+                    pourcentageActualPoint = (GameManager.Instance.S2ATPoints[0].y - Camera.main.ScreenToWorldPoint(Input.mousePosition).y) / valueMaxPoint;
                 }
-                else if(Camera.main.ScreenToWorldPoint(Input.mousePosition).y < GameManager.Instance.S2ATPoints[1].y)
+                else if (Camera.main.ScreenToWorldPoint(Input.mousePosition).y < GameManager.Instance.S2ATPoints[1].y)
                 {
                     pourcentageActualPoint = 1;
                     Debug.Log("pourcentage1");
@@ -194,10 +226,9 @@ public class DragAndDrop : MonoBehaviour
 
                 //   draggedObject.transform.position = new Vector2(draggedObject.transform.position.y, Camera.main.ScreenToWorldPoint(Input.mousePosition).x + 2);
             }
-            
+
             else if (draggedObject.tag == "Slider" && draggedObject.GetComponent<ObjectToDrag>().canSlide)
             {
-                Debug.Log("ddddsfdgfg");
                 if (posInit == 10000.0f)
                 {
                     posInit = draggedObject.transform.position.x;
@@ -215,7 +246,7 @@ public class DragAndDrop : MonoBehaviour
                 }
                 if (draggedObject.transform.position.x < posMaxInit)
                 {
-                    draggedObject.transform.position = new Vector2(posMaxInit, draggedObject.transform.position.y );
+                    draggedObject.transform.position = new Vector2(posMaxInit, draggedObject.transform.position.y);
 
                 }
                 float maxValue = posInit - posMaxInit;
@@ -237,42 +268,42 @@ public class DragAndDrop : MonoBehaviour
 
 
 
-                   /* foreach (AnimationClip Clips in clip.animationClips)
-                    {
-                        Debug.Log(Clips);
-                        foreach (UnityEditor.EditorCurveBinding frames in AnimationUtility.GetObjectReferenceCurveBindings(Clips))
-                        {
-                            ObjectReferenceKeyframe[] keyFrames = AnimationUtility.GetObjectReferenceCurve(Clips, frames);
+                    /* foreach (AnimationClip Clips in clip.animationClips)
+                     {
+                         Debug.Log(Clips);
+                         foreach (UnityEditor.EditorCurveBinding frames in AnimationUtility.GetObjectReferenceCurveBindings(Clips))
+                         {
+                             ObjectReferenceKeyframe[] keyFrames = AnimationUtility.GetObjectReferenceCurve(Clips, frames);
 
-                            Debug.Log(keyFrames);
-                            foreach (var frame in keyFrames)
-                            {
-                                Debug.Log(frame.time);
-                                Sprite SpriteInFrame = (Sprite)frame.value;
-                                tex = SpriteInFrame.texture;
-                                Debug.Log(tex.name);
-                                Debug.Log(testBar.sprite.rect.width);
-                                SpriteInFrame = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * totalSliderValue), tex.height), new Vector2(0.5f / totalSliderValue/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3, 0.5f), 100.0f);
-                                testBar.sprite = SpriteInFrame;
-                                ValueSlider();
-                                Debug.Log(testBar.sprite.rect.width);
+                             Debug.Log(keyFrames);
+                             foreach (var frame in keyFrames)
+                             {
+                                 Debug.Log(frame.time);
+                                 Sprite SpriteInFrame = (Sprite)frame.value;
+                                 tex = SpriteInFrame.texture;
+                                 Debug.Log(tex.name);
+                                 Debug.Log(testBar.sprite.rect.width);
+                                 SpriteInFrame = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * totalSliderValue), tex.height), new Vector2(0.5f / totalSliderValue/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3, 0.5f), 100.0f);
+                                 testBar.sprite = SpriteInFrame;
+                                 ValueSlider();
+                                 Debug.Log(testBar.sprite.rect.width);
 
-                                AnimationUtility.SetObjectReferenceCurve(Clips, frames, keyFrames);
-                            }
-                             StartCoroutine(testWaiting(keyFrames));
+                                 AnimationUtility.SetObjectReferenceCurve(Clips, frames, keyFrames);
+                             }
+                              StartCoroutine(testWaiting(keyFrames));
 
-                        }
+                         }
 
-                        
-                        List<Sprite> allSprite = new List<Sprite>();
-                        allSprite.AddRange(GetSpritesFromClip(Clips));
-                        foreach (Sprite sprite in GetSpritesFromClip(Clips))
-                        {
 
-                        }
-                        
-                    }*/
-                   
+                         List<Sprite> allSprite = new List<Sprite>();
+                         allSprite.AddRange(GetSpritesFromClip(Clips));
+                         foreach (Sprite sprite in GetSpritesFromClip(Clips))
+                         {
+
+                         }
+
+                     }*/
+
                 }
 
 
@@ -376,18 +407,23 @@ public class DragAndDrop : MonoBehaviour
 
             else
             {
-                if(GameManager.Instance.ObjectHover.name != "Button_Pause")
+                if (GameManager.Instance.ObjectHover.name != "Button_Pause")
                 {
                     GetComponent<Simon>().AddToComparative(GameManager.Instance.ObjectHover.name);
                 }
-            
+
             }
 
         }
 
-        else if(GameManager.Instance.ObjectHover.tag == "ButtonON")
+        else if (GameManager.Instance.ObjectHover.tag == "ButtonON")
         {
+            foreach (GameObject ObjectON in GameManager.Instance.ON)
+            {
+                Destroy(ObjectON.GetComponent<Rigidbody2D>());
+            }
             GameManager.Instance.AllText.GetComponent<ElevateText>().RotateIt();
+
         }
 
         else if (GameManager.Instance.ObjectHover.tag == "Light")
@@ -399,27 +435,18 @@ public class DragAndDrop : MonoBehaviour
             Woll2.SetActive(true);
         }
 
-        else if(GameManager.Instance.ObjectHover.tag == "Digi")
+        else if (GameManager.Instance.ObjectHover.tag == "Digi")
         {
             digicode.SetActive(true);
             coliderDigiCode.SetActive(true);
 
-            if(GameManager.Instance.ObjectHover.tag == "Digi2")
+            if (GameManager.Instance.ObjectHover.tag == "Digi2")
             {
                 digicode.SetActive(false);
                 coliderDigiCode.SetActive(false);
             }
         }
-
-        else if(GameManager.Instance.ObjectHover.tag == "Button")
-        {
-            //Pay anim
-
-            Debug.Log("azerty");
-
-        }
     }
-
     public void StopClick()
     {
         if (draggedObject != null)
@@ -469,7 +496,7 @@ public class DragAndDrop : MonoBehaviour
                             cursor.transform.position = new Vector3(GetComponent<Raycast>().HitToStopMouse.point.x, GetComponent<Raycast>().HitToStopMouse.point.y, 0f);
                             break;
                     }
-                  //  StartCoroutine(TouchUI(SimonUI, timing));
+                    //  StartCoroutine(TouchUI(SimonUI, timing));
                 }
             }
         }
@@ -493,15 +520,26 @@ public class DragAndDrop : MonoBehaviour
                         GameManager.Instance.SimonUI.Add(draggedObject);
                         draggedObject.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().enabled = false;
                     }
+                    if (draggedObject.GetComponent<ObjectToDrag>().objectToPutOn.tag == "ButtonON")
+                    {
+                        foreach (GameObject ObjectON in GameManager.Instance.ON)
+                        {
+                            if (ObjectON == draggedObject)
+                            {
+                                GameManager.Instance.ON.Remove(ObjectON);
+                            }
+                        }
+                       
+                    }
                     ObjectPut = draggedObject;
+                    StartCoroutine(draggedObject.GetComponent<ObjectToDrag>().BecomeDestroyable());
                 }
-                StartCoroutine(draggedObject.GetComponent<ObjectToDrag>().BecomeDestroyable());
             }
+            dragged = false;
+            draggedObject = null;
+
+
         }
-        dragged = false;
-        draggedObject = null;
-
-
     }
 
     IEnumerator TouchUI(GameObject SimonUI, float timing)
@@ -526,21 +564,63 @@ public class DragAndDrop : MonoBehaviour
         }
     }
 
-    IEnumerator testWaiting(ObjectReferenceKeyframe[] keyFrames)
+    float CalculValuePourcentOfSliderScale(float scaleValue, float pourcentageActualPoint)
     {
-        foreach (var frame in keyFrames)
+       return (scaleValue * (1 - pourcentageActualPoint) + MinScale);
+    }
+    float CalculValuePourcentOfSliderPosition(float pourcentageActualPoint, float Min, float Max)
+    {
+        return( ((Max - Min) * (1 - pourcentageActualPoint) / 2) + Min);
+    }
+
+    void ChangeLoadingBarScale(float valueGive, float maxValue, float minValue)
+    {
+        foreach (Transform child in GameManager.Instance.Gauge.transform)
         {
-
-            Sprite SpriteInFrame = (Sprite)frame.value;
-            tex = SpriteInFrame.texture;
-            Debug.Log(tex.name);
-            Debug.Log(testBar.sprite.rect.width);
-            SpriteInFrame = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * totalSliderValue), tex.height), new Vector2(0.5f / totalSliderValue/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3*/, 0.5f), 100.0f);
-            testBar.sprite = SpriteInFrame;
-            ValueSlider();
-            Debug.Log(testBar.sprite.rect.width);
-
-            yield return new WaitForSeconds(0.1f);
+            if (child.name == "Loading_bar")
+            {
+                float pourcentageOfTheValue = ((maxValue - minValue) - (valueGive - minValue)) / (maxValue - minValue);
+                Debug.Log(pourcentageOfTheValue);
+                //MaxScaleLoadingBar = child.localScale.x;
+                float scaleValue = MaxScale - MinScale;
+                child.localScale = new Vector3(CalculValuePourcentOfSliderScale(scaleValue, pourcentageOfTheValue), child.localScale.y, child.localScale.z);
+                /*if (posInitLoadingBar < 0)
+                {
+                    posInitLoadingBar *= -1;
+                }
+                if (posMaxInitLoadingBar < 0)
+                {
+                    posMaxInitLoadingBar *= -1;
+                }
+                posMaxInitLoadingBar = posMaxInitLoadingBar + posInitLoadingBar;
+                posInitLoadingBar = 0;
+                */
+                child.localPosition = new Vector2(0, CalculValuePourcentOfSliderPosition(pourcentageOfTheValue, posInitLoadingBar, posMaxInitLoadingBar));
+                // ((posInitLoadingBar - posMaxInitLoadingBar) * (1 - 0.33f) / 2) + posInitLoadingBar
+            }
         }
     }
+
+    /* IEnumerator testWaiting(ObjectReferenceKeyframe[] keyFrames)
+     {
+         foreach (var frame in keyFrames)
+         {
+
+             Sprite SpriteInFrame = (Sprite)frame.value;
+             tex = SpriteInFrame.texture;
+             Debug.Log(tex.name);
+             Debug.Log(testBar.sprite.rect.width);
+             SpriteInFrame = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * totalSliderValue), tex.height), new Vector2(0.5f / totalSliderValue/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3, 0.5f), 100.0f);
+             testBar.sprite = SpriteInFrame;
+             ValueSlider();
+             Debug.Log(testBar.sprite.rect.width);
+
+             yield return new WaitForSeconds(0.1f);
+         }
+     }*/
+
+
+
+
+
 }

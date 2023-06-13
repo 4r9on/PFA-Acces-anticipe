@@ -48,10 +48,9 @@ public class ElevateText : MonoBehaviour
 
     public void RotateIt()
     {
-        
-
         GetComponent<Rigidbody2D>().angularVelocity = 100;
     }
+
 
     IEnumerator StopCredit()
     {

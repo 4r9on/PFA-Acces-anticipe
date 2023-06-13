@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering.Universal;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,10 +17,12 @@ public class GameManager : MonoBehaviour
     public GameObject StockCD;
     public GameObject Narrator;
 
+    //Tableau 1
     public GameObject Gauge;
     public GameObject S2AT;
     public GameObject S2ATWithWriting;
-
+    public List<Light2D> lightsOnTableau1 = new List<Light2D>();
+    public ParticleSystem particlesTableau1;
     public List<Vector2> S2ATPoints;
 
     public List<GameObject> ON = new List<GameObject>();
@@ -51,6 +54,14 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         
+        if (PlayerPrefs.GetInt("GetCrashed") == 1)
+            {
+            PlayerPrefs.SetInt("GetCrashed", 0);
+            dAD.TableauActual = 5;
+                LoadNextLevel();
+            }
+        
+       
     }
 
     // Update is called once per frame
@@ -76,26 +87,28 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
+        tableau1.SetActive(false);
+        tableau2.SetActive(false);
+        tableau3.SetActive(false);
+        tableau4.SetActive(false);
+        tableau5.SetActive(false);
         if (dAD.TableauActual == 2)
         {
-            tableau1.SetActive(false);
             tableau2.SetActive(true);
         }
-        /*else if ()
+        else if (dAD.TableauActual == 3)
         {
-            tableau2.SetActive(false); 
             tableau3.SetActive(true);
         }
-        else if ()
+        else if (dAD.TableauActual == 4)
         {
-            tableau3.SetActive(false);
             tableau4.SetActive(true);
         }
-        else if ()
+        else if (dAD.TableauActual == 5)
         {
-            tableau4.SetActive(false);
             tableau5.SetActive(true);
-        }*/
+        }
+        dAD.ObjectPut = null;
     }
     public void TouchCD(int numberOfTouch)
     {
