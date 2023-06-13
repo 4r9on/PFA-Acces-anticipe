@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class Lampe : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject lampe;
+    public GameObject button;
+
+    private void Update()
     {
-       
+        
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnMouseDown()
     {
-        transform.position = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+        Debug.Log("b");
     }
+
+
+
+
+
+    /*public void OnClic()
+    {
+        if (Input.GetMouseButtonDown(0) && GameManager.Instance.ObjectHover.tag == "Light")
+        {
+
+        }
+    }*/
 }
