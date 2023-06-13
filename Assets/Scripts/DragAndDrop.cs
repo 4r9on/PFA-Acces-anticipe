@@ -100,7 +100,6 @@ public class DragAndDrop : MonoBehaviour
             //Quand l'objet est pose on va pouvoir faire tourner l'objet dans lequel il est introduit
             if (value < 5.3f && ObjectPut != null)
             {
-                GameManager.Instance.lightsOnTableau1[1].gameObject.GetComponent<Animator>().enabled = true;
                 GameManager.Instance.lightsOnTableau1[1].intensity = 0;
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.up = ((Camera.main.ScreenToWorldPoint(Input.mousePosition) - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.position).normalized);
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles = new Vector3(0, 0, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.z);
@@ -158,21 +157,19 @@ public class DragAndDrop : MonoBehaviour
                 }
                 ChangeLoadingBarScale(value, 5.3f, -2.65f);
                 float valuepourcent = (value - -2.65f) / (5.3f - -2.65f);
+                
                 lastRotation = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w;
 
                 for(int i = 0; i < 3; i++)
                 {
-                    if(i != 1)
-                    {
                         GameManager.Instance.lightsOnTableau1[i].intensity = LightMaxValue[i] * valuepourcent;
                         Debug.Log(GameManager.Instance.lightsOnTableau1[i].intensity);
-                    }
                     
                 }
                 
                 var emission = GameManager.Instance.particlesTableau1.emission;
-                emission.rateOverTime = 20 * valuepourcent;
-
+                emission.rateOverTime = 20 * (1 - valuepourcent);
+                Debug.Log(emission.rateOverTime);
             }
             else
             {
