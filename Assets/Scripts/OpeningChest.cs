@@ -22,7 +22,8 @@ public class OpeningChest : MonoBehaviour
     public GameObject lightMain;
 
 
-    private void OnCollisionEnter(Collision collision)
+
+    /*private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Locker1") // si l'objet rentre en colition avec ce tag alors
         {
@@ -75,7 +76,7 @@ public class OpeningChest : MonoBehaviour
 
         Open();
 
-    }
+    }*/
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -118,7 +119,7 @@ public class OpeningChest : MonoBehaviour
         {
             listLock[3] = true;
 
-            if (lastLock == 0 || 2 == lastLock)
+            if (lastLock == 0 || 3 == lastLock)
             {
                 listLock[lastLock] = true;
             }
@@ -139,8 +140,7 @@ public class OpeningChest : MonoBehaviour
             nbForOpen++; 
 
             FalseLock1(); // on désactiver les élément de la liste activer
-
-            //opening1.SetActive(true);
+            Debug.Log("1");
         }
         if (listLock[2] && listLock[1] == true && !opening2.activeInHierarchy)
         {
@@ -148,8 +148,8 @@ public class OpeningChest : MonoBehaviour
             nbForOpen++;
 
             FalseLock2();
+            Debug.Log("2");
 
-            //opening2.SetActive(true);
         }
         if (listLock[2] && listLock[3] == true && !opening3.activeInHierarchy)
         {
@@ -157,8 +157,8 @@ public class OpeningChest : MonoBehaviour
             nbForOpen++;
 
             FalseLock3();
+            Debug.Log("3");
 
-            //opening3.SetActive(true);
         }
         if (listLock[0] && listLock[3] == true && !opening4.activeInHierarchy)
         {
@@ -166,13 +166,16 @@ public class OpeningChest : MonoBehaviour
             nbForOpen++;
 
             FalseLock4();
+            Debug.Log("4");
 
-            //opening4.SetActive(true);
         }
         if (nbForOpen == 4)
         {
             enterChest.transform.position = new Vector3(0, 0, -1);
             Debug.Log("Open");
+
+            enterChest.SetActive(false);
+            light.SetActive(true);
         }
     }
 
@@ -184,7 +187,7 @@ public class OpeningChest : MonoBehaviour
 
     public void FalseLock2()
     {
-        listLock[1] = false;
+       listLock[1] = false;
         listLock[2] = false;
     }
 

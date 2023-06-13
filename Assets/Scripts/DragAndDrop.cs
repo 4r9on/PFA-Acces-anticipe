@@ -55,8 +55,7 @@ public class DragAndDrop : MonoBehaviour
     public GameObject coliderDigiCode;
     public GameObject Woll1;
     public GameObject Woll2;
-
-
+    
     private void Awake()
     {
         sr = gameObject.GetComponent<SpriteRenderer>();
@@ -391,7 +390,7 @@ public class DragAndDrop : MonoBehaviour
             GameManager.Instance.AllText.GetComponent<ElevateText>().RotateIt();
         }
 
-        else if(GameManager.Instance.ObjectHover.tag == "Light")
+        else if (GameManager.Instance.ObjectHover.tag == "Light")
         {
             flashinglight.SetActive(false);
             flashingHand.SetActive(true);
@@ -411,7 +410,16 @@ public class DragAndDrop : MonoBehaviour
                 coliderDigiCode.SetActive(false);
             }
         }
+
+        else if(GameManager.Instance.ObjectHover.tag == "Button")
+        {
+            //Pay anim
+
+            Debug.Log("azerty");
+
+        }
     }
+
     public void StopClick()
     {
         if (draggedObject != null)
@@ -535,8 +543,4 @@ public class DragAndDrop : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
     }
-
-    
-
-    
 }
