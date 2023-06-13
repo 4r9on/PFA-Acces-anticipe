@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering.Universal;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,10 +17,12 @@ public class GameManager : MonoBehaviour
     public GameObject StockCD;
     public GameObject Narrator;
 
+    //Tableau 1
     public GameObject Gauge;
     public GameObject S2AT;
     public GameObject S2ATWithWriting;
-
+    public List<Light2D> lightsOnTableau1 = new List<Light2D>();
+    public ParticleSystem particlesTableau1;
     public List<Vector2> S2ATPoints;
 
     public List<GameObject> ON = new List<GameObject>();
