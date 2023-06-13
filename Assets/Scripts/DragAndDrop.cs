@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using static System.Net.Mime.MediaTypeNames;
+using UnityEngine.Rendering.Universal;
 
 public class DragAndDrop : MonoBehaviour
 {
@@ -36,6 +37,8 @@ public class DragAndDrop : MonoBehaviour
     public float posInitTop;
     public float MinScale;
     public float MaxScale;
+
+    List<float> LightMaxValue = new List<float>();
 
     //public AnimatorController clip;
     public float totalSliderValue;
@@ -79,7 +82,11 @@ public class DragAndDrop : MonoBehaviour
                 oldColor = SimonUI.GetComponent<SpriteRenderer>().color;
             }
         }
-
+        foreach(Light2D light in GameManager.Instance.lightsOnTableau1)
+        {
+            LightMaxValue.Add(light.intensity);
+            light.intensity = 0;
+        }
         //animatorBar.SetBool("Play", true);
         //animatorLogo.SetBool("Logo", true);
     }
@@ -93,7 +100,7 @@ public class DragAndDrop : MonoBehaviour
             //Quand l'objet est pose on va pouvoir faire tourner l'objet dans lequel il est introduit
             if (value < 5.3f && ObjectPut != null)
             {
-
+                GameManager.Instance.lightsOnTableau1[1].intensity = 0;
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.up = ((Camera.main.ScreenToWorldPoint(Input.mousePosition) - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.position).normalized);
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles = new Vector3(0, 0, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.z);
 
@@ -149,13 +156,30 @@ public class DragAndDrop : MonoBehaviour
                     value += theValue;
                 }
                 ChangeLoadingBarScale(value, 5.3f, -2.65f);
+                float valuepourcent = (value - -2.65f) / (5.3f - -2.65f);
+                
                 lastRotation = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w;
 
-
-
+                for(int i = 0; i < 3; i++)
+                {
+                        GameManager.Instance.lightsOnTableau1[i].intensity = LightMaxValue[i] * valuepourcent;
+                        Debug.Log(GameManager.Instance.lightsOnTableau1[i].intensity);
+                    
+                }
+                
+                var emission = GameManager.Instance.particlesTableau1.emission;
+                emission.rateOverTime = 20 * (1 - valuepourcent);
+                Debug.Log(emission.rateOverTime);
             }
             else
             {
+                foreach (Light2D light in GameManager.Instance.lightsOnTableau1)
+                {
+                    if (light.gameObject.GetComponent<Animator>())
+                    {
+                        light.gameObject.GetComponent<Animator>().enabled = true;
+                    }
+                }
                 MovingBar = false;
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().canSlide = true;
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles = new Vector3(ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.x, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.y, -90);
@@ -307,7 +331,7 @@ public class DragAndDrop : MonoBehaviour
 
     public void OnClicked()
     {
-        if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer" || GameManager.Instance.ObjectHover.tag == "Slider" || GameManager.Instance.ObjectHover.tag == "Light")
+        if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer" || GameManager.Instance.ObjectHover.tag == "Slider" || GameManager.Instance.ObjectHover.tag == "Light" || GameManager.Instance.ObjectHover.tag == "Button")
         {
             draggedObject = GameManager.Instance.ObjectHover;
             if (draggedObject.GetComponent<ObjectToDrag>() != null && GameManager.Instance.ObjectHover.tag != "Slider")
@@ -418,6 +442,11 @@ public class DragAndDrop : MonoBehaviour
                 digicode.SetActive(false);
                 coliderDigiCode.SetActive(false);
             }
+        }
+
+        else if(GameManager.Instance.ObjectHover.tag == "Button")
+        {
+            Debug.Log("azerty");
         }
     }
     public void StopClick()
@@ -539,12 +568,11 @@ public class DragAndDrop : MonoBehaviour
 
     float CalculValuePourcentOfSliderScale(float scaleValue, float pourcentageActualPoint)
     {
-        Debug.Log(scaleValue * (pourcentageActualPoint) + MinScale);
-       return (scaleValue * (pourcentageActualPoint) + MinScale);
+       return (scaleValue * (1 - pourcentageActualPoint) + MinScale);
     }
     float CalculValuePourcentOfSliderPosition(float pourcentageActualPoint, float Min, float Max)
     {
-        return( ((Min - Max) * pourcentageActualPoint / 2) + Min);
+        return( ((Max - Min) * (1 - pourcentageActualPoint) / 2) + Min);
     }
 
     void ChangeLoadingBarScale(float valueGive, float maxValue, float minValue)
@@ -555,10 +583,10 @@ public class DragAndDrop : MonoBehaviour
             {
                 float pourcentageOfTheValue = ((maxValue - minValue) - (valueGive - minValue)) / (maxValue - minValue);
                 Debug.Log(pourcentageOfTheValue);
-                MaxScaleLoadingBar = child.localScale.x;
+                //MaxScaleLoadingBar = child.localScale.x;
                 float scaleValue = MaxScale - MinScale;
-                child.localScale = new Vector3(CalculValuePourcentOfSliderScale(scaleValue, 1 /pourcentageOfTheValue), child.localScale.y, child.localScale.z);
-                if (posInitLoadingBar < 0)
+                child.localScale = new Vector3(CalculValuePourcentOfSliderScale(scaleValue, pourcentageOfTheValue), child.localScale.y, child.localScale.z);
+                /*if (posInitLoadingBar < 0)
                 {
                     posInitLoadingBar *= -1;
                 }
@@ -568,7 +596,8 @@ public class DragAndDrop : MonoBehaviour
                 }
                 posMaxInitLoadingBar = posMaxInitLoadingBar + posInitLoadingBar;
                 posInitLoadingBar = 0;
-                child.position = new Vector2(CalculValuePourcentOfSliderPosition(pourcentageOfTheValue, posInitLoadingBar, posMaxInitLoadingBar), child.position.y);
+                */
+                child.localPosition = new Vector2(0, CalculValuePourcentOfSliderPosition(pourcentageOfTheValue, posInitLoadingBar, posMaxInitLoadingBar));
                 // ((posInitLoadingBar - posMaxInitLoadingBar) * (1 - 0.33f) / 2) + posInitLoadingBar
             }
         }
