@@ -383,9 +383,10 @@ public class DragAndDrop : MonoBehaviour
         else if (GameManager.Instance.ObjectHover.tag == "Simon")
         {
             GameManager.Instance.ObjectHover.GetComponent<Animator>().SetBool("IsClicked", true);
-            if (GetComponent<Simon>().infiniteGame.Count == 0 && GameManager.Instance.ObjectHover.name == "Button_Pause")
+            
+            if (GameManager.Instance.ObjectHover.name == "Button_Pause")
             {
-                GetComponent<Simon>().AddLights();
+                GetComponent<Simon>().BeginTheSimon();
             }
             if (ObjectPut != null)
             {
