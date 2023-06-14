@@ -115,11 +115,16 @@ public class Simon : MonoBehaviour
                         LightLeft.color = new Color(0, 0.2810159f, 1, 1);
                         break;
                 }
+                LightUp.GetComponent<Animator>().enabled = false;
+                LightUp.GetComponent<Animator>().enabled = false;
+                LightUp.GetComponent<Animator>().enabled = false;
                 yield return new WaitForSeconds(0.5f);
                 if (LightID == AllID[AllID.Count - 1])
                 {
 
-
+                    LightUp.GetComponent<Animator>().enabled = true;
+                    LightUp.GetComponent<Animator>().enabled = true;
+                    LightUp.GetComponent<Animator>().enabled = true;
                     LightUp.color = AllLight[0];
                     LightRight.color = AllLight[1];
                     LightLeft.color = AllLight[2];
@@ -158,9 +163,15 @@ public class Simon : MonoBehaviour
                     LightLeft.color = new Color(0, 0.2810159f, 1, 1);
                     break;
             }
+            LightUp.GetComponent<Animator>().enabled = false;
+            LightUp.GetComponent<Animator>().enabled = false;
+            LightUp.GetComponent<Animator>().enabled = false;
             yield return new WaitForSeconds(0.5f);
             if (LightID == AllID[AllID.Count - 1])
             {
+                LightUp.GetComponent<Animator>().enabled = true;
+                LightUp.GetComponent<Animator>().enabled = true;
+                LightUp.GetComponent<Animator>().enabled = true;
                 LightUp.color = AllLight[0];
                 LightRight.color = AllLight[1];
                 LightLeft.color = AllLight[2];
@@ -246,9 +257,15 @@ public class Simon : MonoBehaviour
                 LightLeft.color = new Color(0, 0.2810159f, 1, 1);
                 break;
         }
+        LightUp.GetComponent<Animator>().enabled = false;
+        LightUp.GetComponent<Animator>().enabled = false;
+        LightUp.GetComponent<Animator>().enabled = false;
         yield return new WaitForSeconds(0.5f);
         if (LightID == AllID[AllID.Count - 1])
         {
+            LightUp.GetComponent<Animator>().enabled = true;
+            LightUp.GetComponent<Animator>().enabled = true;
+            LightUp.GetComponent<Animator>().enabled = true;
             LightUp.color = AllLight[0];
             LightRight.color = AllLight[1];
             LightLeft.color = AllLight[2];
@@ -256,5 +273,12 @@ public class Simon : MonoBehaviour
         }
 
 
+    }
+
+    public void BeginTheSimon()
+    {
+        RemoveStringFromList(infiniteGame);
+        RemoveStringFromList(ComparativeGame);
+        AddLights();
     }
 }
