@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public List<Light2D> lightsOnTableau1 = new List<Light2D>();
     public ParticleSystem particlesTableau1;
     public List<Vector2> S2ATPoints;
+    List<GameObject> ObjectToRemoveAfterGauge = new List<GameObject>();
 
     public List<GameObject> ON = new List<GameObject>();
     
@@ -140,17 +141,34 @@ public class GameManager : MonoBehaviour
     public IEnumerator TakeAwayTheGauge(GameObject[] GameObjectToRemove)
     {
         yield return new WaitForSeconds(1);
-        Gauge.SetActive(false);
-        S2AT.SetActive(true);
-        S2ATWithWriting.SetActive(false);
+        S2ATWithWriting.GetComponent<Animator>().enabled = true;
+        S2ATWithWriting.transform.localScale = Vector3.one;
+        S2ATWithWriting.transform.position = new Vector3(0.013f, 1.752f, S2ATWithWriting.transform.position.z);
         GetComponent<DragAndDrop>().MinScale = S2AT.transform.localScale.y;
         foreach (GameObject go in GameObjectToRemove)
         {
-            go.SetActive(false);
+            ObjectToRemoveAfterGauge.Add(go);
+           /* go.SetActive(false);
+            go.transform.parent = Gauge.transform;*/
         }
+    }
+
+    public void RemoveGauge()
+    {
+        Gauge.SetActive(false);
+        foreach(GameObject Objects in ObjectToRemoveAfterGauge)
+        {
+            Objects.SetActive(false);
+        }
+    }
+
+    public void S2ATQuit()
+    {
+        S2AT.SetActive(true);
+        S2ATWithWriting.SetActive(false);
         foreach (Transform child in S2AT.transform.GetChild(0))
         {
-            if(child.gameObject.name == "MaxPos")
+            if (child.gameObject.name == "MaxPos")
             {
                 GetComponent<DragAndDrop>().posMaxInit = child.position.y;
             }
