@@ -110,6 +110,7 @@ public class GameManager : MonoBehaviour
             tableau5.SetActive(true);
         }
         dAD.ObjectPut = null;
+        dAD.draggedObject = null;
     }
     public void TouchCD(int numberOfTouch)
     {
