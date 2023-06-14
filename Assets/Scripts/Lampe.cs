@@ -7,25 +7,35 @@ public class Lampe : MonoBehaviour
     public GameObject lampe;
     public GameObject button;
 
+    public bool pushButton;
+
     private void Update()
     {
-        
+       
+
     }
 
     public void OnMouseDown()
     {
-        Debug.Log("b");
+        
     }
 
 
 
 
 
-    /*public void OnClic()
+    /*public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (Input.GetMouseButtonDown(0) && GameManager.Instance.ObjectHover.tag == "Light")
-        {
+        pushButton = true;
+    }
 
+
+
+    public void OnClic()
+    {
+        if ((pushButton = true) && Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("truc");
         }
     }*/
 }
