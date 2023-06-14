@@ -42,7 +42,6 @@ public class ElevateText : MonoBehaviour
                     child.GetComponent<Rigidbody2D>().gravityScale = 1;
                 }
             }
-            Debug.Log("yes");
         }
     }
 
