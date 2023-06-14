@@ -383,9 +383,10 @@ public class DragAndDrop : MonoBehaviour
         else if (GameManager.Instance.ObjectHover.tag == "Simon")
         {
             GameManager.Instance.ObjectHover.GetComponent<Animator>().SetBool("IsClicked", true);
-            if (GetComponent<Simon>().infiniteGame.Count == 0 && GameManager.Instance.ObjectHover.name == "Button_Pause")
+            
+            if (GameManager.Instance.ObjectHover.name == "Button_Pause")
             {
-                GetComponent<Simon>().AddLights();
+                GetComponent<Simon>().BeginTheSimon();
             }
             if (ObjectPut != null)
             {
@@ -578,7 +579,7 @@ public class DragAndDrop : MonoBehaviour
     }
     float CalculValuePourcentOfSliderPosition(float pourcentageActualPoint, float Min, float Max)
     {
-        return( ((Max - Min) * (1 - pourcentageActualPoint) / 2) + Min);
+        return( ((Max - Min) * (1 - pourcentageActualPoint)) + Min);
     }
 
     void ChangeLoadingBarScale(float valueGive, float maxValue, float minValue)
