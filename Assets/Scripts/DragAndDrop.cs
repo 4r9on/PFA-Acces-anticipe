@@ -572,7 +572,7 @@ public class DragAndDrop : MonoBehaviour
     }
     float CalculValuePourcentOfSliderPosition(float pourcentageActualPoint, float Min, float Max)
     {
-        return( ((Max - Min) * (1 - pourcentageActualPoint) / 2) + Min);
+        return( ((Max - Min) * (1 - pourcentageActualPoint)) + Min);
     }
 
     void ChangeLoadingBarScale(float valueGive, float maxValue, float minValue)
