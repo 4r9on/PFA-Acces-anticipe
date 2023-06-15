@@ -26,6 +26,13 @@ public class GameManager : MonoBehaviour
     public List<Vector2> S2ATPoints;
     List<GameObject> ObjectToRemoveAfterGauge = new List<GameObject>();
 
+    //Tableau 3
+    public List<GameObject> Day = new List<GameObject>();
+    public List<GameObject> Night = new List<GameObject>();
+    public SpriteMask LampMask;
+    public GameObject LeftWallAnimation;
+    public GameObject ButtonInWall;
+
     public List<GameObject> ON = new List<GameObject>();
     
     public Physics2DRaycaster Raycaster2D;
@@ -178,5 +185,44 @@ public class GameManager : MonoBehaviour
                 GetComponent<DragAndDrop>().posInit = S2AT.transform.GetChild(0).position.y;
             }
         }
+    }
+
+    public void NightFall()
+    {
+        foreach(GameObject ObjetcsDay in Day)
+        {
+            ObjetcsDay.SetActive(false);
+        }
+        foreach (GameObject ObjetcsNight in Night)
+        {
+            ObjetcsNight.SetActive(true);
+        }
+        LampMask.enabled = true;
+    }
+
+    public void FallTheHole(GameObject UVCross)
+    {
+        UVCross.SetActive(false);
+        ObjectHover = null;
+        Raycaster2D.eventMask = 503;
+        LeftWallAnimation.GetComponent<Animator>().enabled = true;
+        LeftWallAnimation.transform.GetChild(0).gameObject.SetActive(true);
+    }
+
+    public void breakingTheWall()
+    {
+        foreach(Transform child in LeftWallAnimation.transform.parent)
+        {
+            if(child.gameObject != LeftWallAnimation)
+            {
+                child.gameObject.SetActive(true);
+                child.GetComponent<Animator>().enabled = true;
+            }
+            else
+            {
+                child.gameObject.SetActive(false);
+            }
+        }
+        ButtonInWall.SetActive(false);
     }
 }
