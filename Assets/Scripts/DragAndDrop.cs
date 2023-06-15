@@ -51,6 +51,7 @@ public class DragAndDrop : MonoBehaviour
     public GameObject Night;
     public GameObject NightMain;
 
+    public GameObject DarkSquare;
     public Slider sliderLogo;
     public GameObject Logo;
     public int TableauActual;
@@ -62,6 +63,8 @@ public class DragAndDrop : MonoBehaviour
     public GameObject Woll1;
     public GameObject Woll2;
 
+    public GameObject tableau5;
+    public GameObject door;
 
     private void Awake()
     {
@@ -186,9 +189,6 @@ public class DragAndDrop : MonoBehaviour
             }
             //  animator.SetBool("Play", true);
             //animatorLogo.SetBool("Logo", true);
-            Debug.Log("aaaaaa");
-
-
         }
         if (draggedObject != null)
         {
@@ -215,7 +215,9 @@ public class DragAndDrop : MonoBehaviour
                     TableauActual = 2;
                     GameManager.Instance.LoadNextLevel();
                 }
-
+                var OppacityView = DarkSquare.GetComponent<SpriteRenderer>().color;
+                OppacityView.a = 1 - pourcentageActualPoint;
+                DarkSquare.GetComponent<SpriteRenderer>().color = OppacityView;
                 draggedObject.transform.localScale = new Vector2(draggedObject.transform.localScale.x, scaleValue * (1 - pourcentageActualPoint) + MinScale);
                 draggedObject.transform.position = new Vector2(draggedObject.transform.position.x, ((posMaxInit - posInit) * (1 - pourcentageActualPoint) / 2) + posInit);
                 //3.862632 min
@@ -460,6 +462,11 @@ public class DragAndDrop : MonoBehaviour
             GameManager.Instance.FallTheHole(GameManager.Instance.ObjectHover);
         }
 
+        else if(GameManager.Instance.ObjectHover.tag == "Door")
+        {
+            tableau5.SetActive(true);
+            door.SetActive(false);
+        }
 
     }
     public void StopClick()
