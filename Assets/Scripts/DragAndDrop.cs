@@ -62,6 +62,8 @@ public class DragAndDrop : MonoBehaviour
     public GameObject Woll1;
     public GameObject Woll2;
 
+    public GameObject tableau5;
+    public GameObject door;
 
     private void Awake()
     {
@@ -460,6 +462,11 @@ public class DragAndDrop : MonoBehaviour
             }
         }
 
+        else if(GameManager.Instance.ObjectHover.tag == "Door")
+        {
+            tableau5.SetActive(true);
+            door.SetActive(false);
+        }
 
     }
     public void StopClick()
