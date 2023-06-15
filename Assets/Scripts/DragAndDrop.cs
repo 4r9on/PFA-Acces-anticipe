@@ -457,7 +457,7 @@ public class DragAndDrop : MonoBehaviour
 
         else if (GameManager.Instance.ObjectHover.tag == "UV")
         {
-            GameManager.Instance.FallTheHole();
+            GameManager.Instance.FallTheHole(GameManager.Instance.ObjectHover);
         }
 
 

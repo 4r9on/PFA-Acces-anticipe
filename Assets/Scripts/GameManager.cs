@@ -200,8 +200,11 @@ public class GameManager : MonoBehaviour
         LampMask.enabled = true;
     }
 
-    public void FallTheHole()
+    public void FallTheHole(GameObject UVCross)
     {
+        UVCross.SetActive(false);
+        ObjectHover = null;
+        Raycaster2D.eventMask = 503;
         LeftWallAnimation.GetComponent<Animator>().enabled = true;
         LeftWallAnimation.transform.GetChild(0).gameObject.SetActive(true);
     }
