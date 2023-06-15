@@ -416,9 +416,15 @@ public class DragAndDrop : MonoBehaviour
 
         else if (GameManager.Instance.ObjectHover.tag == "ButtonON")
         {
+           /* if (GameManager.Instance.ON = draggedObject)
+            {
+                
+            }*/
+
             foreach (GameObject ObjectON in GameManager.Instance.ON)
             {
-                Destroy(ObjectON.GetComponent<Rigidbody2D>());
+
+                Destroy(ObjectON.GetComponent<Rigidbody2D>());                
             }
             GameManager.Instance.AllText.GetComponent<ElevateText>().RotateIt();
 
