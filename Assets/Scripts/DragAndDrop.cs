@@ -51,6 +51,7 @@ public class DragAndDrop : MonoBehaviour
     public GameObject Night;
     public GameObject NightMain;
 
+    public GameObject DarkSquare;
     public Slider sliderLogo;
     public GameObject Logo;
     public int TableauActual;
@@ -186,9 +187,6 @@ public class DragAndDrop : MonoBehaviour
             }
             //  animator.SetBool("Play", true);
             //animatorLogo.SetBool("Logo", true);
-            Debug.Log("aaaaaa");
-
-
         }
         if (draggedObject != null)
         {
@@ -215,7 +213,9 @@ public class DragAndDrop : MonoBehaviour
                     TableauActual = 2;
                     GameManager.Instance.LoadNextLevel();
                 }
-
+                var OppacityView = DarkSquare.GetComponent<SpriteRenderer>().color;
+                OppacityView.a = 1 - pourcentageActualPoint;
+                DarkSquare.GetComponent<SpriteRenderer>().color = OppacityView;
                 draggedObject.transform.localScale = new Vector2(draggedObject.transform.localScale.x, scaleValue * (1 - pourcentageActualPoint) + MinScale);
                 draggedObject.transform.position = new Vector2(draggedObject.transform.position.x, ((posMaxInit - posInit) * (1 - pourcentageActualPoint) / 2) + posInit);
                 //3.862632 min
