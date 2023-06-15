@@ -30,7 +30,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 3.0166667
+        time: 2.9833333
         value: 1
         inSlope: 0
         outSlope: 0
@@ -66,35 +66,35 @@ AnimationClip:
       value: {fileID: 874454172, guid: d05daee1beef5874188ec0ba8d2b86c9, type: 3}
     - time: 0.5833333
       value: {fileID: 188381886, guid: d05daee1beef5874188ec0ba8d2b86c9, type: 3}
-    - time: 0.6333333
+    - time: 0.6166667
       value: {fileID: -964176889, guid: d05daee1beef5874188ec0ba8d2b86c9, type: 3}
-    - time: 0.68333334
+    - time: 0.65
       value: {fileID: -705451070, guid: d05daee1beef5874188ec0ba8d2b86c9, type: 3}
-    - time: 0.73333335
+    - time: 0.68333334
       value: {fileID: 212161693, guid: d05daee1beef5874188ec0ba8d2b86c9, type: 3}
-    - time: 0.9166667
+    - time: 0.8666667
       value: {fileID: -109481556, guid: d05daee1beef5874188ec0ba8d2b86c9, type: 3}
-    - time: 1.3333334
+    - time: 1.2833333
       value: {fileID: 2107603473, guid: d05daee1beef5874188ec0ba8d2b86c9, type: 3}
-    - time: 1.3833333
+    - time: 1.3333334
       value: {fileID: 1353157459, guid: d05daee1beef5874188ec0ba8d2b86c9, type: 3}
-    - time: 1.4333333
+    - time: 1.3833333
       value: {fileID: 621178357, guid: d05daee1beef5874188ec0ba8d2b86c9, type: 3}
-    - time: 1.4833333
+    - time: 1.4333333
       value: {fileID: 1682759809, guid: d05daee1beef5874188ec0ba8d2b86c9, type: 3}
-    - time: 1.5333333
+    - time: 1.4833333
       value: {fileID: 91574946, guid: d05daee1beef5874188ec0ba8d2b86c9, type: 3}
-    - time: 1.5833334
+    - time: 1.5333333
       value: {fileID: -150075238, guid: d05daee1beef5874188ec0ba8d2b86c9, type: 3}
-    - time: 1.6333333
+    - time: 1.5833334
       value: {fileID: 883188241, guid: d05daee1beef5874188ec0ba8d2b86c9, type: 3}
-    - time: 1.6833333
+    - time: 1.6333333
       value: {fileID: 1310474825, guid: d05daee1beef5874188ec0ba8d2b86c9, type: 3}
-    - time: 1.7333333
+    - time: 1.6833333
       value: {fileID: -795072498, guid: d05daee1beef5874188ec0ba8d2b86c9, type: 3}
-    - time: 1.7833333
+    - time: 1.7333333
       value: {fileID: 1771781679, guid: d05daee1beef5874188ec0ba8d2b86c9, type: 3}
-    - time: 2.2666667
+    - time: 2.2166667
       value: {fileID: 1771781679, guid: d05daee1beef5874188ec0ba8d2b86c9, type: 3}
     - time: 6.95
       value: {fileID: 1771781679, guid: d05daee1beef5874188ec0ba8d2b86c9, type: 3}
@@ -179,7 +179,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 3.0166667
+        time: 2.9833333
         value: 1
         inSlope: 0
         outSlope: 0
