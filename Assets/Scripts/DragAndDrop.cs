@@ -468,6 +468,17 @@ public class DragAndDrop : MonoBehaviour
             door.SetActive(false);
         }
 
+        else if(GameManager.Instance.ObjectHover.tag == "Vis")
+        {
+            animator.SetBool("Visser" , true);
+            Debug.Log("aze");
+        }
+
+        else if(GameManager.Instance.ObjectHover.tag == "ButtonLangue")
+        {
+            GameManager.Instance.Langue();
+        }
+
     }
     public void StopClick()
     {
@@ -499,7 +510,7 @@ public class DragAndDrop : MonoBehaviour
                         float timing = 0;
 
                         GameManager.Instance.TouchCD(nbrOfTimeWeTouch);
-                        switch (nbrOfTimeWeTouch)
+                     /*   switch (nbrOfTimeWeTouch)
                         {
                             case 0:
                                 Debug.Log("touche une fois");
@@ -519,7 +530,7 @@ public class DragAndDrop : MonoBehaviour
                                 cursor.SetActive(true);
                                 cursor.transform.position = new Vector3(GetComponent<Raycast>().HitToStopMouse.point.x, GetComponent<Raycast>().HitToStopMouse.point.y, 0f);
                                 break;
-                        }
+                        }*/
                         //  StartCoroutine(TouchUI(SimonUI, timing));
                     }
                 }
@@ -647,9 +658,4 @@ public class DragAndDrop : MonoBehaviour
              yield return new WaitForSeconds(0.1f);
          }
      }*/
-
-
-
-
-
 }

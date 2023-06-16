@@ -22,6 +22,8 @@ TagManager:
   - Light
   - Button
   - UV
+  - Vis
+  - ButtonLangue
   layers:
   - Default
   - TransparentFX
