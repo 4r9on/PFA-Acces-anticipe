@@ -468,6 +468,17 @@ public class DragAndDrop : MonoBehaviour
             door.SetActive(false);
         }
 
+        else if(GameManager.Instance.ObjectHover.tag == "Vis")
+        {
+            animator.SetBool("Visser" , true);
+            Debug.Log("aze");
+        }
+
+        else if(GameManager.Instance.ObjectHover.tag == "ButtonLangue")
+        {
+            GameManager.Instance.Langue();
+        }
+
     }
     public void StopClick()
     {
@@ -647,9 +658,4 @@ public class DragAndDrop : MonoBehaviour
              yield return new WaitForSeconds(0.1f);
          }
      }*/
-
-
-
-
-
 }

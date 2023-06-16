@@ -46,6 +46,10 @@ public class GameManager : MonoBehaviour
 
     public DragAndDrop dAD;
 
+    public GameObject French;
+    public GameObject English;
+    private int language; 
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -224,5 +228,21 @@ public class GameManager : MonoBehaviour
             }
         }
         ButtonInWall.SetActive(false);
+    }
+
+    public void Langue()
+    {
+        Debug.Log("aaa");
+        if(language == 1)
+        {
+            French.SetActive(true);
+            English.SetActive(false);
+
+        }
+        if (language == 0)
+        {
+            French.SetActive(false);
+            English.SetActive(true);
+        }
     }
 }
