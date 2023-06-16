@@ -515,7 +515,7 @@ public class DragAndDrop : MonoBehaviour
                         float timing = 0;
 
                         GameManager.Instance.TouchCD(nbrOfTimeWeTouch);
-                        switch (nbrOfTimeWeTouch)
+                     /*   switch (nbrOfTimeWeTouch)
                         {
                             case 0:
                                 Debug.Log("touche une fois");
@@ -535,7 +535,7 @@ public class DragAndDrop : MonoBehaviour
                                 cursor.SetActive(true);
                                 cursor.transform.position = new Vector3(GetComponent<Raycast>().HitToStopMouse.point.x, GetComponent<Raycast>().HitToStopMouse.point.y, 0f);
                                 break;
-                        }
+                        }*/
                         //  StartCoroutine(TouchUI(SimonUI, timing));
                     }
                 }

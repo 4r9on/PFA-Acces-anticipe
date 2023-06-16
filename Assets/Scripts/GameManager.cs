@@ -26,6 +26,15 @@ public class GameManager : MonoBehaviour
     public List<Vector2> S2ATPoints;
     List<GameObject> ObjectToRemoveAfterGauge = new List<GameObject>();
 
+
+    //Tableau 2
+    public GameObject CD;
+    public List<GameObject> narratorsAnim = new List<GameObject>();
+    public GameObject lightOnScene2;
+    public GameObject lightBrokenOnScene2;
+    public GameObject Jukebox;
+    public GameObject JukeboxBroken;
+    public GameObject DiskPlayer;
     //Tableau 3
     public List<GameObject> Day = new List<GameObject>();
     public List<GameObject> Night = new List<GameObject>();
@@ -128,18 +137,21 @@ public class GameManager : MonoBehaviour
       //  Narrator.GetComponent<Animator>().SetInteger("nrbOfTouch", numberOfTouch);
         switch (numberOfTouch)
         {
-            case 0:
+            case 1:
                 Debug.Log("touche une fois");
-                
+                narratorsAnim[2].SetActive(true);
                // timing = 0.5f;
                 break;
-            case 1:
-                Debug.Log("touche une seconde fois");
-               // timing = 0.4f;
-                break;
             case 2:
+                Debug.Log("touche une seconde fois");
+                narratorsAnim[3].SetActive(true);
+                // timing = 0.4f;
+                break;
+            case 3:
                 Debug.Log("Detruit l'UI");
-               // timing = 0.3f;
+                narratorsAnim[4].SetActive(true);
+                narratorsAnim[5].SetActive(true);
+                // timing = 0.3f;
                 //nous permet de rendre la souris invisible et non utilisable
                 Cursor.lockState = CursorLockMode.Locked;
 
@@ -244,5 +256,11 @@ public class GameManager : MonoBehaviour
             French.SetActive(false);
             English.SetActive(true);
         }
+    public void DestroyJukebox()
+    {
+        lightOnScene2.SetActive(false);
+        lightBrokenOnScene2.SetActive(true);
+        Jukebox.SetActive(false);
+        JukeboxBroken.SetActive(true);
     }
 }

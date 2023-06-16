@@ -64,6 +64,10 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         else if (collision.gameObject.tag == "Ground" && destroyOnGravity)
         {
             GameObject newObject = Instantiate(objectCreateAfterFalling);
+            if (newObject.GetComponent<ObjectToDrag>().CD)
+            {
+                GameManager.Instance.CD = newObject;
+            }
             newObject.transform.position = gameObject.transform.position;
             newObject.GetComponent<ObjectToDrag>().objectToPutOn = objectToPutOn;
             Destroy(gameObject);
