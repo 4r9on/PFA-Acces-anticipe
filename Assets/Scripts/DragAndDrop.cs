@@ -63,6 +63,8 @@ public class DragAndDrop : MonoBehaviour
     public GameObject Woll1;
     public GameObject Woll2;
 
+    public GameObject tableau5;
+    public GameObject door;
 
     private void Awake()
     {
@@ -460,6 +462,22 @@ public class DragAndDrop : MonoBehaviour
             GameManager.Instance.FallTheHole(GameManager.Instance.ObjectHover);
         }
 
+        else if(GameManager.Instance.ObjectHover.tag == "Door")
+        {
+            tableau5.SetActive(true);
+            door.SetActive(false);
+        }
+
+        else if(GameManager.Instance.ObjectHover.tag == "Vis")
+        {
+            animator.SetBool("Visser" , true);
+            Debug.Log("aze");
+        }
+
+        else if(GameManager.Instance.ObjectHover.tag == "ButtonLangue")
+        {
+            GameManager.Instance.Langue();
+        }
 
     }
     public void StopClick()
@@ -640,9 +658,4 @@ public class DragAndDrop : MonoBehaviour
              yield return new WaitForSeconds(0.1f);
          }
      }*/
-
-
-
-
-
 }
