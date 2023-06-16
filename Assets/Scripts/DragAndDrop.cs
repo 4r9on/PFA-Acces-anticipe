@@ -479,6 +479,11 @@ public class DragAndDrop : MonoBehaviour
             GameManager.Instance.Langue();
         }
 
+        else if(GameManager.Instance.ObjectHover.tag == "ButtonMusic")
+        {
+            Debug.Log("QSD");
+        }
+
     }
     public void StopClick()
     {
