@@ -545,6 +545,7 @@ public class DragAndDrop : MonoBehaviour
                 if (totalSliderValue > 0.75)
                 {
                     draggedObject.transform.position = new Vector2(posInit, draggedObject.transform.position.y);
+                    GameManager.Instance.Gauge.GetComponent<Animator>().enabled = true;
                     GameObject[] gameObjectsToRemove = new GameObject[] { draggedObject, ObjectPut };
                     StartCoroutine(GameManager.Instance.TakeAwayTheGauge(gameObjectsToRemove));
                 }
