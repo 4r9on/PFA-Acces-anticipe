@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEditor;
-using UnityEditor.Animations;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering.Universal;
@@ -73,8 +73,11 @@ public class GameManager : MonoBehaviour
     public GameObject English;
     private int language;
 
-    public List<string>dialogueList;
+    public List<GameObject>dialogueList;
     public int i;
+    public GameObject bocksSpeak;
+
+    public bool truc;
 
     private void Awake()
     {
@@ -89,11 +92,11 @@ public class GameManager : MonoBehaviour
         }
 
     }
+
     void Start()
-    {
-        
+    {        
         if (PlayerPrefs.GetInt("GetCrashed") == 1)
-            {
+        {
             PlayerPrefs.SetInt("GetCrashed", 0);
             dAD.TableauActual = 5;
                 LoadNextLevel();
@@ -180,6 +183,7 @@ public class GameManager : MonoBehaviour
         dAD.draggedObject = null;
         ObjectHover = null;
     }
+
     public void TouchCD(int numberOfTouch)
     {
       //  Narrator.GetComponent<Animator>().SetInteger("nrbOfTouch", numberOfTouch);
@@ -317,3 +321,21 @@ public class GameManager : MonoBehaviour
         }
     }
     }
+    }
+
+    public void Dialogue()
+    {
+        truc = true;
+        if (truc = true)
+        {
+            Debug.Log(i);
+            i++;
+            truc = false;
+            bocksSpeak = dialogueList[i];
+
+            Debug.Log(dialogueList);
+        }
+    }
+
+    
+}

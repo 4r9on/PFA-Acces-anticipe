@@ -33,6 +33,12 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             transform.localPosition = new Vector2(0, 0);
         }
+        if(cog)
+        {
+            MakeTheCogRoll(900);
+            transform.GetChild(0).GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            transform.GetChild(0).position = transform.localPosition;
+        }
         Debug.Log(GameManager.Instance.Raycaster2D.eventMask.value);
     }
 
@@ -151,7 +157,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     void MakeTheCogRoll(float speedOfTheRoll)
     {
-        GetComponent<Rigidbody2D>().angularVelocity = speedOfTheRoll;
+        transform.GetChild(0).GetComponent<Rigidbody2D>().angularVelocity = speedOfTheRoll;
     }
 
     IEnumerator MakeItRoll()
