@@ -21,6 +21,9 @@ TagManager:
   - Sun
   - Light
   - Button
+  - UV
+  - Vis
+  - ButtonLangue
   layers:
   - Default
   - TransparentFX
@@ -31,7 +34,7 @@ TagManager:
   - Cube
   - Object
   - Procesing
-  - 
+  - Lights
   - 
   - 
   - 

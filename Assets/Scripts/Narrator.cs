@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Narrator : MonoBehaviour
 {
-    public GameObject CD;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -19,11 +19,43 @@ public class Narrator : MonoBehaviour
 
     public void ClickedOnCD()
     { 
-        CD.GetComponent<Animator>().SetBool("IsClicked", true);
+        GameManager.Instance.CD.GetComponent<Animator>().SetBool("IsClicked", true);
     }
 
     public void UnClickedOnCD()
     {
-        CD.GetComponent<Animator>().SetBool("IsClicked", false);
+        GameManager.Instance.CD.GetComponent<Animator>().SetBool("IsClicked", false);
+    }
+
+    public void RemoveDiskPlayer()
+    {
+        GameManager.Instance.DiskPlayer.SetActive(false);
+        GameManager.Instance.CD.SetActive(false);
+       // GameManager.Instance.CD.GetComponent<Rigidbody2D>().velocity = new Vector2 (10, 10);
+       // GameManager.Instance.CD.GetComponent<Rigidbody2D>().gravityScale = 1;
+    }
+
+    public void DestroyJukebox()
+    {
+        GameManager.Instance.DestroyJukebox();
+    }
+
+
+    public void EndOfScene2()
+    {
+        for (int i = 0; i < GameManager.Instance.narratorsAnim.Count - 1; i++)
+        {
+            if (GameManager.Instance.narratorsAnim[i] == gameObject)
+            {
+                GameManager.Instance.narratorsAnim[i + 1].SetActive(true);
+                DestroyHands();
+            }
+        }
+
+    }
+
+    public void DestroyHands()
+    {
+        gameObject.SetActive(false);
     }
 }

@@ -20,7 +20,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 5.588, y: -2.453, z: 0}
+        value: {x: 1, y: 2, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -29,18 +29,18 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.083333336
-        value: {x: 4.356, y: -1.46, z: 0}
-        inSlope: {x: -14.627998, y: 13.278, z: 0}
-        outSlope: {x: -14.627998, y: 13.278, z: 0}
+        value: {x: 1.52, y: 1.5, z: 0}
+        inSlope: {x: 8.159999, y: -9.12, z: 0}
+        outSlope: {x: 8.159999, y: -9.12, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.16666667
-        value: {x: 3.15, y: -0.24, z: 0}
-        inSlope: {x: -14.226, y: 2.1839995, z: 0}
-        outSlope: {x: -14.226, y: 2.1839995, z: 0}
+        value: {x: 2.36, y: 0.48, z: 0}
+        inSlope: {x: 0, y: -9.894, z: 0}
+        outSlope: {x: 0, y: -9.894, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
@@ -48,8 +48,8 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.25
         value: {x: 1.985, y: -0.149, z: 0}
-        inSlope: {x: 0, y: 0.94799995, z: 0}
-        outSlope: {x: 0, y: 0.94799995, z: 0}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
@@ -293,7 +293,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 5.588
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -302,18 +302,18 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.083333336
-        value: 4.356
-        inSlope: -14.627998
-        outSlope: -14.627998
+        value: 1.52
+        inSlope: 8.159999
+        outSlope: 8.159999
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.16666667
-        value: 3.15
-        inSlope: -14.226
-        outSlope: -14.226
+        value: 2.36
+        inSlope: 0
+        outSlope: 0
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -438,7 +438,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -2.453
+        value: 2
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -447,18 +447,18 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.083333336
-        value: -1.46
-        inSlope: 13.278
-        outSlope: 13.278
+        value: 1.5
+        inSlope: -9.12
+        outSlope: -9.12
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.16666667
-        value: -0.24
-        inSlope: 2.1839995
-        outSlope: 2.1839995
+        value: 0.48
+        inSlope: -9.894
+        outSlope: -9.894
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -466,8 +466,8 @@ AnimationClip:
       - serializedVersion: 3
         time: 0.25
         value: -0.149
-        inSlope: 0.94799995
-        outSlope: 0.94799995
+        inSlope: 0
+        outSlope: 0
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -840,6 +840,13 @@ AnimationClip:
   m_Events:
   - time: 1.25
     functionName: get_triggers
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.5833334
+    functionName: DestroyHands
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

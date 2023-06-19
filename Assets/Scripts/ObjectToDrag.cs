@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -14,13 +15,14 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public GameObject objectCreateAfterFalling;
     public bool painting;
     public bool CD;
+    public bool Moon;
     public bool child;
     public bool canSlide;
     public bool S2ATSlide;
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -30,6 +32,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             transform.localPosition = new Vector2(0, 0);
         }
+        Debug.Log(GameManager.Instance.Raycaster2D.eventMask.value);
     }
 
     public IEnumerator BecomeDestroyable()
@@ -43,23 +46,28 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             objectToPutOn.SetActive(true);
             objectToPutOn = null;
-            if(objectToPutOn.tag == "sun")
+            foreach (Transform children in transform)
             {
-                //Activer light et animation
+                children.parent = children.parent.parent;
+                Debug.Log(children.parent.parent);
             }
         }
         if (painting && collision.gameObject.tag == "Ground")
         {
-            foreach(Transform children in transform)
-            {
-                children.GetComponent<Rigidbody2D>().gravityScale = 0;
+            
+              /*  children.GetComponent<Rigidbody2D>().gravityScale = 0;
                 children.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            }
+               */
+            
         }
             //Permet de détruire certains objets quand on les laisse tomber
         else if (collision.gameObject.tag == "Ground" && destroyOnGravity)
         {
             GameObject newObject = Instantiate(objectCreateAfterFalling);
+            if (newObject.GetComponent<ObjectToDrag>().CD)
+            {
+                GameManager.Instance.CD = newObject;
+            }
             newObject.transform.position = gameObject.transform.position;
             newObject.GetComponent<ObjectToDrag>().objectToPutOn = objectToPutOn;
             Destroy(gameObject);
@@ -83,10 +91,15 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             child = false;  
             transform.SetParent(transform.parent.transform.parent, true);
         }
+        Debug.Log(GameManager.Instance.LampMask.enabled);
+        if((gameObject.tag == "UV" && GameManager.Instance.LampMask.enabled) || (gameObject.tag != "UV")) 
+        {
+            GameManager.Instance.Raycaster2D.eventMask = 374;
+            GameManager.Instance.GetComponent<DragAndDrop>().OnClicked();
+            //Output the name of the GameObject that is being clicked
+           
+        }
         
-        GameManager.Instance.GetComponent<DragAndDrop>().OnClicked();
-        //Output the name of the GameObject that is being clicked
-        GameManager.Instance.Raycaster2D.eventMask = 118;
        
     }
 
@@ -101,7 +114,8 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
                 GameManager.Instance.GetComponent<DragAndDrop>().StopClick();
             }
         }
-        GameManager.Instance.Raycaster2D.eventMask = int.MaxValue;
+        GameManager.Instance.Raycaster2D.eventMask = 503;
+
         if (gameObject.layer == 6)
         {
             Debug.Log(GameManager.Instance.GetComponent<DragAndDrop>().draggedObject);

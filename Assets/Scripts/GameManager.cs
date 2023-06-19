@@ -26,6 +26,22 @@ public class GameManager : MonoBehaviour
     public List<Vector2> S2ATPoints;
     List<GameObject> ObjectToRemoveAfterGauge = new List<GameObject>();
 
+
+    //Tableau 2
+    public GameObject CD;
+    public List<GameObject> narratorsAnim = new List<GameObject>();
+    public GameObject lightOnScene2;
+    public GameObject lightBrokenOnScene2;
+    public GameObject Jukebox;
+    public GameObject JukeboxBroken;
+    public GameObject DiskPlayer;
+    //Tableau 3
+    public List<GameObject> Day = new List<GameObject>();
+    public List<GameObject> Night = new List<GameObject>();
+    public SpriteMask LampMask;
+    public GameObject LeftWallAnimation;
+    public GameObject ButtonInWall;
+
     public List<GameObject> ON = new List<GameObject>();
     
     public Physics2DRaycaster Raycaster2D;
@@ -38,6 +54,10 @@ public class GameManager : MonoBehaviour
     public GameObject tableau5;
 
     public DragAndDrop dAD;
+
+    public GameObject French;
+    public GameObject English;
+    private int language; 
 
     private void Awake()
     {
@@ -117,18 +137,21 @@ public class GameManager : MonoBehaviour
       //  Narrator.GetComponent<Animator>().SetInteger("nrbOfTouch", numberOfTouch);
         switch (numberOfTouch)
         {
-            case 0:
+            case 1:
                 Debug.Log("touche une fois");
-                
+                narratorsAnim[2].SetActive(true);
                // timing = 0.5f;
                 break;
-            case 1:
-                Debug.Log("touche une seconde fois");
-               // timing = 0.4f;
-                break;
             case 2:
+                Debug.Log("touche une seconde fois");
+                narratorsAnim[3].SetActive(true);
+                // timing = 0.4f;
+                break;
+            case 3:
                 Debug.Log("Detruit l'UI");
-               // timing = 0.3f;
+                narratorsAnim[4].SetActive(true);
+                narratorsAnim[5].SetActive(true);
+                // timing = 0.3f;
                 //nous permet de rendre la souris invisible et non utilisable
                 Cursor.lockState = CursorLockMode.Locked;
 
@@ -178,5 +201,66 @@ public class GameManager : MonoBehaviour
                 GetComponent<DragAndDrop>().posInit = S2AT.transform.GetChild(0).position.y;
             }
         }
+    }
+
+    public void NightFall()
+    {
+        foreach(GameObject ObjetcsDay in Day)
+        {
+            ObjetcsDay.SetActive(false);
+        }
+        foreach (GameObject ObjetcsNight in Night)
+        {
+            ObjetcsNight.SetActive(true);
+        }
+        LampMask.enabled = true;
+    }
+
+    public void FallTheHole(GameObject UVCross)
+    {
+        UVCross.SetActive(false);
+        ObjectHover = null;
+        Raycaster2D.eventMask = 503;
+        LeftWallAnimation.GetComponent<Animator>().enabled = true;
+        LeftWallAnimation.transform.GetChild(0).gameObject.SetActive(true);
+    }
+
+    public void breakingTheWall()
+    {
+        foreach(Transform child in LeftWallAnimation.transform.parent)
+        {
+            if(child.gameObject != LeftWallAnimation)
+            {
+                child.gameObject.SetActive(true);
+                child.GetComponent<Animator>().enabled = true;
+            }
+            else
+            {
+                child.gameObject.SetActive(false);
+            }
+        }
+        ButtonInWall.SetActive(false);
+    }
+
+    public void Langue()
+    {
+        Debug.Log("aaa");
+        if(language == 1)
+        {
+            French.SetActive(true);
+            English.SetActive(false);
+
+        }
+        if (language == 0)
+        {
+            French.SetActive(false);
+            English.SetActive(true);
+        }
+    public void DestroyJukebox()
+    {
+        lightOnScene2.SetActive(false);
+        lightBrokenOnScene2.SetActive(true);
+        Jukebox.SetActive(false);
+        JukeboxBroken.SetActive(true);
     }
 }

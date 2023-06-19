@@ -51,6 +51,7 @@ public class DragAndDrop : MonoBehaviour
     public GameObject Night;
     public GameObject NightMain;
 
+    public GameObject DarkSquare;
     public Slider sliderLogo;
     public GameObject Logo;
     public int TableauActual;
@@ -62,6 +63,8 @@ public class DragAndDrop : MonoBehaviour
     public GameObject Woll1;
     public GameObject Woll2;
 
+    public GameObject tableau5;
+    public GameObject door;
 
     private void Awake()
     {
@@ -82,7 +85,7 @@ public class DragAndDrop : MonoBehaviour
                 oldColor = SimonUI.GetComponent<SpriteRenderer>().color;
             }
         }
-        foreach(Light2D light in GameManager.Instance.lightsOnTableau1)
+        foreach (Light2D light in GameManager.Instance.lightsOnTableau1)
         {
             LightMaxValue.Add(light.intensity);
             light.intensity = 0;
@@ -157,16 +160,16 @@ public class DragAndDrop : MonoBehaviour
                 }
                 ChangeLoadingBarScale(value, 5.3f, -2.65f);
                 float valuepourcent = (value - -2.65f) / (5.3f - -2.65f);
-                
+
                 lastRotation = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w;
 
-                for(int i = 0; i < 3; i++)
+                for (int i = 0; i < 3; i++)
                 {
-                        GameManager.Instance.lightsOnTableau1[i].intensity = LightMaxValue[i] * valuepourcent;
-                        Debug.Log(GameManager.Instance.lightsOnTableau1[i].intensity);
-                    
+                    GameManager.Instance.lightsOnTableau1[i].intensity = LightMaxValue[i] * valuepourcent;
+                    Debug.Log(GameManager.Instance.lightsOnTableau1[i].intensity);
+
                 }
-                
+
                 var emission = GameManager.Instance.particlesTableau1.emission;
                 emission.rateOverTime = 20 * (1 - valuepourcent);
                 Debug.Log(emission.rateOverTime);
@@ -186,9 +189,6 @@ public class DragAndDrop : MonoBehaviour
             }
             //  animator.SetBool("Play", true);
             //animatorLogo.SetBool("Logo", true);
-            Debug.Log("aaaaaa");
-
-
         }
         if (draggedObject != null)
         {
@@ -215,7 +215,9 @@ public class DragAndDrop : MonoBehaviour
                     TableauActual = 2;
                     GameManager.Instance.LoadNextLevel();
                 }
-
+                var OppacityView = DarkSquare.GetComponent<SpriteRenderer>().color;
+                OppacityView.a = 1 - pourcentageActualPoint;
+                DarkSquare.GetComponent<SpriteRenderer>().color = OppacityView;
                 draggedObject.transform.localScale = new Vector2(draggedObject.transform.localScale.x, scaleValue * (1 - pourcentageActualPoint) + MinScale);
                 draggedObject.transform.position = new Vector2(draggedObject.transform.position.x, ((posMaxInit - posInit) * (1 - pourcentageActualPoint) / 2) + posInit);
                 //3.862632 min
@@ -331,7 +333,7 @@ public class DragAndDrop : MonoBehaviour
 
     public void OnClicked()
     {
-        if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer" || GameManager.Instance.ObjectHover.tag == "Slider" || GameManager.Instance.ObjectHover.tag == "Light")
+        if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer" || GameManager.Instance.ObjectHover.tag == "Slider" )
         {
             draggedObject = GameManager.Instance.ObjectHover;
             if (draggedObject.GetComponent<ObjectToDrag>() != null && GameManager.Instance.ObjectHover.tag != "Slider")
@@ -383,7 +385,7 @@ public class DragAndDrop : MonoBehaviour
         else if (GameManager.Instance.ObjectHover.tag == "Simon")
         {
             GameManager.Instance.ObjectHover.GetComponent<Animator>().SetBool("IsClicked", true);
-            
+
             if (GameManager.Instance.ObjectHover.name == "Button_Pause")
             {
                 GetComponent<Simon>().BeginTheSimon();
@@ -416,9 +418,15 @@ public class DragAndDrop : MonoBehaviour
 
         else if (GameManager.Instance.ObjectHover.tag == "ButtonON")
         {
+           /* if (GameManager.Instance.ON = draggedObject)
+            {
+                
+            }*/
+
             foreach (GameObject ObjectON in GameManager.Instance.ON)
             {
-                Destroy(ObjectON.GetComponent<Rigidbody2D>());
+
+                Destroy(ObjectON.GetComponent<Rigidbody2D>());                
             }
             GameManager.Instance.AllText.GetComponent<ElevateText>().RotateIt();
 
@@ -428,9 +436,8 @@ public class DragAndDrop : MonoBehaviour
         {
             flashinglight.SetActive(false);
             flashingHand.SetActive(true);
-
-            Woll1.SetActive(false);
-            Woll2.SetActive(true);
+            GameManager.Instance.ObjectHover = null;
+            GameManager.Instance.Raycaster2D.eventMask = 503;
         }
 
         else if (GameManager.Instance.ObjectHover.tag == "Digi")
@@ -445,15 +452,32 @@ public class DragAndDrop : MonoBehaviour
             }
         }
 
-        else if(GameManager.Instance.ObjectHover.tag == "Button")
+        else if (GameManager.Instance.ObjectHover.tag == "Button")
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Debug.Log("azerty");
-
-            }
+            GameManager.Instance.breakingTheWall();
         }
 
+        else if (GameManager.Instance.ObjectHover.tag == "UV")
+        {
+            GameManager.Instance.FallTheHole(GameManager.Instance.ObjectHover);
+        }
+
+        else if(GameManager.Instance.ObjectHover.tag == "Door")
+        {
+            tableau5.SetActive(true);
+            door.SetActive(false);
+        }
+
+        else if(GameManager.Instance.ObjectHover.tag == "Vis")
+        {
+            animator.SetBool("Visser" , true);
+            Debug.Log("aze");
+        }
+
+        else if(GameManager.Instance.ObjectHover.tag == "ButtonLangue")
+        {
+            GameManager.Instance.Langue();
+        }
 
     }
     public void StopClick()
@@ -475,37 +499,40 @@ public class DragAndDrop : MonoBehaviour
             }
         }
 
-        if (GameManager.Instance.ObjectHover.tag == "Simon" && nbrOfTimeWeTouch > 0)
+        if (GameManager.Instance.ObjectHover != null)
         {
-            foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
+            if (GameManager.Instance.ObjectHover.tag == "Simon" && nbrOfTimeWeTouch > 0)
             {
-                if (SimonUI.GetComponent<ObjectToDrag>().CD && SimonUI == GameManager.Instance.ObjectHover)
+                foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                 {
-                    float timing = 0;
-
-                    GameManager.Instance.TouchCD(nbrOfTimeWeTouch);
-                    switch (nbrOfTimeWeTouch)
+                    if (SimonUI.GetComponent<ObjectToDrag>().CD && SimonUI == GameManager.Instance.ObjectHover)
                     {
-                        case 0:
-                            Debug.Log("touche une fois");
-                            timing = 0.5f;
-                            break;
-                        case 1:
-                            Debug.Log("touche une seconde fois");
-                            timing = 0.4f;
-                            break;
-                        case 2:
-                            Debug.Log("Detruit l'UI");
-                            timing = 0.3f;
-                            //nous permet de rendre la souris invisible et non utilisable
-                            Cursor.lockState = CursorLockMode.Locked;
+                        float timing = 0;
 
-                            //On va utiliser un faux curseur pour empecher le joueur de l'utiliser
-                            cursor.SetActive(true);
-                            cursor.transform.position = new Vector3(GetComponent<Raycast>().HitToStopMouse.point.x, GetComponent<Raycast>().HitToStopMouse.point.y, 0f);
-                            break;
+                        GameManager.Instance.TouchCD(nbrOfTimeWeTouch);
+                     /*   switch (nbrOfTimeWeTouch)
+                        {
+                            case 0:
+                                Debug.Log("touche une fois");
+                                timing = 0.5f;
+                                break;
+                            case 1:
+                                Debug.Log("touche une seconde fois");
+                                timing = 0.4f;
+                                break;
+                            case 2:
+                                Debug.Log("Detruit l'UI");
+                                timing = 0.3f;
+                                //nous permet de rendre la souris invisible et non utilisable
+                                Cursor.lockState = CursorLockMode.Locked;
+
+                                //On va utiliser un faux curseur pour empecher le joueur de l'utiliser
+                                cursor.SetActive(true);
+                                cursor.transform.position = new Vector3(GetComponent<Raycast>().HitToStopMouse.point.x, GetComponent<Raycast>().HitToStopMouse.point.y, 0f);
+                                break;
+                        }*/
+                        //  StartCoroutine(TouchUI(SimonUI, timing));
                     }
-                    //  StartCoroutine(TouchUI(SimonUI, timing));
                 }
             }
         }
@@ -529,6 +556,10 @@ public class DragAndDrop : MonoBehaviour
                         GameManager.Instance.SimonUI.Add(draggedObject);
                         draggedObject.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().enabled = false;
                     }
+                    if (draggedObject.GetComponent<ObjectToDrag>().Moon)
+                    {
+                        GameManager.Instance.NightFall();
+                    }
                     if (draggedObject.GetComponent<ObjectToDrag>().objectToPutOn.tag == "ButtonON")
                     {
                         foreach (GameObject ObjectON in GameManager.Instance.ON)
@@ -538,7 +569,7 @@ public class DragAndDrop : MonoBehaviour
                                 GameManager.Instance.ON.Remove(ObjectON);
                             }
                         }
-                       
+
                     }
                     ObjectPut = draggedObject;
                     StartCoroutine(draggedObject.GetComponent<ObjectToDrag>().BecomeDestroyable());
@@ -575,11 +606,11 @@ public class DragAndDrop : MonoBehaviour
 
     float CalculValuePourcentOfSliderScale(float scaleValue, float pourcentageActualPoint)
     {
-       return (scaleValue * (1 - pourcentageActualPoint) + MinScale);
+        return (scaleValue * (1 - pourcentageActualPoint) + MinScale);
     }
     float CalculValuePourcentOfSliderPosition(float pourcentageActualPoint, float Min, float Max)
     {
-        return( ((Max - Min) * (1 - pourcentageActualPoint)) + Min);
+        return (((Max - Min) * (1 - pourcentageActualPoint)) + Min);
     }
 
     void ChangeLoadingBarScale(float valueGive, float maxValue, float minValue)
@@ -627,9 +658,4 @@ public class DragAndDrop : MonoBehaviour
              yield return new WaitForSeconds(0.1f);
          }
      }*/
-
-
-
-
-
 }
