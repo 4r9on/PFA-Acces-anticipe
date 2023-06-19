@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEditor;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Video;
 
 public class GameManager : MonoBehaviour
 {
@@ -26,6 +28,9 @@ public class GameManager : MonoBehaviour
     public ParticleSystem particlesTableau1;
     public List<Vector2> S2ATPoints;
     List<GameObject> ObjectToRemoveAfterGauge = new List<GameObject>();
+    public VideoPlayer introS2AT;
+    public List<GameObject> ObjectToMakeVisibleOnBeginning = new List<GameObject>();
+    public float pourcentageToMakeObjectVisible;
 
 
     //Tableau 2
@@ -93,19 +98,47 @@ public class GameManager : MonoBehaviour
             dAD.TableauActual = 5;
                 LoadNextLevel();
             }
+        introS2AT.loopPointReached += IntroS2AT_loopPointReached;
         
-       
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (pourcentageToMakeObjectVisible > 0)
+        {
+            foreach (GameObject ObjectInBegin in ObjectToMakeVisibleOnBeginning)
+            {
+                var oppacity = ObjectInBegin.GetComponent<SpriteRenderer>().color;
+                oppacity.a = pourcentageToMakeObjectVisible;
+                ObjectInBegin.GetComponent<SpriteRenderer>().color = oppacity;
+            }
+            dAD.ChangeLoadingBarScale(pourcentageToMakeObjectVisible / 3, 1, 0);
+            for (int i = 0; i < 3; i++)
+            {
+                lightsOnTableau1[i].intensity = dAD.LightMaxValue[i] * pourcentageToMakeObjectVisible / 3;
+            }
+           
+            if(pourcentageToMakeObjectVisible == 1)
+            {
+                GetComponent<Animator>().enabled = false;
+                pourcentageToMakeObjectVisible = 0;
+            }
+        }
+    }
+
+    private void IntroS2AT_loopPointReached(VideoPlayer source)
+    {
+        BeginTheGame();
+        dAD.TableauActual = 1;
+        LoadNextLevel();
+        source.gameObject.SetActive(false);
     }
 
     public void BeginTheGame()
     {
-
+        GetComponent<Animator>().enabled = true;
     }
 
     public void AfterGainSimon()
@@ -123,7 +156,11 @@ public class GameManager : MonoBehaviour
         tableau3.SetActive(false);
         tableau4.SetActive(false);
         tableau5.SetActive(false);
-        if (dAD.TableauActual == 2)
+        if (dAD.TableauActual == 1)
+        {
+            tableau1.SetActive(true);
+        }
+        else if (dAD.TableauActual == 2)
         {
             tableau2.SetActive(true);
         }

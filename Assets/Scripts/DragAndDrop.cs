@@ -40,7 +40,7 @@ public class DragAndDrop : MonoBehaviour
     public float MaxScale;
     public float ScaleInit;
 
-    List<float> LightMaxValue = new List<float>();
+    public List<float> LightMaxValue = new List<float>();
 
     //public AnimatorController clip;
     public float totalSliderValue;
@@ -80,7 +80,7 @@ public class DragAndDrop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ChangeLoadingBarScale(0.33f, 1, 0);
+       // ChangeLoadingBarScale(0.33f, 1, 0);
 
         animator = GetComponent<Animator>();
 
@@ -668,7 +668,7 @@ public class DragAndDrop : MonoBehaviour
         return (((Max - Min) * (1 - pourcentageActualPoint)) + Min);
     }
 
-    void ChangeLoadingBarScale(float valueGive, float maxValue, float minValue)
+    public void ChangeLoadingBarScale(float valueGive, float maxValue, float minValue)
     {
         foreach (Transform child in GameManager.Instance.Gauge.transform)
         {
