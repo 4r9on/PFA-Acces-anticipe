@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering.Universal;
@@ -62,6 +63,9 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject>dialogueList;
     public int i;
+    public GameObject bocksSpeak;
+
+    public bool truc;
 
     private void Awake()
     {
@@ -76,17 +80,15 @@ public class GameManager : MonoBehaviour
         }
 
     }
+
     void Start()
-    {
-        
+    {        
         if (PlayerPrefs.GetInt("GetCrashed") == 1)
-            {
+        {
             PlayerPrefs.SetInt("GetCrashed", 0);
             dAD.TableauActual = 5;
                 LoadNextLevel();
-            }
-        
-       
+        }        
     }
 
     // Update is called once per frame
@@ -136,6 +138,7 @@ public class GameManager : MonoBehaviour
         dAD.ObjectPut = null;
         dAD.draggedObject = null;
     }
+
     public void TouchCD(int numberOfTouch)
     {
       //  Narrator.GetComponent<Animator>().SetInteger("nrbOfTouch", numberOfTouch);
@@ -246,21 +249,6 @@ public class GameManager : MonoBehaviour
         ButtonInWall.SetActive(false);
     }
 
-    public void Langue()
-    {
-        Debug.Log("aaa");
-        if (language == 1)
-        {
-            French.SetActive(true);
-            English.SetActive(false);
-
-        }
-        if (language == 0)
-        {
-            French.SetActive(false);
-            English.SetActive(true);
-        }
-    }
     public void DestroyJukebox()
     {
         lightOnScene2.SetActive(false);
@@ -271,7 +259,16 @@ public class GameManager : MonoBehaviour
 
     public void Dialogue()
     {
-        
+        truc = true;
+        if (truc = true)
+        {
+            Debug.Log(i);
+            i++;
+            truc = false;
+            bocksSpeak = dialogueList[i];
+
+            Debug.Log(dialogueList);
+        }
     }
 
     

@@ -513,10 +513,17 @@ public class DragAndDrop : MonoBehaviour
             settingsWindow.SetActive(false);
         }
 
+        else if (GameManager.Instance.ObjectHover.tag == "SettingsOpen")
+        {
+            settingsWindow.SetActive(true);
+        }
+
         else if(GameManager.Instance.ObjectHover.tag == "Quit")
         {
             //Application.Quit();
         }
+
+
 
     }
     public void StopClick()

@@ -27,6 +27,9 @@ TagManager:
   - ButtonMusic
   - Quit
   - ButtonMusic2
+  - ButtonLangue2
+  - SettingsClose
+  - SettingsOpen
   layers:
   - Default
   - TransparentFX
