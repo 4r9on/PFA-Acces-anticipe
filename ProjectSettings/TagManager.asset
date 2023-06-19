@@ -25,6 +25,8 @@ TagManager:
   - Vis
   - ButtonLangue
   - ButtonMusic
+  - Quit
+  - ButtonMusic2
   layers:
   - Default
   - TransparentFX

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using static System.Net.Mime.MediaTypeNames;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class DragAndDrop : MonoBehaviour
 {
@@ -65,6 +66,10 @@ public class DragAndDrop : MonoBehaviour
 
     public GameObject tableau5;
     public GameObject door;
+
+    public GameObject buttonMusicOption;
+    public GameObject buttonMusicOption2;
+    public int counterMusic;
 
     private void Awake()
     {
@@ -470,8 +475,7 @@ public class DragAndDrop : MonoBehaviour
 
         else if(GameManager.Instance.ObjectHover.tag == "Vis")
         {
-            animator.SetBool("Visser" , true);
-            Debug.Log("aze");
+            animator.SetBool("Visser", true);
         }
 
         else if(GameManager.Instance.ObjectHover.tag == "ButtonLangue")
@@ -480,8 +484,19 @@ public class DragAndDrop : MonoBehaviour
         }
 
         else if(GameManager.Instance.ObjectHover.tag == "ButtonMusic")
+        {           
+            Debug.Log("aze");
+            buttonMusicOption.SetActive(false);
+
+            StartCoroutine(SettingsMusic());
+
+
+        }
+
+
+        else if(GameManager.Instance.ObjectHover.tag == "Quit")
         {
-            Debug.Log("QSD");
+            //Application.Quit();
         }
 
     }
@@ -663,4 +678,12 @@ public class DragAndDrop : MonoBehaviour
              yield return new WaitForSeconds(0.1f);
          }
      }*/
+
+    IEnumerator SettingsMusic()
+    {
+        //dMusicSettings.SetActive(true);
+        yield return new WaitForSeconds(3);
+        buttonMusicOption.SetActive(true);
+        //dMusicSettings.SetActive(false);
+    }
 }
