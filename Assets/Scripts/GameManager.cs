@@ -55,9 +55,13 @@ public class GameManager : MonoBehaviour
 
     public DragAndDrop dAD;
 
+    //Option
     public GameObject French;
     public GameObject English;
     private int language; 
+
+    public List<string>dialogueList;
+    public int i;
 
     private void Awake()
     {
@@ -245,7 +249,7 @@ public class GameManager : MonoBehaviour
     public void Langue()
     {
         Debug.Log("aaa");
-        if(language == 1)
+        if (language == 1)
         {
             French.SetActive(true);
             English.SetActive(false);
@@ -256,6 +260,7 @@ public class GameManager : MonoBehaviour
             French.SetActive(false);
             English.SetActive(true);
         }
+    }
     public void DestroyJukebox()
     {
         lightOnScene2.SetActive(false);
@@ -263,4 +268,11 @@ public class GameManager : MonoBehaviour
         Jukebox.SetActive(false);
         JukeboxBroken.SetActive(true);
     }
+
+    public void Dialogue()
+    {
+        
+    }
+
+    
 }
