@@ -198,6 +198,15 @@ public class DragAndDrop : MonoBehaviour
                         ScaleInit = child.localScale.x;
                     }
                 }
+                Debug.Log("tout fini");
+                foreach(GameObject gaugeComponent in GameManager.Instance.ObjectToMakeVisibleOnBeginning)
+                {
+                    if(gaugeComponent.tag == "Slider")
+                    {
+                        Debug.Log("fine");
+                        gaugeComponent.GetComponent<Animator>().enabled = true;
+                    }
+                }
                 MovingBar = false;
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().canSlide = true;
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles = new Vector3(ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.x, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.y, -90);
