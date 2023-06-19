@@ -67,9 +67,18 @@ public class DragAndDrop : MonoBehaviour
     public GameObject tableau5;
     public GameObject door;
 
+    //Settings
     public GameObject buttonMusicOption;
     public GameObject buttonMusicOption2;
     public int counterMusic;
+    public GameObject dMusicSettings1;
+    public GameObject dMusicSettings2;
+    public GameObject buttonLangue1;
+    public GameObject buttonLangue2;
+    public GameObject dButtonLangue1;
+    public GameObject dButtonLangue2;
+    public GameObject flag;
+    public GameObject settingsWindow;
 
     private void Awake()
     {
@@ -480,19 +489,29 @@ public class DragAndDrop : MonoBehaviour
 
         else if(GameManager.Instance.ObjectHover.tag == "ButtonLangue")
         {
-            GameManager.Instance.Langue();
+            StartCoroutine(SettingsLangue1());
+        }
+
+        else if (GameManager.Instance.ObjectHover.tag == "ButtonLangue2")
+        {
+            StartCoroutine(SettingsLangue2());
         }
 
         else if(GameManager.Instance.ObjectHover.tag == "ButtonMusic")
         {           
             Debug.Log("aze");
-            buttonMusicOption.SetActive(false);
-
             StartCoroutine(SettingsMusic());
-
-
         }
 
+        else if (GameManager.Instance.ObjectHover.tag == "SettingsOpen")
+        {
+            settingsWindow.SetActive(true);
+        }
+
+        else if (GameManager.Instance.ObjectHover.tag == "SettingsClose")
+        {
+            settingsWindow.SetActive(false);
+        }
 
         else if(GameManager.Instance.ObjectHover.tag == "Quit")
         {
@@ -681,9 +700,41 @@ public class DragAndDrop : MonoBehaviour
 
     IEnumerator SettingsMusic()
     {
-        //dMusicSettings.SetActive(true);
+        buttonMusicOption.SetActive(false);
+        dMusicSettings1.SetActive(true);
         yield return new WaitForSeconds(3);
+
+        dMusicSettings1.SetActive(false);
+        dMusicSettings2.SetActive(true);
+        Debug.Log("tyu");
+
+        yield return new WaitForSeconds(3);
+        dMusicSettings2.SetActive(false);
+        Debug.Log("wxc");
+
         buttonMusicOption.SetActive(true);
-        //dMusicSettings.SetActive(false);
+    }
+
+    IEnumerator SettingsLangue1()
+    {
+        buttonLangue1.SetActive(false);
+        flag.SetActive(true);
+        dButtonLangue1.SetActive(true);
+        yield return new WaitForSeconds(3);
+        dButtonLangue1.SetActive(false);
+        dButtonLangue2.SetActive(true);
+        flag.SetActive(false);
+        buttonLangue1.SetActive(true);
+    }
+    IEnumerator SettingsLangue2()
+    {
+        buttonLangue2.SetActive(false);
+        dButtonLangue1.SetActive(true);
+        flag.SetActive(true);
+        yield return new WaitForSeconds(3);
+        dButtonLangue1.SetActive(false);
+        dButtonLangue2.SetActive(true);
+        flag.SetActive(false);
+        buttonLangue2.SetActive(true);
     }
 }

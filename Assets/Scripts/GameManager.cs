@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
     public GameObject English;
     private int language; 
 
-    public List<string>dialogueList;
+    public List<GameObject>dialogueList;
     public int i;
 
     private void Awake()
