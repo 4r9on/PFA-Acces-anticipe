@@ -37,6 +37,7 @@ public class DragAndDrop : MonoBehaviour
     public float posInitTop;
     public float MinScale;
     public float MaxScale;
+    public float ScaleInit;
 
     List<float> LightMaxValue = new List<float>();
 
@@ -90,6 +91,8 @@ public class DragAndDrop : MonoBehaviour
             LightMaxValue.Add(light.intensity);
             light.intensity = 0;
         }
+
+        
         //animatorBar.SetBool("Play", true);
         //animatorLogo.SetBool("Logo", true);
     }
@@ -183,6 +186,13 @@ public class DragAndDrop : MonoBehaviour
                         light.gameObject.GetComponent<Animator>().enabled = true;
                     }
                 }
+                foreach (Transform child in GameManager.Instance.Gauge.transform)
+                {
+                    if (child.name == "Loading_bar")
+                    {
+                        ScaleInit = child.localScale.x;
+                    }
+                }
                 MovingBar = false;
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().canSlide = true;
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles = new Vector3(ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.x, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.y, -90);
@@ -250,10 +260,19 @@ public class DragAndDrop : MonoBehaviour
                 }
                 float maxValue = posInit - posMaxInit;
                 totalSliderValue = 1 - (posInit - draggedObject.transform.position.x) / maxValue;
+                
+                foreach (Transform child in GameManager.Instance.Gauge.transform)
+                {
+                    if (child.name == "Loading_bar")
+                    {
+                        child.localScale = new Vector3(ScaleInit * totalSliderValue, child.localScale.y, child.localScale.z);
+                         child.localPosition = new Vector2(0,  CalculValuePourcentOfSliderPosition(1 - totalSliderValue, posInitLoadingBar, posMaxInitLoadingBar));
+                    }
+                }
+               
+                CalculValuePourcentOfSliderPosition(1-totalSliderValue, posInitLoadingBar, posMaxInitLoadingBar);
 
-
-
-                if (totalSliderValue >= 0.25f)
+                        if (totalSliderValue >= 0.25f)
                 {
                     mySpriteBar.sprite = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * totalSliderValue), tex.height), new Vector2(0.5f / totalSliderValue/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3*/, 0.5f), 100.0f);
 
@@ -397,7 +416,7 @@ public class DragAndDrop : MonoBehaviour
 
                     if (SimonUI.GetComponent<ObjectToDrag>().CD)
                     {
-                        if (SimonUI == GameManager.Instance.ObjectHover)
+                        if (SimonUI == GameManager.Instance.ObjectHover && GameManager.Instance.canTouchCd)
                         {
                             nbrOfTimeWeTouch++;
                         }
@@ -478,6 +497,11 @@ public class DragAndDrop : MonoBehaviour
         {
             GameManager.Instance.Langue();
         }
+        else if (GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().Background)
+        {
+            TableauActual = 4;
+            GameManager.Instance.LoadNextLevel();
+        }
 
     }
     public void StopClick()
@@ -489,12 +513,19 @@ public class DragAndDrop : MonoBehaviour
                 float maxValue = posInit - posMaxInit;
                 totalSliderValue = (posInit - draggedObject.transform.position.x) / maxValue;
 
-                Debug.Log(totalSliderValue);
                 if (totalSliderValue > 0.75)
                 {
                     draggedObject.transform.position = new Vector2(posInit, draggedObject.transform.position.y);
                     GameObject[] gameObjectsToRemove = new GameObject[] { draggedObject, ObjectPut };
                     StartCoroutine(GameManager.Instance.TakeAwayTheGauge(gameObjectsToRemove));
+                }
+                foreach (Transform child in GameManager.Instance.Gauge.transform)
+                {
+                    if (child.name == "Loading_bar")
+                    {
+                        child.localScale = new Vector3(ScaleInit, child.localScale.y, child.localScale.z);
+                        child.localPosition = new Vector2(0, CalculValuePourcentOfSliderPosition(0, posInitLoadingBar, posMaxInitLoadingBar));
+                    }
                 }
             }
         }
@@ -559,6 +590,10 @@ public class DragAndDrop : MonoBehaviour
                     if (draggedObject.GetComponent<ObjectToDrag>().Moon)
                     {
                         GameManager.Instance.NightFall();
+                        if(draggedObject.transform.parent.GetComponent<ObjectToDrag>().painting == true)
+                        {
+                            draggedObject.transform.parent = draggedObject.transform.parent.parent;
+                        }
                     }
                     if (draggedObject.GetComponent<ObjectToDrag>().objectToPutOn.tag == "ButtonON")
                     {
