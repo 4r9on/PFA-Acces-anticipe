@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using UnityEditor;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Video;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +28,9 @@ public class GameManager : MonoBehaviour
     public ParticleSystem particlesTableau1;
     public List<Vector2> S2ATPoints;
     List<GameObject> ObjectToRemoveAfterGauge = new List<GameObject>();
+    public VideoPlayer introS2AT;
+    public List<GameObject> ObjectToMakeVisibleOnBeginning = new List<GameObject>();
+    public float pourcentageToMakeObjectVisible;
 
 
     //Tableau 2
@@ -35,12 +41,19 @@ public class GameManager : MonoBehaviour
     public GameObject Jukebox;
     public GameObject JukeboxBroken;
     public GameObject DiskPlayer;
+    public bool canTouchCd = true;
+
     //Tableau 3
     public List<GameObject> Day = new List<GameObject>();
     public List<GameObject> Night = new List<GameObject>();
     public SpriteMask LampMask;
     public GameObject LeftWallAnimation;
     public GameObject ButtonInWall;
+    public GameObject BackgroundTableau4;
+
+    //Tableau 4
+    public List<GameObject> narratorsAnim4 = new List<GameObject>();
+    public GameObject Hammer;
 
     public List<GameObject> ON = new List<GameObject>();
     
@@ -55,9 +68,13 @@ public class GameManager : MonoBehaviour
 
     public DragAndDrop dAD;
 
+    //Option
     public GameObject French;
     public GameObject English;
-    private int language; 
+    private int language;
+
+    public List<string>dialogueList;
+    public int i;
 
     private void Awake()
     {
@@ -81,29 +98,55 @@ public class GameManager : MonoBehaviour
             dAD.TableauActual = 5;
                 LoadNextLevel();
             }
+        introS2AT.loopPointReached += IntroS2AT_loopPointReached;
         
-       
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (pourcentageToMakeObjectVisible > 0)
+        {
+            foreach (GameObject ObjectInBegin in ObjectToMakeVisibleOnBeginning)
+            {
+                var oppacity = ObjectInBegin.GetComponent<SpriteRenderer>().color;
+                oppacity.a = pourcentageToMakeObjectVisible;
+                ObjectInBegin.GetComponent<SpriteRenderer>().color = oppacity;
+            }
+            dAD.ChangeLoadingBarScale(pourcentageToMakeObjectVisible / 3, 1, 0);
+            for (int i = 0; i < 3; i++)
+            {
+                lightsOnTableau1[i].intensity = dAD.LightMaxValue[i] * pourcentageToMakeObjectVisible / 3;
+            }
+           
+            if(pourcentageToMakeObjectVisible == 1)
+            {
+                GetComponent<Animator>().enabled = false;
+                pourcentageToMakeObjectVisible = 0;
+            }
+        }
+    }
+
+    private void IntroS2AT_loopPointReached(VideoPlayer source)
+    {
+        BeginTheGame();
+        dAD.TableauActual = 1;
+        LoadNextLevel();
+        source.gameObject.SetActive(false);
+    }
+
+    public void BeginTheGame()
+    {
+        GetComponent<Animator>().enabled = true;
     }
 
     public void AfterGainSimon()
     {
         //faire l'anim ou le narrateur va appuyer sur le bouton pause
         //faire tomber le disque
-        foreach(GameObject obj in SimonUI)
-        {
-            if (obj.name == "Button_Pause")
-            {
-                obj.SetActive(false);
-            }
-        }
-        StockCD.GetComponent<Rigidbody2D>().gravityScale = 1.0f;
-        StockCD.tag = "Object";
+        narratorsAnim[1].SetActive(true);
+        
     }
 
     public void LoadNextLevel()
@@ -113,7 +156,11 @@ public class GameManager : MonoBehaviour
         tableau3.SetActive(false);
         tableau4.SetActive(false);
         tableau5.SetActive(false);
-        if (dAD.TableauActual == 2)
+        if (dAD.TableauActual == 1)
+        {
+            tableau1.SetActive(true);
+        }
+        else if (dAD.TableauActual == 2)
         {
             tableau2.SetActive(true);
         }
@@ -131,6 +178,7 @@ public class GameManager : MonoBehaviour
         }
         dAD.ObjectPut = null;
         dAD.draggedObject = null;
+        ObjectHover = null;
     }
     public void TouchCD(int numberOfTouch)
     {
@@ -139,11 +187,13 @@ public class GameManager : MonoBehaviour
         {
             case 1:
                 Debug.Log("touche une fois");
+                canTouchCd = false;
                 narratorsAnim[2].SetActive(true);
                // timing = 0.5f;
                 break;
             case 2:
                 Debug.Log("touche une seconde fois");
+                canTouchCd = false;
                 narratorsAnim[3].SetActive(true);
                 // timing = 0.4f;
                 break;
@@ -167,8 +217,9 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         S2ATWithWriting.GetComponent<Animator>().enabled = true;
         S2ATWithWriting.transform.localScale = Vector3.one;
-        S2ATWithWriting.transform.position = new Vector3(0.013f, 1.752f, S2ATWithWriting.transform.position.z);
+        S2ATWithWriting.transform.localPosition= new Vector3(0.013f, 1.752f, S2ATWithWriting.transform.position.z);
         GetComponent<DragAndDrop>().MinScale = S2AT.transform.localScale.y;
+        GetComponent<DragAndDrop>().MaxScale = 17.62906f;
         foreach (GameObject go in GameObjectToRemove)
         {
             ObjectToRemoveAfterGauge.Add(go);
@@ -240,12 +291,20 @@ public class GameManager : MonoBehaviour
             }
         }
         ButtonInWall.SetActive(false);
+        BackgroundTableau4.SetActive(true);
     }
 
+    public void DestroyJukebox()
+    {
+        lightOnScene2.SetActive(false);
+        lightBrokenOnScene2.SetActive(true);
+        Jukebox.SetActive(false);
+        JukeboxBroken.SetActive(true);
+    }
     public void Langue()
     {
         Debug.Log("aaa");
-        if(language == 1)
+        if (language == 1)
         {
             French.SetActive(true);
             English.SetActive(false);
@@ -256,11 +315,5 @@ public class GameManager : MonoBehaviour
             French.SetActive(false);
             English.SetActive(true);
         }
-    public void DestroyJukebox()
-    {
-        lightOnScene2.SetActive(false);
-        lightBrokenOnScene2.SetActive(true);
-        Jukebox.SetActive(false);
-        JukeboxBroken.SetActive(true);
     }
-}
+    }

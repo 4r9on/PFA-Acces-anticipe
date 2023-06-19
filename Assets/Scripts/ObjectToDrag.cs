@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -14,15 +13,17 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public GameObject objectToPutOn;
     public GameObject objectCreateAfterFalling;
     public bool painting;
+    public bool cog;
     public bool CD;
     public bool Moon;
     public bool child;
     public bool canSlide;
     public bool S2ATSlide;
+    public bool Background;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -54,23 +55,31 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         }
         if (painting && collision.gameObject.tag == "Ground")
         {
-            
-              /*  children.GetComponent<Rigidbody2D>().gravityScale = 0;
-                children.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-               */
-            
+
+            /*  children.GetComponent<Rigidbody2D>().gravityScale = 0;
+              children.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+             */
+
         }
-            //Permet de détruire certains objets quand on les laisse tomber
+        //Permet de détruire certains objets quand on les laisse tomber
         else if (collision.gameObject.tag == "Ground" && destroyOnGravity)
         {
-            GameObject newObject = Instantiate(objectCreateAfterFalling);
-            if (newObject.GetComponent<ObjectToDrag>().CD)
+            if(BornWithoutGravity > 0)
             {
-                GameManager.Instance.CD = newObject;
+                BornWithoutGravity--;
             }
-            newObject.transform.position = gameObject.transform.position;
-            newObject.GetComponent<ObjectToDrag>().objectToPutOn = objectToPutOn;
-            Destroy(gameObject);
+            else
+            {
+                GameObject newObject = Instantiate(objectCreateAfterFalling);
+                if (newObject.GetComponent<ObjectToDrag>().CD)
+                {
+                    GameManager.Instance.CD = newObject;
+                }
+                newObject.transform.position = gameObject.transform.position;
+                newObject.GetComponent<ObjectToDrag>().objectToPutOn = objectToPutOn;
+                Destroy(gameObject);
+            }
+            
         }
     }
 
@@ -86,29 +95,37 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     }
     public void OnPointerDown(PointerEventData pointerEventData)
     {
+        if (cog)
+        {
+            StartCoroutine(MakeItRoll());
+        }
         if (child)
         {
-            child = false;  
+            child = false;
             transform.SetParent(transform.parent.transform.parent, true);
         }
         Debug.Log(GameManager.Instance.LampMask.enabled);
-        if((gameObject.tag == "UV" && GameManager.Instance.LampMask.enabled) || (gameObject.tag != "UV")) 
+        if ((gameObject.tag == "UV" && GameManager.Instance.LampMask.enabled) || (gameObject.tag != "UV"))
         {
             GameManager.Instance.Raycaster2D.eventMask = 374;
             GameManager.Instance.GetComponent<DragAndDrop>().OnClicked();
             //Output the name of the GameObject that is being clicked
-           
+
         }
-        
-       
+
+
     }
 
     public void OnPointerUp(PointerEventData pointerEventData)
     {
+        if (cog)
+        {
+            MakeTheCogRoll(0);
+        }
         if (gameObject.tag == "Simon")
         {
             gameObject.GetComponent<Animator>().SetBool("IsClicked", false);
-            
+
             if (CD)
             {
                 GameManager.Instance.GetComponent<DragAndDrop>().StopClick();
@@ -122,13 +139,40 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             Debug.Log(gameObject);
             GameManager.Instance.ObjectHover = gameObject;
         }
-       
-        else if(GameManager.Instance.GetComponent<DragAndDrop>().draggedObject == gameObject)
+
+        else if (GameManager.Instance.GetComponent<DragAndDrop>().draggedObject == gameObject)
         {
             Debug.Log(gameObject);
             GameManager.Instance.GetComponent<DragAndDrop>().StopClick();
         }
-      
+
+
+    }
+
+    void MakeTheCogRoll(float speedOfTheRoll)
+    {
+        GetComponent<Rigidbody2D>().angularVelocity = speedOfTheRoll;
+    }
+
+    IEnumerator MakeItRoll()
+    {
+        MakeTheCogRoll(30);
+        yield return new WaitForSeconds(0.2f);
+        if (GetComponent<Rigidbody2D>().angularVelocity == 0)
+        {
+            MakeTheCogRoll(70);
+            yield return new WaitForSeconds(0.2f);
+            if (GetComponent<Rigidbody2D>().angularVelocity == 0)
+            {
+                MakeTheCogRoll(150);
+                yield return new WaitForSeconds(0.2f);
+                if (GetComponent<Rigidbody2D>().angularVelocity == 0)
+                {
+                    MakeTheCogRoll(400);
+                    yield return new WaitForSeconds(0.2f);
+                }
+            }
+        }
 
     }
 
