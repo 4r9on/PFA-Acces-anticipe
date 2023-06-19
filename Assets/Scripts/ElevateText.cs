@@ -6,7 +6,6 @@ public class ElevateText : MonoBehaviour
 {
     public GameObject sprite;
     public Transform[] spawnPoints;
-    public List<Loot> lootList = new List<Loot>();
 
     public GameObject object1;
     public GameObject object2;

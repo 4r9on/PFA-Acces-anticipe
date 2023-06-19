@@ -63,9 +63,13 @@ public class GameManager : MonoBehaviour
 
     public DragAndDrop dAD;
 
+    //Option
     public GameObject French;
     public GameObject English;
     private int language;
+
+    public List<string>dialogueList;
+    public int i;
 
     private void Awake()
     {
