@@ -33,6 +33,8 @@ public class Narrator : MonoBehaviour
                 obj.SetActive(false);
             }
         }
+       // GameManager.Instance.StockCD.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = GameManager.Instance.StocksCD[0].GetComponent<SpriteRenderer>().sprite;
+       // GameManager.Instance.StockCD.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingLayerName = "Principal Subject";
         GameManager.Instance.StockCD.GetComponent<Rigidbody2D>().gravityScale = 1.0f;
         GameManager.Instance.StockCD.tag = "Object";
         GameManager.Instance.StockCD.GetComponent<ObjectToDrag>().BornWithoutGravity = 1;
