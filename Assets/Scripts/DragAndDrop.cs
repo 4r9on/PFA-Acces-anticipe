@@ -431,6 +431,7 @@ public class DragAndDrop : MonoBehaviour
             if (GameManager.Instance.ObjectHover.name == "Button_Pause")
             {
                 GetComponent<Simon>().BeginTheSimon();
+                
             }
             if (ObjectPut != null)
             {
@@ -528,6 +529,7 @@ public class DragAndDrop : MonoBehaviour
         {
             TableauActual = 4;
             GameManager.Instance.LoadNextLevel();
+            
         }
 
         else if(GameManager.Instance.ObjectHover.tag == "ButtonMusic")
@@ -758,11 +760,9 @@ public class DragAndDrop : MonoBehaviour
 
         dMusicSettings1.SetActive(false);
         dMusicSettings2.SetActive(true);
-        Debug.Log("tyu");
 
         yield return new WaitForSeconds(3);
         dMusicSettings2.SetActive(false);
-        Debug.Log("wxc");
 
         buttonMusicOption.SetActive(true);
     }
