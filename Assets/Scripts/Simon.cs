@@ -16,6 +16,8 @@ public class Simon : MonoBehaviour
     public Light2D LightLeft;
     public Light2D LightRight;
 
+    public bool IsShowingLight;
+
     int ID;
     public List<int> AllID = new List<int>();
     // Start is called before the first frame update
@@ -56,7 +58,7 @@ public class Simon : MonoBehaviour
 
     public void AddLights()
     {
-        if (infiniteGame.Count == 5)
+        if (infiniteGame.Count == 0)
         {
             RemoveStringFromList(infiniteGame);
             GameManager.Instance.AfterGainSimon();
@@ -83,6 +85,7 @@ public class Simon : MonoBehaviour
     }
     IEnumerator ShowLight()
     {
+        IsShowingLight = true;
         int LightID = ID;
         ID++;
         AllID.Add(LightID);
@@ -90,6 +93,7 @@ public class Simon : MonoBehaviour
         {
             //Permet d'afficher la couleur qu'on va devoir appuyer
             yield return new WaitForSeconds(0.5f);
+           
             foreach (string light in infiniteGame)
             {
                 /*   UIText.text = light;
@@ -135,6 +139,17 @@ public class Simon : MonoBehaviour
               UIText.text = "";*/
         }
         yield return new WaitForSeconds(0.5f);
+        if (LightID == AllID[AllID.Count - 1])
+        {
+
+            LightUp.GetComponent<Animator>().enabled = true;
+            LightUp.GetComponent<Animator>().enabled = true;
+            LightUp.GetComponent<Animator>().enabled = true;
+            LightUp.color = AllLight[0];
+            LightRight.color = AllLight[1];
+            LightLeft.color = AllLight[2];
+            yield return new WaitForSeconds(0.5f);
+        }
         foreach (string light in infiniteGame)
         {
             /*   UIText.text = light;
@@ -167,6 +182,7 @@ public class Simon : MonoBehaviour
             LightUp.GetComponent<Animator>().enabled = false;
             LightUp.GetComponent<Animator>().enabled = false;
             yield return new WaitForSeconds(0.5f);
+            IsShowingLight = false;
             if (LightID == AllID[AllID.Count - 1])
             {
                 LightUp.GetComponent<Animator>().enabled = true;
@@ -178,48 +194,52 @@ public class Simon : MonoBehaviour
                 yield return new WaitForSeconds(0.5f);
             }
         }
+        
     }
     public void AddToComparative(string theNew)
     {
 
         //Indique quel bouton on a appuyer
-        switch (theNew)
+        if (!IsShowingLight)
         {
-            case "Button_Play":
-                GetComponent<Simon>().ComparativeGame.Add("Play");
-                break;
-            case "Button_Credit":
-                GetComponent<Simon>().ComparativeGame.Add("Credits");
-                break;
-            case "Button_Option":
-                GetComponent<Simon>().ComparativeGame.Add("Settings");
-                break;
-        }
-        StartCoroutine(PlayWithLight(theNew));
-        //Permet de comparer le dernier bouton appuyer à la liste de couleur faite au hasard, si le bouton est mauvais alors le jeu es perdu
-        if (ComparativeGame[ComparativeGame.Count - 1] != infiniteGame[ComparativeGame.Count - 1])
-        {
-            UIText.text = "Defeat";
-            RemoveStringFromList(infiniteGame);
-            RemoveStringFromList(ComparativeGame);
-            AddLights();
-        }
-        if (ComparativeGame.Count == infiniteGame.Count)
-        {
-
-            int nbrCorrect = 0;
-            for (int i = 0; i < ComparativeGame.Count; i++)
+            switch (theNew)
+            {
+                case "Button_Play":
+                    GetComponent<Simon>().ComparativeGame.Add("Play");
+                    break;
+                case "Button_Credit":
+                    GetComponent<Simon>().ComparativeGame.Add("Credits");
+                    break;
+                case "Button_Option":
+                    GetComponent<Simon>().ComparativeGame.Add("Settings");
+                    break;
+            }
+            StartCoroutine(PlayWithLight(theNew));
+            //Permet de comparer le dernier bouton appuyer à la liste de couleur faite au hasard, si le bouton est mauvais alors le jeu es perdu
+            if (ComparativeGame[ComparativeGame.Count - 1] != infiniteGame[ComparativeGame.Count - 1])
+            {
+                UIText.text = "Defeat";
+                RemoveStringFromList(infiniteGame);
+                RemoveStringFromList(ComparativeGame);
+                AddLights();
+            }
+            if (ComparativeGame.Count == infiniteGame.Count)
             {
 
-                if (ComparativeGame[i] == infiniteGame[i])
+                int nbrCorrect = 0;
+                for (int i = 0; i < ComparativeGame.Count; i++)
                 {
 
-                    nbrCorrect++;
-
-                    if (nbrCorrect == ComparativeGame.Count)
+                    if (ComparativeGame[i] == infiniteGame[i])
                     {
-                        RemoveStringFromList(ComparativeGame);
-                        AddLights();
+
+                        nbrCorrect++;
+
+                        if (nbrCorrect == ComparativeGame.Count)
+                        {
+                            RemoveStringFromList(ComparativeGame);
+                            AddLights();
+                        }
                     }
                 }
             }
