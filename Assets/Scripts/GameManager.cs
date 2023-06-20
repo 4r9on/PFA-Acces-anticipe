@@ -331,8 +331,12 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log(i);
             i++;
-            truc = false;
+            bocksSpeak.SetActive(true);
             bocksSpeak = dialogueList[i];
+            StartCoroutine(Di());
+            bocksSpeak.SetActive(false);
+            Debug.Log("efface");
+            truc = false;
 
             Debug.Log(dialogueList);
         }
@@ -344,5 +348,11 @@ public class GameManager : MonoBehaviour
     }
 
     
+    IEnumerator Di()
+    {
+        yield return new WaitForSeconds(5);
+        Debug.Log("attendre");
+    }
+
 }
 
