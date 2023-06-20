@@ -1,3 +1,4 @@
+using DG.Tweening.Core.Easing;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -72,18 +73,31 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             if(BornWithoutGravity > 0)
             {
+                if(gameObject == GameManager.Instance.StockCD)
+                {
+                    gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = GameManager.Instance.StocksCD[1].GetComponent<SpriteRenderer>().sprite;
+                }
+                gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
                 BornWithoutGravity--;
             }
             else
             {
                 GameObject newObject = Instantiate(objectCreateAfterFalling);
+                newObject.transform.position = gameObject.transform.position;
+                newObject.GetComponent<ObjectToDrag>().objectToPutOn = objectToPutOn;
                 if (newObject.GetComponent<ObjectToDrag>().CD)
                 {
                     GameManager.Instance.CD = newObject;
+                    gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = GameManager.Instance.StocksCD[2].GetComponent<SpriteRenderer>().sprite;
+                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                    gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+                    Destroy(this);
                 }
-                newObject.transform.position = gameObject.transform.position;
-                newObject.GetComponent<ObjectToDrag>().objectToPutOn = objectToPutOn;
-                Destroy(gameObject);
+                else
+                {
+                    Destroy(gameObject);
+                }
+            
             }
             
         }
@@ -110,7 +124,6 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             child = false;
             transform.SetParent(transform.parent.transform.parent, true);
         }
-        Debug.Log(GameManager.Instance.LampMask.enabled);
         if ((gameObject.tag == "UV" && GameManager.Instance.LampMask.enabled) || (gameObject.tag != "UV"))
         {
             GameManager.Instance.Raycaster2D.eventMask = 374;
