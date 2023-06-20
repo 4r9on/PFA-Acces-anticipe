@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Video;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
@@ -320,8 +321,8 @@ public class GameManager : MonoBehaviour
             English.SetActive(true);
         }
     }
-    }
-    }
+    
+    
 
     public void Dialogue()
     {
@@ -337,5 +338,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void DotWeenShake(GameObject theGameObjectToShake)
+    {
+        DOTween.Shake(() => theGameObjectToShake.transform.position, x => theGameObjectToShake.transform.position = x, 1, 5, 10, 45, false);
+    }
+
     
 }
+

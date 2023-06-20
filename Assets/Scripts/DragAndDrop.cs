@@ -122,7 +122,9 @@ public class DragAndDrop : MonoBehaviour
             {
                 GameManager.Instance.lightsOnTableau1[1].intensity = 0;
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.up = ((Camera.main.ScreenToWorldPoint(Input.mousePosition) - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.position).normalized);
+                ObjectPut.transform.up = ((Camera.main.ScreenToWorldPoint(Input.mousePosition) - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.position).normalized);
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles = new Vector3(0, 0, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.z);
+                ObjectPut.transform.eulerAngles = new Vector3(0, 0, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.z);
 
                 //On va faire augmenter notre jauge ici
                 if (ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w > lastRotation || (lastRotation - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w > 1 && lastRotation > 0))
@@ -183,13 +185,10 @@ public class DragAndDrop : MonoBehaviour
                 for (int i = 0; i < 3; i++)
                 {
                     GameManager.Instance.lightsOnTableau1[i].intensity = LightMaxValue[i] * valuepourcent;
-                    Debug.Log(GameManager.Instance.lightsOnTableau1[i].intensity);
-
                 }
 
                 var emission = GameManager.Instance.particlesTableau1.emission;
                 emission.rateOverTime = 20 * (1 - valuepourcent);
-                Debug.Log(emission.rateOverTime);
             }
             else
             {
@@ -207,25 +206,21 @@ public class DragAndDrop : MonoBehaviour
                         ScaleInit = child.localScale.x;
                     }
                 }
-                Debug.Log("tout fini");
                 foreach(GameObject gaugeComponent in GameManager.Instance.ObjectToMakeVisibleOnBeginning)
                 {
                     if(gaugeComponent.tag == "Slider")
                     {
-                        Debug.Log("fine");
                         gaugeComponent.GetComponent<Animator>().enabled = true;
                     }
                 }
                 MovingBar = false;
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().canSlide = true;
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles = new Vector3(ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.x, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.y, -90);
+                ObjectPut.transform.eulerAngles = new Vector3(ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.x, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.y, -90);
             }
-            //  animator.SetBool("Play", true);
-            //animatorLogo.SetBool("Logo", true);
         }
         if (draggedObject != null)
         {
-            Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition).y < GameManager.Instance.S2ATPoints[0].y);
             if (draggedObject.tag == "Slider" && draggedObject.GetComponent<ObjectToDrag>().S2ATSlide)
             {
                 float valueMaxPoint = 0;
@@ -239,12 +234,10 @@ public class DragAndDrop : MonoBehaviour
                 else if (Camera.main.ScreenToWorldPoint(Input.mousePosition).y < GameManager.Instance.S2ATPoints[1].y)
                 {
                     pourcentageActualPoint = 1;
-                    Debug.Log("pourcentage1");
                 }
                 else if (Camera.main.ScreenToWorldPoint(Input.mousePosition).y > GameManager.Instance.S2ATPoints[0].y)
                 {
                     pourcentageActualPoint = 0;
-                    Debug.Log("pourcentage0");
                     TableauActual = 2;
                     GameManager.Instance.LoadNextLevel();
                 }
@@ -572,7 +565,10 @@ public class DragAndDrop : MonoBehaviour
                 {
                     draggedObject.transform.position = new Vector2(posInit, draggedObject.transform.position.y);
                     GameManager.Instance.Gauge.GetComponent<Animator>().enabled = true;
-                    GameObject[] gameObjectsToRemove = new GameObject[] { draggedObject, ObjectPut };
+                    ObjectPut.GetComponent<Animator>().enabled = true;
+                    ObjectPut.transform.parent = ObjectPut.transform.parent.parent.parent;
+                    ObjectPut = null;
+                    GameObject[] gameObjectsToRemove = new GameObject[] { draggedObject };
                     StartCoroutine(GameManager.Instance.TakeAwayTheGauge(gameObjectsToRemove));
                 }
                 foreach (Transform child in GameManager.Instance.Gauge.transform)
