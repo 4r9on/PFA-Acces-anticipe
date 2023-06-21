@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     //Tableau 2
     public GameObject CD;
     public List<GameObject> narratorsAnim = new List<GameObject>();
+    public List<GameObject> StocksCD = new List<GameObject>();
     public GameObject lightOnScene2;
     public GameObject lightBrokenOnScene2;
     public GameObject Jukebox;
@@ -45,8 +46,9 @@ public class GameManager : MonoBehaviour
     public bool canTouchCd = true;
 
     //Tableau 3
-    public List<GameObject> Day = new List<GameObject>();
-    public List<GameObject> Night = new List<GameObject>();
+    public List<GameObject> DayNight = new List<GameObject>();
+    public GameObject dayLight;
+    public GameObject nightLight;
     public SpriteMask LampMask;
     public GameObject LeftWallAnimation;
     public GameObject ButtonInWall;
@@ -118,10 +120,10 @@ public class GameManager : MonoBehaviour
                 oppacity.a = pourcentageToMakeObjectVisible;
                 ObjectInBegin.GetComponent<SpriteRenderer>().color = oppacity;
             }
-            dAD.ChangeLoadingBarScale(pourcentageToMakeObjectVisible / 3, 1, 0);
+            dAD.ChangeLoadingBarScale(pourcentageToMakeObjectVisible/25, 1, 0);
             for (int i = 0; i < 3; i++)
             {
-                lightsOnTableau1[i].intensity = dAD.LightMaxValue[i] * pourcentageToMakeObjectVisible / 3;
+                lightsOnTableau1[i].intensity = dAD.LightMaxValue[i] * pourcentageToMakeObjectVisible / 25;
             }
            
             if(pourcentageToMakeObjectVisible == 1)
@@ -261,15 +263,13 @@ public class GameManager : MonoBehaviour
 
     public void NightFall()
     {
-        foreach(GameObject ObjetcsDay in Day)
+        foreach (GameObject ObjetcsDay in DayNight)
         {
-            ObjetcsDay.SetActive(false);
+            ObjetcsDay.GetComponent<Animator>().enabled = true;
         }
-        foreach (GameObject ObjetcsNight in Night)
-        {
-            ObjetcsNight.SetActive(true);
-        }
-        LampMask.enabled = true;
+            dayLight.SetActive(false);
+            nightLight.SetActive(true);
+            LampMask.enabled = true;
     }
 
     public void FallTheHole(GameObject UVCross)
@@ -331,8 +331,12 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log(i);
             i++;
-            truc = false;
+            bocksSpeak.SetActive(true);
             bocksSpeak = dialogueList[i];
+            StartCoroutine(Di());
+            bocksSpeak.SetActive(false);
+            Debug.Log("efface");
+            truc = false;
 
             Debug.Log(dialogueList);
         }
@@ -344,5 +348,11 @@ public class GameManager : MonoBehaviour
     }
 
     
+    IEnumerator Di()
+    {
+        yield return new WaitForSeconds(5);
+        Debug.Log("attendre");
+    }
+
 }
 
