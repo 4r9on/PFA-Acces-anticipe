@@ -388,14 +388,26 @@ public class DragAndDrop : MonoBehaviour
     {
         if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer" || GameManager.Instance.ObjectHover.tag == "Slider")
         {
+            
             draggedObject = GameManager.Instance.ObjectHover;
+            if (draggedObject.GetComponent<ObjectToDrag>() != null)
+            {
+                if (draggedObject.GetComponent<Rigidbody2D>().gravityScale > 0)
+                {
+                    draggedObject.GetComponent<ObjectToDrag>().wasGravited = true;
+                    draggedObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+                }
+            }
             if (draggedObject.GetComponent<ObjectToDrag>() != null && GameManager.Instance.ObjectHover.tag != "Slider")
             {
                 //Permet de faire tomber l'UI lorsqu'on aura clicker suffisamment dessus
                 if (draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity > 0)
                 {
                     draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity--;
-                    GameManager.Instance.DotWeenShakeObject(draggedObject, 0.1f, 5);
+                    if (draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity != 0)
+                    {
+                        GameManager.Instance.DotWeenShakeObject(draggedObject, 0.1f, 5);
+                    }
                     if (draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity == 0)
                     {
                         draggedObject.GetComponent<Rigidbody2D>().gravityScale = 1;
@@ -687,9 +699,17 @@ public class DragAndDrop : MonoBehaviour
                     StartCoroutine(draggedObject.GetComponent<ObjectToDrag>().BecomeDestroyable());
                 }
             }
+            if (draggedObject.GetComponent<ObjectToDrag>() != null && draggedObject != ObjectPut)
+            {
+                if (draggedObject.GetComponent<ObjectToDrag>().wasGravited)
+                {
+                    draggedObject.GetComponent<ObjectToDrag>().wasGravited = false;
+                    draggedObject.GetComponent<Rigidbody2D>().gravityScale = 1;
+                }
+            }
             dragged = false;
             draggedObject = null;
-
+            
 
         }
     }

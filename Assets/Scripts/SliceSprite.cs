@@ -41,8 +41,7 @@ public class SliceSprite : MonoBehaviour
             GameManager.Instance.breakableUI.Remove(gameObject);
             if (GameManager.Instance.breakableUI.Count == 0 )
             {
-                PlayerPrefs.SetInt("GetCrashed", 1);
-                GameManager.Instance.GetComponent<LaunchBat>().ExitAppThenRestart();
+               GameManager.Instance.ColliderOfJukeboxBroken.SetActive(true);
             }
             Destroy(gameObject);
         }

@@ -21,6 +21,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public bool canSlide;
     public bool S2ATSlide;
     public bool Background;
+    public bool wasGravited;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +35,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             transform.localPosition = new Vector2(0, 0);
         }
-        if(cog)
+        if(cog && GameManager.Instance.dAD.draggedObject == gameObject)
         {
             MakeTheCogRoll(900);
             transform.GetChild(0).GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -74,7 +75,8 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             if(BornWithoutGravity > 0)
             {
-                GameManager.Instance.DotWeenShakeCamera(0.2f, 5);
+                    GameManager.Instance.DotWeenShakeCamera(0.2f, 5);
+                
                 if (gameObject == GameManager.Instance.StockCD)
                 {
                     gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = GameManager.Instance.StocksCD[1].GetComponent<SpriteRenderer>().sprite;
@@ -84,22 +86,29 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             }
             else
             {
-                GameObject newObject = Instantiate(objectCreateAfterFalling);
-                newObject.transform.position = gameObject.transform.position;
-                newObject.GetComponent<ObjectToDrag>().objectToPutOn = objectToPutOn;
-                if (newObject.GetComponent<ObjectToDrag>().CD)
+                if(objectCreateAfterFalling != null)
                 {
-                    GameManager.Instance.CD = newObject;
-                    gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = GameManager.Instance.StocksCD[2].GetComponent<SpriteRenderer>().sprite;
-                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                    gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
-                    Destroy(this);
+                    GameObject newObject = Instantiate(objectCreateAfterFalling);
+                    newObject.transform.position = gameObject.transform.position;
+                    newObject.GetComponent<ObjectToDrag>().objectToPutOn = objectToPutOn;
+                    if (newObject.GetComponent<ObjectToDrag>().CD)
+                    {
+                        GameManager.Instance.CD = newObject;
+                        gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = GameManager.Instance.StocksCD[2].GetComponent<SpriteRenderer>().sprite;
+                        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                        gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+                        Destroy(this);
+                    }
+                    else
+                    {
+                        Destroy(gameObject);
+                    }
                 }
                 else
                 {
                     Destroy(gameObject);
                 }
-            
+
             }
             
         }
@@ -202,6 +211,12 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public void shakeCameraAnim()
     {
         GameManager.Instance.DotWeenShakeCamera(0.2f, 5);
+    }
+
+    public void DestroyTheCog()
+    {
+        GameManager.Instance.cog3.SetActive(true);
+        Destroy(GameManager.Instance.cog1);
     }
 
 

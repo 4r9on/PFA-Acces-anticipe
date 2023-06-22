@@ -95,6 +95,7 @@ public class Narrator : MonoBehaviour
                
                 if (i == 7)
                 {
+                    GameManager.Instance.cog1.GetComponent<BoxCollider2D>().enabled = false;
                     GameManager.Instance.narratorsAnim[i + 1].SetActive(false);
                     GameManager.Instance.narratorsAnim[i + 1].transform.parent = GameManager.Instance.narratorsAnim[i + 1].transform.parent.parent.parent.parent ;
                     GameManager.Instance.narratorsAnim[i + 1].SetActive(true);
@@ -108,6 +109,11 @@ public class Narrator : MonoBehaviour
         }
     }
 
+    public void crashTheCog()
+    {
+        GameManager.Instance.cog1.GetComponent<Animator>().SetBool("CogWillFall", true);
+    }
+
     public void scene2Disapear()
     {
         GameManager.Instance.cleanScene();
@@ -115,6 +121,7 @@ public class Narrator : MonoBehaviour
         GameManager.Instance.tableau2.SetActive(false);
         GameManager.Instance.dAD.TableauActual = 3;
         GameManager.Instance.changeMusic(GameManager.Instance.dAD.TableauActual);
+
     }
 
     public void scene3Disapear()

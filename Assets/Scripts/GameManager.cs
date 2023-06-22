@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     public VideoPlayer introS2AT;
     public List<GameObject> ObjectToMakeVisibleOnBeginning = new List<GameObject>();
     public float pourcentageToMakeObjectVisible;
+    public GameObject cog1;
 
 
     //Tableau 2
@@ -49,6 +50,7 @@ public class GameManager : MonoBehaviour
     public bool canTouchCd = true;
 
     //Tableau 3
+    public GameObject cog3;
     public List<GameObject> DayNight = new List<GameObject>();
     public GameObject dayLight;
     public GameObject nightLight;
@@ -61,6 +63,10 @@ public class GameManager : MonoBehaviour
     //Tableau 4
     public List<GameObject> narratorsAnim4 = new List<GameObject>();
     public GameObject Hammer;
+    public GameObject JukeboxBroken4;
+    public GameObject ColliderOfJukeboxBroken;
+    public List<GameObject> JukeboxPhase = new List<GameObject>();
+    int JukeBoxHP = 20;
 
     public List<GameObject> ON = new List<GameObject>();
 
@@ -371,5 +377,33 @@ public class GameManager : MonoBehaviour
         camCine.GetComponent<CinemachineVirtualCamera>().enabled = true;
     }
 
+    public void loseHP()
+    {
+        JukeBoxHP--;
+        Debug.Log(JukeBoxHP);
+        int phase = 0;
+        if (JukeBoxHP == 15 || JukeBoxHP == 10 || JukeBoxHP == 5 || JukeBoxHP == 0)
+        {
+            if (JukeBoxHP == 10)
+            {
+                phase = 1;
+            }
+            if (JukeBoxHP == 5)
+            {
+                phase = 2;
+            }
+            if (JukeBoxHP == 0)
+            {
+                PlayerPrefs.SetInt("GetCrashed", 1);
+                GetComponent<LaunchBat>().ExitAppThenRestart();
+            }
+            else
+            {
+                JukeboxBroken4.GetComponent<SpriteRenderer>().sprite = JukeboxPhase[phase].GetComponent<SpriteRenderer>().sprite;
+            }
+
+        }
+
+    }
 }
 
