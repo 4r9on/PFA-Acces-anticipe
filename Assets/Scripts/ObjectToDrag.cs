@@ -64,7 +64,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         if (painting && collision.gameObject.tag == "Ground")
         {
 
-            GameManager.Instance.DotWeenShakeCamera(1, 0.1f, 5);
+            GameManager.Instance.DotWeenShakeCamera(0.2f, 0.1f, 30);
             /*  children.GetComponent<Rigidbody2D>().gravityScale = 0;
               children.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
              */
@@ -75,7 +75,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             if(BornWithoutGravity > 0)
             {
-                    GameManager.Instance.DotWeenShakeCamera(1, 0.2f, 5);
+                    GameManager.Instance.DotWeenShakeCamera(0.2f, 0.1f, 30);
                 
                 if (gameObject == GameManager.Instance.StockCD)
                 {
@@ -211,7 +211,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     public void shakeCameraAnim()
     {
-        GameManager.Instance.DotWeenShakeCamera(1, 0.2f, 5);
+        GameManager.Instance.DotWeenShakeCamera(0.2f, 0.6f, 30);
     }
 
     public void DestroyTheCog()
