@@ -328,26 +328,6 @@ public class GameManager : MonoBehaviour
             English.SetActive(true);
         }
     }
-    
-    
-
-    public void Dialogue()
-    {
-        truc = true;
-        if (truc = true)
-        {
-            Debug.Log(i);
-            i++;
-            bocksSpeak.SetActive(true);
-            bocksSpeak = dialogueList[i];
-            StartCoroutine(Di());
-            Debug.Log("efface");
-            truc = false;
-            bocksSpeak = dialogueList[i];
-
-            Debug.Log(dialogueList);
-        }
-    }
 
     public void DotWeenShakeObject(GameObject theGameObjectToShake, float strenght, int vibrato)
     {
@@ -370,7 +350,30 @@ public class GameManager : MonoBehaviour
         camCine.GetComponent<CinemachineVirtualCamera>().enabled = true;
     }
 
+    public void Dialogue()
+    {
+        truc = true;
+        if (truc = true)
+        {
+            Debug.Log(i);
+            i++;
+            bocksSpeak.SetActive(true);
+            bocksSpeak = dialogueList[i];
+            StartCoroutine(Di());
+            Debug.Log("efface");
+            truc = false;
 
+            Debug.Log(dialogueList);
+        }
+    }
+
+    IEnumerator Di()
+    {
+        yield return new WaitForSeconds(5);
+        bocksSpeak.SetActive(false);
+
+        Debug.Log("attendre");
+    }
 
 }
 
