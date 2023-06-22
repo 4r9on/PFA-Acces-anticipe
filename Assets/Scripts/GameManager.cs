@@ -403,6 +403,30 @@ public class GameManager : MonoBehaviour
             }
 
         }
+    public void Dialogue()
+    {
+        truc = true;
+        if (truc = true)
+        {
+            Debug.Log(i);
+            i++;
+            bocksSpeak.SetActive(true);
+            bocksSpeak = dialogueList[i];
+            StartCoroutine(Di());
+            Debug.Log("efface");
+            truc = false;
+
+            Debug.Log(dialogueList);
+        }
+    }
+
+    IEnumerator Di()
+    {
+        yield return new WaitForSeconds(5);
+        bocksSpeak.SetActive(false);
+
+        Debug.Log("attendre");
+    }
 
     }
 }
