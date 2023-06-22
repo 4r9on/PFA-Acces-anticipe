@@ -49,6 +49,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         yield return new WaitForSeconds(1f);
         destroyOnGravity = true;
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (painting)
