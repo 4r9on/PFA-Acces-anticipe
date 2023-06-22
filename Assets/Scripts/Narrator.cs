@@ -26,7 +26,7 @@ public class Narrator : MonoBehaviour
 
     public void HitPauseButton()
     {
-        GameManager.Instance.DotWeenShakeCamera(1, 0.5f, 5);
+        GameManager.Instance.DotWeenShakeCamera(0.2f, 1f, 40);
         GameManager.Instance.narratorsAnim[9].SetActive(true);
         foreach (GameObject obj in GameManager.Instance.SimonUI)
         {
