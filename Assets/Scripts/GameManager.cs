@@ -89,8 +89,9 @@ public class GameManager : MonoBehaviour
     public List<GameObject> dialogueList;
     public int i;
     public GameObject bocksSpeak;
-
     public bool truc;
+
+    public GameObject diReturnGame;
 
     private void Awake()
     {
@@ -114,6 +115,7 @@ public class GameManager : MonoBehaviour
             dAD.TableauActual = 5;
             LoadNextLevel();
             introS2AT.gameObject.SetActive(false);
+            diReturnGame.SetActive(true);
         }
         introS2AT.loopPointReached += IntroS2AT_loopPointReached;
     }
@@ -344,22 +346,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-
-    public void Dialogue()
-    {
-        truc = true;
-        if (truc = true)
-        {
-            Debug.Log(i);
-            i++;
-            truc = false;
-            bocksSpeak = dialogueList[i];
-
-            Debug.Log(dialogueList);
-        }
-    }
-
     public void DotWeenShakeObject(GameObject theGameObjectToShake, float time, float strenght, int vibrato)
     {
         DOTween.Shake(() => theGameObjectToShake.transform.position, x => theGameObjectToShake.transform.position = x, time, strenght, vibrato, 45, false);
@@ -403,7 +389,33 @@ public class GameManager : MonoBehaviour
             }
 
         }
-
     }
+
+    public void Dialogue()
+    {
+        truc = true;
+        if (truc = true)
+        {
+            Debug.Log(i);
+            i++;
+            bocksSpeak.SetActive(true);
+            bocksSpeak = dialogueList[i];
+            StartCoroutine(Di());
+            Debug.Log("efface");
+            truc = false;
+
+            Debug.Log(dialogueList);
+        }
+    }
+
+    IEnumerator Di()
+    {
+        yield return new WaitForSeconds(5);
+        bocksSpeak.SetActive(false);
+
+        Debug.Log("attendre");
+    }
+
+    
 }
 
