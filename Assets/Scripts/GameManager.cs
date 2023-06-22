@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
     public GameObject English;
     private int language;
 
-    public List<GameObject>dialogueList;
+    public List<GameObject> dialogueList;
     public int i;
     public GameObject bocksSpeak;
 
@@ -334,7 +334,6 @@ public class GameManager : MonoBehaviour
             bocksSpeak.SetActive(true);
             bocksSpeak = dialogueList[i];
             StartCoroutine(Di());
-            bocksSpeak.SetActive(false);
             Debug.Log("efface");
             truc = false;
 
@@ -351,8 +350,12 @@ public class GameManager : MonoBehaviour
     IEnumerator Di()
     {
         yield return new WaitForSeconds(5);
+        bocksSpeak.SetActive(false);
+
         Debug.Log("attendre");
     }
+
+
 
 }
 
