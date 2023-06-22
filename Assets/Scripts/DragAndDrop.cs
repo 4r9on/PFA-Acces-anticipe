@@ -819,6 +819,7 @@ public class DragAndDrop : MonoBehaviour
         flag.SetActive(false);
         buttonLangue1.SetActive(true);
     }
+
     IEnumerator SettingsLangue2()
     {
         buttonLangue2.SetActive(false);

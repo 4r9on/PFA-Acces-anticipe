@@ -170,6 +170,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             GameManager.Instance.Dialogue();
             Debug.Log("parle");
             GameManager.Instance.ObjectHover = gameObject;
+
         }
 
         else if (GameManager.Instance.GetComponent<DragAndDrop>().draggedObject == gameObject)
