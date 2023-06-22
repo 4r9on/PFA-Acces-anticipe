@@ -37,7 +37,7 @@ public class SliceSprite : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground")
         {
-            GameManager.Instance.DotWeenShakeCamera(0.1f, 5);
+            GameManager.Instance.DotWeenShakeCamera(1, 0.1f, 5);
             GameManager.Instance.breakableUI.Remove(gameObject);
             if (GameManager.Instance.breakableUI.Count == 0 )
             {
@@ -49,7 +49,7 @@ public class SliceSprite : MonoBehaviour
         //Plus tard on changera le curseur par un objet que notre curseur va recuperer comme un marteau
         if (collision.gameObject.tag == "Hammer" && canBreakIt)
         {
-            GameManager.Instance.DotWeenShakeCamera(0.1f, 5);
+            GameManager.Instance.DotWeenShakeCamera(1, 0.1f, 5);
             //Le but ici est de trouver a quel endroit est-ce qu'on a touche l'UI 
             SpriteRenderer thisSprite = GetComponent<SpriteRenderer>();
             if (Mathf.Abs(collision.GetContact(0).normal.x) < Mathf.Abs(collision.GetContact(0).normal.y))
