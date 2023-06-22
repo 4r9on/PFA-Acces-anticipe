@@ -207,7 +207,7 @@ public class DragAndDrop : MonoBehaviour
             }
             else
             {
-                GameManager.Instance.DotWeenShakeObject(GameManager.Instance.Gauge, 0.1f, 5);
+                GameManager.Instance.DotWeenShakeObject(GameManager.Instance.Gauge, 1,  0.1f, 5);
                 foreach (Light2D light in GameManager.Instance.lightsOnTableau1)
                 {
                     if (light.gameObject.GetComponent<Animator>())
@@ -406,7 +406,7 @@ public class DragAndDrop : MonoBehaviour
                     draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity--;
                     if (draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity != 0)
                     {
-                        GameManager.Instance.DotWeenShakeObject(draggedObject, 0.1f, 5);
+                        GameManager.Instance.DotWeenShakeObject(draggedObject, 1, 0.1f, 5);
                     }
                     if (draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity == 0)
                     {
@@ -648,7 +648,7 @@ public class DragAndDrop : MonoBehaviour
                 {
                     if (draggedObject.GetComponent<ObjectToDrag>().objectToPutOn == GameManager.Instance.Gauge)
                     {
-                        GameManager.Instance.DotWeenShakeObject(GameManager.Instance.Gauge, 0.1f, 5);
+                        GameManager.Instance.DotWeenShakeObject(GameManager.Instance.Gauge, 1, 0.1f, 5);
                     }
                     if (draggedObject.GetComponent<ObjectToDrag>().Moon)
                     {
@@ -683,7 +683,7 @@ public class DragAndDrop : MonoBehaviour
 
                     if (draggedObject.GetComponent<ObjectToDrag>().objectToPutOn.tag == "ButtonON")
                     {
-                        GameManager.Instance.DotWeenShakeCamera(0.1f, 5);
+                        GameManager.Instance.DotWeenShakeCamera(1, 0.1f, 5);
                         foreach (GameObject ObjectON in GameManager.Instance.ON)
                         {
                             if (ObjectON == draggedObject)

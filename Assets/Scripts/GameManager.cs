@@ -360,14 +360,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void DotWeenShakeObject(GameObject theGameObjectToShake, float strenght, int vibrato)
+    public void DotWeenShakeObject(GameObject theGameObjectToShake, float time, float strenght, int vibrato)
     {
-        DOTween.Shake(() => theGameObjectToShake.transform.position, x => theGameObjectToShake.transform.position = x, 1, strenght, vibrato, 45, false);
+        DOTween.Shake(() => theGameObjectToShake.transform.position, x => theGameObjectToShake.transform.position = x, time, strenght, vibrato, 45, false);
     }
-    public void DotWeenShakeCamera(float strenght, int vibrato)
+    public void DotWeenShakeCamera(float time, float strenght, int vibrato)
     {
         camCine.GetComponent<CinemachineVirtualCamera>().enabled = false;
-        Camera.main.DOShakePosition(1, strenght, vibrato, fadeOut: false);
+        Camera.main.DOShakePosition(time, strenght, vibrato, fadeOut: false);
         StartCoroutine(enabledTheCamera());
     }
 
