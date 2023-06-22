@@ -45,7 +45,6 @@ public class ElevateText : MonoBehaviour
             }
         }*/
 
-        StartCoroutine(StopCredit());
     }
 
     // Update is called once per frame
@@ -74,19 +73,26 @@ public class ElevateText : MonoBehaviour
     public void RotateIt()
     {
         GetComponent<Rigidbody2D>().angularVelocity = 100;
-
-    }
-
-
-    IEnumerator StopCredit()
-    {
-        yield return new WaitForSeconds(1);
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         foreach (GameObject ONGameObject in GameManager.Instance.ON)
         {
-
             if (ONGameObject.GetComponent<Rigidbody2D>() != null)
             {
+
+                ONGameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            }
+        }
+    }
+
+
+    public void StopCredit()
+    {
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        foreach (GameObject ONGameObject in GameManager.Instance.ON)
+        {
+            if (ONGameObject.GetComponent<Rigidbody2D>() != null)
+            {
+                
                 ONGameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             }
         }

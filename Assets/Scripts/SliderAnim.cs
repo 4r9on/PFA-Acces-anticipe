@@ -8,6 +8,7 @@ public class SliderAnim : MonoBehaviour
 
     public void StopTheAnimator()
     {
+       
         GetComponent<Animator>().enabled = false;
         transform.position = new Vector2 (transform.position.x, -1.83f);
     }
