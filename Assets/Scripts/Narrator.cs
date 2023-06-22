@@ -113,12 +113,16 @@ public class Narrator : MonoBehaviour
         GameManager.Instance.cleanScene();
         GameManager.Instance.BackgroundTableau4.SetActive(true);
         GameManager.Instance.tableau2.SetActive(false);
+        GameManager.Instance.dAD.TableauActual = 3;
+        GameManager.Instance.changeMusic(GameManager.Instance.dAD.TableauActual);
     }
 
     public void scene3Disapear()
     {
         GameManager.Instance.cleanScene();
         GameManager.Instance.tableau3.SetActive(false);
+        GameManager.Instance.dAD.TableauActual = 4;
+        GameManager.Instance.changeMusic(GameManager.Instance.dAD.TableauActual);
     }
 
     public void PutTheHammer()

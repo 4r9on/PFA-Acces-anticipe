@@ -543,7 +543,6 @@ public class DragAndDrop : MonoBehaviour
             GameManager.Instance.ObjectHover.SetActive(false);
             GameManager.Instance.leftWall.SetActive(false);
             GameManager.Instance.tableau3.GetComponent<Animator>().SetBool("PassedTo4", true);
-
             GameManager.Instance.tableau4.SetActive(true);
         }
 

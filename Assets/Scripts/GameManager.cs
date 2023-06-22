@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public GameObject StockCD;
     public GameObject Narrator;
     public GameObject camCine;
+    public List<AudioClip> TableauxMusic = new List<AudioClip>();
 
     //Tableau 1
     public GameObject Gauge;
@@ -62,12 +63,12 @@ public class GameManager : MonoBehaviour
     public GameObject Hammer;
 
     public List<GameObject> ON = new List<GameObject>();
-    
+
     public Physics2DRaycaster Raycaster2D;
     string tableau;
 
     public GameObject tableau1;
-    public GameObject tableau2;  
+    public GameObject tableau2;
     public GameObject tableau3;
     public GameObject tableau4;
     public GameObject tableau5;
@@ -79,7 +80,7 @@ public class GameManager : MonoBehaviour
     public GameObject English;
     private int language;
 
-    public List<GameObject>dialogueList;
+    public List<GameObject> dialogueList;
     public int i;
     public GameObject bocksSpeak;
 
@@ -100,13 +101,14 @@ public class GameManager : MonoBehaviour
     }
 
     void Start()
-    {        
+    {
         if (PlayerPrefs.GetInt("GetCrashed") == 1)
         {
             PlayerPrefs.SetInt("GetCrashed", 0);
             dAD.TableauActual = 5;
-                LoadNextLevel();
-            }
+            LoadNextLevel();
+            introS2AT.gameObject.SetActive(false);
+        }
         introS2AT.loopPointReached += IntroS2AT_loopPointReached;
     }
 
@@ -121,13 +123,13 @@ public class GameManager : MonoBehaviour
                 oppacity.a = pourcentageToMakeObjectVisible;
                 ObjectInBegin.GetComponent<SpriteRenderer>().color = oppacity;
             }
-            dAD.ChangeLoadingBarScale(pourcentageToMakeObjectVisible/25, 1, 0);
+            dAD.ChangeLoadingBarScale(pourcentageToMakeObjectVisible / 25, 1, 0);
             for (int i = 0; i < 3; i++)
             {
                 lightsOnTableau1[i].intensity = dAD.LightMaxValue[i] * pourcentageToMakeObjectVisible / 25;
             }
-           
-            if(pourcentageToMakeObjectVisible == 1)
+
+            if (pourcentageToMakeObjectVisible == 1)
             {
                 GetComponent<Animator>().enabled = false;
                 pourcentageToMakeObjectVisible = 0;
@@ -185,6 +187,13 @@ public class GameManager : MonoBehaviour
             tableau5.SetActive(true);
         }
         cleanScene();
+        changeMusic(dAD.TableauActual);
+    }
+
+    public void changeMusic(int MusicTableau)
+    {
+        GetComponent<AudioSource>().clip = TableauxMusic[MusicTableau - 1];
+        GetComponent<AudioSource>().Play();
     }
 
     public void cleanScene()
@@ -196,14 +205,14 @@ public class GameManager : MonoBehaviour
 
     public void TouchCD(int numberOfTouch)
     {
-      //  Narrator.GetComponent<Animator>().SetInteger("nrbOfTouch", numberOfTouch);
+        //  Narrator.GetComponent<Animator>().SetInteger("nrbOfTouch", numberOfTouch);
         switch (numberOfTouch)
         {
             case 1:
                 Debug.Log("touche une fois");
                 canTouchCd = false;
                 narratorsAnim[3].SetActive(true);
-               // timing = 0.5f;
+                // timing = 0.5f;
                 break;
             case 2:
                 Debug.Log("touche une seconde fois");
@@ -220,8 +229,8 @@ public class GameManager : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
 
                 //On va utiliser un faux curseur pour empecher le joueur de l'utiliser
-              /*  cursor.SetActive(true);
-                cursor.transform.position = new Vector3(GetComponent<Raycast>().HitToStopMouse.point.x, GetComponent<Raycast>().HitToStopMouse.point.y, 0f);*/
+                /*  cursor.SetActive(true);
+                  cursor.transform.position = new Vector3(GetComponent<Raycast>().HitToStopMouse.point.x, GetComponent<Raycast>().HitToStopMouse.point.y, 0f);*/
                 break;
         }
     }
@@ -231,21 +240,21 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         S2ATWithWriting.GetComponent<Animator>().enabled = true;
         S2ATWithWriting.transform.localScale = Vector3.one;
-        S2ATWithWriting.transform.localPosition= new Vector3(0.013f, 1.752f, S2ATWithWriting.transform.position.z);
+        S2ATWithWriting.transform.localPosition = new Vector3(0.013f, 1.752f, S2ATWithWriting.transform.position.z);
         GetComponent<DragAndDrop>().MinScale = S2AT.transform.localScale.y;
         GetComponent<DragAndDrop>().MaxScale = 17.62906f;
         foreach (GameObject go in GameObjectToRemove)
         {
             ObjectToRemoveAfterGauge.Add(go);
-           /* go.SetActive(false);
-            go.transform.parent = Gauge.transform;*/
+            /* go.SetActive(false);
+             go.transform.parent = Gauge.transform;*/
         }
     }
 
     public void RemoveGauge()
     {
         Gauge.SetActive(false);
-        foreach(GameObject Objects in ObjectToRemoveAfterGauge)
+        foreach (GameObject Objects in ObjectToRemoveAfterGauge)
         {
             Objects.SetActive(false);
         }
@@ -274,9 +283,9 @@ public class GameManager : MonoBehaviour
         {
             ObjetcsDay.GetComponent<Animator>().enabled = true;
         }
-            dayLight.SetActive(false);
-            nightLight.SetActive(true);
-            LampMask.enabled = true;
+        dayLight.SetActive(false);
+        nightLight.SetActive(true);
+        LampMask.enabled = true;
     }
 
     public void FallTheHole(GameObject UVCross)
@@ -290,9 +299,9 @@ public class GameManager : MonoBehaviour
 
     public void breakingTheWall()
     {
-        foreach(Transform child in LeftWallAnimation.transform.parent)
+        foreach (Transform child in LeftWallAnimation.transform.parent)
         {
-            if(child.gameObject != LeftWallAnimation)
+            if (child.gameObject != LeftWallAnimation)
             {
                 child.gameObject.SetActive(true);
                 child.GetComponent<Animator>().enabled = true;
@@ -328,8 +337,8 @@ public class GameManager : MonoBehaviour
             English.SetActive(true);
         }
     }
-    
-    
+
+
 
     public void Dialogue()
     {
@@ -352,7 +361,7 @@ public class GameManager : MonoBehaviour
     public void DotWeenShakeCamera(float strenght, int vibrato)
     {
         camCine.GetComponent<CinemachineVirtualCamera>().enabled = false;
-        Camera.main.DOShakePosition(1, strenght,vibrato, fadeOut:false);
+        Camera.main.DOShakePosition(1, strenght, vibrato, fadeOut: false);
         StartCoroutine(enabledTheCamera());
     }
 
