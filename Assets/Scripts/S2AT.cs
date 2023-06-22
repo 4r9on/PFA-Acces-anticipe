@@ -25,4 +25,12 @@ public class S2AT : MonoBehaviour
     {
         GameManager.Instance.S2ATQuit();
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            transform.parent.GetComponent<ElevateText>().StopCredit();
+        }
+    }
 }

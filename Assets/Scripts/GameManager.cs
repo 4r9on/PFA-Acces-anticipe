@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Video;
 using DG.Tweening;
+using Cinemachine;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> breakableUI = new List<GameObject>();
     public GameObject StockCD;
     public GameObject Narrator;
+    public GameObject camCine;
 
     //Tableau 1
     public GameObject Gauge;
@@ -53,6 +55,7 @@ public class GameManager : MonoBehaviour
     public GameObject LeftWallAnimation;
     public GameObject ButtonInWall;
     public GameObject BackgroundTableau4;
+    public GameObject leftWall;
 
     //Tableau 4
     public List<GameObject> narratorsAnim4 = new List<GameObject>();
@@ -105,8 +108,6 @@ public class GameManager : MonoBehaviour
                 LoadNextLevel();
             }
         introS2AT.loopPointReached += IntroS2AT_loopPointReached;
-        
-
     }
 
     // Update is called once per frame
@@ -151,8 +152,9 @@ public class GameManager : MonoBehaviour
     {
         //faire l'anim ou le narrateur va appuyer sur le bouton pause
         //faire tomber le disque
-        narratorsAnim[1].SetActive(true);
-        
+        narratorsAnim[2].SetActive(true);
+        canTouchCd = true;
+        dAD.multipleTouchOnTableau2 = true;
     }
 
     public void LoadNextLevel()
@@ -182,6 +184,11 @@ public class GameManager : MonoBehaviour
         {
             tableau5.SetActive(true);
         }
+        cleanScene();
+    }
+
+    public void cleanScene()
+    {
         dAD.ObjectPut = null;
         dAD.draggedObject = null;
         ObjectHover = null;
@@ -195,13 +202,13 @@ public class GameManager : MonoBehaviour
             case 1:
                 Debug.Log("touche une fois");
                 canTouchCd = false;
-                narratorsAnim[2].SetActive(true);
+                narratorsAnim[3].SetActive(true);
                // timing = 0.5f;
                 break;
             case 2:
                 Debug.Log("touche une seconde fois");
                 canTouchCd = false;
-                narratorsAnim[3].SetActive(true);
+                narratorsAnim[1].SetActive(true);
                 // timing = 0.4f;
                 break;
             case 3:
@@ -336,23 +343,31 @@ public class GameManager : MonoBehaviour
             StartCoroutine(Di());
             Debug.Log("efface");
             truc = false;
+            bocksSpeak = dialogueList[i];
 
             Debug.Log(dialogueList);
         }
     }
 
-    public void DotWeenShake(GameObject theGameObjectToShake)
+    public void DotWeenShakeObject(GameObject theGameObjectToShake, float strenght, int vibrato)
     {
-        DOTween.Shake(() => theGameObjectToShake.transform.position, x => theGameObjectToShake.transform.position = x, 1, 5, 10, 45, false);
+        DOTween.Shake(() => theGameObjectToShake.transform.position, x => theGameObjectToShake.transform.position = x, 1, strenght, vibrato, 45, false);
+    }
+    public void DotWeenShakeCamera(float strenght, int vibrato)
+    {
+        camCine.GetComponent<CinemachineVirtualCamera>().enabled = false;
+        Camera.main.DOShakePosition(1, strenght,vibrato, fadeOut:false);
+        StartCoroutine(enabledTheCamera());
     }
 
-    
-    IEnumerator Di()
+    IEnumerator enabledTheCamera()
     {
         yield return new WaitForSeconds(5);
         bocksSpeak.SetActive(false);
 
         Debug.Log("attendre");
+        yield return new WaitForSeconds(1);
+        camCine.GetComponent<CinemachineVirtualCamera>().enabled = true;
     }
 
 
