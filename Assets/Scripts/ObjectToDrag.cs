@@ -1,3 +1,4 @@
+using DG.Tweening.Core.Easing;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -62,6 +63,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         if (painting && collision.gameObject.tag == "Ground")
         {
 
+            GameManager.Instance.DotWeenShakeCamera(0.1f, 5);
             /*  children.GetComponent<Rigidbody2D>().gravityScale = 0;
               children.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
              */
@@ -72,18 +74,32 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             if(BornWithoutGravity > 0)
             {
+                GameManager.Instance.DotWeenShakeCamera(0.2f, 5);
+                if (gameObject == GameManager.Instance.StockCD)
+                {
+                    gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = GameManager.Instance.StocksCD[1].GetComponent<SpriteRenderer>().sprite;
+                }
+                gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
                 BornWithoutGravity--;
             }
             else
             {
                 GameObject newObject = Instantiate(objectCreateAfterFalling);
+                newObject.transform.position = gameObject.transform.position;
+                newObject.GetComponent<ObjectToDrag>().objectToPutOn = objectToPutOn;
                 if (newObject.GetComponent<ObjectToDrag>().CD)
                 {
                     GameManager.Instance.CD = newObject;
+                    gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = GameManager.Instance.StocksCD[2].GetComponent<SpriteRenderer>().sprite;
+                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                    gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+                    Destroy(this);
                 }
-                newObject.transform.position = gameObject.transform.position;
-                newObject.GetComponent<ObjectToDrag>().objectToPutOn = objectToPutOn;
-                Destroy(gameObject);
+                else
+                {
+                    Destroy(gameObject);
+                }
+            
             }
             
         }
@@ -110,7 +126,6 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             child = false;
             transform.SetParent(transform.parent.transform.parent, true);
         }
-        Debug.Log(GameManager.Instance.LampMask.enabled);
         if ((gameObject.tag == "UV" && GameManager.Instance.LampMask.enabled) || (gameObject.tag != "UV"))
         {
             GameManager.Instance.Raycaster2D.eventMask = 374;
@@ -132,7 +147,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             gameObject.GetComponent<Animator>().SetBool("IsClicked", false);
 
-            if (CD)
+            if (CD || (GameManager.Instance.dAD.multipleTouchOnTableau2 && GameManager.Instance.ObjectHover.name=="Button_Pause"))
             {
                 GameManager.Instance.GetComponent<DragAndDrop>().StopClick();
             }
@@ -143,7 +158,10 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             Debug.Log(GameManager.Instance.GetComponent<DragAndDrop>().draggedObject);
             Debug.Log(gameObject);
+            GameManager.Instance.Dialogue();
+            Debug.Log("parle");
             GameManager.Instance.ObjectHover = gameObject;
+
         }
 
         else if (GameManager.Instance.GetComponent<DragAndDrop>().draggedObject == gameObject)
@@ -180,6 +198,11 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             }
         }
 
+    }
+
+    public void shakeCameraAnim()
+    {
+        GameManager.Instance.DotWeenShakeCamera(0.2f, 5);
     }
 
 

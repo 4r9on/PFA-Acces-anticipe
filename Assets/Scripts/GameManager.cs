@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Video;
 using DG.Tweening;
+using Cinemachine;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> breakableUI = new List<GameObject>();
     public GameObject StockCD;
     public GameObject Narrator;
+    public GameObject camCine;
 
     //Tableau 1
     public GameObject Gauge;
@@ -37,6 +39,7 @@ public class GameManager : MonoBehaviour
     //Tableau 2
     public GameObject CD;
     public List<GameObject> narratorsAnim = new List<GameObject>();
+    public List<GameObject> StocksCD = new List<GameObject>();
     public GameObject lightOnScene2;
     public GameObject lightBrokenOnScene2;
     public GameObject Jukebox;
@@ -45,12 +48,14 @@ public class GameManager : MonoBehaviour
     public bool canTouchCd = true;
 
     //Tableau 3
-    public List<GameObject> Day = new List<GameObject>();
-    public List<GameObject> Night = new List<GameObject>();
+    public List<GameObject> DayNight = new List<GameObject>();
+    public GameObject dayLight;
+    public GameObject nightLight;
     public SpriteMask LampMask;
     public GameObject LeftWallAnimation;
     public GameObject ButtonInWall;
     public GameObject BackgroundTableau4;
+    public GameObject leftWall;
 
     //Tableau 4
     public List<GameObject> narratorsAnim4 = new List<GameObject>();
@@ -74,7 +79,7 @@ public class GameManager : MonoBehaviour
     public GameObject English;
     private int language;
 
-    public List<GameObject>dialogueList;
+    public List<GameObject> dialogueList;
     public int i;
     public GameObject bocksSpeak;
 
@@ -103,8 +108,6 @@ public class GameManager : MonoBehaviour
                 LoadNextLevel();
             }
         introS2AT.loopPointReached += IntroS2AT_loopPointReached;
-        
-
     }
 
     // Update is called once per frame
@@ -118,10 +121,10 @@ public class GameManager : MonoBehaviour
                 oppacity.a = pourcentageToMakeObjectVisible;
                 ObjectInBegin.GetComponent<SpriteRenderer>().color = oppacity;
             }
-            dAD.ChangeLoadingBarScale(pourcentageToMakeObjectVisible / 3, 1, 0);
+            dAD.ChangeLoadingBarScale(pourcentageToMakeObjectVisible/25, 1, 0);
             for (int i = 0; i < 3; i++)
             {
-                lightsOnTableau1[i].intensity = dAD.LightMaxValue[i] * pourcentageToMakeObjectVisible / 3;
+                lightsOnTableau1[i].intensity = dAD.LightMaxValue[i] * pourcentageToMakeObjectVisible / 25;
             }
            
             if(pourcentageToMakeObjectVisible == 1)
@@ -149,8 +152,9 @@ public class GameManager : MonoBehaviour
     {
         //faire l'anim ou le narrateur va appuyer sur le bouton pause
         //faire tomber le disque
-        narratorsAnim[1].SetActive(true);
-        
+        narratorsAnim[2].SetActive(true);
+        canTouchCd = true;
+        dAD.multipleTouchOnTableau2 = true;
     }
 
     public void LoadNextLevel()
@@ -180,6 +184,11 @@ public class GameManager : MonoBehaviour
         {
             tableau5.SetActive(true);
         }
+        cleanScene();
+    }
+
+    public void cleanScene()
+    {
         dAD.ObjectPut = null;
         dAD.draggedObject = null;
         ObjectHover = null;
@@ -193,13 +202,13 @@ public class GameManager : MonoBehaviour
             case 1:
                 Debug.Log("touche une fois");
                 canTouchCd = false;
-                narratorsAnim[2].SetActive(true);
+                narratorsAnim[3].SetActive(true);
                // timing = 0.5f;
                 break;
             case 2:
                 Debug.Log("touche une seconde fois");
                 canTouchCd = false;
-                narratorsAnim[3].SetActive(true);
+                narratorsAnim[1].SetActive(true);
                 // timing = 0.4f;
                 break;
             case 3:
@@ -261,15 +270,13 @@ public class GameManager : MonoBehaviour
 
     public void NightFall()
     {
-        foreach(GameObject ObjetcsDay in Day)
+        foreach (GameObject ObjetcsDay in DayNight)
         {
-            ObjetcsDay.SetActive(false);
+            ObjetcsDay.GetComponent<Animator>().enabled = true;
         }
-        foreach (GameObject ObjetcsNight in Night)
-        {
-            ObjetcsNight.SetActive(true);
-        }
-        LampMask.enabled = true;
+            dayLight.SetActive(false);
+            nightLight.SetActive(true);
+            LampMask.enabled = true;
     }
 
     public void FallTheHole(GameObject UVCross)
@@ -331,6 +338,10 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log(i);
             i++;
+            bocksSpeak.SetActive(true);
+            bocksSpeak = dialogueList[i];
+            StartCoroutine(Di());
+            Debug.Log("efface");
             truc = false;
             bocksSpeak = dialogueList[i];
 
@@ -338,11 +349,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void DotWeenShake(GameObject theGameObjectToShake)
+    public void DotWeenShakeObject(GameObject theGameObjectToShake, float strenght, int vibrato)
     {
-        DOTween.Shake(() => theGameObjectToShake.transform.position, x => theGameObjectToShake.transform.position = x, 1, 5, 10, 45, false);
+        DOTween.Shake(() => theGameObjectToShake.transform.position, x => theGameObjectToShake.transform.position = x, 1, strenght, vibrato, 45, false);
+    }
+    public void DotWeenShakeCamera(float strenght, int vibrato)
+    {
+        camCine.GetComponent<CinemachineVirtualCamera>().enabled = false;
+        Camera.main.DOShakePosition(1, strenght,vibrato, fadeOut:false);
+        StartCoroutine(enabledTheCamera());
     }
 
-    
+    IEnumerator enabledTheCamera()
+    {
+        yield return new WaitForSeconds(5);
+        bocksSpeak.SetActive(false);
+
+        Debug.Log("attendre");
+        yield return new WaitForSeconds(1);
+        camCine.GetComponent<CinemachineVirtualCamera>().enabled = true;
+    }
+
+
+
 }
 

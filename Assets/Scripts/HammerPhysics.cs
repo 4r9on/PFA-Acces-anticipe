@@ -10,7 +10,7 @@ public class HammerPhysics : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DOTween.Shake(() => transform.parent.position, x => transform.parent.position = x, 1, 5, 10, 45, false);
+       
     }
 
     // Update is called once per frame
