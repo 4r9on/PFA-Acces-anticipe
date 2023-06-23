@@ -216,7 +216,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     public void shakeCameraAnim()
     {
-        GameManager.Instance.DotWeenShakeCamera(0.2f, 0.6f, 30);
+        GameManager.Instance.DotWeenShakeCamera(0.1f, 0.6f, 30);
     }
 
     public void DestroyTheCog()
