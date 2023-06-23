@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
     public GameObject camCine;
     public List<AudioClip> TableauxMusic = new List<AudioClip>();
     public GameObject SoundDesign;
+    public GameObject ObjectLoopingSound;
+    public string nameOfLoopingObject;
+    public List<GameObject> LoopingObjects = new List<GameObject>();
 
     //Tableau 1
     public GameObject Gauge;
@@ -128,7 +131,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(pourcentageToMakeObjectVisible > 0)
+        if (pourcentageToMakeObjectVisible > 0)
         {
             if (isTableau2)
             {
@@ -147,11 +150,11 @@ public class GameManager : MonoBehaviour
                         emission.rateOverTime = 20 * pourcentageToMakeObjectVisible;
                         lightsOnTableau1[3].intensity = pourcentageToMakeObjectVisible;
                     }
-                    
+
                     var oppacity = ObjectInBegin.GetComponent<SpriteRenderer>().color;
                     oppacity.a = pourcentageToMakeObjectVisible;
                     ObjectInBegin.GetComponent<SpriteRenderer>().color = oppacity;
-                   
+
                 }
                 if (!stopTheBeginning)
                 {
@@ -161,7 +164,7 @@ public class GameManager : MonoBehaviour
                         lightsOnTableau1[i].intensity = dAD.LightMaxValue[i] * pourcentageToMakeObjectVisible / 25;
                     }
                 }
-                
+
             }
             if (pourcentageToMakeObjectVisible == 1)
             {
@@ -169,7 +172,7 @@ public class GameManager : MonoBehaviour
                 pourcentageToMakeObjectVisible = 0;
             }
         }
-        
+
     }
 
     private void IntroS2AT_loopPointReached(VideoPlayer source)
@@ -223,7 +226,7 @@ public class GameManager : MonoBehaviour
         }
         cleanScene();
 
-        if(dAD.TableauActual != 2)
+        if (dAD.TableauActual != 2)
         {
             changeMusic(dAD.TableauActual);
         }
@@ -233,7 +236,7 @@ public class GameManager : MonoBehaviour
             GetComponent<AudioSource>().Pause();
             GetComponent<Animator>().enabled = true;
         }
-        
+
     }
 
     public void changeMusic(int MusicTableau)
@@ -457,7 +460,7 @@ public class GameManager : MonoBehaviour
 
     public void Dialogue()
     {
-        truc = true;
+        truc = false;
         if (truc == true)
         {
             bocksSpeak.SetActive(true);
@@ -470,8 +473,10 @@ public class GameManager : MonoBehaviour
 
     public void NewSound(GameObject gameObjectWithTheSound)
     {
+        Debug.Log(gameObjectWithTheSound.GetComponent<SoundDesign>().PhaseOfSound);
+        Debug.Log(gameObjectWithTheSound.name);
         GameObject newSoundDesign = Instantiate(SoundDesign);
-        switch (gameObjectWithTheSound.GetComponent<SoundDesign>().PhaseOfSound )
+        switch (gameObjectWithTheSound.GetComponent<SoundDesign>().PhaseOfSound)
         {
             case 1:
                 newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList1[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList1.Count)];
@@ -482,11 +487,59 @@ public class GameManager : MonoBehaviour
             case 3:
                 newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3.Count)];
                 break;
+            case 4:
+                newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList4[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3.Count)];
+                break;
         }
-       
+
         newSoundDesign.GetComponent<AudioSource>().Play();
     }
 
-    
+    public void SoundLoop(GameObject gameObjectWithTheSound, float timing)
+    {
+        GameObject newSoundDesign = Instantiate(ObjectLoopingSound);
+        switch (gameObjectWithTheSound.GetComponent<SoundDesign>().PhaseOfSound)
+        {
+            case 1:
+                newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList1[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList1.Count)];
+                newSoundDesign.GetComponent<SoundDesign>().clipList1 = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList1;
+                break;
+            case 2:
+                newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList2[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList2.Count)];
+                newSoundDesign.GetComponent<SoundDesign>().clipList1 = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList2;
+                break;
+            case 3:
+                newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3.Count)];
+                newSoundDesign.GetComponent<SoundDesign>().clipList1 = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3;
+                break;
+            case 4:
+                newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList4[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3.Count)];
+                newSoundDesign.GetComponent<SoundDesign>().clipList1 = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList4;
+                break;
+        }
+        nameOfLoopingObject = gameObjectWithTheSound.name;
+        newSoundDesign.GetComponent<SoundDesign>().Timing = timing;
+        newSoundDesign.name = nameOfLoopingObject;
+        LoopingObjects.Add(newSoundDesign);
+    }
+
+    public void CancelLoopingObjects(string nameOfLoopingObjects)
+    {
+        print(LoopingObjects.Count);
+        for (int i = 0; i < LoopingObjects.Count; i++)
+        {
+            if (LoopingObjects[i].name == nameOfLoopingObjects)
+            {
+                Destroy(LoopingObjects[i].gameObject);
+                LoopingObjects.Remove(LoopingObjects[i]);
+
+                nameOfLoopingObject = null;
+            }
+        }
+
+
+    }
+
+
 }
 

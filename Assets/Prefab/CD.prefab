@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7096487089702398940}
   - component: {fileID: 7096487089702398941}
   - component: {fileID: 5785636585308914936}
+  - component: {fileID: 4450501089757388964}
   m_Layer: 0
   m_Name: CD
   m_TagString: Object
@@ -55,9 +56,14 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  cog: 0
   CD: 1
+  Moon: 0
   child: 0
   canSlide: 0
+  S2ATSlide: 0
+  Background: 0
+  wasGravited: 0
 --- !u!61 &7096487089702398883
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -177,3 +183,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4450501089757388964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7096487089702398936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4de28c59c6fbb7345ac03d9ac8c05460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PhaseOfSound: 0
+  clipList1:
+  - {fileID: 8300000, guid: a65d7e38619d84d49a280945b2194a41, type: 3}
+  - {fileID: 8300000, guid: 62fe53983d8e2f44288f076e99aeea18, type: 3}
+  - {fileID: 8300000, guid: 0f32c06b21412bf4ea38f33decaf05fe, type: 3}
+  clipList2: []
+  clipList3: []
+  audioSource: {fileID: 0}
+  Timing: 0
