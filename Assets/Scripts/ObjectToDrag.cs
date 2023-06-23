@@ -22,6 +22,8 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public bool S2ATSlide;
     public bool Background;
     public bool wasGravited;
+
+    private int click;
     // Start is called before the first frame update
     void Start()
     {
@@ -74,9 +76,10 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         //Permet de détruire certains objets quand on les laisse tomber
         else if (collision.gameObject.tag == "Ground" && destroyOnGravity)
         {
-            if(BornWithoutGravity > 0)
+            
+            if (BornWithoutGravity > 0)
             {
-                    GameManager.Instance.DotWeenShakeCamera(0.2f, 0.1f, 30);
+                GameManager.Instance.DotWeenShakeCamera(0.2f, 0.1f, 30);
                 
                 if (gameObject == GameManager.Instance.StockCD)
                 {
@@ -87,6 +90,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             }
             else
             {
+                Debug.Log("in the else");
                 if(objectCreateAfterFalling != null)
                 {
                     GameObject newObject = Instantiate(objectCreateAfterFalling);
@@ -170,11 +174,13 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
         if (gameObject.layer == 6)
         {
+            
+
             Debug.Log(GameManager.Instance.GetComponent<DragAndDrop>().draggedObject);
             Debug.Log(gameObject);
-            GameManager.Instance.Dialogue();
-            Debug.Log("parle");
             GameManager.Instance.ObjectHover = gameObject;
+
+
 
         }
 
@@ -189,6 +195,9 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     void MakeTheCogRoll(float speedOfTheRoll)
     {
+        //the false
+        GetComponent<Rigidbody2D>().angularVelocity = speedOfTheRoll;
+        //the true
         transform.GetChild(0).GetComponent<Rigidbody2D>().angularVelocity = speedOfTheRoll;
     }
 

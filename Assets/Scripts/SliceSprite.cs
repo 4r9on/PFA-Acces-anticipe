@@ -42,6 +42,10 @@ public class SliceSprite : MonoBehaviour
             if (GameManager.Instance.breakableUI.Count == 0 )
             {
                GameManager.Instance.ColliderOfJukeboxBroken.SetActive(true);
+                for (int i = 0; i < 5; i++)
+                {
+                    GameManager.Instance.loseHP();
+                }
             }
             Destroy(gameObject);
         }
@@ -50,8 +54,10 @@ public class SliceSprite : MonoBehaviour
         if (collision.gameObject.tag == "Hammer" && canBreakIt)
         {
             GameManager.Instance.DotWeenShakeCamera(0.2f, 0.06f, 30);
+            GameManager.Instance.DotWeenShakeObject(GameManager.Instance.JukeboxBroken4, 0.2f, 0.06f, 30);
             //Le but ici est de trouver a quel endroit est-ce qu'on a touche l'UI 
             SpriteRenderer thisSprite = GetComponent<SpriteRenderer>();
+            StartCoroutine(destroyAfterFewSeconds());
             if (Mathf.Abs(collision.GetContact(0).normal.x) < Mathf.Abs(collision.GetContact(0).normal.y))
             {
                sliceX(collision, thisSprite);
@@ -182,7 +188,7 @@ public class SliceSprite : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = new Vector2(-1, -2) * 5;
             newUI.GetComponent<Rigidbody2D>().velocity = new Vector2(1, -2) * 5;
         }
-
+       StartCoroutine(newUI.GetComponent<SliceSprite>().destroyAfterFewSeconds());
     }
     void sliceY(Collision2D collision, SpriteRenderer thisSprite)
     {
@@ -242,17 +248,33 @@ public class SliceSprite : MonoBehaviour
             newUI.GetComponent<Rigidbody2D>().velocity = new Vector2(-1, -2) * 5;
             Debug.Log("x.-");
         }
-        
+
+        StartCoroutine(newUI.GetComponent<SliceSprite>().destroyAfterFewSeconds());
 
 
 
 
-       
     }
 
     void ChangeForceAfterHit(GameObject TheOtherSide)
     {
         GetComponent<Rigidbody2D>().velocity = new Vector2(-1, -2) * 5;
         TheOtherSide.GetComponent<Rigidbody2D>().velocity = new Vector2(-1, -2) * 5;
+    }
+
+    IEnumerator destroyAfterFewSeconds()
+    {
+        yield return new WaitForSeconds(5);
+        GameManager.Instance.breakableUI.Remove(gameObject);
+        if (GameManager.Instance.breakableUI.Count == 0)
+        {
+            GameManager.Instance.ColliderOfJukeboxBroken.SetActive(true);
+            for(int i = 0; i < 5; i++)
+            {
+                GameManager.Instance.loseHP();
+            }
+            
+        }
+        Destroy(gameObject);
     }
 }
