@@ -548,6 +548,8 @@ public class DragAndDrop : MonoBehaviour
 
             GameManager.Instance.tableau4.SetActive(true);
             diReturnJukebox.SetActive(true);
+            Debug.Log("aaaaaaahhh");
+
         }
 
         else if (GameManager.Instance.ObjectHover.tag == "ButtonMusic")
