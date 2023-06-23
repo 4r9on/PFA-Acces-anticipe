@@ -689,7 +689,7 @@ public class DragAndDrop : MonoBehaviour
 
                     if (draggedObject.GetComponent<ObjectToDrag>().objectToPutOn.tag == "ButtonON")
                     {
-                        GameManager.Instance.DotWeenShakeCamera(0.2f, 0.5f, 20);
+                        GameManager.Instance.DotWeenShakeCamera(0.1f, 0.2f, 10);
                         foreach (GameObject ObjectON in GameManager.Instance.ON)
                         {
                             if (ObjectON == draggedObject)
