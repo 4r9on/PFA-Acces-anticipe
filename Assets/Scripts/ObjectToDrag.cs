@@ -21,6 +21,9 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public bool canSlide;
     public bool S2ATSlide;
     public bool Background;
+    public bool wasGravited;
+
+    private int click;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +37,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             transform.localPosition = new Vector2(0, 0);
         }
-        if(cog)
+        if(cog && GameManager.Instance.dAD.draggedObject == gameObject)
         {
             MakeTheCogRoll(900);
             transform.GetChild(0).GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -48,6 +51,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         yield return new WaitForSeconds(1f);
         destroyOnGravity = true;
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (painting)
@@ -63,6 +67,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         if (painting && collision.gameObject.tag == "Ground")
         {
 
+            GameManager.Instance.DotWeenShakeCamera(0.2f, 0.1f, 30);
             /*  children.GetComponent<Rigidbody2D>().gravityScale = 0;
               children.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
              */
@@ -71,9 +76,12 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         //Permet de détruire certains objets quand on les laisse tomber
         else if (collision.gameObject.tag == "Ground" && destroyOnGravity)
         {
-            if(BornWithoutGravity > 0)
+            
+            if (BornWithoutGravity > 0)
             {
-                if(gameObject == GameManager.Instance.StockCD)
+                GameManager.Instance.DotWeenShakeCamera(0.2f, 0.1f, 30);
+                
+                if (gameObject == GameManager.Instance.StockCD)
                 {
                     gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = GameManager.Instance.StocksCD[1].GetComponent<SpriteRenderer>().sprite;
                 }
@@ -82,22 +90,34 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             }
             else
             {
-                GameObject newObject = Instantiate(objectCreateAfterFalling);
-                newObject.transform.position = gameObject.transform.position;
-                newObject.GetComponent<ObjectToDrag>().objectToPutOn = objectToPutOn;
-                if (newObject.GetComponent<ObjectToDrag>().CD)
+                Debug.Log("in the else");
+                if(objectCreateAfterFalling != null)
                 {
-                    GameManager.Instance.CD = newObject;
-                    gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = GameManager.Instance.StocksCD[2].GetComponent<SpriteRenderer>().sprite;
-                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                    gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
-                    Destroy(this);
+                    GameObject newObject = Instantiate(objectCreateAfterFalling);
+                    newObject.transform.position = gameObject.transform.position;
+                    newObject.GetComponent<ObjectToDrag>().objectToPutOn = objectToPutOn;
+                    if (newObject.GetComponent<ObjectToDrag>().CD)
+                    {
+                        GameManager.Instance.ObjectHover = null;
+                        GameManager.Instance.dAD.draggedObject = null;
+                        GameManager.Instance.dAD.dragged = false;
+                        GameManager.Instance.Raycaster2D.eventMask = 503;
+                        GameManager.Instance.CD = newObject;
+                        gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = GameManager.Instance.StocksCD[2].GetComponent<SpriteRenderer>().sprite;
+                        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                        gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+                        Destroy(this);
+                    }
+                    else
+                    {
+                        Destroy(gameObject);
+                    }
                 }
                 else
                 {
                     Destroy(gameObject);
                 }
-            
+
             }
             
         }
@@ -145,7 +165,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             gameObject.GetComponent<Animator>().SetBool("IsClicked", false);
 
-            if (CD)
+            if (CD || (GameManager.Instance.dAD.multipleTouchOnTableau2 && GameManager.Instance.ObjectHover.name=="Button_Pause"))
             {
                 GameManager.Instance.GetComponent<DragAndDrop>().StopClick();
             }
@@ -154,11 +174,14 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
         if (gameObject.layer == 6)
         {
+            
+
             Debug.Log(GameManager.Instance.GetComponent<DragAndDrop>().draggedObject);
             Debug.Log(gameObject);
-            GameManager.Instance.Dialogue();
-            Debug.Log("parle");
             GameManager.Instance.ObjectHover = gameObject;
+
+
+
         }
 
         else if (GameManager.Instance.GetComponent<DragAndDrop>().draggedObject == gameObject)
@@ -172,6 +195,9 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     void MakeTheCogRoll(float speedOfTheRoll)
     {
+        //the false
+        GetComponent<Rigidbody2D>().angularVelocity = speedOfTheRoll;
+        //the true
         transform.GetChild(0).GetComponent<Rigidbody2D>().angularVelocity = speedOfTheRoll;
     }
 
@@ -195,6 +221,17 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             }
         }
 
+    }
+
+    public void shakeCameraAnim()
+    {
+        GameManager.Instance.DotWeenShakeCamera(0.1f, 0.6f, 30);
+    }
+
+    public void DestroyTheCog()
+    {
+        GameManager.Instance.cog3.SetActive(true);
+        Destroy(GameManager.Instance.cog1);
     }
 
 

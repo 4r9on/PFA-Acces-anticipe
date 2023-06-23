@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Video;
 using DG.Tweening;
+using Cinemachine;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class GameManager : MonoBehaviour
     public List<GameObject> breakableUI = new List<GameObject>();
     public GameObject StockCD;
     public GameObject Narrator;
+    public GameObject camCine;
+    public List<AudioClip> TableauxMusic = new List<AudioClip>();
+    public GameObject SoundDesign;
 
     //Tableau 1
     public GameObject Gauge;
@@ -27,14 +31,19 @@ public class GameManager : MonoBehaviour
     public GameObject S2ATWithWriting;
     public List<Light2D> lightsOnTableau1 = new List<Light2D>();
     public ParticleSystem particlesTableau1;
+    public ParticleSystem littleParticlesTableau1;
     public List<Vector2> S2ATPoints;
     List<GameObject> ObjectToRemoveAfterGauge = new List<GameObject>();
     public VideoPlayer introS2AT;
     public List<GameObject> ObjectToMakeVisibleOnBeginning = new List<GameObject>();
     public float pourcentageToMakeObjectVisible;
+    public GameObject cog1;
+    public bool stopTheBeginning;
 
 
     //Tableau 2
+    public bool isTableau2;
+    public ParticleSystem particlesTableau2;
     public GameObject CD;
     public List<GameObject> narratorsAnim = new List<GameObject>();
     public List<GameObject> StocksCD = new List<GameObject>();
@@ -46,6 +55,7 @@ public class GameManager : MonoBehaviour
     public bool canTouchCd = true;
 
     //Tableau 3
+    public GameObject cog3;
     public List<GameObject> DayNight = new List<GameObject>();
     public GameObject dayLight;
     public GameObject nightLight;
@@ -53,18 +63,23 @@ public class GameManager : MonoBehaviour
     public GameObject LeftWallAnimation;
     public GameObject ButtonInWall;
     public GameObject BackgroundTableau4;
+    public GameObject leftWall;
 
     //Tableau 4
     public List<GameObject> narratorsAnim4 = new List<GameObject>();
     public GameObject Hammer;
+    public GameObject JukeboxBroken4;
+    public GameObject ColliderOfJukeboxBroken;
+    public List<GameObject> JukeboxPhase = new List<GameObject>();
+    int JukeBoxHP = 20;
 
     public List<GameObject> ON = new List<GameObject>();
-    
+
     public Physics2DRaycaster Raycaster2D;
     string tableau;
 
     public GameObject tableau1;
-    public GameObject tableau2;  
+    public GameObject tableau2;
     public GameObject tableau3;
     public GameObject tableau4;
     public GameObject tableau5;
@@ -76,11 +91,12 @@ public class GameManager : MonoBehaviour
     public GameObject English;
     private int language;
 
-    public List<GameObject>dialogueList;
+    public List<GameObject> dialogueList;
     public int i;
     public GameObject bocksSpeak;
-
     public bool truc;
+
+    public GameObject diReturnGame;
 
     private void Awake()
     {
@@ -97,41 +113,63 @@ public class GameManager : MonoBehaviour
     }
 
     void Start()
-    {        
+    {
         if (PlayerPrefs.GetInt("GetCrashed") == 1)
         {
             PlayerPrefs.SetInt("GetCrashed", 0);
             dAD.TableauActual = 5;
-                LoadNextLevel();
-            }
+            LoadNextLevel();
+            introS2AT.gameObject.SetActive(false);
+            diReturnGame.SetActive(true);
+        }
         introS2AT.loopPointReached += IntroS2AT_loopPointReached;
-        
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (pourcentageToMakeObjectVisible > 0)
+        if(pourcentageToMakeObjectVisible > 0)
         {
-            foreach (GameObject ObjectInBegin in ObjectToMakeVisibleOnBeginning)
+            if (isTableau2)
             {
-                var oppacity = ObjectInBegin.GetComponent<SpriteRenderer>().color;
-                oppacity.a = pourcentageToMakeObjectVisible;
-                ObjectInBegin.GetComponent<SpriteRenderer>().color = oppacity;
+                var emission = particlesTableau2.emission;
+                emission.rateOverTime = 20 * pourcentageToMakeObjectVisible;
             }
-            dAD.ChangeLoadingBarScale(pourcentageToMakeObjectVisible/25, 1, 0);
-            for (int i = 0; i < 3; i++)
+            else if (pourcentageToMakeObjectVisible > 0 && !isTableau2)
             {
-                lightsOnTableau1[i].intensity = dAD.LightMaxValue[i] * pourcentageToMakeObjectVisible / 25;
+                foreach (GameObject ObjectInBegin in ObjectToMakeVisibleOnBeginning)
+                {
+                    if (!stopTheBeginning)
+                    {
+                        var emission = particlesTableau1.emission;
+                        emission.rateOverTime = 20 * pourcentageToMakeObjectVisible;
+                        emission = littleParticlesTableau1.emission;
+                        emission.rateOverTime = 20 * pourcentageToMakeObjectVisible;
+                        lightsOnTableau1[3].intensity = pourcentageToMakeObjectVisible;
+                    }
+                    
+                    var oppacity = ObjectInBegin.GetComponent<SpriteRenderer>().color;
+                    oppacity.a = pourcentageToMakeObjectVisible;
+                    ObjectInBegin.GetComponent<SpriteRenderer>().color = oppacity;
+                   
+                }
+                if (!stopTheBeginning)
+                {
+                    dAD.ChangeLoadingBarScale(pourcentageToMakeObjectVisible / 25, 1, 0);
+                    for (int i = 0; i < 3; i++)
+                    {
+                        lightsOnTableau1[i].intensity = dAD.LightMaxValue[i] * pourcentageToMakeObjectVisible / 25;
+                    }
+                }
+                
             }
-           
-            if(pourcentageToMakeObjectVisible == 1)
+            if (pourcentageToMakeObjectVisible == 1)
             {
                 GetComponent<Animator>().enabled = false;
                 pourcentageToMakeObjectVisible = 0;
             }
         }
+        
     }
 
     private void IntroS2AT_loopPointReached(VideoPlayer source)
@@ -151,8 +189,9 @@ public class GameManager : MonoBehaviour
     {
         //faire l'anim ou le narrateur va appuyer sur le bouton pause
         //faire tomber le disque
-        narratorsAnim[1].SetActive(true);
-        
+        narratorsAnim[2].SetActive(true);
+        canTouchCd = true;
+        dAD.multipleTouchOnTableau2 = true;
     }
 
     public void LoadNextLevel()
@@ -182,6 +221,47 @@ public class GameManager : MonoBehaviour
         {
             tableau5.SetActive(true);
         }
+        cleanScene();
+
+        if(dAD.TableauActual != 2)
+        {
+            changeMusic(dAD.TableauActual);
+        }
+        else
+        {
+            isTableau2 = true;
+            GetComponent<AudioSource>().Pause();
+            GetComponent<Animator>().enabled = true;
+        }
+        
+    }
+
+    public void changeMusic(int MusicTableau)
+    {
+        switch (MusicTableau)
+        {
+            case 1:
+                GetComponent<AudioSource>().volume = 0.333f;
+                break;
+            case 2:
+                GetComponent<AudioSource>().volume = 0.488f;
+                break;
+            case 3:
+                GetComponent<AudioSource>().volume = 0.55f;
+                break;
+            case 4:
+                GetComponent<AudioSource>().volume = 0.5f;
+                break;
+            case 5:
+                GetComponent<AudioSource>().volume = 0.396f;
+                break;
+        }
+        GetComponent<AudioSource>().clip = TableauxMusic[MusicTableau - 1];
+        GetComponent<AudioSource>().Play();
+    }
+
+    public void cleanScene()
+    {
         dAD.ObjectPut = null;
         dAD.draggedObject = null;
         ObjectHover = null;
@@ -189,32 +269,39 @@ public class GameManager : MonoBehaviour
 
     public void TouchCD(int numberOfTouch)
     {
-      //  Narrator.GetComponent<Animator>().SetInteger("nrbOfTouch", numberOfTouch);
+        //  Narrator.GetComponent<Animator>().SetInteger("nrbOfTouch", numberOfTouch);
         switch (numberOfTouch)
         {
             case 1:
                 Debug.Log("touche une fois");
                 canTouchCd = false;
-                narratorsAnim[2].SetActive(true);
-               // timing = 0.5f;
+                Dialogue();
+
+                narratorsAnim[3].SetActive(true);
+                // timing = 0.5f;
                 break;
             case 2:
                 Debug.Log("touche une seconde fois");
                 canTouchCd = false;
-                narratorsAnim[3].SetActive(true);
+                Dialogue();
+
+                narratorsAnim[1].SetActive(true);
+
                 // timing = 0.4f;
                 break;
             case 3:
                 Debug.Log("Detruit l'UI");
+                Dialogue();
+
                 narratorsAnim[4].SetActive(true);
                 narratorsAnim[5].SetActive(true);
+
                 // timing = 0.3f;
                 //nous permet de rendre la souris invisible et non utilisable
-                Cursor.lockState = CursorLockMode.Locked;
 
                 //On va utiliser un faux curseur pour empecher le joueur de l'utiliser
-              /*  cursor.SetActive(true);
-                cursor.transform.position = new Vector3(GetComponent<Raycast>().HitToStopMouse.point.x, GetComponent<Raycast>().HitToStopMouse.point.y, 0f);*/
+                /*  cursor.SetActive(true);
+                  cursor.transform.position = new Vector3(GetComponent<Raycast>().HitToStopMouse.point.x, GetComponent<Raycast>().HitToStopMouse.point.y, 0f);*/
                 break;
         }
     }
@@ -223,22 +310,23 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         S2ATWithWriting.GetComponent<Animator>().enabled = true;
+        NewSound(S2ATWithWriting);
         S2ATWithWriting.transform.localScale = Vector3.one;
-        S2ATWithWriting.transform.localPosition= new Vector3(0.013f, 1.752f, S2ATWithWriting.transform.position.z);
+        S2ATWithWriting.transform.localPosition = new Vector3(0.013f, 1.752f, S2ATWithWriting.transform.position.z);
         GetComponent<DragAndDrop>().MinScale = S2AT.transform.localScale.y;
         GetComponent<DragAndDrop>().MaxScale = 17.62906f;
         foreach (GameObject go in GameObjectToRemove)
         {
             ObjectToRemoveAfterGauge.Add(go);
-           /* go.SetActive(false);
-            go.transform.parent = Gauge.transform;*/
+            /* go.SetActive(false);
+             go.transform.parent = Gauge.transform;*/
         }
     }
 
     public void RemoveGauge()
     {
         Gauge.SetActive(false);
-        foreach(GameObject Objects in ObjectToRemoveAfterGauge)
+        foreach (GameObject Objects in ObjectToRemoveAfterGauge)
         {
             Objects.SetActive(false);
         }
@@ -267,9 +355,9 @@ public class GameManager : MonoBehaviour
         {
             ObjetcsDay.GetComponent<Animator>().enabled = true;
         }
-            dayLight.SetActive(false);
-            nightLight.SetActive(true);
-            LampMask.enabled = true;
+        dayLight.SetActive(false);
+        nightLight.SetActive(true);
+        LampMask.enabled = true;
     }
 
     public void FallTheHole(GameObject UVCross)
@@ -283,9 +371,9 @@ public class GameManager : MonoBehaviour
 
     public void breakingTheWall()
     {
-        foreach(Transform child in LeftWallAnimation.transform.parent)
+        foreach (Transform child in LeftWallAnimation.transform.parent)
         {
-            if(child.gameObject != LeftWallAnimation)
+            if (child.gameObject != LeftWallAnimation)
             {
                 child.gameObject.SetActive(true);
                 child.GetComponent<Animator>().enabled = true;
@@ -321,38 +409,84 @@ public class GameManager : MonoBehaviour
             English.SetActive(true);
         }
     }
-    
-    
+
+    public void DotWeenShakeObject(GameObject theGameObjectToShake, float time, float strenght, int vibrato)
+    {
+        DOTween.Shake(() => theGameObjectToShake.transform.position, x => theGameObjectToShake.transform.position = x, time, strenght, vibrato, 45, false);
+    }
+    public void DotWeenShakeCamera(float time, float strenght, int vibrato)
+    {
+        camCine.GetComponent<CinemachineVirtualCamera>().enabled = false;
+        Camera.main.DOShakePosition(time, strenght, vibrato, fadeOut: false);
+        StartCoroutine(enabledTheCamera());
+    }
+
+    IEnumerator enabledTheCamera()
+    {
+        yield return new WaitForSeconds(1);
+        camCine.GetComponent<CinemachineVirtualCamera>().enabled = true;
+    }
+
+    public void loseHP()
+    {
+        JukeBoxHP--;
+        Debug.Log(JukeBoxHP);
+        int phase = 0;
+        if (JukeBoxHP == 15 || JukeBoxHP == 10 || JukeBoxHP == 5 || JukeBoxHP == 0)
+        {
+            if (JukeBoxHP == 10)
+            {
+                phase = 1;
+            }
+            if (JukeBoxHP == 5)
+            {
+                phase = 2;
+            }
+            if (JukeBoxHP == 0)
+            {
+                PlayerPrefs.SetInt("GetCrashed", 1);
+                GetComponent<LaunchBat>().ExitAppThenRestart();
+            }
+            else
+            {
+                JukeboxBroken4.GetComponent<SpriteRenderer>().sprite = JukeboxPhase[phase].GetComponent<SpriteRenderer>().sprite;
+            }
+
+        }
+    }
 
     public void Dialogue()
     {
         truc = true;
-        if (truc = true)
+        if (truc == true)
         {
-            Debug.Log(i);
-            i++;
             bocksSpeak.SetActive(true);
             bocksSpeak = dialogueList[i];
-            StartCoroutine(Di());
-            bocksSpeak.SetActive(false);
-            Debug.Log("efface");
+            i++;
             truc = false;
 
-            Debug.Log(dialogueList);
         }
     }
 
-    public void DotWeenShake(GameObject theGameObjectToShake)
+    public void NewSound(GameObject gameObjectWithTheSound)
     {
-        DOTween.Shake(() => theGameObjectToShake.transform.position, x => theGameObjectToShake.transform.position = x, 1, 5, 10, 45, false);
+        GameObject newSoundDesign = Instantiate(SoundDesign);
+        switch (gameObjectWithTheSound.GetComponent<SoundDesign>().PhaseOfSound )
+        {
+            case 1:
+                newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList1[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList1.Count)];
+                break;
+            case 2:
+                newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList2[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList2.Count)];
+                break;
+            case 3:
+                newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3.Count)];
+                break;
+        }
+       
+        newSoundDesign.GetComponent<AudioSource>().Play();
     }
 
     
-    IEnumerator Di()
-    {
-        yield return new WaitForSeconds(5);
-        Debug.Log("attendre");
-    }
-
 }
 
