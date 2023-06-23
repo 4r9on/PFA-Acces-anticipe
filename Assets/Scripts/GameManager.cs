@@ -9,6 +9,7 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.Video;
 using DG.Tweening;
 using Cinemachine;
+using Cinemachine.Utility;
 
 public class GameManager : MonoBehaviour
 {
@@ -100,6 +101,9 @@ public class GameManager : MonoBehaviour
     public bool truc;
 
     public GameObject diReturnGame;
+
+    public GameObject forground;
+    public GameObject camera;
 
     private void Awake()
     {
@@ -212,14 +216,21 @@ public class GameManager : MonoBehaviour
         else if (dAD.TableauActual == 2)
         {
             tableau2.SetActive(true);
+            tableau2.transform.Translate(17.58f, 0, 0);
+            camera.transform.Translate(17.58f, 0, 0);
         }
         else if (dAD.TableauActual == 3)
         {
             tableau3.SetActive(true);
+            forground.SetActive(false);
+            //camera.transform.Translate(-34.58f, 0, 0);
+
         }
         else if (dAD.TableauActual == 4)
         {
             tableau4.SetActive(true);
+            forground.transform.Translate(17.58f, 0, 0);
+
         }
         else if (dAD.TableauActual == 5)
         {
