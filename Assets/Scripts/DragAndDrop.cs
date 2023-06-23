@@ -625,6 +625,13 @@ public class DragAndDrop : MonoBehaviour
                     }
                 }
             }
+
+            if (draggedObject.GetComponent<ObjectToDrag>().CD)
+            {
+
+                GameManager.Instance.DotWeenShakeObject(draggedObject, 0.5f, 0.06f, 10);
+                GameManager.Instance.DotWeenShakeObject(GameManager.Instance.DiskPlayer, 0.5f, 0.06f, 10);
+            }
         }
         if (GameManager.Instance.ObjectHover != null)
         {
