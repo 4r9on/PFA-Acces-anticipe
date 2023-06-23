@@ -204,11 +204,13 @@ public class DragAndDrop : MonoBehaviour
                 }
                 else
                 {
+                    GameManager.Instance.stopTheBeginning = true;
                     firstTimeUseTheLoadingBar = false;
                 }
             }
             else
             {
+               
                 GameManager.Instance.DotWeenShakeObject(GameManager.Instance.Gauge, 0.5f, 0.06f, 10);
                 foreach (Light2D light in GameManager.Instance.lightsOnTableau1)
                 {
@@ -418,13 +420,20 @@ public class DragAndDrop : MonoBehaviour
                     {
 
                     }
-                    else if (ObjectPut.tag == "Simon" && draggedObject == ObjectPut)
+                    else if (ObjectPut != null)
                     {
+                         if (ObjectPut.tag == "Simon" && draggedObject == ObjectPut)
+                        {
 
+                        }
                     }
                     else
                     {
-                        draggedObject.GetComponent<ObjectToDrag>().destroyOnGravity = false;
+                        if(draggedObject.name != "Stock CD")
+                        {
+                            draggedObject.GetComponent<ObjectToDrag>().destroyOnGravity = false;
+                        }
+                        
                     }
                 }
 
@@ -739,7 +748,6 @@ public class DragAndDrop : MonoBehaviour
             if (child.name == "Loading_bar")
             {
                 float pourcentageOfTheValue = ((maxValue - minValue) - (valueGive - minValue)) / (maxValue - minValue);
-                Debug.Log(pourcentageOfTheValue);
                 //MaxScaleLoadingBar = child.localScale.x;
                 float scaleValue = MaxScale - MinScale;
                 child.localScale = new Vector3(CalculValuePourcentOfSliderScale(scaleValue, pourcentageOfTheValue), child.localScale.y, child.localScale.z);

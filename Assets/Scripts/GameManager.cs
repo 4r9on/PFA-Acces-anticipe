@@ -36,9 +36,12 @@ public class GameManager : MonoBehaviour
     public List<GameObject> ObjectToMakeVisibleOnBeginning = new List<GameObject>();
     public float pourcentageToMakeObjectVisible;
     public GameObject cog1;
+    public bool stopTheBeginning;
 
 
     //Tableau 2
+    public bool isTableau2;
+    public ParticleSystem particlesTableau2;
     public GameObject CD;
     public List<GameObject> narratorsAnim = new List<GameObject>();
     public List<GameObject> StocksCD = new List<GameObject>();
@@ -123,27 +126,46 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (pourcentageToMakeObjectVisible > 0)
+        if(pourcentageToMakeObjectVisible > 0)
         {
-            foreach (GameObject ObjectInBegin in ObjectToMakeVisibleOnBeginning)
+            if (isTableau2)
             {
-                var oppacity = ObjectInBegin.GetComponent<SpriteRenderer>().color;
-                oppacity.a = pourcentageToMakeObjectVisible;
-                ObjectInBegin.GetComponent<SpriteRenderer>().color = oppacity;
-                lightsOnTableau1[3].intensity = pourcentageToMakeObjectVisible;
+                var emission = particlesTableau2.emission;
+                emission.rateOverTime = 20 * pourcentageToMakeObjectVisible;
             }
-            dAD.ChangeLoadingBarScale(pourcentageToMakeObjectVisible / 25, 1, 0);
-            for (int i = 0; i < 3; i++)
+            else if (pourcentageToMakeObjectVisible > 0 && !isTableau2)
             {
-                lightsOnTableau1[i].intensity = dAD.LightMaxValue[i] * pourcentageToMakeObjectVisible / 25;
+                foreach (GameObject ObjectInBegin in ObjectToMakeVisibleOnBeginning)
+                {
+                    if (!stopTheBeginning)
+                    {
+                        var emission = particlesTableau1.emission;
+                        emission.rateOverTime = 20 * pourcentageToMakeObjectVisible;
+                        lightsOnTableau1[3].intensity = pourcentageToMakeObjectVisible;
+                    }
+                    
+                    var oppacity = ObjectInBegin.GetComponent<SpriteRenderer>().color;
+                    oppacity.a = pourcentageToMakeObjectVisible;
+                    ObjectInBegin.GetComponent<SpriteRenderer>().color = oppacity;
+                   
+                }
+                if (!stopTheBeginning)
+                {
+                    dAD.ChangeLoadingBarScale(pourcentageToMakeObjectVisible / 25, 1, 0);
+                    for (int i = 0; i < 3; i++)
+                    {
+                        lightsOnTableau1[i].intensity = dAD.LightMaxValue[i] * pourcentageToMakeObjectVisible / 25;
+                    }
+                }
+                
             }
-
             if (pourcentageToMakeObjectVisible == 1)
             {
                 GetComponent<Animator>().enabled = false;
                 pourcentageToMakeObjectVisible = 0;
             }
         }
+        
     }
 
     private void IntroS2AT_loopPointReached(VideoPlayer source)
@@ -200,6 +222,12 @@ public class GameManager : MonoBehaviour
         if(dAD.TableauActual != 2)
         {
             changeMusic(dAD.TableauActual);
+        }
+        else
+        {
+            isTableau2 = true;
+            GetComponent<AudioSource>().Pause();
+            GetComponent<Animator>().enabled = true;
         }
         
     }

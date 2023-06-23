@@ -37,7 +37,8 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         }
         if(cog && GameManager.Instance.dAD.draggedObject == gameObject)
         {
-            MakeTheCogRoll(900);
+            //MakeTheCogRoll(900);
+            MakeTheCogRoll(90);
             transform.GetChild(0).GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             transform.GetChild(0).position = transform.localPosition;
         }
@@ -74,9 +75,10 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         //Permet de détruire certains objets quand on les laisse tomber
         else if (collision.gameObject.tag == "Ground" && destroyOnGravity)
         {
-            if(BornWithoutGravity > 0)
+            
+            if (BornWithoutGravity > 0)
             {
-                    GameManager.Instance.DotWeenShakeCamera(0.2f, 0.1f, 30);
+                GameManager.Instance.DotWeenShakeCamera(0.2f, 0.1f, 30);
                 
                 if (gameObject == GameManager.Instance.StockCD)
                 {
@@ -87,6 +89,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             }
             else
             {
+                Debug.Log("in the else");
                 if(objectCreateAfterFalling != null)
                 {
                     GameObject newObject = Instantiate(objectCreateAfterFalling);
@@ -189,6 +192,9 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     void MakeTheCogRoll(float speedOfTheRoll)
     {
+        //the false
+        GetComponent<Rigidbody2D>().angularVelocity = speedOfTheRoll;
+        //the true
         transform.GetChild(0).GetComponent<Rigidbody2D>().angularVelocity = speedOfTheRoll;
     }
 
