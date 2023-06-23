@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
 public class Narrator : MonoBehaviour
 {
     bool KnowYouComeToScene4;
+    public bool secondTimeHandHitButton;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,7 @@ public class Narrator : MonoBehaviour
     {
         GameManager.Instance.DotWeenShakeCamera(0.2f, 1f, 40);
         GameManager.Instance.narratorsAnim[9].SetActive(true);
+        GameManager.Instance.NewSound(gameObject);
         foreach (GameObject obj in GameManager.Instance.SimonUI)
         {
             if (obj.name == "Button_Pause")
@@ -47,13 +50,16 @@ public class Narrator : MonoBehaviour
     public void firstLampToLightOn()
     {
        GameManager.Instance.lightOnScene2.transform.GetChild(2).gameObject.SetActive(true);
+        GameManager.Instance.NewSound(gameObject);
     }
     public void SecondLampToLightOn()
     {
         GameManager.Instance.lightOnScene2.transform.GetChild(4).gameObject.SetActive(true);
+        GameManager.Instance.NewSound(gameObject);
     }
     public void LastLampToLightOn()
     {
+        GameManager.Instance.NewSound(gameObject);
         GameManager.Instance.lightOnScene2.transform.GetChild(3).gameObject.SetActive(true);
         GameManager.Instance.lightOnScene2.transform.GetChild(5).GetComponent<Light2D>().intensity = 0.48f;
         GameManager.Instance.lightOnScene2.transform.GetChild(5).GetComponent<Animator>().enabled = true;
@@ -63,18 +69,25 @@ public class Narrator : MonoBehaviour
 
     public void ClickedOnCD()
     {
+        if (secondTimeHandHitButton)
+        {
+            GameManager.Instance.DotWeenShakeCamera(0.2f, 0.5f, 20);
+        }
         foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
         {
             if (SimonUI.name == "Button_Pause")
             {
                 SimonUI.GetComponent<Animator>().SetBool("IsClicked", true);
+                GameManager.Instance.NewSound(SimonUI);
             }
         }
+
            // GameManager.Instance.CD.GetComponent<Animator>().SetBool("IsClicked", true);
     }
 
     public void UnClickedOnCD()
     {
+       
         foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
         {
             if (SimonUI.name == "Button_Pause")
@@ -98,7 +111,10 @@ public class Narrator : MonoBehaviour
         // GameManager.Instance.CD.GetComponent<Rigidbody2D>().velocity = new Vector2 (10, 10);
         // GameManager.Instance.CD.GetComponent<Rigidbody2D>().gravityScale = 1;
     }
-
+    public void ExplosionSound()
+    {
+        GameManager.Instance.NewSound(gameObject);
+    }
     public void DestroyJukebox()
     {
         GameManager.Instance.DestroyJukebox();

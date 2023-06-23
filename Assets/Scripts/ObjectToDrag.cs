@@ -76,7 +76,10 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         //Permet de détruire certains objets quand on les laisse tomber
         else if (collision.gameObject.tag == "Ground" && destroyOnGravity)
         {
-            
+            if(gameObject == GameManager.Instance.StockCD)
+            {
+                GameManager.Instance.NewSound(gameObject);
+            }
             if (BornWithoutGravity > 0)
             {
                 GameManager.Instance.DotWeenShakeCamera(0.2f, 0.1f, 30);
@@ -90,7 +93,10 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             }
             else
             {
-                Debug.Log("in the else");
+                if(gameObject == GameManager.Instance.StockCD || gameObject.GetComponent<ObjectToDrag>().painting)
+                {
+                    GameManager.Instance.DotWeenShakeCamera(0.2f, 0.5f, 20);
+                }
                 if(objectCreateAfterFalling != null)
                 {
                     GameObject newObject = Instantiate(objectCreateAfterFalling);
@@ -121,6 +127,11 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             }
             
         }
+        else if (collision.gameObject.tag == "Ground" && gameObject == GameManager.Instance.cog1)
+            {
+            gameObject.GetComponent<SoundDesign>().PhaseOfSound = 2;
+                GameManager.Instance.NewSound(gameObject);
+            }
     }
 
     public void OnPointerExit(PointerEventData pointerEventData)
@@ -226,6 +237,8 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public void shakeCameraAnim()
     {
         GameManager.Instance.DotWeenShakeCamera(0.1f, 0.6f, 30);
+        GetComponent<SoundDesign>().PhaseOfSound = 4;
+        GameManager.Instance.NewSound(gameObject);
     }
 
     public void DestroyTheCog()
