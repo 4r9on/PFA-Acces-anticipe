@@ -453,16 +453,13 @@ public class GameManager : MonoBehaviour
     public void Dialogue()
     {
         truc = true;
-        if (truc = true)
+        if (truc == true)
         {
-            Debug.Log(i);
-            i++;
             bocksSpeak.SetActive(true);
             bocksSpeak = dialogueList[i];
-            Debug.Log("efface");
+            i++;
             truc = false;
 
-            Debug.Log(dialogueList);
         }
     }
 

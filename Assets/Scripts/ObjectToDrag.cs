@@ -39,8 +39,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         }
         if(cog && GameManager.Instance.dAD.draggedObject == gameObject)
         {
-            //MakeTheCogRoll(900);
-            MakeTheCogRoll(90);
+            MakeTheCogRoll(900);
             transform.GetChild(0).GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             transform.GetChild(0).position = transform.localPosition;
         }
