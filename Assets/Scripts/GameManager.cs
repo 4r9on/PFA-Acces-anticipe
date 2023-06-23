@@ -487,6 +487,9 @@ public class GameManager : MonoBehaviour
             case 3:
                 newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3.Count)];
                 break;
+            case 4:
+                newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList4[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3.Count)];
+                break;
         }
 
         newSoundDesign.GetComponent<AudioSource>().Play();
@@ -508,6 +511,10 @@ public class GameManager : MonoBehaviour
             case 3:
                 newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3.Count)];
                 newSoundDesign.GetComponent<SoundDesign>().clipList1 = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3;
+                break;
+            case 4:
+                newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList4[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3.Count)];
+                newSoundDesign.GetComponent<SoundDesign>().clipList1 = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList4;
                 break;
         }
         nameOfLoopingObject = gameObjectWithTheSound.name;

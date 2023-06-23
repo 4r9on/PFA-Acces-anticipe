@@ -8,6 +8,7 @@ public class SoundDesign : MonoBehaviour
     public List<AudioClip> clipList1;
     public List<AudioClip> clipList2;
     public List<AudioClip> clipList3;
+    public List<AudioClip> clipList4;
     public AudioSource audioSource;
     public float Timing;
 

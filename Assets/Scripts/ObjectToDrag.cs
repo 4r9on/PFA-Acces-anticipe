@@ -237,6 +237,8 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public void shakeCameraAnim()
     {
         GameManager.Instance.DotWeenShakeCamera(0.1f, 0.6f, 30);
+        GetComponent<SoundDesign>().PhaseOfSound = 4;
+        GameManager.Instance.NewSound(gameObject);
     }
 
     public void DestroyTheCog()
