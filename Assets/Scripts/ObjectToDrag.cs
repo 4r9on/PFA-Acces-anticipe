@@ -22,6 +22,8 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public bool S2ATSlide;
     public bool Background;
     public bool wasGravited;
+
+    private int click;
     // Start is called before the first frame update
     void Start()
     {
@@ -173,11 +175,13 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
         if (gameObject.layer == 6)
         {
+            
+
             Debug.Log(GameManager.Instance.GetComponent<DragAndDrop>().draggedObject);
             Debug.Log(gameObject);
-            GameManager.Instance.Dialogue();
-            Debug.Log("parle");
             GameManager.Instance.ObjectHover = gameObject;
+
+
 
         }
 

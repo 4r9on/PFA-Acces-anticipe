@@ -271,22 +271,29 @@ public class GameManager : MonoBehaviour
             case 1:
                 Debug.Log("touche une fois");
                 canTouchCd = false;
+                Dialogue();
+
                 narratorsAnim[3].SetActive(true);
                 // timing = 0.5f;
                 break;
             case 2:
                 Debug.Log("touche une seconde fois");
                 canTouchCd = false;
+                Dialogue();
+
                 narratorsAnim[1].SetActive(true);
+
                 // timing = 0.4f;
                 break;
             case 3:
                 Debug.Log("Detruit l'UI");
+                Dialogue();
+
                 narratorsAnim[4].SetActive(true);
                 narratorsAnim[5].SetActive(true);
+
                 // timing = 0.3f;
                 //nous permet de rendre la souris invisible et non utilisable
-                Cursor.lockState = CursorLockMode.Locked;
 
                 //On va utiliser un faux curseur pour empecher le joueur de l'utiliser
                 /*  cursor.SetActive(true);
@@ -452,20 +459,11 @@ public class GameManager : MonoBehaviour
             i++;
             bocksSpeak.SetActive(true);
             bocksSpeak = dialogueList[i];
-            StartCoroutine(Di());
             Debug.Log("efface");
             truc = false;
 
             Debug.Log(dialogueList);
         }
-    }
-
-    IEnumerator Di()
-    {
-        yield return new WaitForSeconds(5);
-        bocksSpeak.SetActive(false);
-
-        Debug.Log("attendre");
     }
 
     
