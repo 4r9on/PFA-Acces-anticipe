@@ -6,6 +6,7 @@ using UnityEngine.Rendering.Universal;
 public class Narrator : MonoBehaviour
 {
     bool KnowYouComeToScene4;
+    public bool secondTimeHandHitButton;
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +64,10 @@ public class Narrator : MonoBehaviour
 
     public void ClickedOnCD()
     {
+        if (secondTimeHandHitButton)
+        {
+            GameManager.Instance.DotWeenShakeCamera(0.2f, 0.5f, 20);
+        }
         foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
         {
             if (SimonUI.name == "Button_Pause")
@@ -70,11 +75,13 @@ public class Narrator : MonoBehaviour
                 SimonUI.GetComponent<Animator>().SetBool("IsClicked", true);
             }
         }
+
            // GameManager.Instance.CD.GetComponent<Animator>().SetBool("IsClicked", true);
     }
 
     public void UnClickedOnCD()
     {
+       
         foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
         {
             if (SimonUI.name == "Button_Pause")
