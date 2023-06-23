@@ -208,9 +208,9 @@ public class DragAndDrop : MonoBehaviour
                     firstTimeUseTheLoadingBar = false;
                 }
             }
-            else
+            else if (!canThrowHandle)
             {
-               
+
                 GameManager.Instance.DotWeenShakeObject(GameManager.Instance.Gauge, 0.5f, 0.06f, 10);
                 foreach (Light2D light in GameManager.Instance.lightsOnTableau1)
                 {
@@ -390,206 +390,210 @@ public class DragAndDrop : MonoBehaviour
 
     public void OnClicked()
     {
-        if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer" || GameManager.Instance.ObjectHover.tag == "Slider")
+        if (GameManager.Instance.ObjectHover != null)
         {
-            draggedObject = GameManager.Instance.ObjectHover;
-            if (draggedObject.GetComponent<ObjectToDrag>() != null && GameManager.Instance.ObjectHover.tag != "Slider")
+
+
+            if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer" || GameManager.Instance.ObjectHover.tag == "Slider")
             {
-                //Permet de faire tomber l'UI lorsqu'on aura clicker suffisamment dessus
-                if (draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity > 0)
+                draggedObject = GameManager.Instance.ObjectHover;
+                if (draggedObject.GetComponent<ObjectToDrag>() != null && GameManager.Instance.ObjectHover.tag != "Slider")
                 {
-                    draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity--;
-                    if (draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity != 0)
+                    //Permet de faire tomber l'UI lorsqu'on aura clicker suffisamment dessus
+                    if (draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity > 0)
                     {
-                        GameManager.Instance.DotWeenShakeObject(draggedObject, 0.2f, 0.06f, 20);
-                    }
-                    if (draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity == 0)
-                    {
-                        draggedObject.GetComponent<Rigidbody2D>().gravityScale = 1;
-                        foreach (Transform children in draggedObject.transform)
+                        draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity--;
+                        if (draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity != 0)
                         {
-                            children.GetComponent<Rigidbody2D>().gravityScale = 1;
+                            GameManager.Instance.DotWeenShakeObject(draggedObject, 0.2f, 0.06f, 20);
                         }
-                    }
-                    draggedObject = null;
-                }
-                else
-                {
-                    dragged = true;
-                    if (draggedObject.GetComponent<ObjectToDrag>().canPutObject)
-                    {
-
-                    }
-                    else if (ObjectPut != null)
-                    {
-                         if (ObjectPut.tag == "Simon" && draggedObject == ObjectPut)
+                        if (draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity == 0)
                         {
-
+                            draggedObject.GetComponent<Rigidbody2D>().gravityScale = 1;
+                            foreach (Transform children in draggedObject.transform)
+                            {
+                                children.GetComponent<Rigidbody2D>().gravityScale = 1;
+                            }
                         }
+                        draggedObject = null;
                     }
                     else
                     {
-                        if(draggedObject.name != "Stock CD")
+                        dragged = true;
+                        if (draggedObject.GetComponent<ObjectToDrag>().canPutObject)
                         {
-                            draggedObject.GetComponent<ObjectToDrag>().destroyOnGravity = false;
+
                         }
-                        
+                        else if (ObjectPut != null)
+                        {
+                            if (ObjectPut.tag == "Simon" && draggedObject == ObjectPut)
+                            {
+
+                            }
+                        }
+                        else
+                        {
+                            if (draggedObject.name != "Stock CD")
+                            {
+                                draggedObject.GetComponent<ObjectToDrag>().destroyOnGravity = false;
+                            }
+
+                        }
                     }
+
+
+
                 }
 
-
-
             }
 
-        }
-
-        //Nous fera bouger la barre de chargement
-        else if (GameManager.Instance.ObjectHover.tag == "Bar" && ObjectPut != null)
-        {
-            MovingBar = true;
-        }
-
-        //Donne le nom de l'UI que l'on a clique dessus
-        else if (GameManager.Instance.ObjectHover.tag == "Simon")
-        {
-            GameManager.Instance.ObjectHover.GetComponent<Animator>().SetBool("IsClicked", true);
-
-            if (GameManager.Instance.ObjectHover.name == "Button_Pause" && !multipleTouchOnTableau2)
+            //Nous fera bouger la barre de chargement
+            else if (GameManager.Instance.ObjectHover.tag == "Bar" && ObjectPut != null)
             {
-                GetComponent<Simon>().BeginTheSimon();
+                MovingBar = true;
             }
-            else if((GameManager.Instance.ObjectHover.name == "Button_Pause" || GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().CD) && GameManager.Instance.canTouchCd)
+
+            //Donne le nom de l'UI que l'on a clique dessus
+            else if (GameManager.Instance.ObjectHover.tag == "Simon")
             {
-                nbrOfTimeWeTouch++;
-            }
-            if (ObjectPut != null)
-            {
-                foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
+                GameManager.Instance.ObjectHover.GetComponent<Animator>().SetBool("IsClicked", true);
+
+                if (GameManager.Instance.ObjectHover.name == "Button_Pause" && !multipleTouchOnTableau2)
                 {
-
-                    if (SimonUI.GetComponent<ObjectToDrag>().CD)
+                    GetComponent<Simon>().BeginTheSimon();
+                }
+                else if ((GameManager.Instance.ObjectHover.name == "Button_Pause" || GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().CD) && GameManager.Instance.canTouchCd)
+                {
+                    nbrOfTimeWeTouch++;
+                }
+                if (ObjectPut != null)
+                {
+                    foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                     {
-                        if (SimonUI == GameManager.Instance.ObjectHover)
+
+                        if (SimonUI.GetComponent<ObjectToDrag>().CD)
                         {
-                            nbrOfTimeWeTouch++;
+                            if (SimonUI == GameManager.Instance.ObjectHover)
+                            {
+                                nbrOfTimeWeTouch++;
+                            }
                         }
                     }
                 }
-            }
 
-            else
-            {
-                if (GameManager.Instance.ObjectHover.name != "Button_Pause")
+                else
                 {
-                    GetComponent<Simon>().AddToComparative(GameManager.Instance.ObjectHover.name);
+                    if (GameManager.Instance.ObjectHover.name != "Button_Pause")
+                    {
+                        GetComponent<Simon>().AddToComparative(GameManager.Instance.ObjectHover.name);
+                    }
+
                 }
 
             }
 
-        }
-
-        else if (GameManager.Instance.ObjectHover.tag == "ButtonON")
-        {
-            if (GameManager.Instance.ON[0].GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<SpriteRenderer>().sprite == GameManager.Instance.ON[0].GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<SpriteRenderer>().sprite)
+            else if (GameManager.Instance.ObjectHover.tag == "ButtonON")
             {
-
-                foreach (GameObject ObjectON in GameManager.Instance.ON)
+                if (GameManager.Instance.ON[0].GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<SpriteRenderer>().sprite == GameManager.Instance.ON[0].GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<SpriteRenderer>().sprite)
                 {
 
-                    Destroy(ObjectON.GetComponent<Rigidbody2D>());
+                    foreach (GameObject ObjectON in GameManager.Instance.ON)
+                    {
+
+                        Destroy(ObjectON.GetComponent<Rigidbody2D>());
+                    }
+                    GameManager.Instance.AllText.GetComponent<ElevateText>().RotateIt();
                 }
-                GameManager.Instance.AllText.GetComponent<ElevateText>().RotateIt();
             }
-        }
 
-        else if (GameManager.Instance.ObjectHover.tag == "Light")
-        {
-            flashinglight.SetActive(false);
-            flashingHand.SetActive(true);
-            GameManager.Instance.ObjectHover = null;
-            GameManager.Instance.Raycaster2D.eventMask = 503;
-        }
-
-        else if (GameManager.Instance.ObjectHover.tag == "Digi")
-        {
-            digicode.SetActive(true);
-            coliderDigiCode.SetActive(true);
-
-            if (GameManager.Instance.ObjectHover.tag == "Digi2")
+            else if (GameManager.Instance.ObjectHover.tag == "Light")
             {
-                digicode.SetActive(false);
-                coliderDigiCode.SetActive(false);
+                flashinglight.SetActive(false);
+                flashingHand.SetActive(true);
+                GameManager.Instance.ObjectHover = null;
+                GameManager.Instance.Raycaster2D.eventMask = 503;
             }
+
+            else if (GameManager.Instance.ObjectHover.tag == "Digi")
+            {
+                digicode.SetActive(true);
+                coliderDigiCode.SetActive(true);
+
+                if (GameManager.Instance.ObjectHover.tag == "Digi2")
+                {
+                    digicode.SetActive(false);
+                    coliderDigiCode.SetActive(false);
+                }
+            }
+
+            else if (GameManager.Instance.ObjectHover.tag == "Button")
+            {
+                GameManager.Instance.breakingTheWall();
+            }
+
+            else if (GameManager.Instance.ObjectHover.tag == "UV")
+            {
+                GameManager.Instance.FallTheHole(GameManager.Instance.ObjectHover);
+            }
+
+            else if (GameManager.Instance.ObjectHover.tag == "Door")
+            {
+                tableau5.SetActive(true);
+                door.SetActive(false);
+            }
+
+            else if (GameManager.Instance.ObjectHover.tag == "Vis")
+            {
+                animator.SetBool("Visser", true);
+            }
+
+            else if (GameManager.Instance.ObjectHover.tag == "ButtonLangue")
+            {
+                StartCoroutine(SettingsLangue1());
+            }
+
+            else if (GameManager.Instance.ObjectHover.tag == "ButtonLangue2")
+            {
+                StartCoroutine(SettingsLangue2());
+            }
+            else if (GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().Background)
+            {
+                GameManager.Instance.ObjectHover.SetActive(false);
+                GameManager.Instance.leftWall.SetActive(false);
+                GameManager.Instance.tableau3.GetComponent<Animator>().SetBool("PassedTo4", true);
+
+                GameManager.Instance.tableau4.SetActive(true);
+                diReturnJukebox.SetActive(true);
+                Debug.Log("aaaaaaahhh");
+
+            }
+
+            else if (GameManager.Instance.ObjectHover.tag == "ButtonMusic")
+            {
+                StartCoroutine(SettingsMusic());
+            }
+
+            else if (GameManager.Instance.ObjectHover.tag == "SettingsOpen")
+            {
+                settingsWindow.SetActive(true);
+            }
+
+            else if (GameManager.Instance.ObjectHover.tag == "SettingsClose")
+            {
+                settingsWindow.SetActive(false);
+            }
+
+            else if (GameManager.Instance.ObjectHover.tag == "SettingsOpen")
+            {
+                settingsWindow.SetActive(true);
+            }
+
+            else if (GameManager.Instance.ObjectHover.tag == "Quit")
+            {
+                //Application.Quit();
+            }
+
         }
-
-        else if (GameManager.Instance.ObjectHover.tag == "Button")
-        {
-            GameManager.Instance.breakingTheWall();
-        }
-
-        else if (GameManager.Instance.ObjectHover.tag == "UV")
-        {
-            GameManager.Instance.FallTheHole(GameManager.Instance.ObjectHover);
-        }
-
-        else if (GameManager.Instance.ObjectHover.tag == "Door")
-        {
-            tableau5.SetActive(true);
-            door.SetActive(false);
-        }
-
-        else if (GameManager.Instance.ObjectHover.tag == "Vis")
-        {
-            animator.SetBool("Visser", true);
-        }
-
-        else if (GameManager.Instance.ObjectHover.tag == "ButtonLangue")
-        {
-            StartCoroutine(SettingsLangue1());
-        }
-
-        else if (GameManager.Instance.ObjectHover.tag == "ButtonLangue2")
-        {
-            StartCoroutine(SettingsLangue2());
-        }
-        else if (GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().Background)
-        {
-            GameManager.Instance.ObjectHover.SetActive(false);
-            GameManager.Instance.leftWall.SetActive(false);
-            GameManager.Instance.tableau3.GetComponent<Animator>().SetBool("PassedTo4", true);
-
-            GameManager.Instance.tableau4.SetActive(true);
-            diReturnJukebox.SetActive(true);
-            Debug.Log("aaaaaaahhh");
-
-        }
-
-        else if (GameManager.Instance.ObjectHover.tag == "ButtonMusic")
-        {
-            StartCoroutine(SettingsMusic());
-        }
-
-        else if (GameManager.Instance.ObjectHover.tag == "SettingsOpen")
-        {
-            settingsWindow.SetActive(true);
-        }
-
-        else if (GameManager.Instance.ObjectHover.tag == "SettingsClose")
-        {
-            settingsWindow.SetActive(false);
-        }
-
-        else if (GameManager.Instance.ObjectHover.tag == "SettingsOpen")
-        {
-            settingsWindow.SetActive(true);
-        }
-
-        else if (GameManager.Instance.ObjectHover.tag == "Quit")
-        {
-            //Application.Quit();
-        }
-
-
 
     }
     public void StopClick()
@@ -624,10 +628,10 @@ public class DragAndDrop : MonoBehaviour
         }
         if (GameManager.Instance.ObjectHover != null)
         {
-            
+
             if (GameManager.Instance.ObjectHover.tag == "Simon" && nbrOfTimeWeTouch > 0)
             {
-                
+
                 foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                 {
                     if (SimonUI.name == "Button_Pause" && SimonUI == GameManager.Instance.ObjectHover && multipleTouchOnTableau2)
@@ -652,10 +656,6 @@ public class DragAndDrop : MonoBehaviour
 
                 if (draggedObject.GetComponent<ObjectToDrag>().canPutObject && GameManager.Instance.ObjectHover == draggedObject.GetComponent<ObjectToDrag>().objectToPutOn)
                 {
-                    if (draggedObject.GetComponent<ObjectToDrag>().objectToPutOn == GameManager.Instance.Gauge)
-                    {
-                        GameManager.Instance.DotWeenShakeObject(GameManager.Instance.Gauge, 0.1f, 0.01f, 10);
-                    }
                     if (draggedObject.GetComponent<ObjectToDrag>().Moon)
                     {
 

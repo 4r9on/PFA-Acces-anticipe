@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public GameObject Narrator;
     public GameObject camCine;
     public List<AudioClip> TableauxMusic = new List<AudioClip>();
+    public GameObject SoundDesign;
 
     //Tableau 1
     public GameObject Gauge;
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
     public GameObject S2ATWithWriting;
     public List<Light2D> lightsOnTableau1 = new List<Light2D>();
     public ParticleSystem particlesTableau1;
+    public ParticleSystem littleParticlesTableau1;
     public List<Vector2> S2ATPoints;
     List<GameObject> ObjectToRemoveAfterGauge = new List<GameObject>();
     public VideoPlayer introS2AT;
@@ -140,6 +142,8 @@ public class GameManager : MonoBehaviour
                     if (!stopTheBeginning)
                     {
                         var emission = particlesTableau1.emission;
+                        emission.rateOverTime = 20 * pourcentageToMakeObjectVisible;
+                        emission = littleParticlesTableau1.emission;
                         emission.rateOverTime = 20 * pourcentageToMakeObjectVisible;
                         lightsOnTableau1[3].intensity = pourcentageToMakeObjectVisible;
                     }
@@ -306,6 +310,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         S2ATWithWriting.GetComponent<Animator>().enabled = true;
+        NewSound(S2ATWithWriting);
         S2ATWithWriting.transform.localScale = Vector3.one;
         S2ATWithWriting.transform.localPosition = new Vector3(0.013f, 1.752f, S2ATWithWriting.transform.position.z);
         GetComponent<DragAndDrop>().MinScale = S2AT.transform.localScale.y;
@@ -453,17 +458,33 @@ public class GameManager : MonoBehaviour
     public void Dialogue()
     {
         truc = true;
-        if (truc = true)
+        if (truc == true)
         {
-            Debug.Log(i);
-            i++;
             bocksSpeak.SetActive(true);
             bocksSpeak = dialogueList[i];
-            Debug.Log("efface");
+            i++;
             truc = false;
 
-            Debug.Log(dialogueList);
         }
+    }
+
+    public void NewSound(GameObject gameObjectWithTheSound)
+    {
+        GameObject newSoundDesign = Instantiate(SoundDesign);
+        switch (gameObjectWithTheSound.GetComponent<SoundDesign>().PhaseOfSound )
+        {
+            case 1:
+                newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList1[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList1.Count)];
+                break;
+            case 2:
+                newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList2[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList2.Count)];
+                break;
+            case 3:
+                newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3.Count)];
+                break;
+        }
+       
+        newSoundDesign.GetComponent<AudioSource>().Play();
     }
 
     
