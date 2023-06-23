@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Narrator : MonoBehaviour
 {
@@ -39,6 +40,25 @@ public class Narrator : MonoBehaviour
         GameManager.Instance.StockCD.GetComponent<Rigidbody2D>().gravityScale = 1.0f;
         GameManager.Instance.StockCD.tag = "Object";
         GameManager.Instance.StockCD.GetComponent<ObjectToDrag>().BornWithoutGravity = 1;
+        GameManager.Instance.cog1.transform.parent = GameManager.Instance.tableau2.transform;
+        GameManager.Instance.cog1.GetComponent<SpriteRenderer>().sortingOrder = 4;
+    }
+
+    public void firstLampToLightOn()
+    {
+       GameManager.Instance.lightOnScene2.transform.GetChild(2).gameObject.SetActive(true);
+    }
+    public void SecondLampToLightOn()
+    {
+        GameManager.Instance.lightOnScene2.transform.GetChild(4).gameObject.SetActive(true);
+    }
+    public void LastLampToLightOn()
+    {
+        GameManager.Instance.lightOnScene2.transform.GetChild(3).gameObject.SetActive(true);
+        GameManager.Instance.lightOnScene2.transform.GetChild(5).GetComponent<Light2D>().intensity = 0.48f;
+        GameManager.Instance.lightOnScene2.transform.GetChild(5).GetComponent<Animator>().enabled = true;
+        GameManager.Instance.lightOnScene2.transform.GetChild(6).gameObject.SetActive(true);
+        GameManager.Instance.changeMusic(2);
     }
 
     public void ClickedOnCD()
@@ -95,6 +115,7 @@ public class Narrator : MonoBehaviour
                
                 if (i == 7)
                 {
+                    GameManager.Instance.cog1.transform.parent = GameManager.Instance.cog1.transform.parent.parent;
                     GameManager.Instance.cog1.GetComponent<BoxCollider2D>().enabled = false;
                     GameManager.Instance.narratorsAnim[i + 1].SetActive(false);
                     GameManager.Instance.narratorsAnim[i + 1].transform.parent = GameManager.Instance.narratorsAnim[i + 1].transform.parent.parent.parent.parent ;

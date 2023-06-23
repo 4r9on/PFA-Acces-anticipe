@@ -130,6 +130,7 @@ public class GameManager : MonoBehaviour
                 var oppacity = ObjectInBegin.GetComponent<SpriteRenderer>().color;
                 oppacity.a = pourcentageToMakeObjectVisible;
                 ObjectInBegin.GetComponent<SpriteRenderer>().color = oppacity;
+                lightsOnTableau1[3].intensity = pourcentageToMakeObjectVisible;
             }
             dAD.ChangeLoadingBarScale(pourcentageToMakeObjectVisible / 25, 1, 0);
             for (int i = 0; i < 3; i++)
@@ -195,11 +196,34 @@ public class GameManager : MonoBehaviour
             tableau5.SetActive(true);
         }
         cleanScene();
-        changeMusic(dAD.TableauActual);
+
+        if(dAD.TableauActual != 2)
+        {
+            changeMusic(dAD.TableauActual);
+        }
+        
     }
 
     public void changeMusic(int MusicTableau)
     {
+        switch (MusicTableau)
+        {
+            case 1:
+                GetComponent<AudioSource>().volume = 0.333f;
+                break;
+            case 2:
+                GetComponent<AudioSource>().volume = 0.488f;
+                break;
+            case 3:
+                GetComponent<AudioSource>().volume = 0.55f;
+                break;
+            case 4:
+                GetComponent<AudioSource>().volume = 0.5f;
+                break;
+            case 5:
+                GetComponent<AudioSource>().volume = 0.396f;
+                break;
+        }
         GetComponent<AudioSource>().clip = TableauxMusic[MusicTableau - 1];
         GetComponent<AudioSource>().Play();
     }

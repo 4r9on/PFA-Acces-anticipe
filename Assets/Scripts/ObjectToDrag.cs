@@ -49,6 +49,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         yield return new WaitForSeconds(1f);
         destroyOnGravity = true;
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (painting)
@@ -93,6 +94,10 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
                     newObject.GetComponent<ObjectToDrag>().objectToPutOn = objectToPutOn;
                     if (newObject.GetComponent<ObjectToDrag>().CD)
                     {
+                        GameManager.Instance.ObjectHover = null;
+                        GameManager.Instance.dAD.draggedObject = null;
+                        GameManager.Instance.dAD.dragged = false;
+                        GameManager.Instance.Raycaster2D.eventMask = 503;
                         GameManager.Instance.CD = newObject;
                         gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = GameManager.Instance.StocksCD[2].GetComponent<SpriteRenderer>().sprite;
                         gameObject.GetComponent<BoxCollider2D>().enabled = false;
