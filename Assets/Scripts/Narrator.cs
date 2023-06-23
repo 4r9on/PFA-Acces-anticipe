@@ -157,6 +157,7 @@ public class Narrator : MonoBehaviour
         GameManager.Instance.BackgroundTableau4.SetActive(true);
         GameManager.Instance.tableau2.SetActive(false);
         GameManager.Instance.dAD.TableauActual = 3;
+        GameManager.Instance.camera.transform.Translate(-17.58f, 0, 0);
         GameManager.Instance.changeMusic(GameManager.Instance.dAD.TableauActual);
 
     }

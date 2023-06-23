@@ -223,6 +223,7 @@ public class GameManager : MonoBehaviour
         {
             tableau3.SetActive(true);
             forground.SetActive(false);
+            camera.transform.Translate(27.5115f, 0, 0);
             //camera.transform.Translate(-34.58f, 0, 0);
 
         }
