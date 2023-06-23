@@ -90,7 +90,10 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             }
             else
             {
-                Debug.Log("in the else");
+                if(gameObject == GameManager.Instance.StockCD || gameObject.GetComponent<ObjectToDrag>().painting)
+                {
+                    GameManager.Instance.DotWeenShakeCamera(0.2f, 0.5f, 20);
+                }
                 if(objectCreateAfterFalling != null)
                 {
                     GameObject newObject = Instantiate(objectCreateAfterFalling);
