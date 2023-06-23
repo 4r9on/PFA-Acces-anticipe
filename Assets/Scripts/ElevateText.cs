@@ -72,7 +72,8 @@ public class ElevateText : MonoBehaviour
 
     public void RotateIt()
     {
-        GetComponent<Rigidbody2D>().angularVelocity = 100;
+        GameManager.Instance.camCine.transform.parent.parent.GetComponent<Animator>().enabled = true;
+        //GetComponent<Rigidbody2D>().angularVelocity = 100;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         foreach (GameObject ONGameObject in GameManager.Instance.ON)
         {

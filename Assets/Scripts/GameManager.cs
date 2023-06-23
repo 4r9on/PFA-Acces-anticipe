@@ -195,6 +195,7 @@ public class GameManager : MonoBehaviour
         narratorsAnim[2].SetActive(true);
         canTouchCd = true;
         dAD.multipleTouchOnTableau2 = true;
+        Dialogue();
     }
 
     public void LoadNextLevel()
@@ -460,7 +461,7 @@ public class GameManager : MonoBehaviour
 
     public void Dialogue()
     {
-        truc = false;
+        truc = true;
         if (truc == true)
         {
             bocksSpeak.SetActive(true);

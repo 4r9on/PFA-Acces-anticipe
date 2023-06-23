@@ -673,7 +673,7 @@ public class DragAndDrop : MonoBehaviour
 
                 foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                 {
-                    if (SimonUI.name == "Button_Pause" && SimonUI == GameManager.Instance.ObjectHover && multipleTouchOnTableau2)
+                    if (SimonUI.name == "Button_Pause" && SimonUI == GameManager.Instance.ObjectHover && multipleTouchOnTableau2 && GameManager.Instance.canTouchCd)
                     {
                         GameManager.Instance.TouchCD(nbrOfTimeWeTouch);
                     }
