@@ -119,8 +119,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 74a3d73d9481bfd41a70db8775c9e763
-      internalID: 2018360280
+      spriteID: 99ab8a1a5fea00442b8c665d716533f7
+      internalID: 10645837
       vertices: []
       indices: 
       edges: []
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 804423c3711f9c64faa18b1c6ba975fd
-      internalID: 992737050
+      spriteID: 53398a3089c37df4d865d9212ae82d00
+      internalID: -1108437478
       vertices: []
       indices: 
       edges: []
@@ -161,8 +161,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec62959ad23d65a439f98c76128eda1c
-      internalID: 661273917
+      spriteID: 3f844a4cd7191a04e915935019407bfa
+      internalID: 1499966109
       vertices: []
       indices: 
       edges: []
@@ -182,8 +182,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8bd439f1ce29ad541bf449ae56aa1f0e
-      internalID: 1937080692
+      spriteID: 0c30bb1752f1024418bcb34218d630ef
+      internalID: -1395315551
       vertices: []
       indices: 
       edges: []
@@ -203,8 +203,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e4a96c3f76309c64c9ebe5a8cfa81e24
-      internalID: 693115185
+      spriteID: 30c0b35a0e5ed5a44ae5df1ebc0c13a5
+      internalID: -1559304712
       vertices: []
       indices: 
       edges: []
@@ -224,8 +224,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cff8f0624f9757641948369d10eb67ef
-      internalID: -172853964
+      spriteID: aed220617d7964b4689b689e63f61de9
+      internalID: 393560573
       vertices: []
       indices: 
       edges: []
@@ -245,8 +245,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7f1b36713bcc754ba159862ee765424
-      internalID: -1030365522
+      spriteID: 85af1d753735fa44989707bb4277f94f
+      internalID: -10480150
       vertices: []
       indices: 
       edges: []
@@ -266,8 +266,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b21b5c6e8bd75f24782be4b42d5feb04
-      internalID: -910150930
+      spriteID: 69ca19fb43a40c744b0eca035a710a7c
+      internalID: -1664717637
       vertices: []
       indices: 
       edges: []
@@ -287,8 +287,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0d72dda72c3ec548a7c87cff9fe7513
-      internalID: -2090382678
+      spriteID: 2d7dd2335a0c6bb43b9fabde29456b5d
+      internalID: 1551355554
       vertices: []
       indices: 
       edges: []
@@ -308,8 +308,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 465992816ab53f949ab66954f0aa3572
-      internalID: -1219081528
+      spriteID: 6083ea5e40c70514dbee79f40ae2a366
+      internalID: 1521134419
       vertices: []
       indices: 
       edges: []
@@ -329,8 +329,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5bea145e86f165941aec297df2e02638
-      internalID: -27619077
+      spriteID: ebe02df59ede7b44391ded743bdd8bd2
+      internalID: -129082525
       vertices: []
       indices: 
       edges: []
@@ -350,8 +350,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0bfa36c8260f73f4fa4bef502af65b65
-      internalID: 61154595
+      spriteID: 96fb8e310de52e84893528056568c99a
+      internalID: -1115321005
       vertices: []
       indices: 
       edges: []
@@ -371,8 +371,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1352352b4b37af746a096678f32ce309
-      internalID: 394618312
+      spriteID: c0b00cd33a6fd9542beb925332148bfc
+      internalID: -200766802
       vertices: []
       indices: 
       edges: []
@@ -392,8 +392,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f539c489f7295e447b4022137c6a8780
-      internalID: -1451865784
+      spriteID: 8a2e1aabd3956254b8a00cba1db82ca0
+      internalID: 2067928355
       vertices: []
       indices: 
       edges: []
@@ -413,8 +413,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6cc92f74602579746b6e8fb1b96cf1a1
-      internalID: -758281763
+      spriteID: 7c56d7bdb8ca23648bb9e3b927925143
+      internalID: -1265785286
       vertices: []
       indices: 
       edges: []
@@ -434,8 +434,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e5197d640eda6c147952a3475d76e6e8
-      internalID: 1780549744
+      spriteID: 2632af3d3b234864d9abf2a58d962a81
+      internalID: -1871903152
       vertices: []
       indices: 
       edges: []
@@ -455,8 +455,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef4bbdf51bf257645b06a047e7675c17
-      internalID: -704862280
+      spriteID: dca00c34f14233942919dcc56cb864d5
+      internalID: -353411782
       vertices: []
       indices: 
       edges: []
@@ -476,8 +476,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed1a9e1a7badb284ea9d06907280c4ad
-      internalID: -899747248
+      spriteID: 7801fab4af6b3f54daf787848ac0c27a
+      internalID: -53832792
       vertices: []
       indices: 
       edges: []
@@ -497,8 +497,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0115183409b797040bbe843c374e3e60
-      internalID: -554231229
+      spriteID: 78f1644fdf1509040a5c4e5025f9173e
+      internalID: -1304865500
       vertices: []
       indices: 
       edges: []
@@ -518,8 +518,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b28fb6727edc9445ae10306aa6ecd64
-      internalID: -1468932111
+      spriteID: e60a1735febedee40991ea3afa41d6e4
+      internalID: -1529209954
       vertices: []
       indices: 
       edges: []
@@ -539,8 +539,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 067b8f5bf5b32fd42aae440db9111eba
-      internalID: 805547846
+      spriteID: 714ba255346fb294c9883aa0fe4d02f3
+      internalID: -649254229
       vertices: []
       indices: 
       edges: []
@@ -560,8 +560,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3bf9047c87914e347b8ca2300be0b872
-      internalID: 664245428
+      spriteID: 023cdfa1a20a4ff4a909695bf4f7789b
+      internalID: -943821065
       vertices: []
       indices: 
       edges: []
@@ -581,8 +581,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d8eeb236320a5b4a91d0fea3db12cde
-      internalID: -1647019656
+      spriteID: a07bcee4790c8784aa065d2bc202fbae
+      internalID: 2057135443
       vertices: []
       indices: 
       edges: []
@@ -602,8 +602,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ed23e73a89191b4984923d14126d2bb
-      internalID: -726048098
+      spriteID: 779bb1c40dfa89c42974dbda2f0bf4b5
+      internalID: 1334205019
       vertices: []
       indices: 
       edges: []
@@ -611,7 +611,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: d1f7e8502bbef1741b3382056e5a168a
+    spriteID: 84661da6fa1915a419aab2bb8efa8461
     internalID: 0
     vertices: []
     indices: 
@@ -619,30 +619,30 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Thank you for playing emission map_20: 805547846
-      Thank you for playing emission map_5: -172853964
-      Thank you for playing emission map_11: 61154595
-      Thank you for playing emission map_3: 1937080692
-      Thank you for playing emission map_21: 664245428
-      Thank you for playing emission map_10: -27619077
-      Thank you for playing emission map_22: -1647019656
-      Thank you for playing emission map_13: -1451865784
-      Thank you for playing emission map_14: -758281763
-      Thank you for playing emission map_8: -2090382678
-      Thank you for playing emission map_23: -726048098
-      Thank you for playing emission map_12: 394618312
-      Thank you for playing emission map_6: -1030365522
-      Thank you for playing emission map_18: -554231229
-      Thank you for playing emission map_15: 1780549744
-      Thank you for playing emission map_1: 992737050
-      Thank you for playing emission map_4: 693115185
-      Thank you for playing emission map_7: -910150930
-      Thank you for playing emission map_16: -704862280
-      Thank you for playing emission map_0: 2018360280
-      Thank you for playing emission map_19: -1468932111
-      Thank you for playing emission map_2: 661273917
-      Thank you for playing emission map_17: -899747248
-      Thank you for playing emission map_9: -1219081528
+      Thank you for playing emission map_20: -649254229
+      Thank you for playing emission map_5: 393560573
+      Thank you for playing emission map_11: -1115321005
+      Thank you for playing emission map_3: -1395315551
+      Thank you for playing emission map_21: -943821065
+      Thank you for playing emission map_10: -129082525
+      Thank you for playing emission map_22: 2057135443
+      Thank you for playing emission map_13: 2067928355
+      Thank you for playing emission map_14: -1265785286
+      Thank you for playing emission map_8: 1551355554
+      Thank you for playing emission map_23: 1334205019
+      Thank you for playing emission map_12: -200766802
+      Thank you for playing emission map_6: -10480150
+      Thank you for playing emission map_18: -1304865500
+      Thank you for playing emission map_15: -1871903152
+      Thank you for playing emission map_1: -1108437478
+      Thank you for playing emission map_4: -1559304712
+      Thank you for playing emission map_7: -1664717637
+      Thank you for playing emission map_16: -353411782
+      Thank you for playing emission map_0: 10645837
+      Thank you for playing emission map_19: -1529209954
+      Thank you for playing emission map_2: 1499966109
+      Thank you for playing emission map_17: -53832792
+      Thank you for playing emission map_9: 1521134419
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
