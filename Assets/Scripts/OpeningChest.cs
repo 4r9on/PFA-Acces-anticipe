@@ -174,7 +174,11 @@ public class OpeningChest : MonoBehaviour
             Debug.Log("Open");
 
             enterChest.SetActive(false);
-            GameManager.Instance.dAD.flashinglight.SetActive(true);
+            if (!GameManager.Instance.dAD.flashingHand.activeInHierarchy)
+            {
+                GameManager.Instance.dAD.flashinglight.SetActive(true);
+            }
+            
         }
     }
 

@@ -107,6 +107,8 @@ public class GameManager : MonoBehaviour
     public List<GameObject> dialogueMomentList;
     public int IdDialogue;
     public int IdDialogueMoment;
+    public int LastIdDialogueMoment;
+    public int LastIdDialogue;
     public GameObject bocksSpeak;
     public GameObject bocksMomentSpeak;
 
@@ -147,6 +149,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(dAD.draggedObject == null && Raycaster2D.eventMask != 503)
+        {
+            Raycaster2D.eventMask = 503;
+        }
         if (pourcentageToMakeObjectVisible > 0)
         {
             if (isTableau2)
@@ -587,6 +593,20 @@ public class GameManager : MonoBehaviour
         }
 
 
+    }
+    public void SettingsNarrations(string tags)
+    {
+        switch (tags)
+        {
+            case "ButtonLangue":
+                IdDialogue = 0;
+                Dialogue();
+                break;
+            case "ButtonMusic":
+                IdDialogue = 1;
+                Dialogue();
+                break;
+        }
     }
 
 

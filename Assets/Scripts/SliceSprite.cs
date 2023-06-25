@@ -60,6 +60,8 @@ public class SliceSprite : MonoBehaviour
         if (collision.gameObject.tag == "Hammer" && canBreakIt)
         {
             GameManager.Instance.DotWeenShakeCamera(0.2f, 0.06f, 30);
+            GameManager.Instance.NewSound(gameObject);
+            GameManager.Instance.NewSound(collision.gameObject);
             GameManager.Instance.DotWeenShakeObject(GameManager.Instance.JukeboxBroken4, 0.2f, 0.06f, 30);
             //Le but ici est de trouver a quel endroit est-ce qu'on a touche l'UI 
             SpriteRenderer thisSprite = GetComponent<SpriteRenderer>();
