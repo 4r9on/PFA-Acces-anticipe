@@ -30,6 +30,9 @@ TagManager:
   - ButtonLangue2
   - SettingsClose
   - SettingsOpen
+  - DeadZone
+  - Explosion
+  - Door
   layers:
   - Default
   - TransparentFX

@@ -46,9 +46,11 @@ public class GameManager : MonoBehaviour
 
 
     //Tableau 2
+    public float MaxVolume = 0.488f;
     public bool isTableau2;
     public ParticleSystem particlesTableau2;
     public GameObject CD;
+    public GameObject narratorAnimIdle;
     public List<GameObject> narratorsAnim = new List<GameObject>();
     public List<GameObject> StocksCD = new List<GameObject>();
     public GameObject lightOnScene2;
@@ -77,6 +79,12 @@ public class GameManager : MonoBehaviour
     public List<GameObject> JukeboxPhase = new List<GameObject>();
     int JukeBoxHP = 20;
 
+    //Tableau 5
+    public List<GameObject> Credit = new List<GameObject>();
+    public GameObject Door;
+    public GameObject TalkingAboutDoor;
+    public List<GameObject> Explosions = new List<GameObject>();
+
     public List<GameObject> ON = new List<GameObject>();
 
     public Physics2DRaycaster Raycaster2D;
@@ -96,9 +104,11 @@ public class GameManager : MonoBehaviour
     private int language;
 
     public List<GameObject> dialogueList;
-    public int i;
+    public List<GameObject> dialogueMomentList;
+    public int IdDialogue;
+    public int IdDialogueMoment;
     public GameObject bocksSpeak;
-    public bool truc;
+    public GameObject bocksMomentSpeak;
 
     public GameObject diReturnGame;
 
@@ -127,7 +137,9 @@ public class GameManager : MonoBehaviour
             dAD.TableauActual = 5;
             LoadNextLevel();
             introS2AT.gameObject.SetActive(false);
-            diReturnGame.SetActive(true);
+            //diReturnGame.SetActive(true);
+            IdDialogueMoment = 3;
+            ChangeDialogueMoment();
         }
         introS2AT.loopPointReached += IntroS2AT_loopPointReached;
     }
@@ -197,7 +209,7 @@ public class GameManager : MonoBehaviour
         //faire l'anim ou le narrateur va appuyer sur le bouton pause
         //faire tomber le disque
         narratorsAnim[2].SetActive(true);
-        canTouchCd = true;
+        canTouchCd = false;
         dAD.multipleTouchOnTableau2 = true;
         Dialogue();
     }
@@ -215,9 +227,10 @@ public class GameManager : MonoBehaviour
         }
         else if (dAD.TableauActual == 2)
         {
+            ChangeDialogueMoment();
             tableau2.SetActive(true);
-            tableau2.transform.Translate(17.58f, 0, 0);
-            camera.transform.Translate(17.58f, 0, 0);
+            forground.transform.Translate(-17.58f, 0, 0);
+            // camera.transform.Translate(17.58f, 0, 0);
         }
         else if (dAD.TableauActual == 3)
         {
@@ -231,7 +244,6 @@ public class GameManager : MonoBehaviour
         {
             tableau4.SetActive(true);
             forground.transform.Translate(17.58f, 0, 0);
-
         }
         else if (dAD.TableauActual == 5)
         {
@@ -278,6 +290,7 @@ public class GameManager : MonoBehaviour
 
     public void cleanScene()
     {
+        Raycaster2D.eventMask = 503;
         dAD.ObjectPut = null;
         dAD.draggedObject = null;
         ObjectHover = null;
@@ -292,7 +305,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log("touche une fois");
                 canTouchCd = false;
                 Dialogue();
-
+                narratorAnimIdle.SetActive(false);
                 narratorsAnim[3].SetActive(true);
                 // timing = 0.5f;
                 break;
@@ -300,15 +313,14 @@ public class GameManager : MonoBehaviour
                 Debug.Log("touche une seconde fois");
                 canTouchCd = false;
                 Dialogue();
-
-                narratorsAnim[1].SetActive(true);
+                
 
                 // timing = 0.4f;
                 break;
-            case 3:
+            case >=3:
                 Debug.Log("Detruit l'UI");
                 Dialogue();
-
+                narratorAnimIdle.SetActive(false);
                 narratorsAnim[4].SetActive(true);
                 narratorsAnim[5].SetActive(true);
 
@@ -370,6 +382,10 @@ public class GameManager : MonoBehaviour
         foreach (GameObject ObjetcsDay in DayNight)
         {
             ObjetcsDay.GetComponent<Animator>().enabled = true;
+            if (ObjetcsDay.GetComponent<SoundDesign>() != null)
+            {
+                NewSound(ObjetcsDay);
+            }
         }
         dayLight.SetActive(false);
         nightLight.SetActive(true);
@@ -412,7 +428,6 @@ public class GameManager : MonoBehaviour
     }
     public void Langue()
     {
-        Debug.Log("aaa");
         if (language == 1)
         {
             French.SetActive(true);
@@ -460,8 +475,8 @@ public class GameManager : MonoBehaviour
             }
             if (JukeBoxHP == 0)
             {
-                PlayerPrefs.SetInt("GetCrashed", 1);
-                GetComponent<LaunchBat>().ExitAppThenRestart();
+                
+                
             }
             else
             {
@@ -473,15 +488,35 @@ public class GameManager : MonoBehaviour
 
     public void Dialogue()
     {
-        truc = true;
-        if (truc == true)
+        bocksSpeak = dialogueList[IdDialogue];
+        
+        if (IdDialogue - 1 >= 0)
         {
-            bocksSpeak.SetActive(true);
-            bocksSpeak = dialogueList[i];
-            i++;
-            truc = false;
+            if (dialogueList[IdDialogue - 1].GetComponent<Narration>() != null)
+            {
+                dialogueList[IdDialogue - 1].GetComponent<Narration>().endAnAnim();
+            }
 
         }
+        bocksSpeak.SetActive(true);
+        IdDialogue++;
+    }
+
+    public void ChangeDialogueMoment()
+    {
+        bocksMomentSpeak = dialogueMomentList[IdDialogueMoment];
+        dialogueList.Clear();
+        foreach (Transform child in bocksMomentSpeak.transform)
+        {
+            dialogueList.Add(child.gameObject);
+        }
+        if (IdDialogueMoment - 1 >= 0)
+        {
+            //dialogueMomentList[IdDialogueMoment - 1].GetComponent<Narration>().endAnAnim();
+            dialogueMomentList[IdDialogueMoment - 1].SetActive(false);
+        }
+        bocksMomentSpeak.SetActive(true);
+        IdDialogueMoment++;
     }
 
     public void NewSound(GameObject gameObjectWithTheSound)

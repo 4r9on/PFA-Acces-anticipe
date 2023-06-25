@@ -26,11 +26,19 @@ public class Narrator : MonoBehaviour
         }
     }
 
+    public void willHitTheButton()
+    {
+        GameManager.Instance.narratorAnimIdle.SetActive(false);
+        GameManager.Instance.narratorsAnim[1].SetActive(true);
+    }
+
     public void HitPauseButton()
     {
         GameManager.Instance.DotWeenShakeCamera(0.2f, 1f, 40);
         GameManager.Instance.narratorsAnim[9].SetActive(true);
         GameManager.Instance.NewSound(gameObject);
+        GameManager.Instance.Dialogue();
+        GameManager.Instance.GetComponent<AudioSource>().Pause();
         foreach (GameObject obj in GameManager.Instance.SimonUI)
         {
             if (obj.name == "Button_Pause")
@@ -65,6 +73,7 @@ public class Narrator : MonoBehaviour
         GameManager.Instance.lightOnScene2.transform.GetChild(5).GetComponent<Animator>().enabled = true;
         GameManager.Instance.lightOnScene2.transform.GetChild(6).gameObject.SetActive(true);
         GameManager.Instance.changeMusic(2);
+        GameManager.Instance.GetComponent<AudioSource>().volume = 0;
     }
 
     public void ClickedOnCD()
@@ -78,11 +87,12 @@ public class Narrator : MonoBehaviour
             if (SimonUI.name == "Button_Pause")
             {
                 SimonUI.GetComponent<Animator>().SetBool("IsClicked", true);
+                SimonUI.GetComponent<SoundDesign>().PhaseOfSound = 1;
                 GameManager.Instance.NewSound(SimonUI);
             }
         }
-
-           // GameManager.Instance.CD.GetComponent<Animator>().SetBool("IsClicked", true);
+        GameManager.Instance.GetComponent<AudioSource>().Pause();
+        // GameManager.Instance.CD.GetComponent<Animator>().SetBool("IsClicked", true);
     }
 
     public void UnClickedOnCD()
@@ -100,8 +110,14 @@ public class Narrator : MonoBehaviour
 
     public void YouCanTouchCd()
     {
-       GameManager.Instance.canTouchCd = true;
-       DestroyHands();
+        GameManager.Instance.canTouchCd = true;
+        if (secondTimeHandHitButton)
+        {
+
+            GameManager.Instance.Dialogue();
+        }
+        GameManager.Instance.narratorAnimIdle.SetActive(true);
+        DestroyHands();
     }
 
     public void RemoveDiskPlayer()
@@ -114,10 +130,12 @@ public class Narrator : MonoBehaviour
     public void ExplosionSound()
     {
         GameManager.Instance.NewSound(gameObject);
+        GameManager.Instance.GetComponent<AudioSource>().Pause();
     }
     public void DestroyJukebox()
     {
         GameManager.Instance.DestroyJukebox();
+        GameManager.Instance.Dialogue();
     }
 
 
@@ -154,10 +172,9 @@ public class Narrator : MonoBehaviour
     public void scene2Disapear()
     {
         GameManager.Instance.cleanScene();
-        GameManager.Instance.BackgroundTableau4.SetActive(true);
         GameManager.Instance.tableau2.SetActive(false);
         GameManager.Instance.dAD.TableauActual = 3;
-        GameManager.Instance.camera.transform.Translate(-17.58f, 0, 0);
+        GameManager.Instance.forground.transform.Translate(-17.58f, 0, 0);
         GameManager.Instance.changeMusic(GameManager.Instance.dAD.TableauActual);
 
     }
@@ -174,13 +191,30 @@ public class Narrator : MonoBehaviour
     {
         if (KnowYouComeToScene4)
         {
-            endOfScene4();
+            BeginNarrationTableau4();
         }
     }
     public void HammerIsPutted()
     {
         GameManager.Instance.Hammer.SetActive(true);
         endOfScene4();
+    }
+
+    public void BeginNarrationTableau4()
+    {
+        KnowYouComeToScene4 = false;
+            foreach (Transform child in GameManager.Instance.bocksMomentSpeak.transform)
+            {
+                child.gameObject.SetActive(true);
+            }
+        
+        
+    }
+
+    public void EndOfMonologueTableau4()
+    {
+        GameManager.Instance.narratorsAnim4[0].SetActive(false);
+        GameManager.Instance.narratorsAnim4[1].SetActive(true);
     }
 
     public void endOfScene4()
@@ -195,8 +229,35 @@ public class Narrator : MonoBehaviour
         }
     }
 
+    public void QuitTheGame()
+    {
+         PlayerPrefs.SetInt("GetCrashed", 1);
+         GameManager.Instance.GetComponent<LaunchBat>().ExitAppThenRestart();
+    }
+
     public void DestroyHands()
     {
         gameObject.SetActive(false);
     }
+
+    public void NarratorTalkAboutTheDoor()
+    {
+        GameManager.Instance.TalkingAboutDoor.SetActive(true);
+    }
+    public void DoorAppeared()
+    {
+        GameManager.Instance.Door.SetActive(true);
+    }
+
+    public void DeadZoneActive()
+    {
+        foreach (Transform child in gameObject.transform.parent)
+        {
+            if (child.tag == "DeadZone")
+            {
+                child.gameObject.SetActive(true);
+            }
+        }
+    }
+
 }

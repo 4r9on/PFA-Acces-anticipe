@@ -421,9 +421,17 @@ public class DragAndDrop : MonoBehaviour
                 draggedObject = GameManager.Instance.ObjectHover;
                 if (draggedObject.GetComponent<ObjectToDrag>() != null && GameManager.Instance.ObjectHover.tag != "Slider")
                 {
+                    if (draggedObject.GetComponent<ObjectToDrag>().painting)
+                    {
+                        GameManager.Instance.NewSound(draggedObject);
+                    }
                     //Permet de faire tomber l'UI lorsqu'on aura clicker suffisamment dessus
                     if (draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity > 0)
                     {
+                        if (draggedObject.GetComponent<ObjectToDrag>().painting)
+                        {
+                            flashingHand.transform.parent.parent.gameObject.SetActive(true);
+                        }
                         draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity--;
                         if(draggedObject == GameManager.Instance.cog1)
                         {
@@ -445,6 +453,11 @@ public class DragAndDrop : MonoBehaviour
                     }
                     else
                     {
+                        
+                         if (GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().Moon)
+                        {
+                            GameManager.Instance.NewSound(GameManager.Instance.ObjectHover);
+                        }
                         dragged = true;
                         if (draggedObject.GetComponent<ObjectToDrag>().canPutObject)
                         {
@@ -483,6 +496,7 @@ public class DragAndDrop : MonoBehaviour
             else if (GameManager.Instance.ObjectHover.tag == "Simon")
             {
                 GameManager.Instance.ObjectHover.GetComponent<Animator>().SetBool("IsClicked", true);
+                GameManager.Instance.ObjectHover.GetComponent<SoundDesign>().PhaseOfSound = 1;
                 GameManager.Instance.NewSound(GameManager.Instance.ObjectHover);
 
                 if (GameManager.Instance.ObjectHover.name == "Button_Pause" && !multipleTouchOnTableau2)
@@ -492,6 +506,7 @@ public class DragAndDrop : MonoBehaviour
                 else if ((GameManager.Instance.ObjectHover.name == "Button_Pause" || GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().CD) && GameManager.Instance.canTouchCd)
                 {
                     nbrOfTimeWeTouch++;
+                    GameManager.Instance.GetComponent<AudioSource>().Play();
                 }
                 if (ObjectPut != null)
                 {
@@ -502,7 +517,7 @@ public class DragAndDrop : MonoBehaviour
                         {
                             if (SimonUI == GameManager.Instance.ObjectHover)
                             {
-                                nbrOfTimeWeTouch++;
+                                //nbrOfTimeWeTouch++;
                             }
                         }
                     }
@@ -512,7 +527,13 @@ public class DragAndDrop : MonoBehaviour
                 {
                     if (GameManager.Instance.ObjectHover.name != "Button_Pause")
                     {
+                        if (GetComponent<Simon>().infiniteGame.Count > 0)
+                        {
+                            GameManager.Instance.ObjectHover.GetComponent<SoundDesign>().PhaseOfSound = 2;
+                            GameManager.Instance.NewSound(GameManager.Instance.ObjectHover);
+                        }
                         GetComponent<Simon>().AddToComparative(GameManager.Instance.ObjectHover.name);
+                        
                     }
 
                 }
@@ -532,9 +553,11 @@ public class DragAndDrop : MonoBehaviour
                     GameManager.Instance.AllText.GetComponent<ElevateText>().RotateIt();
                 }
             }
+            
 
             else if (GameManager.Instance.ObjectHover.tag == "Light")
             {
+                GameManager.Instance.NewSound(flashinglight);
                 flashinglight.SetActive(false);
                 flashingHand.SetActive(true);
                 GameManager.Instance.ObjectHover = null;
@@ -563,15 +586,19 @@ public class DragAndDrop : MonoBehaviour
                 GameManager.Instance.FallTheHole(GameManager.Instance.ObjectHover);
             }
 
-            else if (GameManager.Instance.ObjectHover.tag == "Door")
-            {
-                tableau5.SetActive(true);
-                door.SetActive(false);
-            }
-
             else if (GameManager.Instance.ObjectHover.tag == "Vis")
             {
                 animator.SetBool("Visser", true);
+            }
+
+            else if (GameManager.Instance.ObjectHover.tag == "Door")
+            {
+                foreach(GameObject Credits in GameManager.Instance.Credit)
+                {
+                    Credits.SetActive(true);
+                }
+                GameManager.Instance.Door.SetActive(false);
+                GameManager.Instance.cleanScene();
             }
 
             else if (GameManager.Instance.ObjectHover.tag == "ButtonLangue")
@@ -588,9 +615,9 @@ public class DragAndDrop : MonoBehaviour
                 GameManager.Instance.ObjectHover.SetActive(false);
                 GameManager.Instance.leftWall.SetActive(false);
                 GameManager.Instance.tableau3.GetComponent<Animator>().SetBool("PassedTo4", true);
-
+                GameManager.Instance.ChangeDialogueMoment();
                 GameManager.Instance.tableau4.SetActive(true);
-                diReturnJukebox.SetActive(true);
+                //diReturnJukebox.SetActive(true);
 
             }
 
@@ -697,7 +724,8 @@ public class DragAndDrop : MonoBehaviour
                 {
                     if (draggedObject.GetComponent<ObjectToDrag>().Moon)
                     {
-
+                        draggedObject.GetComponent<SoundDesign>().PhaseOfSound = 2;
+                        GameManager.Instance.NewSound(draggedObject);
                         GameManager.Instance.NightFall();
                         if (draggedObject.transform.parent.GetComponent<ObjectToDrag>() != null)
                         {
