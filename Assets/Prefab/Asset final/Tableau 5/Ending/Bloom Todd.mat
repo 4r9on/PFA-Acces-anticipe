@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bloom aurelien
-  m_Shader: {fileID: -6465566751694194690, guid: 47db442d8a9ee26458adea1b2414af3f, type: 3}
+  m_Name: Bloom Todd
+  m_Shader: {fileID: -6465566751694194690, guid: 91dacaac965854a4482f144096f38c73, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -21,11 +21,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Emission:
-        m_Texture: {fileID: 2800000, guid: b5905947f43d3e34fb0c64e5fd099ee5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9cd874831b4fa6c458fe82a089031772, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: c56292631d998d248b1e481c37fc543d, type: 3}
+        m_Texture: {fileID: 2800000, guid: eb3ab3c8280497841b3c0198c5f6978c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -43,5 +43,5 @@ Material:
     m_Ints: []
     m_Floats: []
     m_Colors:
-    - _Color: {r: 0.43137255, g: 0.039215688, b: 1.4980392, a: 0}
+    - _Color: {r: 5.992157, g: 1.913725, b: 0.1568628, a: 0}
   m_BuildTextureStacks: []
