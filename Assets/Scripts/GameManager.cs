@@ -248,6 +248,7 @@ public class GameManager : MonoBehaviour
         else if (dAD.TableauActual == 5)
         {
             tableau5.SetActive(true);
+            forground.SetActive(false);
         }
         cleanScene();
 
