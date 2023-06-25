@@ -23,7 +23,7 @@ public class DragAndDrop : MonoBehaviour
     public RaycastHit lastHit;
     public int nbrOfTimeWeTouch;
     Color oldColor;
-    public Slider slider;
+    public GameObject slider;
     private SpriteRenderer sr;
     public SpriteRenderer mySpriteBar;
     public SpriteRenderer testBar;
@@ -123,6 +123,10 @@ public class DragAndDrop : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0))
         {
+            if (MovingBar)
+            {
+                GameManager.Instance.CancelLoopingObjects(GameManager.Instance.nameOfLoopingObject);
+            }
             MovingBar = false;
         }
         //Barre de chargement
@@ -143,6 +147,11 @@ public class DragAndDrop : MonoBehaviour
                 {
                     if (ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w > lastRotation || (lastRotation - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w > 1 && lastRotation > 0))
                     {
+                        if (GameManager.Instance.nameOfLoopingObject != GameManager.Instance.Gauge.name)
+                        {
+                            GameManager.Instance.Gauge.GetComponent<SoundDesign>().PhaseOfSound = 1;
+                            GameManager.Instance.SoundLoop(GameManager.Instance.Gauge, 0.5f);
+                        }
                         float theValue = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w;
 
                         if (theValue < 0)
@@ -169,6 +178,11 @@ public class DragAndDrop : MonoBehaviour
                     //On va faire decrementer notre jauge ici
                     else if (ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w != lastRotation)
                     {
+                        if (GameManager.Instance.nameOfLoopingObject != GameManager.Instance.Gauge.name)
+                        {
+                            GameManager.Instance.Gauge.GetComponent<SoundDesign>().PhaseOfSound = 1;
+                            GameManager.Instance.SoundLoop(GameManager.Instance.Gauge, 0.5f);
+                        }
                         float theValue = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w;
 
                         if (theValue < 0)
@@ -188,6 +202,10 @@ public class DragAndDrop : MonoBehaviour
                         }
 
                         value += theValue;
+                    }
+                    else
+                    {
+                        GameManager.Instance.CancelLoopingObjects(GameManager.Instance.nameOfLoopingObject);
                     }
                     ChangeLoadingBarScale(value, 5.3f, -2.65f);
                     float valuepourcent = (value - -2.65f) / (5.3f - -2.65f);
@@ -210,7 +228,8 @@ public class DragAndDrop : MonoBehaviour
             }
             else if (!canThrowHandle)
             {
-
+                GameManager.Instance.CancelLoopingObjects(GameManager.Instance.nameOfLoopingObject);
+                ChangeLoadingBarScale(5.3f, 5.3f, -2.65f);
                 GameManager.Instance.DotWeenShakeObject(GameManager.Instance.Gauge, 0.5f, 0.06f, 10);
                 foreach (Light2D light in GameManager.Instance.lightsOnTableau1)
                 {
@@ -226,13 +245,11 @@ public class DragAndDrop : MonoBehaviour
                         ScaleInit = child.localScale.x;
                     }
                 }
-                foreach (GameObject gaugeComponent in GameManager.Instance.ObjectToMakeVisibleOnBeginning)
-                {
-                    if (gaugeComponent.tag == "Slider")
-                    {
-                        gaugeComponent.GetComponent<Animator>().enabled = true;
-                    }
-                }
+              
+                        slider.transform.GetChild(0).GetComponent<Animator>().enabled = true;
+                        GameManager.Instance.NewSound(slider);
+                    
+                
                 MovingBar = false;
                 canThrowHandle = true;
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().canSlide = true;
@@ -286,7 +303,12 @@ public class DragAndDrop : MonoBehaviour
                 //Debug.Log(posInit);
                 //Debug.Log(posMaxInit);
                 draggedObject.transform.position = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x + 2, draggedObject.transform.position.y);
+                draggedObject.GetComponent<SoundDesign>().PhaseOfSound = 2;
 
+                if(GameManager.Instance.nameOfLoopingObject != draggedObject.name)
+                {
+                    GameManager.Instance.SoundLoop(draggedObject, 0.5f);
+                }
                 if (draggedObject.transform.position.x > posInit)
                 {
                     draggedObject.transform.position = new Vector2(posInit, draggedObject.transform.position.y);
@@ -399,10 +421,22 @@ public class DragAndDrop : MonoBehaviour
                 draggedObject = GameManager.Instance.ObjectHover;
                 if (draggedObject.GetComponent<ObjectToDrag>() != null && GameManager.Instance.ObjectHover.tag != "Slider")
                 {
+                    if (draggedObject.GetComponent<ObjectToDrag>().painting)
+                    {
+                        GameManager.Instance.NewSound(draggedObject);
+                    }
                     //Permet de faire tomber l'UI lorsqu'on aura clicker suffisamment dessus
                     if (draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity > 0)
                     {
+                        if (draggedObject.GetComponent<ObjectToDrag>().painting)
+                        {
+                            flashingHand.transform.parent.parent.gameObject.SetActive(true);
+                        }
                         draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity--;
+                        if(draggedObject == GameManager.Instance.cog1)
+                        {
+                            GameManager.Instance.NewSound(draggedObject);
+                        }
                         if (draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity != 0)
                         {
                             GameManager.Instance.DotWeenShakeObject(draggedObject, 0.2f, 0.06f, 20);
@@ -419,6 +453,11 @@ public class DragAndDrop : MonoBehaviour
                     }
                     else
                     {
+                        
+                         if (GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().Moon)
+                        {
+                            GameManager.Instance.NewSound(GameManager.Instance.ObjectHover);
+                        }
                         dragged = true;
                         if (draggedObject.GetComponent<ObjectToDrag>().canPutObject)
                         {
@@ -457,6 +496,8 @@ public class DragAndDrop : MonoBehaviour
             else if (GameManager.Instance.ObjectHover.tag == "Simon")
             {
                 GameManager.Instance.ObjectHover.GetComponent<Animator>().SetBool("IsClicked", true);
+                GameManager.Instance.ObjectHover.GetComponent<SoundDesign>().PhaseOfSound = 1;
+                GameManager.Instance.NewSound(GameManager.Instance.ObjectHover);
 
                 if (GameManager.Instance.ObjectHover.name == "Button_Pause" && !multipleTouchOnTableau2)
                 {
@@ -465,6 +506,7 @@ public class DragAndDrop : MonoBehaviour
                 else if ((GameManager.Instance.ObjectHover.name == "Button_Pause" || GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().CD) && GameManager.Instance.canTouchCd)
                 {
                     nbrOfTimeWeTouch++;
+                    GameManager.Instance.GetComponent<AudioSource>().Play();
                 }
                 if (ObjectPut != null)
                 {
@@ -475,7 +517,7 @@ public class DragAndDrop : MonoBehaviour
                         {
                             if (SimonUI == GameManager.Instance.ObjectHover)
                             {
-                                nbrOfTimeWeTouch++;
+                                //nbrOfTimeWeTouch++;
                             }
                         }
                     }
@@ -485,7 +527,13 @@ public class DragAndDrop : MonoBehaviour
                 {
                     if (GameManager.Instance.ObjectHover.name != "Button_Pause")
                     {
+                        if (GetComponent<Simon>().infiniteGame.Count > 0)
+                        {
+                            GameManager.Instance.ObjectHover.GetComponent<SoundDesign>().PhaseOfSound = 2;
+                            GameManager.Instance.NewSound(GameManager.Instance.ObjectHover);
+                        }
                         GetComponent<Simon>().AddToComparative(GameManager.Instance.ObjectHover.name);
+                        
                     }
 
                 }
@@ -505,9 +553,11 @@ public class DragAndDrop : MonoBehaviour
                     GameManager.Instance.AllText.GetComponent<ElevateText>().RotateIt();
                 }
             }
+            
 
             else if (GameManager.Instance.ObjectHover.tag == "Light")
             {
+                GameManager.Instance.NewSound(flashinglight);
                 flashinglight.SetActive(false);
                 flashingHand.SetActive(true);
                 GameManager.Instance.ObjectHover = null;
@@ -536,15 +586,19 @@ public class DragAndDrop : MonoBehaviour
                 GameManager.Instance.FallTheHole(GameManager.Instance.ObjectHover);
             }
 
-            else if (GameManager.Instance.ObjectHover.tag == "Door")
-            {
-                tableau5.SetActive(true);
-                door.SetActive(false);
-            }
-
             else if (GameManager.Instance.ObjectHover.tag == "Vis")
             {
                 animator.SetBool("Visser", true);
+            }
+
+            else if (GameManager.Instance.ObjectHover.tag == "Door")
+            {
+                foreach(GameObject Credits in GameManager.Instance.Credit)
+                {
+                    Credits.SetActive(true);
+                }
+                GameManager.Instance.Door.SetActive(false);
+                GameManager.Instance.cleanScene();
             }
 
             else if (GameManager.Instance.ObjectHover.tag == "ButtonLangue")
@@ -561,10 +615,9 @@ public class DragAndDrop : MonoBehaviour
                 GameManager.Instance.ObjectHover.SetActive(false);
                 GameManager.Instance.leftWall.SetActive(false);
                 GameManager.Instance.tableau3.GetComponent<Animator>().SetBool("PassedTo4", true);
-
+                GameManager.Instance.ChangeDialogueMoment();
                 GameManager.Instance.tableau4.SetActive(true);
-                diReturnJukebox.SetActive(true);
-                Debug.Log("aaaaaaahhh");
+                //diReturnJukebox.SetActive(true);
 
             }
 
@@ -602,6 +655,7 @@ public class DragAndDrop : MonoBehaviour
         {
             if (draggedObject.tag == "Slider" && canThrowHandle)
             {
+                GameManager.Instance.CancelLoopingObjects(GameManager.Instance.nameOfLoopingObject);
                 float maxValue = posInit - posMaxInit;
                 totalSliderValue = (posInit - draggedObject.transform.position.x) / maxValue;
 
@@ -632,6 +686,11 @@ public class DragAndDrop : MonoBehaviour
                 GameManager.Instance.DotWeenShakeObject(draggedObject, 0.5f, 0.06f, 10);
                 GameManager.Instance.DotWeenShakeObject(GameManager.Instance.DiskPlayer, 0.5f, 0.06f, 10);
             }
+            if(draggedObject == GameManager.Instance.cog1)
+            {
+                draggedObject.GetComponent<SoundDesign>().PhaseOfSound = 3;
+                GameManager.Instance.NewSound(draggedObject);
+            }
         }
         if (GameManager.Instance.ObjectHover != null)
         {
@@ -641,7 +700,7 @@ public class DragAndDrop : MonoBehaviour
 
                 foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                 {
-                    if (SimonUI.name == "Button_Pause" && SimonUI == GameManager.Instance.ObjectHover && multipleTouchOnTableau2)
+                    if (SimonUI.name == "Button_Pause" && SimonUI == GameManager.Instance.ObjectHover && multipleTouchOnTableau2 && GameManager.Instance.canTouchCd)
                     {
                         GameManager.Instance.TouchCD(nbrOfTimeWeTouch);
                     }
@@ -665,7 +724,8 @@ public class DragAndDrop : MonoBehaviour
                 {
                     if (draggedObject.GetComponent<ObjectToDrag>().Moon)
                     {
-
+                        draggedObject.GetComponent<SoundDesign>().PhaseOfSound = 2;
+                        GameManager.Instance.NewSound(draggedObject);
                         GameManager.Instance.NightFall();
                         if (draggedObject.transform.parent.GetComponent<ObjectToDrag>() != null)
                         {
@@ -696,7 +756,7 @@ public class DragAndDrop : MonoBehaviour
 
                     if (draggedObject.GetComponent<ObjectToDrag>().objectToPutOn.tag == "ButtonON")
                     {
-                        GameManager.Instance.DotWeenShakeCamera(0.2f, 0.5f, 20);
+                        GameManager.Instance.DotWeenShakeCamera(0.1f, 0.2f, 10);
                         foreach (GameObject ObjectON in GameManager.Instance.ON)
                         {
                             if (ObjectON == draggedObject)

@@ -18,7 +18,6 @@ public class OpeningChest : MonoBehaviour
 
     public int nbForOpen;
 
-    public GameObject light;
     public GameObject lightMain;
 
 
@@ -140,7 +139,7 @@ public class OpeningChest : MonoBehaviour
             nbForOpen++; 
 
             FalseLock1(); // on désactiver les élément de la liste activer
-            Debug.Log("1");
+            Debug.Log("1a");
         }
         if (listLock[2] && listLock[1] == true && !opening2.activeInHierarchy)
         {
@@ -148,7 +147,7 @@ public class OpeningChest : MonoBehaviour
             nbForOpen++;
 
             FalseLock2();
-            Debug.Log("2");
+            Debug.Log("2a");
 
         }
         if (listLock[2] && listLock[3] == true && !opening3.activeInHierarchy)
@@ -157,7 +156,7 @@ public class OpeningChest : MonoBehaviour
             nbForOpen++;
 
             FalseLock3();
-            Debug.Log("3");
+            Debug.Log("3a");
 
         }
         if (listLock[0] && listLock[3] == true && !opening4.activeInHierarchy)
@@ -166,7 +165,7 @@ public class OpeningChest : MonoBehaviour
             nbForOpen++;
 
             FalseLock4();
-            Debug.Log("4");
+            Debug.Log("4a");
 
         }
         if (nbForOpen == 4)
@@ -175,7 +174,7 @@ public class OpeningChest : MonoBehaviour
             Debug.Log("Open");
 
             enterChest.SetActive(false);
-            light.SetActive(true);
+            GameManager.Instance.dAD.flashinglight.SetActive(true);
         }
     }
 

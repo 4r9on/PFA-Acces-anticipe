@@ -9,6 +9,7 @@ using UnityEngine.Rendering.Universal;
 using UnityEngine.Video;
 using DG.Tweening;
 using Cinemachine;
+using Cinemachine.Utility;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,6 +25,9 @@ public class GameManager : MonoBehaviour
     public GameObject camCine;
     public List<AudioClip> TableauxMusic = new List<AudioClip>();
     public GameObject SoundDesign;
+    public GameObject ObjectLoopingSound;
+    public string nameOfLoopingObject;
+    public List<GameObject> LoopingObjects = new List<GameObject>();
 
     //Tableau 1
     public GameObject Gauge;
@@ -42,9 +46,11 @@ public class GameManager : MonoBehaviour
 
 
     //Tableau 2
+    public float MaxVolume = 0.488f;
     public bool isTableau2;
     public ParticleSystem particlesTableau2;
     public GameObject CD;
+    public GameObject narratorAnimIdle;
     public List<GameObject> narratorsAnim = new List<GameObject>();
     public List<GameObject> StocksCD = new List<GameObject>();
     public GameObject lightOnScene2;
@@ -73,6 +79,12 @@ public class GameManager : MonoBehaviour
     public List<GameObject> JukeboxPhase = new List<GameObject>();
     int JukeBoxHP = 20;
 
+    //Tableau 5
+    public List<GameObject> Credit = new List<GameObject>();
+    public GameObject Door;
+    public GameObject TalkingAboutDoor;
+    public List<GameObject> Explosions = new List<GameObject>();
+
     public List<GameObject> ON = new List<GameObject>();
 
     public Physics2DRaycaster Raycaster2D;
@@ -92,11 +104,16 @@ public class GameManager : MonoBehaviour
     private int language;
 
     public List<GameObject> dialogueList;
-    public int i;
+    public List<GameObject> dialogueMomentList;
+    public int IdDialogue;
+    public int IdDialogueMoment;
     public GameObject bocksSpeak;
-    public bool truc;
+    public GameObject bocksMomentSpeak;
 
     public GameObject diReturnGame;
+
+    public GameObject forground;
+    public GameObject camera;
 
     private void Awake()
     {
@@ -120,7 +137,9 @@ public class GameManager : MonoBehaviour
             dAD.TableauActual = 5;
             LoadNextLevel();
             introS2AT.gameObject.SetActive(false);
-            diReturnGame.SetActive(true);
+            //diReturnGame.SetActive(true);
+            IdDialogueMoment = 3;
+            ChangeDialogueMoment();
         }
         introS2AT.loopPointReached += IntroS2AT_loopPointReached;
     }
@@ -128,7 +147,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(pourcentageToMakeObjectVisible > 0)
+        if (pourcentageToMakeObjectVisible > 0)
         {
             if (isTableau2)
             {
@@ -147,11 +166,11 @@ public class GameManager : MonoBehaviour
                         emission.rateOverTime = 20 * pourcentageToMakeObjectVisible;
                         lightsOnTableau1[3].intensity = pourcentageToMakeObjectVisible;
                     }
-                    
+
                     var oppacity = ObjectInBegin.GetComponent<SpriteRenderer>().color;
                     oppacity.a = pourcentageToMakeObjectVisible;
                     ObjectInBegin.GetComponent<SpriteRenderer>().color = oppacity;
-                   
+
                 }
                 if (!stopTheBeginning)
                 {
@@ -161,7 +180,7 @@ public class GameManager : MonoBehaviour
                         lightsOnTableau1[i].intensity = dAD.LightMaxValue[i] * pourcentageToMakeObjectVisible / 25;
                     }
                 }
-                
+
             }
             if (pourcentageToMakeObjectVisible == 1)
             {
@@ -169,7 +188,7 @@ public class GameManager : MonoBehaviour
                 pourcentageToMakeObjectVisible = 0;
             }
         }
-        
+
     }
 
     private void IntroS2AT_loopPointReached(VideoPlayer source)
@@ -190,8 +209,9 @@ public class GameManager : MonoBehaviour
         //faire l'anim ou le narrateur va appuyer sur le bouton pause
         //faire tomber le disque
         narratorsAnim[2].SetActive(true);
-        canTouchCd = true;
+        canTouchCd = false;
         dAD.multipleTouchOnTableau2 = true;
+        Dialogue();
     }
 
     public void LoadNextLevel()
@@ -207,15 +227,23 @@ public class GameManager : MonoBehaviour
         }
         else if (dAD.TableauActual == 2)
         {
+            ChangeDialogueMoment();
             tableau2.SetActive(true);
+            forground.transform.Translate(-17.58f, 0, 0);
+            // camera.transform.Translate(17.58f, 0, 0);
         }
         else if (dAD.TableauActual == 3)
         {
             tableau3.SetActive(true);
+            forground.SetActive(false);
+            camera.transform.Translate(27.5115f, 0, 0);
+            //camera.transform.Translate(-34.58f, 0, 0);
+
         }
         else if (dAD.TableauActual == 4)
         {
             tableau4.SetActive(true);
+            forground.transform.Translate(17.58f, 0, 0);
         }
         else if (dAD.TableauActual == 5)
         {
@@ -223,7 +251,7 @@ public class GameManager : MonoBehaviour
         }
         cleanScene();
 
-        if(dAD.TableauActual != 2)
+        if (dAD.TableauActual != 2)
         {
             changeMusic(dAD.TableauActual);
         }
@@ -233,7 +261,7 @@ public class GameManager : MonoBehaviour
             GetComponent<AudioSource>().Pause();
             GetComponent<Animator>().enabled = true;
         }
-        
+
     }
 
     public void changeMusic(int MusicTableau)
@@ -262,6 +290,7 @@ public class GameManager : MonoBehaviour
 
     public void cleanScene()
     {
+        Raycaster2D.eventMask = 503;
         dAD.ObjectPut = null;
         dAD.draggedObject = null;
         ObjectHover = null;
@@ -276,7 +305,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log("touche une fois");
                 canTouchCd = false;
                 Dialogue();
-
+                narratorAnimIdle.SetActive(false);
                 narratorsAnim[3].SetActive(true);
                 // timing = 0.5f;
                 break;
@@ -284,15 +313,14 @@ public class GameManager : MonoBehaviour
                 Debug.Log("touche une seconde fois");
                 canTouchCd = false;
                 Dialogue();
-
-                narratorsAnim[1].SetActive(true);
+                
 
                 // timing = 0.4f;
                 break;
-            case 3:
+            case >=3:
                 Debug.Log("Detruit l'UI");
                 Dialogue();
-
+                narratorAnimIdle.SetActive(false);
                 narratorsAnim[4].SetActive(true);
                 narratorsAnim[5].SetActive(true);
 
@@ -354,6 +382,10 @@ public class GameManager : MonoBehaviour
         foreach (GameObject ObjetcsDay in DayNight)
         {
             ObjetcsDay.GetComponent<Animator>().enabled = true;
+            if (ObjetcsDay.GetComponent<SoundDesign>() != null)
+            {
+                NewSound(ObjetcsDay);
+            }
         }
         dayLight.SetActive(false);
         nightLight.SetActive(true);
@@ -396,7 +428,6 @@ public class GameManager : MonoBehaviour
     }
     public void Langue()
     {
-        Debug.Log("aaa");
         if (language == 1)
         {
             French.SetActive(true);
@@ -444,8 +475,8 @@ public class GameManager : MonoBehaviour
             }
             if (JukeBoxHP == 0)
             {
-                PlayerPrefs.SetInt("GetCrashed", 1);
-                GetComponent<LaunchBat>().ExitAppThenRestart();
+                
+                
             }
             else
             {
@@ -457,21 +488,43 @@ public class GameManager : MonoBehaviour
 
     public void Dialogue()
     {
-        truc = true;
-        if (truc == true)
+        bocksSpeak = dialogueList[IdDialogue];
+        
+        if (IdDialogue - 1 >= 0)
         {
-            bocksSpeak.SetActive(true);
-            bocksSpeak = dialogueList[i];
-            i++;
-            truc = false;
+            if (dialogueList[IdDialogue - 1].GetComponent<Narration>() != null)
+            {
+                dialogueList[IdDialogue - 1].GetComponent<Narration>().endAnAnim();
+            }
 
         }
+        bocksSpeak.SetActive(true);
+        IdDialogue++;
+    }
+
+    public void ChangeDialogueMoment()
+    {
+        bocksMomentSpeak = dialogueMomentList[IdDialogueMoment];
+        dialogueList.Clear();
+        foreach (Transform child in bocksMomentSpeak.transform)
+        {
+            dialogueList.Add(child.gameObject);
+        }
+        if (IdDialogueMoment - 1 >= 0)
+        {
+            //dialogueMomentList[IdDialogueMoment - 1].GetComponent<Narration>().endAnAnim();
+            dialogueMomentList[IdDialogueMoment - 1].SetActive(false);
+        }
+        bocksMomentSpeak.SetActive(true);
+        IdDialogueMoment++;
     }
 
     public void NewSound(GameObject gameObjectWithTheSound)
     {
+        Debug.Log(gameObjectWithTheSound.GetComponent<SoundDesign>().PhaseOfSound);
+        Debug.Log(gameObjectWithTheSound.name);
         GameObject newSoundDesign = Instantiate(SoundDesign);
-        switch (gameObjectWithTheSound.GetComponent<SoundDesign>().PhaseOfSound )
+        switch (gameObjectWithTheSound.GetComponent<SoundDesign>().PhaseOfSound)
         {
             case 1:
                 newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList1[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList1.Count)];
@@ -482,11 +535,59 @@ public class GameManager : MonoBehaviour
             case 3:
                 newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3.Count)];
                 break;
+            case 4:
+                newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList4[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3.Count)];
+                break;
         }
-       
+
         newSoundDesign.GetComponent<AudioSource>().Play();
     }
 
-    
+    public void SoundLoop(GameObject gameObjectWithTheSound, float timing)
+    {
+        GameObject newSoundDesign = Instantiate(ObjectLoopingSound);
+        switch (gameObjectWithTheSound.GetComponent<SoundDesign>().PhaseOfSound)
+        {
+            case 1:
+                newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList1[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList1.Count)];
+                newSoundDesign.GetComponent<SoundDesign>().clipList1 = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList1;
+                break;
+            case 2:
+                newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList2[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList2.Count)];
+                newSoundDesign.GetComponent<SoundDesign>().clipList1 = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList2;
+                break;
+            case 3:
+                newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3.Count)];
+                newSoundDesign.GetComponent<SoundDesign>().clipList1 = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3;
+                break;
+            case 4:
+                newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList4[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3.Count)];
+                newSoundDesign.GetComponent<SoundDesign>().clipList1 = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList4;
+                break;
+        }
+        nameOfLoopingObject = gameObjectWithTheSound.name;
+        newSoundDesign.GetComponent<SoundDesign>().Timing = timing;
+        newSoundDesign.name = nameOfLoopingObject;
+        LoopingObjects.Add(newSoundDesign);
+    }
+
+    public void CancelLoopingObjects(string nameOfLoopingObjects)
+    {
+        print(LoopingObjects.Count);
+        for (int i = 0; i < LoopingObjects.Count; i++)
+        {
+            if (LoopingObjects[i].name == nameOfLoopingObjects)
+            {
+                Destroy(LoopingObjects[i].gameObject);
+                LoopingObjects.Remove(LoopingObjects[i]);
+
+                nameOfLoopingObject = null;
+            }
+        }
+
+
+    }
+
+
 }
 

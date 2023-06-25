@@ -1,7 +1,6 @@
 using DG.Tweening.Core.Easing;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -37,13 +36,16 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             transform.localPosition = new Vector2(0, 0);
         }
-        if(cog && GameManager.Instance.dAD.draggedObject == gameObject)
+        if(cog)
         {
-            MakeTheCogRoll(900);
+            if(GameManager.Instance.dAD.draggedObject == gameObject)
+            {
+                MakeTheCogRoll(900);
+            }
+            
             transform.GetChild(0).GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             transform.GetChild(0).position = transform.localPosition;
         }
-        Debug.Log(GameManager.Instance.Raycaster2D.eventMask.value);
     }
 
     public IEnumerator BecomeDestroyable()
@@ -52,12 +54,27 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         destroyOnGravity = true;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(gameObject.tag == "DeadZone" && collision.tag != "Explosion")
+        {
+            GameObject newExplosion = Instantiate(GameManager.Instance.Explosions[Random.Range(0, GameManager.Instance.Explosions.Count)]);
+            newExplosion.transform.position = new Vector2(Random.Range(-4.0f, 4.0f), transform.position.y + 2);
+            newExplosion.transform.eulerAngles = new Vector3(newExplosion.transform.eulerAngles.x, newExplosion.transform.eulerAngles.y, Random.Range(0, 360));
+            StartCoroutine(DestroyExplosion(newExplosion));
+            Destroy(collision.gameObject);
+        }
+    }
+    public IEnumerator DestroyExplosion(GameObject Explosion)
+    {
+        yield return new WaitForSeconds(1.12f);
+        Destroy(Explosion);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (painting)
         {
-            objectToPutOn.SetActive(true);
-            objectToPutOn = null;
             foreach (Transform children in transform)
             {
                 children.parent = children.parent.parent;
@@ -66,7 +83,8 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         }
         if (painting && collision.gameObject.tag == "Ground")
         {
-
+            gameObject.GetComponent<SoundDesign>().PhaseOfSound = 2;
+            GameManager.Instance.NewSound(gameObject);
             GameManager.Instance.DotWeenShakeCamera(0.2f, 0.1f, 30);
             /*  children.GetComponent<Rigidbody2D>().gravityScale = 0;
               children.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
@@ -76,7 +94,10 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         //Permet de détruire certains objets quand on les laisse tomber
         else if (collision.gameObject.tag == "Ground" && destroyOnGravity)
         {
-            
+            if(gameObject == GameManager.Instance.StockCD)
+            {
+                GameManager.Instance.NewSound(gameObject);
+            }
             if (BornWithoutGravity > 0)
             {
                 GameManager.Instance.DotWeenShakeCamera(0.2f, 0.1f, 30);
@@ -124,6 +145,11 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             }
             
         }
+        else if (collision.gameObject.tag == "Ground" && gameObject == GameManager.Instance.cog1)
+            {
+            gameObject.GetComponent<SoundDesign>().PhaseOfSound = 2;
+                GameManager.Instance.NewSound(gameObject);
+            }
     }
 
     public void OnPointerExit(PointerEventData pointerEventData)
@@ -229,6 +255,8 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public void shakeCameraAnim()
     {
         GameManager.Instance.DotWeenShakeCamera(0.1f, 0.6f, 30);
+        GetComponent<SoundDesign>().PhaseOfSound = 4;
+        GameManager.Instance.NewSound(gameObject);
     }
 
     public void DestroyTheCog()

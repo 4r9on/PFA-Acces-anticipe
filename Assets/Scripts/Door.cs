@@ -14,6 +14,7 @@ public class Door : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        StartCoroutine(Text());
     }
 
     // Update is called once per frame
@@ -22,7 +23,7 @@ public class Door : MonoBehaviour
 
         //animator.SetBool("Porte Tremble", true);
         
-        StartCoroutine(Text());
+       
     }
 
     IEnumerator Text()

@@ -50,7 +50,6 @@ public class ElevateText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(transform.rotation.eulerAngles);
         if(transform.eulerAngles.z >= 180)
         {
 
@@ -72,7 +71,14 @@ public class ElevateText : MonoBehaviour
 
     public void RotateIt()
     {
-        GetComponent<Rigidbody2D>().angularVelocity = 100;
+        foreach(Transform child in gameObject.transform)
+        {
+            child.GetComponent<BoxCollider2D>().enabled = true;
+        }
+       
+        GameManager.Instance.NewSound(gameObject);
+        gameObject.transform.parent.GetComponent<Animator>().enabled = true;
+        //GetComponent<Rigidbody2D>().angularVelocity = 100;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         foreach (GameObject ONGameObject in GameManager.Instance.ON)
         {
