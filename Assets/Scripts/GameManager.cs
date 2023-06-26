@@ -112,6 +112,7 @@ public class GameManager : MonoBehaviour
     public int LastIdDialogue;
     public GameObject bocksSpeak;
     public GameObject bocksMomentSpeak;
+    public bool animWasStop;
 
     public GameObject diReturnGame;
 
@@ -473,6 +474,7 @@ public class GameManager : MonoBehaviour
         JukeBoxHP--;
         Debug.Log(JukeBoxHP);
         int phase = 0;
+        DotWeenShakeCamera(0.1f, 0.6f, 30);
         if (JukeBoxHP == 15 || JukeBoxHP == 10 || JukeBoxHP == 5 || JukeBoxHP == 0)
         {
             if (JukeBoxHP == 10)

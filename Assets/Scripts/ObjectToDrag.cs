@@ -182,6 +182,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     public void OnPointerUp(PointerEventData pointerEventData)
     {
+        Debug.Log("unclick");
         if (cog)
         {
             MakeTheCogRoll(0);
@@ -205,7 +206,10 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             Debug.Log(gameObject);
             GameManager.Instance.ObjectHover = gameObject;
 
-
+            if(gameObject.transform.GetChild(0).GetComponent<HammerPhysics>() != null)
+            {
+                GameManager.Instance.GetComponent<DragAndDrop>().StopClick();
+            }
 
         }
 
