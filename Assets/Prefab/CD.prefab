@@ -151,7 +151,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1912269735
   m_SortingLayer: 5
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_Sprite: {fileID: -962570848, guid: 10bdbf7205b45e547a0eb91bd8714724, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -202,5 +202,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0f32c06b21412bf4ea38f33decaf05fe, type: 3}
   clipList2: []
   clipList3: []
+  clipList4: []
   audioSource: {fileID: 0}
   Timing: 0

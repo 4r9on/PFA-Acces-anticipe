@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
     public GameObject leftWall;
 
     //Tableau 4
+    public GameObject Egg;
     public List<GameObject> narratorsAnim4 = new List<GameObject>();
     public GameObject Hammer;
     public GameObject JukeboxBroken4;
@@ -416,6 +417,7 @@ public class GameManager : MonoBehaviour
             {
                 child.gameObject.SetActive(true);
                 child.GetComponent<Animator>().enabled = true;
+                NewSound(child.gameObject);
             }
             else
             {
@@ -475,6 +477,7 @@ public class GameManager : MonoBehaviour
             if (JukeBoxHP == 10)
             {
                 phase = 1;
+                Destroy(Egg);
             }
             if (JukeBoxHP == 5)
             {
