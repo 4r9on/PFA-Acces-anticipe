@@ -671,6 +671,7 @@ public class DragAndDrop : MonoBehaviour
                     {
                         GameManager.Instance.dialogueList.Add(child.gameObject);
                     }
+                    GameManager.Instance.IdDialogueMoment++;
                 }
                 else
                 {
@@ -693,7 +694,7 @@ public class DragAndDrop : MonoBehaviour
                         {
                             GameManager.Instance.dialogueList.Add(child.gameObject);
                         }
-                        GameManager.Instance.bocksMomentSpeak.SetActive(true);
+                       
                     }
                     
                   
