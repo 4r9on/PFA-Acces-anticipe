@@ -261,6 +261,12 @@ public class Narrator : MonoBehaviour
         }
     }
 
+    public void OpenButton(int id)
+    {
+        gameObject.GetComponent<SoundDesign>().PhaseOfSound = id;
+        GameManager.Instance.NewSound(gameObject);
+    }
+
     
 
 }
