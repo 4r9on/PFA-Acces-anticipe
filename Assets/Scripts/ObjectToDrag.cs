@@ -36,13 +36,13 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             transform.localPosition = new Vector2(0, 0);
         }
-        if(cog)
+        if (cog)
         {
-            if(GameManager.Instance.dAD.draggedObject == gameObject)
+            if (GameManager.Instance.dAD.draggedObject == gameObject)
             {
                 MakeTheCogRoll(900);
             }
-            
+
             transform.GetChild(0).GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             transform.GetChild(0).position = transform.localPosition;
         }
@@ -56,7 +56,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(gameObject.tag == "DeadZone" && collision.tag != "Explosion")
+        if (gameObject.tag == "DeadZone" && collision.tag != "Explosion")
         {
             GameObject newExplosion = Instantiate(GameManager.Instance.Explosions[Random.Range(0, GameManager.Instance.Explosions.Count)]);
             newExplosion.transform.position = new Vector2(Random.Range(-4.0f, 4.0f), transform.position.y + 2);
@@ -94,14 +94,14 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         //Permet de détruire certains objets quand on les laisse tomber
         else if (collision.gameObject.tag == "Ground" && destroyOnGravity)
         {
-            if(gameObject == GameManager.Instance.StockCD)
+            if (gameObject == GameManager.Instance.StockCD)
             {
                 GameManager.Instance.NewSound(gameObject);
             }
             if (BornWithoutGravity > 0)
             {
                 GameManager.Instance.DotWeenShakeCamera(0.2f, 0.1f, 30);
-                
+
                 if (gameObject == GameManager.Instance.StockCD)
                 {
                     gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = GameManager.Instance.StocksCD[1].GetComponent<SpriteRenderer>().sprite;
@@ -111,11 +111,11 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             }
             else
             {
-                if(gameObject == GameManager.Instance.StockCD || gameObject.GetComponent<ObjectToDrag>().painting)
+                if (gameObject == GameManager.Instance.StockCD || gameObject.GetComponent<ObjectToDrag>().painting)
                 {
                     GameManager.Instance.DotWeenShakeCamera(0.2f, 0.5f, 20);
                 }
-                if(objectCreateAfterFalling != null)
+                if (objectCreateAfterFalling != null)
                 {
                     GameObject newObject = Instantiate(objectCreateAfterFalling);
                     newObject.transform.position = gameObject.transform.position;
@@ -143,13 +143,13 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
                 }
 
             }
-            
+
         }
         else if (collision.gameObject.tag == "Ground" && gameObject == GameManager.Instance.cog1)
-            {
+        {
             gameObject.GetComponent<SoundDesign>().PhaseOfSound = 2;
-                GameManager.Instance.NewSound(gameObject);
-            }
+            GameManager.Instance.NewSound(gameObject);
+        }
     }
 
     public void OnPointerExit(PointerEventData pointerEventData)
@@ -164,10 +164,6 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     }
     public void OnPointerDown(PointerEventData pointerEventData)
     {
-        if (cog)
-        {
-            StartCoroutine(MakeItRoll());
-        }
         if (child)
         {
             child = false;
@@ -194,7 +190,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             gameObject.GetComponent<Animator>().SetBool("IsClicked", false);
 
-            if (CD || (GameManager.Instance.dAD.multipleTouchOnTableau2 && GameManager.Instance.ObjectHover.name=="Button_Pause"))
+            if (CD || (GameManager.Instance.dAD.multipleTouchOnTableau2 && GameManager.Instance.ObjectHover.name == "Button_Pause"))
             {
                 GameManager.Instance.GetComponent<DragAndDrop>().StopClick();
             }
@@ -203,7 +199,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
         if (gameObject.layer == 6)
         {
-            
+
 
             Debug.Log(GameManager.Instance.GetComponent<DragAndDrop>().draggedObject);
             Debug.Log(gameObject);
@@ -230,40 +226,35 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         transform.GetChild(0).GetComponent<Rigidbody2D>().angularVelocity = speedOfTheRoll;
     }
 
-    IEnumerator MakeItRoll()
+    public IEnumerator MakeItRoll()
     {
-        MakeTheCogRoll(30);
-        yield return new WaitForSeconds(0.2f);
-        if (GetComponent<Rigidbody2D>().angularVelocity == 0)
+        yield return new WaitForSeconds(gameObject.GetComponent<SoundDesign>().clipList1[0].length);
+        if (gameObject.GetComponent<SoundDesign>().PhaseOfSound == 1)
         {
-            MakeTheCogRoll(70);
-            yield return new WaitForSeconds(0.2f);
-            if (GetComponent<Rigidbody2D>().angularVelocity == 0)
-            {
-                MakeTheCogRoll(150);
-                yield return new WaitForSeconds(0.2f);
-                if (GetComponent<Rigidbody2D>().angularVelocity == 0)
-                {
-                    MakeTheCogRoll(400);
-                    yield return new WaitForSeconds(0.2f);
-                }
-            }
+            transform.GetChild(0).GetComponent<AudioSource>().Play();
         }
 
     }
+    
+    
+
+            
+        
+
+    
 
     public void shakeCameraAnim()
-    {
-        GameManager.Instance.DotWeenShakeCamera(0.1f, 0.6f, 30);
-        GetComponent<SoundDesign>().PhaseOfSound = 4;
-        GameManager.Instance.NewSound(gameObject);
-    }
+{
+    GameManager.Instance.DotWeenShakeCamera(0.1f, 0.6f, 30);
+    GetComponent<SoundDesign>().PhaseOfSound = 4;
+    GameManager.Instance.NewSound(gameObject);
+}
 
-    public void DestroyTheCog()
-    {
-        GameManager.Instance.cog3.SetActive(true);
-        Destroy(GameManager.Instance.cog1);
-    }
+public void DestroyTheCog()
+{
+    GameManager.Instance.cog3.SetActive(true);
+    Destroy(GameManager.Instance.cog1);
+}
 
 
 }

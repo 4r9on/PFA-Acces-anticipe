@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
     public GameObject leftWall;
 
     //Tableau 4
+    public GameObject Egg;
     public List<GameObject> narratorsAnim4 = new List<GameObject>();
     public GameObject Hammer;
     public GameObject JukeboxBroken4;
@@ -107,6 +108,8 @@ public class GameManager : MonoBehaviour
     public List<GameObject> dialogueMomentList;
     public int IdDialogue;
     public int IdDialogueMoment;
+    public int LastIdDialogueMoment;
+    public int LastIdDialogue;
     public GameObject bocksSpeak;
     public GameObject bocksMomentSpeak;
 
@@ -147,6 +150,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(dAD.draggedObject == null && Raycaster2D.eventMask != 503)
+        {
+            Raycaster2D.eventMask = 503;
+        }
         if (pourcentageToMakeObjectVisible > 0)
         {
             if (isTableau2)
@@ -410,6 +417,7 @@ public class GameManager : MonoBehaviour
             {
                 child.gameObject.SetActive(true);
                 child.GetComponent<Animator>().enabled = true;
+                NewSound(child.gameObject);
             }
             else
             {
@@ -469,6 +477,7 @@ public class GameManager : MonoBehaviour
             if (JukeBoxHP == 10)
             {
                 phase = 1;
+                Destroy(Egg);
             }
             if (JukeBoxHP == 5)
             {
@@ -587,6 +596,20 @@ public class GameManager : MonoBehaviour
         }
 
 
+    }
+    public void SettingsNarrations(string tags)
+    {
+        switch (tags)
+        {
+            case "ButtonLangue":
+                IdDialogue = 0;
+                Dialogue();
+                break;
+            case "ButtonMusic":
+                IdDialogue = 1;
+                Dialogue();
+                break;
+        }
     }
 
 
