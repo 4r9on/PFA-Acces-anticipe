@@ -113,7 +113,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             {
                 if (gameObject == GameManager.Instance.StockCD || gameObject.GetComponent<ObjectToDrag>().painting)
                 {
-                    GameManager.Instance.DotWeenShakeCamera(0.2f, 0.5f, 20);
+                    GameManager.Instance.DotWeenShakeCamera(0.1f, 0.4f, 30);
                 }
                 if (objectCreateAfterFalling != null)
                 {
