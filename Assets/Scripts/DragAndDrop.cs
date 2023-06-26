@@ -281,7 +281,15 @@ public class DragAndDrop : MonoBehaviour
                 }
                 else if (Camera.main.ScreenToWorldPoint(Input.mousePosition).y > GameManager.Instance.S2ATPoints[0].y)
                 {
+
                     pourcentageActualPoint = 0;
+                    foreach (GameObject child in GameManager.Instance.ObjectToMakeVisibleOnBeginning)
+                    {
+                        if(child.tag == "SettingsOpen")
+                        {
+                            child.transform.parent = GameManager.Instance.tableau1.transform.parent;
+                        }
+                    }
                     TableauActual = 2;
                     GameManager.Instance.LoadNextLevel();
                 }
@@ -450,6 +458,10 @@ public class DragAndDrop : MonoBehaviour
                         }
                         if (draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity == 0)
                         {
+                            if(draggedObject.GetComponent <ObjectToDrag>().objectToPutOn == GameManager.Instance.Gauge)
+                            {
+                                draggedObject.transform.parent = draggedObject.transform.parent.parent;
+                            }
                             draggedObject.GetComponent<Rigidbody2D>().gravityScale = 1;
                             foreach (Transform children in draggedObject.transform)
                             {
@@ -590,7 +602,9 @@ public class DragAndDrop : MonoBehaviour
 
             else if (GameManager.Instance.ObjectHover.tag == "Button")
             {
+                
                 GameManager.Instance.breakingTheWall();
+                GameManager.Instance.NewSound(GameManager.Instance.ObjectHover);
             }
 
             else if (GameManager.Instance.ObjectHover.tag == "UV")
@@ -624,6 +638,7 @@ public class DragAndDrop : MonoBehaviour
               }*/
             else if (GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().Background)
             {
+                flashingHand.SetActive(false);
                 GameManager.Instance.ObjectHover.SetActive(false);
                 GameManager.Instance.leftWall.SetActive(false);
                 GameManager.Instance.tableau3.GetComponent<Animator>().SetBool("PassedTo4", true);
