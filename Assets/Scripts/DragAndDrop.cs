@@ -84,6 +84,7 @@ public class DragAndDrop : MonoBehaviour
     public GameObject dButtonLangue2;
     public GameObject flag;
     public GameObject settingsWindow;
+    private Rigidbody2D rb2d;
 
     public GameObject diReturnJukebox;
 
@@ -614,7 +615,14 @@ public class DragAndDrop : MonoBehaviour
 
             else if (GameManager.Instance.ObjectHover.tag == "Vis")
             {
-                animator.SetBool("Visser", true);
+                
+                //animator.SetBool("Visser", true);
+                Debug.Log("fgh");
+
+                rb2d.gravityScale += 1;
+                Debug.Log("f");
+
+
             }
 
             else if (GameManager.Instance.ObjectHover.tag == "Door")
