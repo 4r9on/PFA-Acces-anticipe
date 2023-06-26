@@ -73,8 +73,6 @@ public class HammerPhysics : MonoBehaviour
         {
             PourcentMovement = 1;
             StopMove = false;
-            Debug.Log(lastPosition - transform.parent.position.x + 0.05f);
-            Debug.Log(lastPosition + transform.parent.position.x - 0.05f);
             if (lastPosition < transform.parent.position.x)
             {
                 toTheLeft = false;

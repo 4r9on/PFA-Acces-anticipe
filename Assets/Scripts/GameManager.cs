@@ -370,6 +370,7 @@ public class GameManager : MonoBehaviour
 
     public void S2ATQuit()
     {
+        cleanScene();
         S2AT.SetActive(true);
         S2ATWithWriting.SetActive(false);
         foreach (Transform child in S2AT.transform.GetChild(0))
@@ -508,8 +509,16 @@ public class GameManager : MonoBehaviour
             }
 
         }
-        bocksSpeak.SetActive(true);
-        IdDialogue++;
+        if(bocksMomentSpeak != null)
+        {
+            if(bocksMomentSpeak == bocksSpeak.transform.parent.gameObject)
+            {
+                bocksSpeak.SetActive(true);
+                IdDialogue++;
+            }
+        }
+       
+       
     }
 
     public void ChangeDialogueMoment()
@@ -602,10 +611,12 @@ public class GameManager : MonoBehaviour
         switch (tags)
         {
             case "ButtonLangue":
+                bocksMomentSpeak.SetActive(true);
                 IdDialogue = 0;
                 Dialogue();
                 break;
             case "ButtonMusic":
+                bocksMomentSpeak.SetActive(true);
                 IdDialogue = 1;
                 Dialogue();
                 break;
