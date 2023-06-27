@@ -576,6 +576,7 @@ public class DragAndDrop : MonoBehaviour
                         Destroy(ObjectON.GetComponent<Rigidbody2D>());
                     }
                     GameManager.Instance.AllText.GetComponent<ElevateText>().RotateIt();
+                    GameManager.Instance.ChangeDialogueMoment();
                 }
             }
 
@@ -631,8 +632,11 @@ public class DragAndDrop : MonoBehaviour
                 {
                     Credits.SetActive(true);
                 }
+                Debug.Log("hereitis");
+                GameManager.Instance.ChangeDialogueMoment();
                 GameManager.Instance.Door.SetActive(false);
                 GameManager.Instance.cleanScene();
+                
             }
 
             /*  else if (GameManager.Instance.ObjectHover.tag == "ButtonLangue")
