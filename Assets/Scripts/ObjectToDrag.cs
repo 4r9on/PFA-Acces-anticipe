@@ -47,7 +47,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             }
 
             transform.GetChild(0).GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            transform.GetChild(0).position = transform.localPosition;
+            transform.GetChild(0).position = transform.position;
         }
     }
 
