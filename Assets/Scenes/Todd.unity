@@ -11451,6 +11451,7 @@ MonoBehaviour:
   testBar: {fileID: 0}
   tex: {fileID: 0}
   animator: {fileID: 0}
+  canThrowHandle: 0
   MaxScaleLoadingBar: 0
   posInit: 0
   posInitLoadingBar: 0
@@ -11491,6 +11492,7 @@ MonoBehaviour:
   flag: {fileID: 0}
   settingsWindow: {fileID: 0}
   diReturnJukebox: {fileID: 0}
+  AnimPaused: []
 --- !u!114 &892342285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11605,6 +11607,7 @@ MonoBehaviour:
   ButtonInWall: {fileID: 0}
   BackgroundTableau4: {fileID: 0}
   leftWall: {fileID: 0}
+  Egg: {fileID: 0}
   narratorsAnim4: []
   Hammer: {fileID: 0}
   JukeboxBroken4: {fileID: 0}
@@ -11628,6 +11631,8 @@ MonoBehaviour:
   dialogueMomentList: []
   IdDialogue: 0
   IdDialogueMoment: 0
+  LastIdDialogueMoment: 0
+  LastIdDialogue: 0
   bocksSpeak: {fileID: 0}
   bocksMomentSpeak: {fileID: 0}
   diReturnGame: {fileID: 0}
@@ -27447,7 +27452,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1762421278
 Transform:
   m_ObjectHideFlags: 0
