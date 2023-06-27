@@ -430,8 +430,6 @@ public class DragAndDrop : MonoBehaviour
     {
         if (GameManager.Instance.ObjectHover != null)
         {
-
-
             if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer" || GameManager.Instance.ObjectHover.tag == "Slider")
             {
                 draggedObject = GameManager.Instance.ObjectHover;
@@ -727,7 +725,6 @@ public class DragAndDrop : MonoBehaviour
 
         else if (GameManager.Instance.ObjectHover.tag == "ButtonLangue")
         {
-            Debug.Log("langue");
             GameManager.Instance.SettingsNarrations(GameManager.Instance.ObjectHover.tag);
         }
 
@@ -822,9 +819,6 @@ public void StopClick()
     {
         if (draggedObject.GetComponent<ObjectToDrag>() != null)
         {
-
-
-
             if (draggedObject.GetComponent<ObjectToDrag>().canPutObject && GameManager.Instance.ObjectHover == draggedObject.GetComponent<ObjectToDrag>().objectToPutOn)
             {
                 if (draggedObject.GetComponent<ObjectToDrag>().Moon)
@@ -857,9 +851,6 @@ public void StopClick()
                 {
                     draggedObject.tag = "Untagged";
                 }
-
-
-
                 if (draggedObject.GetComponent<ObjectToDrag>().objectToPutOn.tag == "ButtonON")
                 {
                     GameManager.Instance.DotWeenShakeCamera(0.1f, 0.2f, 10);
