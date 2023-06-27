@@ -94,11 +94,13 @@ public class ElevateText : MonoBehaviour
     public void StopCredit()
     {
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        Debug.Log("westop");
         foreach (GameObject ONGameObject in GameManager.Instance.ON)
         {
+            Debug.Log("maybeitstop");
             if (ONGameObject.GetComponent<Rigidbody2D>() != null)
             {
-                
+                Debug.Log("stop");
                 ONGameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             }
         }

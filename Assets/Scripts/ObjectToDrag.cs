@@ -59,10 +59,16 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         if (gameObject.tag == "DeadZone" && collision.tag != "Explosion")
         {
             GameObject newExplosion = Instantiate(GameManager.Instance.Explosions[Random.Range(0, GameManager.Instance.Explosions.Count)]);
-            newExplosion.transform.position = new Vector2(Random.Range(-4.0f, 4.0f), transform.position.y + 2);
+            newExplosion.transform.position = new Vector2(Random.Range(-4.0f, 4.0f), transform.position.y + 1);
             newExplosion.transform.eulerAngles = new Vector3(newExplosion.transform.eulerAngles.x, newExplosion.transform.eulerAngles.y, Random.Range(0, 360));
             StartCoroutine(DestroyExplosion(newExplosion));
+            if (collision.gameObject.GetComponent<S2AT>())
+            {
+                GameManager.Instance.ChangeDialogueMoment();
+                GameManager.Instance.blackSquare.SetActive(true);
+            }
             Destroy(collision.gameObject);
+            
         }
     }
     public IEnumerator DestroyExplosion(GameObject Explosion)
@@ -182,6 +188,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     public void OnPointerUp(PointerEventData pointerEventData)
     {
+        Debug.Log("unclick");
         if (cog)
         {
             MakeTheCogRoll(0);
@@ -205,7 +212,14 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             Debug.Log(gameObject);
             GameManager.Instance.ObjectHover = gameObject;
 
-
+            if(gameObject.transform.GetChild(0) != null)
+            {
+                if (gameObject.transform.GetChild(0).GetComponent<HammerPhysics>() != null)
+                {
+                    GameManager.Instance.GetComponent<DragAndDrop>().StopClick();
+                }
+            }
+           
 
         }
 

@@ -83,7 +83,9 @@ public class GameManager : MonoBehaviour
     //Tableau 5
     public List<GameObject> Credit = new List<GameObject>();
     public GameObject Door;
+    public GameObject blackSquare;
     public GameObject TalkingAboutDoor;
+    public GameObject CreditText;
     public List<GameObject> Explosions = new List<GameObject>();
 
     public List<GameObject> ON = new List<GameObject>();
@@ -96,6 +98,7 @@ public class GameManager : MonoBehaviour
     public GameObject tableau3;
     public GameObject tableau4;
     public GameObject tableau5;
+    public GameObject endGame;
 
     public DragAndDrop dAD;
 
@@ -112,6 +115,7 @@ public class GameManager : MonoBehaviour
     public int LastIdDialogue;
     public GameObject bocksSpeak;
     public GameObject bocksMomentSpeak;
+    public bool animWasStop;
 
     public GameObject diReturnGame;
 
@@ -473,6 +477,7 @@ public class GameManager : MonoBehaviour
         JukeBoxHP--;
         Debug.Log(JukeBoxHP);
         int phase = 0;
+        DotWeenShakeCamera(0.1f, 0.6f, 30);
         if (JukeBoxHP == 15 || JukeBoxHP == 10 || JukeBoxHP == 5 || JukeBoxHP == 0)
         {
             if (JukeBoxHP == 10)
