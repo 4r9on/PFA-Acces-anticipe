@@ -21,6 +21,9 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public bool S2ATSlide;
     public bool Background;
     public bool wasGravited;
+    public bool vis;
+
+    public List<GameObject> visList;
 
     private int click;
     // Start is called before the first frame update
@@ -258,17 +261,17 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     
 
     public void shakeCameraAnim()
-{
-    GameManager.Instance.DotWeenShakeCamera(0.1f, 0.6f, 30);
-    GetComponent<SoundDesign>().PhaseOfSound = 4;
-    GameManager.Instance.NewSound(gameObject);
-}
+    {
+        GameManager.Instance.DotWeenShakeCamera(0.1f, 0.6f, 30);
+        GetComponent<SoundDesign>().PhaseOfSound = 4;
+        GameManager.Instance.NewSound(gameObject);
+    }
 
-public void DestroyTheCog()
-{
-    GameManager.Instance.cog3.SetActive(true);
-    Destroy(GameManager.Instance.cog1);
-}
+    public void DestroyTheCog()
+    {
+        GameManager.Instance.cog3.SetActive(true);
+        Destroy(GameManager.Instance.cog1);
+    }
 
 
 }

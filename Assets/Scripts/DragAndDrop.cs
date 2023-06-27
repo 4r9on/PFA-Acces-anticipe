@@ -84,7 +84,7 @@ public class DragAndDrop : MonoBehaviour
     public GameObject dButtonLangue2;
     public GameObject flag;
     public GameObject settingsWindow;
-    private Rigidbody2D rb2d;
+    public Rigidbody2D vis1;
 
     public GameObject diReturnJukebox;
 
@@ -616,11 +616,11 @@ public class DragAndDrop : MonoBehaviour
 
             else if (GameManager.Instance.ObjectHover.tag == "Vis")
             {
-                
+                int a = -10;
                 //animator.SetBool("Visser", true);
                 Debug.Log("fgh");
 
-                rb2d.gravityScale += 1;
+                vis1.AddForce(transform.up * a);
                 Debug.Log("f");
 
 
