@@ -11,7 +11,7 @@ public class HammerPhysics : MonoBehaviour
     bool HasntMove;
     bool StopMove;
     bool toTheLeft;
-    float MaxMovement;
+    float PourcentMovement;
     int ID;
     // Start is called before the first frame update
     void Start()
@@ -22,6 +22,14 @@ public class HammerPhysics : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(PourcentMovement > 0)
+        {
+            PourcentMovement -= Time.deltaTime;
+            if (PourcentMovement < 0)
+            {
+                PourcentMovement = 0;
+            }
+        }
         if (HasntMove)
         {
             if(toTheLeft)
@@ -63,9 +71,8 @@ public class HammerPhysics : MonoBehaviour
         
         if (lastPosition != transform.parent.position.x && (lastPosition > transform.parent.position.x+0.05f || lastPosition < transform.parent.position.x-0.05f))
         {
+            PourcentMovement = 1;
             StopMove = false;
-            Debug.Log(lastPosition - transform.parent.position.x + 0.05f);
-            Debug.Log(lastPosition + transform.parent.position.x - 0.05f);
             if (lastPosition < transform.parent.position.x)
             {
                 toTheLeft = false;

@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
     public GameObject leftWall;
 
     //Tableau 4
+    public GameObject Egg;
     public List<GameObject> narratorsAnim4 = new List<GameObject>();
     public GameObject Hammer;
     public GameObject JukeboxBroken4;
@@ -82,7 +83,9 @@ public class GameManager : MonoBehaviour
     //Tableau 5
     public List<GameObject> Credit = new List<GameObject>();
     public GameObject Door;
+    public GameObject blackSquare;
     public GameObject TalkingAboutDoor;
+    public GameObject CreditText;
     public List<GameObject> Explosions = new List<GameObject>();
 
     public List<GameObject> ON = new List<GameObject>();
@@ -95,6 +98,7 @@ public class GameManager : MonoBehaviour
     public GameObject tableau3;
     public GameObject tableau4;
     public GameObject tableau5;
+    public GameObject endGame;
 
     public DragAndDrop dAD;
 
@@ -107,8 +111,11 @@ public class GameManager : MonoBehaviour
     public List<GameObject> dialogueMomentList;
     public int IdDialogue;
     public int IdDialogueMoment;
+    public int LastIdDialogueMoment;
+    public int LastIdDialogue;
     public GameObject bocksSpeak;
     public GameObject bocksMomentSpeak;
+    public bool animWasStop;
 
     public GameObject diReturnGame;
 
@@ -147,6 +154,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(dAD.draggedObject == null && Raycaster2D.eventMask != 503)
+        {
+            Raycaster2D.eventMask = 503;
+        }
         if (pourcentageToMakeObjectVisible > 0)
         {
             if (isTableau2)
@@ -363,6 +374,7 @@ public class GameManager : MonoBehaviour
 
     public void S2ATQuit()
     {
+        cleanScene();
         S2AT.SetActive(true);
         S2ATWithWriting.SetActive(false);
         foreach (Transform child in S2AT.transform.GetChild(0))
@@ -410,6 +422,7 @@ public class GameManager : MonoBehaviour
             {
                 child.gameObject.SetActive(true);
                 child.GetComponent<Animator>().enabled = true;
+                NewSound(child.gameObject);
             }
             else
             {
@@ -464,11 +477,13 @@ public class GameManager : MonoBehaviour
         JukeBoxHP--;
         Debug.Log(JukeBoxHP);
         int phase = 0;
+        DotWeenShakeCamera(0.1f, 0.6f, 30);
         if (JukeBoxHP == 15 || JukeBoxHP == 10 || JukeBoxHP == 5 || JukeBoxHP == 0)
         {
             if (JukeBoxHP == 10)
             {
                 phase = 1;
+                Destroy(Egg);
             }
             if (JukeBoxHP == 5)
             {
@@ -499,8 +514,16 @@ public class GameManager : MonoBehaviour
             }
 
         }
-        bocksSpeak.SetActive(true);
-        IdDialogue++;
+        if(bocksMomentSpeak != null)
+        {
+            if(bocksMomentSpeak == bocksSpeak.transform.parent.gameObject)
+            {
+                bocksSpeak.SetActive(true);
+                IdDialogue++;
+            }
+        }
+       
+       
     }
 
     public void ChangeDialogueMoment()
@@ -587,6 +610,22 @@ public class GameManager : MonoBehaviour
         }
 
 
+    }
+    public void SettingsNarrations(string tags)
+    {
+        switch (tags)
+        {
+            case "ButtonLangue":
+                bocksMomentSpeak.SetActive(true);
+                IdDialogue = 0;
+                Dialogue();
+                break;
+            case "ButtonMusic":
+                bocksMomentSpeak.SetActive(true);
+                IdDialogue = 1;
+                Dialogue();
+                break;
+        }
     }
 
 

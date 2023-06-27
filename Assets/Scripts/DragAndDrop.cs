@@ -5,7 +5,6 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using static System.Net.Mime.MediaTypeNames;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
@@ -30,7 +29,7 @@ public class DragAndDrop : MonoBehaviour
     public Texture2D tex;
     public Animator animator;
 
-    bool canThrowHandle;
+    public bool canThrowHandle;
     bool firstTimeUseTheLoadingBar = true;
 
     public float MaxScaleLoadingBar;
@@ -85,9 +84,13 @@ public class DragAndDrop : MonoBehaviour
     public GameObject dButtonLangue2;
     public GameObject flag;
     public GameObject settingsWindow;
+    private Rigidbody2D rb2d;
 
     public GameObject diReturnJukebox;
 
+    public List<GameObject> AnimPaused = new List<GameObject>();
+
+    Scene sceneBeforeSettings;
     private void Awake()
     {
         sr = gameObject.GetComponent<SpriteRenderer>();
@@ -228,6 +231,7 @@ public class DragAndDrop : MonoBehaviour
             }
             else if (!canThrowHandle)
             {
+
                 GameManager.Instance.CancelLoopingObjects(GameManager.Instance.nameOfLoopingObject);
                 ChangeLoadingBarScale(5.3f, 5.3f, -2.65f);
                 GameManager.Instance.DotWeenShakeObject(GameManager.Instance.Gauge, 0.5f, 0.06f, 10);
@@ -245,16 +249,17 @@ public class DragAndDrop : MonoBehaviour
                         ScaleInit = child.localScale.x;
                     }
                 }
-              
-                        slider.transform.GetChild(0).GetComponent<Animator>().enabled = true;
-                        GameManager.Instance.NewSound(slider);
-                    
-                
+
+                slider.transform.GetChild(0).GetComponent<Animator>().enabled = true;
+                GameManager.Instance.NewSound(slider);
+
+
                 MovingBar = false;
                 canThrowHandle = true;
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().canSlide = true;
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles = new Vector3(ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.x, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.y, -90);
                 ObjectPut.transform.eulerAngles = new Vector3(ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.x, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.y, -90);
+                slider.transform.parent = slider.transform.parent.parent;
             }
 
 
@@ -277,15 +282,26 @@ public class DragAndDrop : MonoBehaviour
                 }
                 else if (Camera.main.ScreenToWorldPoint(Input.mousePosition).y > GameManager.Instance.S2ATPoints[0].y)
                 {
+
                     pourcentageActualPoint = 0;
+                    foreach (GameObject child in GameManager.Instance.ObjectToMakeVisibleOnBeginning)
+                    {
+                        if (child.tag == "SettingsOpen")
+                        {
+                            child.transform.parent = GameManager.Instance.tableau1.transform.parent;
+                        }
+                    }
                     TableauActual = 2;
                     GameManager.Instance.LoadNextLevel();
                 }
                 var OppacityView = DarkSquare.GetComponent<SpriteRenderer>().color;
                 OppacityView.a = 1 - pourcentageActualPoint;
                 DarkSquare.GetComponent<SpriteRenderer>().color = OppacityView;
-                draggedObject.transform.localScale = new Vector2(draggedObject.transform.localScale.x, scaleValue * (1 - pourcentageActualPoint) + MinScale);
-                draggedObject.transform.position = new Vector2(draggedObject.transform.position.x, ((posMaxInit - posInit) * (1 - pourcentageActualPoint) / 2) + posInit);
+                if (draggedObject != null)
+                {
+                    draggedObject.transform.localScale = new Vector2(draggedObject.transform.localScale.x, scaleValue * (1 - pourcentageActualPoint) + MinScale);
+                    draggedObject.transform.position = new Vector2(draggedObject.transform.position.x, ((posMaxInit - posInit) * (1 - pourcentageActualPoint) / 2) + posInit);
+                }
                 //3.862632 min
                 //17.5 max
 
@@ -297,7 +313,7 @@ public class DragAndDrop : MonoBehaviour
                 if (posInit == 10000.0f)
                 {
                     posInit = draggedObject.transform.position.x;
-                    draggedObject.transform.parent = draggedObject.transform.parent.transform.parent;
+
                 }
                 //Debug.Log(Camera.main.ScreenToWorldPoint(Input.mousePosition).x);
                 //Debug.Log(posInit);
@@ -305,7 +321,7 @@ public class DragAndDrop : MonoBehaviour
                 draggedObject.transform.position = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x + 2, draggedObject.transform.position.y);
                 draggedObject.GetComponent<SoundDesign>().PhaseOfSound = 2;
 
-                if(GameManager.Instance.nameOfLoopingObject != draggedObject.name)
+                if (GameManager.Instance.nameOfLoopingObject != draggedObject.name)
                 {
                     GameManager.Instance.SoundLoop(draggedObject, 0.5f);
                 }
@@ -433,7 +449,7 @@ public class DragAndDrop : MonoBehaviour
                             flashingHand.transform.parent.parent.gameObject.SetActive(true);
                         }
                         draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity--;
-                        if(draggedObject == GameManager.Instance.cog1)
+                        if (draggedObject == GameManager.Instance.cog1)
                         {
                             GameManager.Instance.NewSound(draggedObject);
                         }
@@ -443,6 +459,10 @@ public class DragAndDrop : MonoBehaviour
                         }
                         if (draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity == 0)
                         {
+                            if (draggedObject.GetComponent<ObjectToDrag>().objectToPutOn == GameManager.Instance.Gauge)
+                            {
+                                draggedObject.transform.parent = draggedObject.transform.parent.parent;
+                            }
                             draggedObject.GetComponent<Rigidbody2D>().gravityScale = 1;
                             foreach (Transform children in draggedObject.transform)
                             {
@@ -453,8 +473,13 @@ public class DragAndDrop : MonoBehaviour
                     }
                     else
                     {
-                        
-                         if (GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().Moon)
+                        if (draggedObject == GameManager.Instance.cog3)
+                        {
+                            draggedObject.GetComponent<SoundDesign>().PhaseOfSound = 1;
+                            GameManager.Instance.NewSound(draggedObject);
+                            StartCoroutine(draggedObject.GetComponent<ObjectToDrag>().MakeItRoll());
+                        }
+                        if (GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().Moon)
                         {
                             GameManager.Instance.NewSound(GameManager.Instance.ObjectHover);
                         }
@@ -533,7 +558,7 @@ public class DragAndDrop : MonoBehaviour
                             GameManager.Instance.NewSound(GameManager.Instance.ObjectHover);
                         }
                         GetComponent<Simon>().AddToComparative(GameManager.Instance.ObjectHover.name);
-                        
+
                     }
 
                 }
@@ -551,9 +576,10 @@ public class DragAndDrop : MonoBehaviour
                         Destroy(ObjectON.GetComponent<Rigidbody2D>());
                     }
                     GameManager.Instance.AllText.GetComponent<ElevateText>().RotateIt();
+                    GameManager.Instance.ChangeDialogueMoment();
                 }
             }
-            
+
 
             else if (GameManager.Instance.ObjectHover.tag == "Light")
             {
@@ -578,7 +604,9 @@ public class DragAndDrop : MonoBehaviour
 
             else if (GameManager.Instance.ObjectHover.tag == "Button")
             {
+
                 GameManager.Instance.breakingTheWall();
+                GameManager.Instance.NewSound(GameManager.Instance.ObjectHover);
             }
 
             else if (GameManager.Instance.ObjectHover.tag == "UV")
@@ -588,30 +616,41 @@ public class DragAndDrop : MonoBehaviour
 
             else if (GameManager.Instance.ObjectHover.tag == "Vis")
             {
-                animator.SetBool("Visser", true);
+                
+                //animator.SetBool("Visser", true);
+                Debug.Log("fgh");
+
+                rb2d.gravityScale += 1;
+                Debug.Log("f");
+
+
             }
 
             else if (GameManager.Instance.ObjectHover.tag == "Door")
             {
-                foreach(GameObject Credits in GameManager.Instance.Credit)
+                foreach (GameObject Credits in GameManager.Instance.Credit)
                 {
                     Credits.SetActive(true);
                 }
+                Debug.Log("hereitis");
+                GameManager.Instance.ChangeDialogueMoment();
                 GameManager.Instance.Door.SetActive(false);
                 GameManager.Instance.cleanScene();
+                
             }
 
-            else if (GameManager.Instance.ObjectHover.tag == "ButtonLangue")
-            {
-                StartCoroutine(SettingsLangue1());
-            }
+            /*  else if (GameManager.Instance.ObjectHover.tag == "ButtonLangue")
+              {
+                  StartCoroutine(SettingsLangue1());
+              }
 
-            else if (GameManager.Instance.ObjectHover.tag == "ButtonLangue2")
-            {
-                StartCoroutine(SettingsLangue2());
-            }
+              else if (GameManager.Instance.ObjectHover.tag == "ButtonLangue2")
+              {
+                  StartCoroutine(SettingsLangue2());
+              }*/
             else if (GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().Background)
             {
+                flashingHand.SetActive(false);
                 GameManager.Instance.ObjectHover.SetActive(false);
                 GameManager.Instance.leftWall.SetActive(false);
                 GameManager.Instance.tableau3.GetComponent<Animator>().SetBool("PassedTo4", true);
@@ -623,276 +662,343 @@ public class DragAndDrop : MonoBehaviour
 
             else if (GameManager.Instance.ObjectHover.tag == "ButtonMusic")
             {
-                StartCoroutine(SettingsMusic());
+                GameManager.Instance.SettingsNarrations(GameManager.Instance.ObjectHover.tag);
             }
 
             else if (GameManager.Instance.ObjectHover.tag == "SettingsOpen")
             {
+                if (settingsWindow.activeInHierarchy)
+                {
+                    settingsWindow.SetActive(false);
+                    if (GameManager.Instance.animWasStop)
+                    {
+                        foreach (GameObject child in AnimPaused.ToArray())
+                        {
+                            child.GetComponent<Animator>().SetFloat("Speed", 1f);
+                            AnimPaused.Remove(child.gameObject);
+                        }
+                        GameManager.Instance.IdDialogueMoment = GameManager.Instance.LastIdDialogueMoment;
+                        GameManager.Instance.IdDialogue = GameManager.Instance.LastIdDialogue;
+                        GameManager.Instance.bocksMomentSpeak = GameManager.Instance.dialogueMomentList[GameManager.Instance.IdDialogueMoment];
+                        GameManager.Instance.dialogueList.Clear();
+                        foreach (Transform child in GameManager.Instance.bocksMomentSpeak.transform)
+                        {
+                            GameManager.Instance.dialogueList.Add(child.gameObject);
+                        }
+                        GameManager.Instance.IdDialogueMoment++;
+                    }
+                }
+            
+            else
+            {
                 settingsWindow.SetActive(true);
-            }
+                if (GameManager.Instance.dialogueList[GameManager.Instance.IdDialogue - 1] != null)
+                {
+                    foreach (Transform child in GameManager.Instance.dialogueList[GameManager.Instance.IdDialogue - 1].transform)
+                    {
+                        // Debug.Log(child.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).ToString());
+                        child.GetComponent<Animator>().SetFloat("Speed", 0f);
+                        AnimPaused.Add(child.gameObject);
+                    }
+                    GameManager.Instance.LastIdDialogueMoment = GameManager.Instance.IdDialogueMoment - 1;
+                    GameManager.Instance.LastIdDialogue = GameManager.Instance.IdDialogue;
 
-            else if (GameManager.Instance.ObjectHover.tag == "SettingsClose")
-            {
-                settingsWindow.SetActive(false);
-            }
+                    GameManager.Instance.IdDialogueMoment = 7;
+                    GameManager.Instance.bocksMomentSpeak = GameManager.Instance.dialogueMomentList[GameManager.Instance.IdDialogueMoment];
+                    GameManager.Instance.dialogueList.Clear();
+                    foreach (Transform child in GameManager.Instance.bocksMomentSpeak.transform)
+                    {
+                        GameManager.Instance.dialogueList.Add(child.gameObject);
+                    }
+                    GameManager.Instance.animWasStop = true;
 
-            else if (GameManager.Instance.ObjectHover.tag == "SettingsOpen")
-            {
-                settingsWindow.SetActive(true);
-            }
 
-            else if (GameManager.Instance.ObjectHover.tag == "Quit")
-            {
-                //Application.Quit();
+                }
+
+
             }
 
         }
 
+        else if (GameManager.Instance.ObjectHover.tag == "SettingsClose")
+        {
+            Application.Quit();
+        }
+
+        else if (GameManager.Instance.ObjectHover.tag == "ButtonLangue")
+        {
+            Debug.Log("langue");
+            GameManager.Instance.SettingsNarrations(GameManager.Instance.ObjectHover.tag);
+        }
+
+        else if (GameManager.Instance.ObjectHover.tag == "Quit")
+        {
+            //Application.Quit();
+        }
+
     }
-    public void StopClick()
+
+}
+public void StopClick()
+{
+    if (draggedObject != null)
     {
+        if (draggedObject.tag == "Slider" && canThrowHandle)
+        {
+            GameManager.Instance.CancelLoopingObjects(GameManager.Instance.nameOfLoopingObject);
+            float maxValue = posInit - posMaxInit;
+            totalSliderValue = (posInit - draggedObject.transform.position.x) / maxValue;
+
+            if (totalSliderValue > 0.75f)
+            {
+                draggedObject.transform.position = new Vector2(posInit, draggedObject.transform.position.y);
+                GameManager.Instance.Gauge.GetComponent<Animator>().enabled = true;
+                ObjectPut.GetComponent<Animator>().enabled = true;
+                ObjectPut.transform.parent = ObjectPut.transform.parent.parent.parent;
+                ObjectPut = null;
+                GameObject[] gameObjectsToRemove = new GameObject[] { draggedObject };
+                StartCoroutine(GameManager.Instance.TakeAwayTheGauge(gameObjectsToRemove));
+                GameManager.Instance.cleanScene();
+            }
+            foreach (Transform child in GameManager.Instance.Gauge.transform)
+            {
+                if (child.name == "Loading_bar")
+                {
+                    child.localScale = new Vector3(ScaleInit, child.localScale.y, child.localScale.z);
+                    child.localPosition = new Vector2(0, CalculValuePourcentOfSliderPosition(0, posInitLoadingBar, posMaxInitLoadingBar));
+                }
+            }
+        }
+
         if (draggedObject != null)
         {
-            if (draggedObject.tag == "Slider" && canThrowHandle)
-            {
-                GameManager.Instance.CancelLoopingObjects(GameManager.Instance.nameOfLoopingObject);
-                float maxValue = posInit - posMaxInit;
-                totalSliderValue = (posInit - draggedObject.transform.position.x) / maxValue;
 
-                if (totalSliderValue > 0.75)
+
+            if (draggedObject.GetComponent<ObjectToDrag>() != null)
+            {
+                if (draggedObject.GetComponent<ObjectToDrag>().CD)
                 {
-                    draggedObject.transform.position = new Vector2(posInit, draggedObject.transform.position.y);
-                    GameManager.Instance.Gauge.GetComponent<Animator>().enabled = true;
-                    ObjectPut.GetComponent<Animator>().enabled = true;
-                    ObjectPut.transform.parent = ObjectPut.transform.parent.parent.parent;
-                    ObjectPut = null;
-                    GameObject[] gameObjectsToRemove = new GameObject[] { draggedObject };
-                    StartCoroutine(GameManager.Instance.TakeAwayTheGauge(gameObjectsToRemove));
-                    GameManager.Instance.cleanScene();
-                }
-                foreach (Transform child in GameManager.Instance.Gauge.transform)
-                {
-                    if (child.name == "Loading_bar")
-                    {
-                        child.localScale = new Vector3(ScaleInit, child.localScale.y, child.localScale.z);
-                        child.localPosition = new Vector2(0, CalculValuePourcentOfSliderPosition(0, posInitLoadingBar, posMaxInitLoadingBar));
-                    }
+
+                    GameManager.Instance.DotWeenShakeObject(draggedObject, 0.1f, 0.03f, 10);
+                    GameManager.Instance.DotWeenShakeObject(GameManager.Instance.DiskPlayer, 0.1f, 0.03f, 10);
                 }
             }
 
-            if (draggedObject.GetComponent<ObjectToDrag>().CD)
-            {
-
-                GameManager.Instance.DotWeenShakeObject(draggedObject, 0.5f, 0.06f, 10);
-                GameManager.Instance.DotWeenShakeObject(GameManager.Instance.DiskPlayer, 0.5f, 0.06f, 10);
-            }
-            if(draggedObject == GameManager.Instance.cog1)
+            if (draggedObject == GameManager.Instance.cog1)
             {
                 draggedObject.GetComponent<SoundDesign>().PhaseOfSound = 3;
                 GameManager.Instance.NewSound(draggedObject);
             }
+            if (draggedObject == GameManager.Instance.cog3)
+            {
+                draggedObject.transform.GetChild(0).GetComponent<AudioSource>().Pause();
+                draggedObject.GetComponent<SoundDesign>().PhaseOfSound = 2;
+                GameManager.Instance.NewSound(draggedObject);
+            }
         }
-        if (GameManager.Instance.ObjectHover != null)
+    }
+    if (GameManager.Instance.ObjectHover != null)
+    {
+
+        if (GameManager.Instance.ObjectHover.tag == "Simon" && nbrOfTimeWeTouch > 0)
         {
 
-            if (GameManager.Instance.ObjectHover.tag == "Simon" && nbrOfTimeWeTouch > 0)
+            foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
             {
-
-                foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
+                if (SimonUI.name == "Button_Pause" && SimonUI == GameManager.Instance.ObjectHover && multipleTouchOnTableau2 && GameManager.Instance.canTouchCd)
                 {
-                    if (SimonUI.name == "Button_Pause" && SimonUI == GameManager.Instance.ObjectHover && multipleTouchOnTableau2 && GameManager.Instance.canTouchCd)
-                    {
-                        GameManager.Instance.TouchCD(nbrOfTimeWeTouch);
-                    }
+                    GameManager.Instance.TouchCD(nbrOfTimeWeTouch);
+                }
 
-                    if (SimonUI.GetComponent<ObjectToDrag>().CD && SimonUI == GameManager.Instance.ObjectHover)
-                    {
-                        GameManager.Instance.TouchCD(nbrOfTimeWeTouch);
-                    }
+                if (SimonUI.GetComponent<ObjectToDrag>().CD && SimonUI == GameManager.Instance.ObjectHover)
+                {
+                    GameManager.Instance.TouchCD(nbrOfTimeWeTouch);
                 }
             }
         }
+    }
 
-        if (draggedObject != null)
+    if (draggedObject != null)
+    {
+        if (draggedObject.GetComponent<ObjectToDrag>() != null)
         {
-            if (draggedObject.GetComponent<ObjectToDrag>() != null)
+
+
+
+            if (draggedObject.GetComponent<ObjectToDrag>().canPutObject && GameManager.Instance.ObjectHover == draggedObject.GetComponent<ObjectToDrag>().objectToPutOn)
             {
-
-
-
-                if (draggedObject.GetComponent<ObjectToDrag>().canPutObject && GameManager.Instance.ObjectHover == draggedObject.GetComponent<ObjectToDrag>().objectToPutOn)
+                if (draggedObject.GetComponent<ObjectToDrag>().Moon)
                 {
-                    if (draggedObject.GetComponent<ObjectToDrag>().Moon)
+                    draggedObject.GetComponent<ShadowCaster2D>().enabled = false;
+                    draggedObject.GetComponent<SoundDesign>().PhaseOfSound = 2;
+                    GameManager.Instance.NewSound(draggedObject);
+                    GameManager.Instance.NightFall();
+                    if (draggedObject.transform.parent.GetComponent<ObjectToDrag>() != null)
                     {
-                        draggedObject.GetComponent<SoundDesign>().PhaseOfSound = 2;
-                        GameManager.Instance.NewSound(draggedObject);
-                        GameManager.Instance.NightFall();
-                        if (draggedObject.transform.parent.GetComponent<ObjectToDrag>() != null)
+                        if (draggedObject.transform.parent.GetComponent<ObjectToDrag>().painting == true)
                         {
-                            if (draggedObject.transform.parent.GetComponent<ObjectToDrag>().painting == true)
-                            {
-                                draggedObject.transform.parent = draggedObject.transform.parent.parent;
-                            }
+                            draggedObject.transform.parent = draggedObject.transform.parent.parent;
                         }
-
-                    }
-                    draggedObject.transform.position = new Vector3(GameManager.Instance.ObjectHover.transform.position.x, GameManager.Instance.ObjectHover.transform.position.y, GameManager.Instance.ObjectHover.transform.position.z);
-                    draggedObject.GetComponent<Rigidbody2D>().gravityScale = 0;
-                    draggedObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-                    draggedObject.GetComponent<ObjectToDrag>().isPut = true;
-                    if (draggedObject.GetComponent<ObjectToDrag>().CD)
-                    {
-                        draggedObject.tag = "Simon";
-                        draggedObject.layer = 6;
-                        GameManager.Instance.SimonUI.Add(draggedObject);
-                        draggedObject.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().enabled = false;
-                    }
-                    if (draggedObject.tag != "Simon")
-                    {
-                        draggedObject.tag = "Untagged";
                     }
 
+                }
+                draggedObject.transform.position = new Vector3(GameManager.Instance.ObjectHover.transform.position.x, GameManager.Instance.ObjectHover.transform.position.y, GameManager.Instance.ObjectHover.transform.position.z);
+                draggedObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+                draggedObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                draggedObject.GetComponent<ObjectToDrag>().isPut = true;
+                if (draggedObject.GetComponent<ObjectToDrag>().CD)
+                {
+                    draggedObject.tag = "Simon";
+                    draggedObject.layer = 6;
+                    GameManager.Instance.SimonUI.Add(draggedObject);
+                    draggedObject.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().enabled = false;
+                }
+                if (draggedObject.tag != "Simon")
+                {
+                    draggedObject.tag = "Untagged";
+                }
 
 
-                    if (draggedObject.GetComponent<ObjectToDrag>().objectToPutOn.tag == "ButtonON")
+
+                if (draggedObject.GetComponent<ObjectToDrag>().objectToPutOn.tag == "ButtonON")
+                {
+                    GameManager.Instance.DotWeenShakeCamera(0.1f, 0.2f, 10);
+                    foreach (GameObject ObjectON in GameManager.Instance.ON)
                     {
-                        GameManager.Instance.DotWeenShakeCamera(0.1f, 0.2f, 10);
-                        foreach (GameObject ObjectON in GameManager.Instance.ON)
+                        if (ObjectON == draggedObject)
                         {
-                            if (ObjectON == draggedObject)
-                            {
-                                draggedObject.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<SpriteRenderer>().sprite = draggedObject.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<SpriteRenderer>().sprite;
-                                GameManager.Instance.ON.Remove(ObjectON);
-                                Destroy(ObjectON);
-                            }
+                            draggedObject.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<SpriteRenderer>().sprite = draggedObject.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<ObjectToDrag>().objectToPutOn.GetComponent<SpriteRenderer>().sprite;
+                            GameManager.Instance.ON.Remove(ObjectON);
+                            Destroy(ObjectON);
                         }
-                        draggedObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
                     }
-                    ObjectPut = draggedObject;
-                    StartCoroutine(draggedObject.GetComponent<ObjectToDrag>().BecomeDestroyable());
+                    draggedObject.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
                 }
+                ObjectPut = draggedObject;
+                StartCoroutine(draggedObject.GetComponent<ObjectToDrag>().BecomeDestroyable());
             }
-            dragged = false;
-            draggedObject = null;
-
-
         }
-    }
+        dragged = false;
+        draggedObject = null;
 
-    IEnumerator TouchUI(GameObject SimonUI, float timing)
-    {
-        yield return new WaitForSeconds(timing);
-    }
 
-    public void ValueSlider()
+    }
+}
+
+IEnumerator TouchUI(GameObject SimonUI, float timing)
+{
+    yield return new WaitForSeconds(timing);
+}
+
+public void ValueSlider()
+{
+    if (totalSliderValue <= 0.40f)
     {
-        if (totalSliderValue <= 0.40f)
+        totalSliderValue = 1;
+
+
+        //_Rigidbody.AddForce 
+
+
+    }
+    else
+    {
+        // totalSliderValue = ;
+    }
+}
+
+float CalculValuePourcentOfSliderScale(float scaleValue, float pourcentageActualPoint)
+{
+    return (scaleValue * (1 - pourcentageActualPoint) + MinScale);
+}
+float CalculValuePourcentOfSliderPosition(float pourcentageActualPoint, float Min, float Max)
+{
+    return (((Max - Min) * (1 - pourcentageActualPoint)) + Min);
+}
+
+public void ChangeLoadingBarScale(float valueGive, float maxValue, float minValue)
+{
+    foreach (Transform child in GameManager.Instance.Gauge.transform)
+    {
+        if (child.name == "Loading_bar")
         {
-            totalSliderValue = 1;
-
-
-            //_Rigidbody.AddForce 
-
-
-        }
-        else
-        {
-            // totalSliderValue = ;
-        }
-    }
-
-    float CalculValuePourcentOfSliderScale(float scaleValue, float pourcentageActualPoint)
-    {
-        return (scaleValue * (1 - pourcentageActualPoint) + MinScale);
-    }
-    float CalculValuePourcentOfSliderPosition(float pourcentageActualPoint, float Min, float Max)
-    {
-        return (((Max - Min) * (1 - pourcentageActualPoint)) + Min);
-    }
-
-    public void ChangeLoadingBarScale(float valueGive, float maxValue, float minValue)
-    {
-        foreach (Transform child in GameManager.Instance.Gauge.transform)
-        {
-            if (child.name == "Loading_bar")
+            float pourcentageOfTheValue = ((maxValue - minValue) - (valueGive - minValue)) / (maxValue - minValue);
+            //MaxScaleLoadingBar = child.localScale.x;
+            float scaleValue = MaxScale - MinScale;
+            child.localScale = new Vector3(CalculValuePourcentOfSliderScale(scaleValue, pourcentageOfTheValue), child.localScale.y, child.localScale.z);
+            /*if (posInitLoadingBar < 0)
             {
-                float pourcentageOfTheValue = ((maxValue - minValue) - (valueGive - minValue)) / (maxValue - minValue);
-                //MaxScaleLoadingBar = child.localScale.x;
-                float scaleValue = MaxScale - MinScale;
-                child.localScale = new Vector3(CalculValuePourcentOfSliderScale(scaleValue, pourcentageOfTheValue), child.localScale.y, child.localScale.z);
-                /*if (posInitLoadingBar < 0)
-                {
-                    posInitLoadingBar *= -1;
-                }
-                if (posMaxInitLoadingBar < 0)
-                {
-                    posMaxInitLoadingBar *= -1;
-                }
-                posMaxInitLoadingBar = posMaxInitLoadingBar + posInitLoadingBar;
-                posInitLoadingBar = 0;
-                */
-                child.localPosition = new Vector2(0, CalculValuePourcentOfSliderPosition(pourcentageOfTheValue, posInitLoadingBar, posMaxInitLoadingBar));
-                // ((posInitLoadingBar - posMaxInitLoadingBar) * (1 - 0.33f) / 2) + posInitLoadingBar
+                posInitLoadingBar *= -1;
             }
+            if (posMaxInitLoadingBar < 0)
+            {
+                posMaxInitLoadingBar *= -1;
+            }
+            posMaxInitLoadingBar = posMaxInitLoadingBar + posInitLoadingBar;
+            posInitLoadingBar = 0;
+            */
+            child.localPosition = new Vector2(0, CalculValuePourcentOfSliderPosition(pourcentageOfTheValue, posInitLoadingBar, posMaxInitLoadingBar));
+            // ((posInitLoadingBar - posMaxInitLoadingBar) * (1 - 0.33f) / 2) + posInitLoadingBar
         }
     }
+}
 
-    /* IEnumerator testWaiting(ObjectReferenceKeyframe[] keyFrames)
+/* IEnumerator testWaiting(ObjectReferenceKeyframe[] keyFrames)
+ {
+     foreach (var frame in keyFrames)
      {
-         foreach (var frame in keyFrames)
-         {
 
-             Sprite SpriteInFrame = (Sprite)frame.value;
-             tex = SpriteInFrame.texture;
-             Debug.Log(tex.name);
-             Debug.Log(testBar.sprite.rect.width);
-             SpriteInFrame = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * totalSliderValue), tex.height), new Vector2(0.5f / totalSliderValue/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3, 0.5f), 100.0f);
-             testBar.sprite = SpriteInFrame;
-             ValueSlider();
-             Debug.Log(testBar.sprite.rect.width);
+         Sprite SpriteInFrame = (Sprite)frame.value;
+         tex = SpriteInFrame.texture;
+         Debug.Log(tex.name);
+         Debug.Log(testBar.sprite.rect.width);
+         SpriteInFrame = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * totalSliderValue), tex.height), new Vector2(0.5f / totalSliderValue/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3, 0.5f), 100.0f);
+         testBar.sprite = SpriteInFrame;
+         ValueSlider();
+         Debug.Log(testBar.sprite.rect.width);
 
-             yield return new WaitForSeconds(0.1f);
-         }
-     }*/
+         yield return new WaitForSeconds(0.1f);
+     }
+ }*/
 
-    IEnumerator SettingsMusic()
-    {
-        buttonMusicOption.SetActive(false);
-        dMusicSettings1.SetActive(true);
-        yield return new WaitForSeconds(3);
+IEnumerator SettingsMusic()
+{
+    buttonMusicOption.SetActive(false);
+    dMusicSettings1.SetActive(true);
+    yield return new WaitForSeconds(3);
 
-        dMusicSettings1.SetActive(false);
-        dMusicSettings2.SetActive(true);
-        Debug.Log("tyu");
+    dMusicSettings1.SetActive(false);
+    dMusicSettings2.SetActive(true);
+    Debug.Log("tyu");
 
-        yield return new WaitForSeconds(3);
-        dMusicSettings2.SetActive(false);
-        Debug.Log("wxc");
+    yield return new WaitForSeconds(3);
+    dMusicSettings2.SetActive(false);
+    Debug.Log("wxc");
 
-        buttonMusicOption.SetActive(true);
-    }
+    buttonMusicOption.SetActive(true);
+}
 
-    IEnumerator SettingsLangue1()
-    {
-        buttonLangue1.SetActive(false);
-        flag.SetActive(true);
-        dButtonLangue1.SetActive(true);
-        yield return new WaitForSeconds(3);
-        dButtonLangue1.SetActive(false);
-        dButtonLangue2.SetActive(true);
-        flag.SetActive(false);
-        buttonLangue1.SetActive(true);
-    }
+IEnumerator SettingsLangue1()
+{
+    buttonLangue1.SetActive(false);
+    flag.SetActive(true);
+    dButtonLangue1.SetActive(true);
+    yield return new WaitForSeconds(3);
+    dButtonLangue1.SetActive(false);
+    dButtonLangue2.SetActive(true);
+    flag.SetActive(false);
+    buttonLangue1.SetActive(true);
+}
 
-    IEnumerator SettingsLangue2()
-    {
-        buttonLangue2.SetActive(false);
-        dButtonLangue1.SetActive(true);
-        flag.SetActive(true);
-        yield return new WaitForSeconds(3);
-        dButtonLangue1.SetActive(false);
-        dButtonLangue2.SetActive(true);
-        flag.SetActive(false);
-        buttonLangue2.SetActive(true);
-    }
+IEnumerator SettingsLangue2()
+{
+    buttonLangue2.SetActive(false);
+    dButtonLangue1.SetActive(true);
+    flag.SetActive(true);
+    yield return new WaitForSeconds(3);
+    dButtonLangue1.SetActive(false);
+    dButtonLangue2.SetActive(true);
+    flag.SetActive(false);
+    buttonLangue2.SetActive(true);
+}
 }

@@ -8,6 +8,7 @@ public class Narrator : MonoBehaviour
 {
     bool KnowYouComeToScene4;
     public bool secondTimeHandHitButton;
+    public float value;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,18 @@ public class Narrator : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 KnowYouComeToScene4 = true;
+            }
+        }
+        if(gameObject == GameManager.Instance.blackSquare)
+        {
+            var OppacityView = gameObject.GetComponent<SpriteRenderer>().color;
+            OppacityView.a =  value;
+            gameObject.GetComponent<SpriteRenderer>().color = OppacityView;
+            if(value == 1)
+            {
+                Debug.Log("oppa1");
+                GameManager.Instance.endGame.SetActive(true);
+                GameManager.Instance.tableau5.SetActive(false);
             }
         }
     }
@@ -135,10 +148,12 @@ public class Narrator : MonoBehaviour
     public void DestroyJukebox()
     {
         GameManager.Instance.DestroyJukebox();
-        GameManager.Instance.Dialogue();
     }
 
-
+    public void NextDialogue()
+    {
+        GameManager.Instance.Dialogue();
+    }
     public void EndOfScene2()
     {
         for (int i = 0; i < GameManager.Instance.narratorsAnim.Count - 1; i++)
@@ -197,6 +212,7 @@ public class Narrator : MonoBehaviour
     public void HammerIsPutted()
     {
         GameManager.Instance.Hammer.SetActive(true);
+        GameManager.Instance.NewSound(gameObject);
         endOfScene4();
     }
 
@@ -259,5 +275,13 @@ public class Narrator : MonoBehaviour
             }
         }
     }
+
+    public void OpenButton(int id)
+    {
+        gameObject.GetComponent<SoundDesign>().PhaseOfSound = id;
+        GameManager.Instance.NewSound(gameObject);
+    }
+
+    
 
 }

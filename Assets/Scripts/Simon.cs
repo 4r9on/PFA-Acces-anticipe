@@ -174,72 +174,75 @@ public class Simon : MonoBehaviour
             LightLeft.color = AllLight[2];
             yield return new WaitForSeconds(0.5f);
         }
-        foreach (string light in infiniteGame)
+        if (infiniteGame.Count > 0)
         {
-            /*   UIText.text = light;
-               yield return new WaitForSeconds(0.2f);
-               UIText.text = "";
-               yield return new WaitForSeconds(0.1f);*/
-            /*-   LightUp.color = new Color(0.9528302f, 0.0759992f, 0, 1);
-               LightRight.color = new Color(0.9528302f, 0.0759992f, 0, 1);
-               LightLeft.color = new Color(0.9528302f, 0.0759992f, 0, 1);*/
+            foreach (string light in infiniteGame)
+            {
+                /*   UIText.text = light;
+                   yield return new WaitForSeconds(0.2f);
+                   UIText.text = "";
+                   yield return new WaitForSeconds(0.1f);*/
+                /*-   LightUp.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                   LightRight.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                   LightLeft.color = new Color(0.9528302f, 0.0759992f, 0, 1);*/
 
-            switch (light)
-            {
-                case "Play":
-                    LightUp.color = new Color(0.9528302f, 0.0759992f, 0, 1);
-                    LightRight.color = new Color(0.9528302f, 0.0759992f, 0, 1);
-                    LightLeft.color = new Color(0.9528302f, 0.0759992f, 0, 1);
-                    foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
-                    {
-                        if (SimonUI.name == "Button_Play")
+                switch (light)
+                {
+                    case "Play":
+                        LightUp.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                        LightRight.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                        LightLeft.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                        foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                         {
-                            SimonUI.GetComponent<SoundDesign>().PhaseOfSound = 2;
-                            GameManager.Instance.NewSound(SimonUI);
+                            if (SimonUI.name == "Button_Play")
+                            {
+                                SimonUI.GetComponent<SoundDesign>().PhaseOfSound = 2;
+                                GameManager.Instance.NewSound(SimonUI);
+                            }
                         }
-                    }
-                    break;
-                case "Credits":
-                    LightUp.color = new Color(1, 0.7112604f, 0, 1);
-                    LightRight.color = new Color(1, 0.7112604f, 0, 1);
-                    LightLeft.color = new Color(1, 0.7112604f, 0, 1);
-                    foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
-                    {
-                        if (SimonUI.name == "Button_Credit")
+                        break;
+                    case "Credits":
+                        LightUp.color = new Color(1, 0.7112604f, 0, 1);
+                        LightRight.color = new Color(1, 0.7112604f, 0, 1);
+                        LightLeft.color = new Color(1, 0.7112604f, 0, 1);
+                        foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                         {
-                            SimonUI.GetComponent<SoundDesign>().PhaseOfSound = 2;
-                            GameManager.Instance.NewSound(SimonUI);
+                            if (SimonUI.name == "Button_Credit")
+                            {
+                                SimonUI.GetComponent<SoundDesign>().PhaseOfSound = 2;
+                                GameManager.Instance.NewSound(SimonUI);
+                            }
                         }
-                    }
-                    break;
-                case "Settings":
-                    LightUp.color = new Color(0, 0.2810159f, 1, 1);
-                    LightRight.color = new Color(0, 0.2810159f, 1, 1);
-                    LightLeft.color = new Color(0, 0.2810159f, 1, 1);
-                    foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
-                    {
-                        if (SimonUI.name == "Button_Option")
+                        break;
+                    case "Settings":
+                        LightUp.color = new Color(0, 0.2810159f, 1, 1);
+                        LightRight.color = new Color(0, 0.2810159f, 1, 1);
+                        LightLeft.color = new Color(0, 0.2810159f, 1, 1);
+                        foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                         {
-                            SimonUI.GetComponent<SoundDesign>().PhaseOfSound = 2;
-                            GameManager.Instance.NewSound(SimonUI);
+                            if (SimonUI.name == "Button_Option")
+                            {
+                                SimonUI.GetComponent<SoundDesign>().PhaseOfSound = 2;
+                                GameManager.Instance.NewSound(SimonUI);
+                            }
                         }
-                    }
-                    break;
-            }
-            LightUp.GetComponent<Animator>().enabled = false;
-            LightUp.GetComponent<Animator>().enabled = false;
-            LightUp.GetComponent<Animator>().enabled = false;
-            yield return new WaitForSeconds(0.5f);
-            IsShowingLight = false;
-            if (LightID == AllID[AllID.Count - 1])
-            {
-                LightUp.GetComponent<Animator>().enabled = true;
-                LightUp.GetComponent<Animator>().enabled = true;
-                LightUp.GetComponent<Animator>().enabled = true;
-                LightUp.color = AllLight[0];
-                LightRight.color = AllLight[1];
-                LightLeft.color = AllLight[2];
+                        break;
+                }
+                LightUp.GetComponent<Animator>().enabled = false;
+                LightUp.GetComponent<Animator>().enabled = false;
+                LightUp.GetComponent<Animator>().enabled = false;
                 yield return new WaitForSeconds(0.5f);
+                IsShowingLight = false;
+                if (LightID == AllID[AllID.Count - 1])
+                {
+                    LightUp.GetComponent<Animator>().enabled = true;
+                    LightUp.GetComponent<Animator>().enabled = true;
+                    LightUp.GetComponent<Animator>().enabled = true;
+                    LightUp.color = AllLight[0];
+                    LightRight.color = AllLight[1];
+                    LightLeft.color = AllLight[2];
+                    yield return new WaitForSeconds(0.5f);
+                }
             }
         }
 

@@ -60,6 +60,8 @@ public class SliceSprite : MonoBehaviour
         if (collision.gameObject.tag == "Hammer" && canBreakIt)
         {
             GameManager.Instance.DotWeenShakeCamera(0.2f, 0.06f, 30);
+            GameManager.Instance.NewSound(gameObject);
+            GameManager.Instance.NewSound(collision.gameObject);
             GameManager.Instance.DotWeenShakeObject(GameManager.Instance.JukeboxBroken4, 0.2f, 0.06f, 30);
             //Le but ici est de trouver a quel endroit est-ce qu'on a touche l'UI 
             SpriteRenderer thisSprite = GetComponent<SpriteRenderer>();
@@ -271,22 +273,26 @@ public class SliceSprite : MonoBehaviour
     IEnumerator destroyAfterFewSeconds()
     {
         yield return new WaitForSeconds(5);
-        GameManager.Instance.breakableUI.Remove(gameObject);
-        if (GameManager.Instance.breakableUI.Count == 0)
+        if(gameObject != null)
         {
-            GameManager.Instance.ColliderOfJukeboxBroken.SetActive(true);
-            GameManager.Instance.ChangeDialogueMoment();
-            foreach (Transform child in GameManager.Instance.bocksMomentSpeak.transform)
+            GameManager.Instance.breakableUI.Remove(gameObject);
+            if (GameManager.Instance.breakableUI.Count == 0)
             {
-                child.gameObject.SetActive(true);
-            }
-            for (int i = 0; i < 5; i++)
-            {
-                GameManager.Instance.loseHP();
+                GameManager.Instance.ColliderOfJukeboxBroken.SetActive(true);
+                GameManager.Instance.ChangeDialogueMoment();
+                foreach (Transform child in GameManager.Instance.bocksMomentSpeak.transform)
+                {
+                    child.gameObject.SetActive(true);
+                }
+                for (int i = 0; i < 5; i++)
+                {
+                    GameManager.Instance.loseHP();
+
+                }
 
             }
-            
         }
+        
         Destroy(gameObject);
     }
 }
