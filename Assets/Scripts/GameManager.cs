@@ -83,7 +83,9 @@ public class GameManager : MonoBehaviour
     //Tableau 5
     public List<GameObject> Credit = new List<GameObject>();
     public GameObject Door;
+    public GameObject blackSquare;
     public GameObject TalkingAboutDoor;
+    public GameObject CreditText;
     public List<GameObject> Explosions = new List<GameObject>();
 
     public List<GameObject> ON = new List<GameObject>();
@@ -96,6 +98,7 @@ public class GameManager : MonoBehaviour
     public GameObject tableau3;
     public GameObject tableau4;
     public GameObject tableau5;
+    public GameObject endGame;
 
     public DragAndDrop dAD;
 
