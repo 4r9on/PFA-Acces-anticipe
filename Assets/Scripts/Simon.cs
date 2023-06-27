@@ -15,7 +15,7 @@ public class Simon : MonoBehaviour
     public Light2D LightUp;
     public Light2D LightLeft;
     public Light2D LightRight;
-
+    bool waitIntro;
     public bool IsShowingLight;
 
     int ID;
@@ -58,7 +58,7 @@ public class Simon : MonoBehaviour
 
     public void AddLights()
     {
-        if (infiniteGame.Count == 1)
+        if (infiniteGame.Count == 5)
         {
             RemoveStringFromList(infiniteGame);
             GameManager.Instance.AfterGainSimon();
@@ -372,7 +372,13 @@ public class Simon : MonoBehaviour
 
     IEnumerator waitIntroSimon()
     {
-        yield return new WaitForSeconds(2f);
-        AddLights();
+        if (!waitIntro)
+        {
+            waitIntro = true;
+            yield return new WaitForSeconds(2f);
+            AddLights();
+            waitIntro = false;
+        }
+       
     }
 }

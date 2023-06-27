@@ -206,13 +206,9 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
         if (gameObject.layer == 6)
         {
-
-
-            Debug.Log(GameManager.Instance.GetComponent<DragAndDrop>().draggedObject);
-            Debug.Log(gameObject);
             GameManager.Instance.ObjectHover = gameObject;
 
-            if(gameObject.transform.GetChild(0) != null)
+            if(gameObject.transform.childCount > 0)
             {
                 if (gameObject.transform.GetChild(0).GetComponent<HammerPhysics>() != null)
                 {

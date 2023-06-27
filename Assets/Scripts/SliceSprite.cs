@@ -11,6 +11,7 @@ public class SliceSprite : MonoBehaviour
     private SpriteRenderer sr;
     public GameObject NewUI;
     private bool canBreakIt;
+    public bool original;
     // Start is called before the first frame update
 
     private void Awake()
@@ -23,6 +24,10 @@ public class SliceSprite : MonoBehaviour
      /*   mySprite = Sprite.Create(tex, new Rect( 0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100.0f);
         sr.sprite = mySprite;*/
         StartCoroutine(WaitToBreakIt());
+        if (!original)
+        {
+            StartCoroutine(destroyAfterFewSeconds());
+        }
     }
 
     // Update is called once per frame
@@ -156,6 +161,7 @@ public class SliceSprite : MonoBehaviour
 
         //On va creer notre seconde partie de l'UI
         GameObject newUI = Instantiate(NewUI);
+        newUI.GetComponent<SliceSprite>().original = false;
         GameManager.Instance.breakableUI.Add(newUI);
         newUI.transform.parent = transform.parent;
         newUI.transform.position = transform.position;
@@ -176,8 +182,9 @@ public class SliceSprite : MonoBehaviour
         tex.SetPixels(TexturePixels);
         tex.filterMode = FilterMode.Point;
         tex.Apply();
-
+        
         Texture2D newTex = newUI.GetComponent<SliceSprite>().tex;
+        
         newUI.GetComponent<SliceSprite>().tex = new Texture2D(-(int)newSprite.rect.width, (int)newSprite.rect.height);
         Color[] newTexturePixels = newSprite.texture.GetPixels((int)newSprite.textureRect.x, (int)newSprite.textureRect.y, -(int)newSprite.textureRect.width, (int)newSprite.textureRect.height);
         newUI.GetComponent<SliceSprite>().tex.SetPixels(newTexturePixels);
@@ -196,7 +203,7 @@ public class SliceSprite : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = new Vector2(-1, -2) * 5;
             newUI.GetComponent<Rigidbody2D>().velocity = new Vector2(1, -2) * 5;
         }
-       StartCoroutine(newUI.GetComponent<SliceSprite>().destroyAfterFewSeconds());
+       
     }
     void sliceY(Collision2D collision, SpriteRenderer thisSprite)
     {
@@ -214,6 +221,7 @@ public class SliceSprite : MonoBehaviour
 
         //On va creer notre seconde partie de l'UI
         GameObject newUI = Instantiate(NewUI);
+        newUI.GetComponent<SliceSprite>().original = false;
         newUI.transform.parent = transform.parent;
         newUI.transform.position = transform.position;
         Sprite newSprite = newUI.GetComponent<SliceSprite>().mySprite;
@@ -257,7 +265,7 @@ public class SliceSprite : MonoBehaviour
             Debug.Log("x.-");
         }
 
-        StartCoroutine(newUI.GetComponent<SliceSprite>().destroyAfterFewSeconds());
+       
 
 
 
@@ -284,15 +292,8 @@ public class SliceSprite : MonoBehaviour
                 {
                     child.gameObject.SetActive(true);
                 }
-                for (int i = 0; i < 5; i++)
-                {
-                    GameManager.Instance.loseHP();
-
-                }
-
             }
         }
-        
         Destroy(gameObject);
     }
 }
