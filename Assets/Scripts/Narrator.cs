@@ -144,10 +144,12 @@ public class Narrator : MonoBehaviour
     {
         GameManager.Instance.NewSound(gameObject);
         GameManager.Instance.GetComponent<AudioSource>().Pause();
+        Camera.main.transform.parent.GetComponent<Animator>().enabled = true;
     }
     public void DestroyJukebox()
     {
         GameManager.Instance.DestroyJukebox();
+        
     }
 
     public void NextDialogue()
