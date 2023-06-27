@@ -703,7 +703,7 @@ public class DragAndDrop : MonoBehaviour
                     GameManager.Instance.LastIdDialogueMoment = GameManager.Instance.IdDialogueMoment - 1;
                     GameManager.Instance.LastIdDialogue = GameManager.Instance.IdDialogue;
 
-                    GameManager.Instance.IdDialogueMoment = 5;
+                    GameManager.Instance.IdDialogueMoment = 7;
                     GameManager.Instance.bocksMomentSpeak = GameManager.Instance.dialogueMomentList[GameManager.Instance.IdDialogueMoment];
                     GameManager.Instance.dialogueList.Clear();
                     foreach (Transform child in GameManager.Instance.bocksMomentSpeak.transform)

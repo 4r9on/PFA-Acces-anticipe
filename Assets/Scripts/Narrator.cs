@@ -148,10 +148,12 @@ public class Narrator : MonoBehaviour
     public void DestroyJukebox()
     {
         GameManager.Instance.DestroyJukebox();
-        GameManager.Instance.Dialogue();
     }
 
-
+    public void NextDialogue()
+    {
+        GameManager.Instance.Dialogue();
+    }
     public void EndOfScene2()
     {
         for (int i = 0; i < GameManager.Instance.narratorsAnim.Count - 1; i++)
