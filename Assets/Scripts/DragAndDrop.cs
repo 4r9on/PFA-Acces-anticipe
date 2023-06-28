@@ -682,7 +682,6 @@ public class DragAndDrop : MonoBehaviour
                         GameManager.Instance.IdDialogueMoment++;
                     }
                 }
-
                 else
                 {
                     settingsWindow.SetActive(true);

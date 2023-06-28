@@ -219,8 +219,6 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
                     GameManager.Instance.GetComponent<DragAndDrop>().StopClick();
                 }
             }
-
-
         }
 
         else if (GameManager.Instance.GetComponent<DragAndDrop>().draggedObject == gameObject)
@@ -249,13 +247,6 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         }
 
     }
-
-
-
-
-
-
-
 
     public void shakeCameraAnim()
     {
