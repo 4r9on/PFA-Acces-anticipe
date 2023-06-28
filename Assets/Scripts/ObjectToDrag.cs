@@ -93,7 +93,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         if (painting && collision.gameObject.tag == "Ground")
         {
             gameObject.GetComponent<SoundDesign>().PhaseOfSound = 2;
-            GameManager.Instance.NewSound(gameObject);
+            GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
             GameManager.Instance.DotWeenShakeCamera(0.2f, 0.1f, 30);
             /*  children.GetComponent<Rigidbody2D>().gravityScale = 0;
               children.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
@@ -105,7 +105,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             if (gameObject == GameManager.Instance.StockCD)
             {
-                GameManager.Instance.NewSound(gameObject);
+                GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
             }
             if (BornWithoutGravity > 0)
             {
@@ -157,7 +157,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         else if (collision.gameObject.tag == "Ground" && gameObject == GameManager.Instance.cog1)
         {
             gameObject.GetComponent<SoundDesign>().PhaseOfSound = 2;
-            GameManager.Instance.NewSound(gameObject);
+            GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
         }
     }
 
@@ -260,7 +260,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     {
         GameManager.Instance.DotWeenShakeCamera(0.1f, 0.6f, 30);
         GetComponent<SoundDesign>().PhaseOfSound = 4;
-        GameManager.Instance.NewSound(gameObject);
+        GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
     }
 
     public void DestroyTheCog()

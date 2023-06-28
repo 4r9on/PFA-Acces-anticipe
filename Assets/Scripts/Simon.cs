@@ -112,7 +112,7 @@ public class Simon : MonoBehaviour
                             if (SimonUI.name == "Button_Play")
                             {
                                 SimonUI.GetComponent<SoundDesign>().PhaseOfSound = 2;
-                                GameManager.Instance.NewSound(SimonUI);
+                                GameManager.Instance.NewSound(SimonUI, SimonUI.GetComponent<SoundDesign>().TheVolume);
                             }
                         }
                         break;
@@ -125,7 +125,7 @@ public class Simon : MonoBehaviour
                             if (SimonUI.name == "Button_Credit")
                             {
                                 SimonUI.GetComponent<SoundDesign>().PhaseOfSound = 2;
-                                GameManager.Instance.NewSound(SimonUI);
+                                GameManager.Instance.NewSound(SimonUI, SimonUI.GetComponent<SoundDesign>().TheVolume);
                             }
                         }
                         break;
@@ -138,7 +138,7 @@ public class Simon : MonoBehaviour
                             if (SimonUI.name == "Button_Option")
                             {
                                 SimonUI.GetComponent<SoundDesign>().PhaseOfSound = 2;
-                                GameManager.Instance.NewSound(SimonUI);
+                                GameManager.Instance.NewSound(SimonUI, SimonUI.GetComponent<SoundDesign>().TheVolume);
                             }
                         }
                         break;
@@ -197,7 +197,7 @@ public class Simon : MonoBehaviour
                             if (SimonUI.name == "Button_Play")
                             {
                                 SimonUI.GetComponent<SoundDesign>().PhaseOfSound = 2;
-                                GameManager.Instance.NewSound(SimonUI);
+                                GameManager.Instance.NewSound(SimonUI, SimonUI.GetComponent<SoundDesign>().TheVolume);
                             }
                         }
                         break;
@@ -210,7 +210,7 @@ public class Simon : MonoBehaviour
                             if (SimonUI.name == "Button_Credit")
                             {
                                 SimonUI.GetComponent<SoundDesign>().PhaseOfSound = 2;
-                                GameManager.Instance.NewSound(SimonUI);
+                                GameManager.Instance.NewSound(SimonUI, SimonUI.GetComponent<SoundDesign>().TheVolume);
                             }
                         }
                         break;
@@ -223,7 +223,7 @@ public class Simon : MonoBehaviour
                             if (SimonUI.name == "Button_Option")
                             {
                                 SimonUI.GetComponent<SoundDesign>().PhaseOfSound = 2;
-                                GameManager.Instance.NewSound(SimonUI);
+                                GameManager.Instance.NewSound(SimonUI, SimonUI.GetComponent<SoundDesign>().TheVolume);
                             }
                         }
                         break;
@@ -275,7 +275,7 @@ public class Simon : MonoBehaviour
                     if (SimonUI.name == "Button_Pause")
                     {
                         SimonUI.GetComponent<SoundDesign>().PhaseOfSound = 3;
-                        GameManager.Instance.NewSound(SimonUI);
+                        GameManager.Instance.NewSound(SimonUI, SimonUI.GetComponent<SoundDesign>().TheVolume);
                     }
                 }
                 RemoveStringFromList(infiniteGame);
@@ -362,7 +362,7 @@ public class Simon : MonoBehaviour
             if (SimonUI.name == "Button_Pause")
             {
                 SimonUI.GetComponent<SoundDesign>().PhaseOfSound = 2;
-                GameManager.Instance.NewSound(SimonUI);
+                GameManager.Instance.NewSound(SimonUI, SimonUI.GetComponent<SoundDesign>().TheVolume);
             }
         }
         RemoveStringFromList(infiniteGame);

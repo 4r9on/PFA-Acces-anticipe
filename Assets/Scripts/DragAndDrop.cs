@@ -251,7 +251,7 @@ public class DragAndDrop : MonoBehaviour
                 }
 
                 slider.transform.GetChild(0).GetComponent<Animator>().enabled = true;
-                GameManager.Instance.NewSound(slider);
+                GameManager.Instance.NewSound(slider, slider.GetComponent<SoundDesign>().TheVolume);
 
 
                 MovingBar = false;
@@ -437,7 +437,7 @@ public class DragAndDrop : MonoBehaviour
                 {
                     if (draggedObject.GetComponent<ObjectToDrag>().painting)
                     {
-                        GameManager.Instance.NewSound(draggedObject);
+                        GameManager.Instance.NewSound(draggedObject, draggedObject.GetComponent<SoundDesign>().TheVolume);
                     }
                     //Permet de faire tomber l'UI lorsqu'on aura clicker suffisamment dessus
                     if (draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity > 0)
@@ -449,7 +449,7 @@ public class DragAndDrop : MonoBehaviour
                         draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity--;
                         if (draggedObject == GameManager.Instance.cog1)
                         {
-                            GameManager.Instance.NewSound(draggedObject);
+                            GameManager.Instance.NewSound(draggedObject, draggedObject.GetComponent<SoundDesign>().TheVolume);
                         }
                         if (draggedObject.GetComponent<ObjectToDrag>().BornWithoutGravity != 0)
                         {
@@ -474,12 +474,12 @@ public class DragAndDrop : MonoBehaviour
                         if (draggedObject == GameManager.Instance.cog3)
                         {
                             draggedObject.GetComponent<SoundDesign>().PhaseOfSound = 1;
-                            GameManager.Instance.NewSound(draggedObject);
+                            GameManager.Instance.NewSound(draggedObject, draggedObject.GetComponent<SoundDesign>().TheVolume);
                             StartCoroutine(draggedObject.GetComponent<ObjectToDrag>().MakeItRoll());
                         }
                         if (GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().Moon)
                         {
-                            GameManager.Instance.NewSound(GameManager.Instance.ObjectHover);
+                            GameManager.Instance.NewSound(GameManager.Instance.ObjectHover, GameManager.Instance.ObjectHover.GetComponent<SoundDesign>().TheVolume);
                         }
                         dragged = true;
                         if (draggedObject.GetComponent<ObjectToDrag>().canPutObject)
@@ -520,7 +520,7 @@ public class DragAndDrop : MonoBehaviour
             {
                 GameManager.Instance.ObjectHover.GetComponent<Animator>().SetBool("IsClicked", true);
                 GameManager.Instance.ObjectHover.GetComponent<SoundDesign>().PhaseOfSound = 1;
-                GameManager.Instance.NewSound(GameManager.Instance.ObjectHover);
+                GameManager.Instance.NewSound(GameManager.Instance.ObjectHover, GameManager.Instance.ObjectHover.GetComponent<SoundDesign>().TheVolume);
 
                 if (GameManager.Instance.ObjectHover.name == "Button_Pause" && !multipleTouchOnTableau2)
                 {
@@ -553,7 +553,7 @@ public class DragAndDrop : MonoBehaviour
                         if (GetComponent<Simon>().infiniteGame.Count > 0)
                         {
                             GameManager.Instance.ObjectHover.GetComponent<SoundDesign>().PhaseOfSound = 2;
-                            GameManager.Instance.NewSound(GameManager.Instance.ObjectHover);
+                            GameManager.Instance.NewSound(GameManager.Instance.ObjectHover, GameManager.Instance.ObjectHover.GetComponent<SoundDesign>().TheVolume);
                         }
                         GetComponent<Simon>().AddToComparative(GameManager.Instance.ObjectHover.name);
 
@@ -581,7 +581,7 @@ public class DragAndDrop : MonoBehaviour
 
             else if (GameManager.Instance.ObjectHover.tag == "Light")
             {
-                GameManager.Instance.NewSound(flashinglight);
+                GameManager.Instance.NewSound(flashinglight, flashinglight.GetComponent<SoundDesign>().TheVolume);
                 flashinglight.SetActive(false);
                 flashingHand.SetActive(true);
                 GameManager.Instance.ObjectHover = null;
@@ -604,7 +604,7 @@ public class DragAndDrop : MonoBehaviour
             {
 
                 GameManager.Instance.breakingTheWall();
-                GameManager.Instance.NewSound(GameManager.Instance.ObjectHover);
+                GameManager.Instance.NewSound(GameManager.Instance.ObjectHover, GameManager.Instance.ObjectHover.GetComponent<SoundDesign>().TheVolume);
             }
 
             else if (GameManager.Instance.ObjectHover.tag == "UV")
@@ -784,13 +784,13 @@ public void StopClick()
             if (draggedObject == GameManager.Instance.cog1)
             {
                 draggedObject.GetComponent<SoundDesign>().PhaseOfSound = 3;
-                GameManager.Instance.NewSound(draggedObject);
+                GameManager.Instance.NewSound(draggedObject, draggedObject.GetComponent<SoundDesign>().TheVolume);
             }
             if (draggedObject == GameManager.Instance.cog3)
             {
                 draggedObject.transform.GetChild(0).GetComponent<AudioSource>().Pause();
                 draggedObject.GetComponent<SoundDesign>().PhaseOfSound = 2;
-                GameManager.Instance.NewSound(draggedObject);
+                GameManager.Instance.NewSound(draggedObject, draggedObject.GetComponent<SoundDesign>().TheVolume);
             }
         }
     }
@@ -825,7 +825,7 @@ public void StopClick()
                 {
                     draggedObject.GetComponent<ShadowCaster2D>().enabled = false;
                     draggedObject.GetComponent<SoundDesign>().PhaseOfSound = 2;
-                    GameManager.Instance.NewSound(draggedObject);
+                    GameManager.Instance.NewSound(draggedObject, draggedObject.GetComponent<SoundDesign>().TheVolume);
                     GameManager.Instance.NightFall();
                     if (draggedObject.transform.parent.GetComponent<ObjectToDrag>() != null)
                     {

@@ -64,13 +64,13 @@ public class Narration : MonoBehaviour
     public void BeginningOfAnim()
     {
         gameObject.GetComponent<SoundDesign>().PhaseOfSound = 1;
-        GameManager.Instance.NewSound(gameObject);
+        GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
     }
 
     public void endSoundOfAnim()
     {
         gameObject.GetComponent<SoundDesign>().PhaseOfSound = 2;
-        GameManager.Instance.NewSound(gameObject);
+        GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
     }
 
     public void endOfAnim()

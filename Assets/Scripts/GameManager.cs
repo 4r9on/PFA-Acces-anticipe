@@ -361,7 +361,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         S2ATWithWriting.GetComponent<Animator>().enabled = true;
-        NewSound(S2ATWithWriting);
+        NewSound(S2ATWithWriting, S2ATWithWriting.GetComponent<SoundDesign>().TheVolume);
         S2ATWithWriting.transform.localScale = Vector3.one;
         S2ATWithWriting.transform.localPosition = new Vector3(0.013f, 1.752f, S2ATWithWriting.transform.position.z);
         GetComponent<DragAndDrop>().MinScale = S2AT.transform.localScale.y;
@@ -408,7 +408,7 @@ public class GameManager : MonoBehaviour
             ObjetcsDay.GetComponent<Animator>().enabled = true;
             if (ObjetcsDay.GetComponent<SoundDesign>() != null)
             {
-                NewSound(ObjetcsDay);
+                NewSound(ObjetcsDay, ObjetcsDay.GetComponent<SoundDesign>().TheVolume);
             }
         }
         dayLight.SetActive(false);
@@ -433,7 +433,7 @@ public class GameManager : MonoBehaviour
             {
                 child.gameObject.SetActive(true);
                 child.GetComponent<Animator>().enabled = true;
-                NewSound(child.gameObject);
+                NewSound(child.gameObject, child.gameObject.GetComponent<SoundDesign>().TheVolume);
             }
             else
             {

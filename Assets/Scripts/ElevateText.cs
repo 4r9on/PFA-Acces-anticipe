@@ -61,7 +61,7 @@ public class ElevateText : MonoBehaviour
             child.GetComponent<BoxCollider2D>().enabled = true;
         }
        
-        GameManager.Instance.NewSound(gameObject);
+        GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
         gameObject.transform.parent.GetComponent<Animator>().enabled = true;
         //GetComponent<Rigidbody2D>().angularVelocity = 100;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
