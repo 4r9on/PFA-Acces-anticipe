@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6804029342354184804}
   - component: {fileID: 6804029342354184806}
   - component: {fileID: 6804029342354184805}
+  - component: {fileID: 6861391621676669964}
   m_Layer: 0
   m_Name: Big explosion
   m_TagString: Untagged
@@ -105,3 +106,27 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6861391621676669964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6804029342354184827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4de28c59c6fbb7345ac03d9ac8c05460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PhaseOfSound: 0
+  clipList1:
+  - {fileID: 8300000, guid: fd039d5da34ae7f44b5ccc3f2dfd0fe7, type: 3}
+  - {fileID: 8300000, guid: 684f1ddb496395d4aabfc7ba285a6e6c, type: 3}
+  - {fileID: 8300000, guid: 62c24812f1b6c554ab93b034b07ef74c, type: 3}
+  - {fileID: 8300000, guid: 32186bfe0dbdac642930da31c9f7bc8e, type: 3}
+  clipList2: []
+  clipList3: []
+  clipList4: []
+  audioSource: {fileID: 0}
+  Timing: 0
+  TheVolume: 1

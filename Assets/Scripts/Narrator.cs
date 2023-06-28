@@ -260,6 +260,12 @@ public class Narrator : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public void NarratorWantUsToLeftTheGame()
+    {
+        GameManager.Instance.changeMusic(7);
+         gameObject.GetComponent<Narration>().endSoundOfAnim();
+    }
+
     public void NarratorTalkAboutTheDoor()
     {
         GameManager.Instance.TalkingAboutDoor.SetActive(true);

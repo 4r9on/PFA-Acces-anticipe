@@ -63,6 +63,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         if (gameObject.tag == "DeadZone" && collision.tag != "Explosion")
         {
             GameObject newExplosion = Instantiate(GameManager.Instance.Explosions[Random.Range(0, GameManager.Instance.Explosions.Count)]);
+            GameManager.Instance.NewSound(newExplosion, newExplosion.GetComponent<SoundDesign>().TheVolume);
             newExplosion.transform.position = new Vector2(Random.Range(-4.0f, 4.0f), transform.position.y + 1);
             newExplosion.transform.eulerAngles = new Vector3(newExplosion.transform.eulerAngles.x, newExplosion.transform.eulerAngles.y, Random.Range(0, 360));
             StartCoroutine(DestroyExplosion(newExplosion));
