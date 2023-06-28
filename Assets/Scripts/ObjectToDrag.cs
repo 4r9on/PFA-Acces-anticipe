@@ -75,6 +75,11 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             Destroy(collision.gameObject);
 
         }
+
+        if(gameObject.tag == "Hammer" && collision.tag == "JukeBoxCollider")
+        {
+            GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
+        }
     }
     public IEnumerator DestroyExplosion(GameObject Explosion)
     {
