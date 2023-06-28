@@ -30,7 +30,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 44
+        time: 17
         value: 0
         inSlope: 0
         outSlope: 0
@@ -39,7 +39,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 44.083332
+        time: 17.083334
         value: 1
         inSlope: 0
         outSlope: 0
@@ -56,31 +56,31 @@ AnimationClip:
     script: {fileID: 0}
   m_PPtrCurves:
   - curve:
-    - time: 44.083332
+    - time: 17.083334
       value: {fileID: 1380833571, guid: cd3cc37dd2ae946489686eb446ac6dd2, type: 3}
-    - time: 44.333332
+    - time: 17.25
       value: {fileID: -101828199, guid: cd3cc37dd2ae946489686eb446ac6dd2, type: 3}
-    - time: 44.583332
+    - time: 17.416666
       value: {fileID: -223500203, guid: cd3cc37dd2ae946489686eb446ac6dd2, type: 3}
-    - time: 44.833332
+    - time: 17.583334
       value: {fileID: 218570707, guid: cd3cc37dd2ae946489686eb446ac6dd2, type: 3}
-    - time: 45.083332
+    - time: 17.75
       value: {fileID: -854501694, guid: cd3cc37dd2ae946489686eb446ac6dd2, type: 3}
-    - time: 45.333332
+    - time: 17.916666
       value: {fileID: 540247365, guid: cd3cc37dd2ae946489686eb446ac6dd2, type: 3}
-    - time: 45.583332
+    - time: 18.083334
       value: {fileID: -543601249, guid: cd3cc37dd2ae946489686eb446ac6dd2, type: 3}
-    - time: 45.833332
+    - time: 18.25
       value: {fileID: -1611293206, guid: cd3cc37dd2ae946489686eb446ac6dd2, type: 3}
-    - time: 46.083332
+    - time: 18.416666
       value: {fileID: -2086894445, guid: cd3cc37dd2ae946489686eb446ac6dd2, type: 3}
-    - time: 46.333332
+    - time: 18.583334
       value: {fileID: 53686626, guid: cd3cc37dd2ae946489686eb446ac6dd2, type: 3}
-    - time: 46.583332
+    - time: 18.75
       value: {fileID: 658665612, guid: cd3cc37dd2ae946489686eb446ac6dd2, type: 3}
-    - time: 46.833332
+    - time: 18.916666
       value: {fileID: -1500129905, guid: cd3cc37dd2ae946489686eb446ac6dd2, type: 3}
-    - time: 47.083332
+    - time: 19.083334
       value: {fileID: 712206176, guid: cd3cc37dd2ae946489686eb446ac6dd2, type: 3}
     attribute: m_Sprite
     path: 
@@ -126,7 +126,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 47.166664
+    m_StopTime: 19.166668
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -155,7 +155,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 44
+        time: 17
         value: 0
         inSlope: 0
         outSlope: 0
@@ -164,7 +164,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 44.083332
+        time: 17.083334
         value: 1
         inSlope: 0
         outSlope: 0
@@ -183,91 +183,91 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 44.083332
+  - time: 17.083334
     functionName: 
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 44.333332
+  - time: 17.25
     functionName: 
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 44.583332
+  - time: 17.416666
     functionName: 
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 44.833332
+  - time: 17.583334
     functionName: 
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 45.083332
+  - time: 17.75
     functionName: 
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 45.333332
+  - time: 17.916666
     functionName: 
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 45.583332
+  - time: 18.083334
     functionName: 
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 45.833332
+  - time: 18.25
     functionName: 
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 46.083332
+  - time: 18.416666
     functionName: 
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 46.333332
+  - time: 18.583334
     functionName: 
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 46.583332
+  - time: 18.75
     functionName: 
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 46.833332
+  - time: 18.916666
     functionName: 
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 47.083332
+  - time: 19.083334
     functionName: 
     data: 
     objectReferenceParameter: {fileID: 0}
