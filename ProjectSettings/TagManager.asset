@@ -33,6 +33,7 @@ TagManager:
   - DeadZone
   - Explosion
   - Door
+  - JukeBoxCollider
   layers:
   - Default
   - TransparentFX
