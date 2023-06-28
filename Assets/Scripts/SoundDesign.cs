@@ -11,6 +11,7 @@ public class SoundDesign : MonoBehaviour
     public List<AudioClip> clipList4;
     public AudioSource audioSource;
     public float Timing;
+    public float TheVolume;
 
     private void Start()
     {
