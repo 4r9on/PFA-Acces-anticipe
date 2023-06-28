@@ -84,7 +84,7 @@ public class DragAndDrop : MonoBehaviour
     public GameObject dButtonLangue2;
     public GameObject flag;
     public GameObject settingsWindow;
-    private Rigidbody2D rb2d;
+    public Rigidbody2D vis1;
 
     public GameObject diReturnJukebox;
 
@@ -430,8 +430,6 @@ public class DragAndDrop : MonoBehaviour
     {
         if (GameManager.Instance.ObjectHover != null)
         {
-
-
             if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer" || GameManager.Instance.ObjectHover.tag == "Slider")
             {
                 draggedObject = GameManager.Instance.ObjectHover;
@@ -616,11 +614,11 @@ public class DragAndDrop : MonoBehaviour
 
             else if (GameManager.Instance.ObjectHover.tag == "Vis")
             {
-                
+                int a = -10;
                 //animator.SetBool("Visser", true);
                 Debug.Log("fgh");
 
-                rb2d.gravityScale += 1;
+                vis1.AddForce(transform.up * a);
                 Debug.Log("f");
 
 
@@ -727,7 +725,6 @@ public class DragAndDrop : MonoBehaviour
 
         else if (GameManager.Instance.ObjectHover.tag == "ButtonLangue")
         {
-            Debug.Log("langue");
             GameManager.Instance.SettingsNarrations(GameManager.Instance.ObjectHover.tag);
         }
 
@@ -822,9 +819,6 @@ public void StopClick()
     {
         if (draggedObject.GetComponent<ObjectToDrag>() != null)
         {
-
-
-
             if (draggedObject.GetComponent<ObjectToDrag>().canPutObject && GameManager.Instance.ObjectHover == draggedObject.GetComponent<ObjectToDrag>().objectToPutOn)
             {
                 if (draggedObject.GetComponent<ObjectToDrag>().Moon)
@@ -857,9 +851,6 @@ public void StopClick()
                 {
                     draggedObject.tag = "Untagged";
                 }
-
-
-
                 if (draggedObject.GetComponent<ObjectToDrag>().objectToPutOn.tag == "ButtonON")
                 {
                     GameManager.Instance.DotWeenShakeCamera(0.1f, 0.2f, 10);
