@@ -554,7 +554,7 @@ public class GameManager : MonoBehaviour
         IdDialogueMoment++;
     }
 
-    public void NewSound(GameObject gameObjectWithTheSound)
+    public void NewSound(GameObject gameObjectWithTheSound, float Volume)
     {
         Debug.Log(gameObjectWithTheSound.GetComponent<SoundDesign>().PhaseOfSound);
         Debug.Log(gameObjectWithTheSound.name);
@@ -575,6 +575,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
+        newSoundDesign.GetComponent<AudioSource>().volume = Volume;
         newSoundDesign.GetComponent<AudioSource>().Play();
     }
 
