@@ -22,6 +22,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public bool Background;
     public bool wasGravited;
     public bool vis;
+    public bool canEnterInTheDoor;
 
     public List<GameObject> visList;
 
@@ -71,7 +72,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
                 GameManager.Instance.blackSquare.SetActive(true);
             }
             Destroy(collision.gameObject);
-            
+
         }
     }
     public IEnumerator DestroyExplosion(GameObject Explosion)
@@ -211,14 +212,14 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             GameManager.Instance.ObjectHover = gameObject;
 
-            if(gameObject.transform.childCount > 0)
+            if (gameObject.transform.childCount > 0)
             {
                 if (gameObject.transform.GetChild(0).GetComponent<HammerPhysics>() != null)
                 {
                     GameManager.Instance.GetComponent<DragAndDrop>().StopClick();
                 }
             }
-           
+
 
         }
 
@@ -248,13 +249,13 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         }
 
     }
-    
-    
 
-            
-        
 
-    
+
+
+
+
+
 
     public void shakeCameraAnim()
     {
@@ -269,5 +270,19 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         Destroy(GameManager.Instance.cog1);
     }
 
+    public void NowYouCanEnterInTheDoor()
+    {
+        canEnterInTheDoor = true;
+    }
+    public void YouEnterInTheDoor()
+    {
+        foreach (GameObject Credits in GameManager.Instance.Credit)
+        {
+            Credits.SetActive(true);
+        }
+        GameManager.Instance.ChangeDialogueMoment();
+        GameManager.Instance.Door.SetActive(false);
+        GameManager.Instance.cleanScene();
+    }
 
 }
