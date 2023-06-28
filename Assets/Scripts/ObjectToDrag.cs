@@ -21,6 +21,9 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public bool S2ATSlide;
     public bool Background;
     public bool wasGravited;
+    public bool vis;
+
+    public List<GameObject> visList;
 
     private int click;
     // Start is called before the first frame update
@@ -44,7 +47,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             }
 
             transform.GetChild(0).GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            transform.GetChild(0).position = transform.localPosition;
+            transform.GetChild(0).position = transform.position;
         }
     }
 
@@ -206,13 +209,9 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
         if (gameObject.layer == 6)
         {
-
-
-            Debug.Log(GameManager.Instance.GetComponent<DragAndDrop>().draggedObject);
-            Debug.Log(gameObject);
             GameManager.Instance.ObjectHover = gameObject;
 
-            if(gameObject.transform.GetChild(0) != null)
+            if(gameObject.transform.childCount > 0)
             {
                 if (gameObject.transform.GetChild(0).GetComponent<HammerPhysics>() != null)
                 {
@@ -258,17 +257,17 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     
 
     public void shakeCameraAnim()
-{
-    GameManager.Instance.DotWeenShakeCamera(0.1f, 0.6f, 30);
-    GetComponent<SoundDesign>().PhaseOfSound = 4;
-    GameManager.Instance.NewSound(gameObject);
-}
+    {
+        GameManager.Instance.DotWeenShakeCamera(0.1f, 0.6f, 30);
+        GetComponent<SoundDesign>().PhaseOfSound = 4;
+        GameManager.Instance.NewSound(gameObject);
+    }
 
-public void DestroyTheCog()
-{
-    GameManager.Instance.cog3.SetActive(true);
-    Destroy(GameManager.Instance.cog1);
-}
+    public void DestroyTheCog()
+    {
+        GameManager.Instance.cog3.SetActive(true);
+        Destroy(GameManager.Instance.cog1);
+    }
 
 
 }
