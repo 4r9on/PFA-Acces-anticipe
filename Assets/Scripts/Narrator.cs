@@ -27,15 +27,17 @@ public class Narrator : MonoBehaviour
         }
         if(gameObject == GameManager.Instance.blackSquare)
         {
-            var OppacityView = gameObject.GetComponent<SpriteRenderer>().color;
-            OppacityView.a =  value;
-            gameObject.GetComponent<SpriteRenderer>().color = OppacityView;
-            if(value == 1)
+            if (value == 1)
             {
                 Debug.Log("oppa1");
                 GameManager.Instance.endGame.SetActive(true);
+                GameManager.Instance.changeMusic(6);
                 GameManager.Instance.tableau5.SetActive(false);
             }
+            var OppacityView = gameObject.GetComponent<SpriteRenderer>().color;
+            OppacityView.a =  value;
+            gameObject.GetComponent<SpriteRenderer>().color = OppacityView;
+           
         }
     }
 
@@ -284,6 +286,16 @@ public class Narrator : MonoBehaviour
         GameManager.Instance.NewSound(gameObject);
     }
 
-    
+    public void afterOpencurtain()
+    {
+        GameManager.Instance.CreditText.GetComponent<ElevateText>().elevateAllText();
+    }
+
+    public void BeginTheExplosionCD()
+    {
+        GameManager.Instance.narratorAnimIdle.SetActive(false);
+        GameManager.Instance.narratorsAnim[4].SetActive(true);
+        GameManager.Instance.narratorsAnim[5].SetActive(true);
+    }
 
 }

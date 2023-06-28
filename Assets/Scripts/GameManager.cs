@@ -296,6 +296,9 @@ public class GameManager : MonoBehaviour
             case 5:
                 GetComponent<AudioSource>().volume = 0.396f;
                 break;
+            case 6:
+                GetComponent<AudioSource>().volume = 0.5f;
+                break;
         }
         GetComponent<AudioSource>().clip = TableauxMusic[MusicTableau - 1];
         GetComponent<AudioSource>().Play();
@@ -343,9 +346,6 @@ public class GameManager : MonoBehaviour
                     antiBugAnimBoutonPause++;
                     Debug.Log("Detruit l'UI");
                     Dialogue();
-                    narratorAnimIdle.SetActive(false);
-                    narratorsAnim[4].SetActive(true);
-                    narratorsAnim[5].SetActive(true);
                 }
                 // timing = 0.3f;
                 //nous permet de rendre la souris invisible et non utilisable

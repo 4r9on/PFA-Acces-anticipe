@@ -22,74 +22,82 @@ public class HammerPhysics : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(PourcentMovement > 0)
+        if (GameManager.Instance.dAD.draggedObject != null)
         {
-            PourcentMovement -= Time.deltaTime;
-            if (PourcentMovement < 0)
+            if (gameObject.transform.parent = GameManager.Instance.dAD.draggedObject.transform)
             {
-                PourcentMovement = 0;
-            }
-        }
-        if (HasntMove)
-        {
-            if(toTheLeft)
-            {
-                transform.RotateAround(transform.parent.position, Vector3.back, 500 * Time.deltaTime);
-            }
-            else
-            {
-                transform.RotateAround(transform.parent.position, Vector3.forward, 500 * Time.deltaTime);
-            }
-           
-        }
-        else if(!StopMove) 
-        {
-            if (transform.eulerAngles.z < 10 || transform.eulerAngles.z > 350)
-            {
-                transform.eulerAngles = new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y, 0);
-                StopMove = true;
-            }
-            else
-            {
-                if (transform.eulerAngles.z > 130)
+                if (PourcentMovement > 0)
                 {
-                    transform.RotateAround(transform.parent.position, Vector3.forward, 200 * Time.deltaTime);
+                    PourcentMovement -= Time.deltaTime;
+                    if (PourcentMovement < 0)
+                    {
+                        PourcentMovement = 0;
+                    }
                 }
-                else
+                if (HasntMove)
                 {
-                    transform.RotateAround(transform.parent.position, Vector3.back, 200 * Time.deltaTime);
-                }
-            }
-            
-        }
-        transform.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        transform.position = transform.parent.position;
-        transform.GetChild(0).position = transform.parent.position;
-        transform.GetChild(0).eulerAngles = Vector3.zero;
-        //GetComponent<Rigidbody2D>().angularVelocity = 0;
-        // GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        
-        if (lastPosition != transform.parent.position.x && (lastPosition > transform.parent.position.x+0.05f || lastPosition < transform.parent.position.x-0.05f))
-        {
-            PourcentMovement = 1;
-            StopMove = false;
-            if (lastPosition < transform.parent.position.x)
-            {
-                toTheLeft = false;
-                transform.RotateAround(transform.parent.position, Vector3.forward, 200 * Time.deltaTime);
-                StartCoroutine(movementToSides());
-            }
-            else 
-            {
-                toTheLeft = true;
-                transform.RotateAround(transform.parent.position, Vector3.back, 200 * Time.deltaTime);
-                StartCoroutine(movementToSides());
-            }
-                lastPosition = transform.parent.position.x;
+                    if (toTheLeft)
+                    {
+                        transform.RotateAround(transform.parent.position, Vector3.back, 500 * Time.deltaTime);
+                    }
+                    else
+                    {
+                        transform.RotateAround(transform.parent.position, Vector3.forward, 500 * Time.deltaTime);
+                    }
 
+                }
+                else if (!StopMove)
+                {
+                    if (transform.eulerAngles.z < 10 || transform.eulerAngles.z > 350)
+                    {
+                        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);
+                        StopMove = true;
+                    }
+                    else
+                    {
+                        if (transform.eulerAngles.z > 130)
+                        {
+                            transform.RotateAround(transform.parent.position, Vector3.forward, 200 * Time.deltaTime);
+                        }
+                        else
+                        {
+                            transform.RotateAround(transform.parent.position, Vector3.back, 200 * Time.deltaTime);
+                        }
+                    }
+
+                }
+                transform.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                transform.position = transform.parent.position;
+                transform.GetChild(0).position = transform.parent.position;
+                transform.GetChild(0).eulerAngles = Vector3.zero;
+                //GetComponent<Rigidbody2D>().angularVelocity = 0;
+                // GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+                if (lastPosition != transform.parent.position.x && (lastPosition > transform.parent.position.x + 0.05f || lastPosition < transform.parent.position.x - 0.05f))
+                {
+                    Debug.Log(lastPosition);
+                    Debug.Log(transform.parent.position.x);
+                    PourcentMovement = 1;
+                    StopMove = false;
+                    if (lastPosition < transform.parent.position.x)
+                    {
+                        toTheLeft = false;
+                        transform.RotateAround(transform.parent.position, Vector3.forward, 200 * Time.deltaTime);
+                        StartCoroutine(movementToSides());
+                    }
+                    else
+                    {
+                        toTheLeft = true;
+                        transform.RotateAround(transform.parent.position, Vector3.back, 200 * Time.deltaTime);
+                        StartCoroutine(movementToSides());
+                    }
+                    lastPosition = transform.parent.position.x;
+
+                }
+                /*   transform.up = direction.transform.position;
+                   transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z);*/
+            }
         }
-        /*   transform.up = direction.transform.position;
-           transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z);*/
     }
 
     IEnumerator movementToGround()
@@ -105,7 +113,7 @@ public class HammerPhysics : MonoBehaviour
         int ActualId = ID;
         HasntMove = true;
         yield return new WaitForSeconds(1f);
-        if(ID == ActualId)
+        if (ID == ActualId)
         {
 
             HasntMove = false;

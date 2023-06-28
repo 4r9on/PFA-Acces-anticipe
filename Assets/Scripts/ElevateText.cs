@@ -29,21 +29,6 @@ public class ElevateText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<Rigidbody2D>().velocity = new Vector2 (0, 1);
-        foreach (GameObject ONGameObject in GameManager.Instance.ON)
-        {
-            if (ONGameObject.GetComponent<Rigidbody2D>() != null)
-            {
-                ONGameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 1);
-            }
-        }
-        /*foreach (Transform child in transform)
-        {
-            if (t.GetComponent<Rigidbody2D>() != null)
-            {
-                t.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 1);
-            }
-        }*/
 
     }
 
@@ -90,6 +75,18 @@ public class ElevateText : MonoBehaviour
         }
     }
 
+    public void elevateAllText()
+    {
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0, 1);
+        foreach (GameObject ONGameObject in GameManager.Instance.ON)
+        {
+            if (ONGameObject.GetComponent<Rigidbody2D>() != null)
+            {
+                ONGameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 1);
+            }
+        }
+    }
+
 
     public void StopCredit()
     {
@@ -115,7 +112,7 @@ public class ElevateText : MonoBehaviour
 
     public void DropItem()
     {
-        Debug.Log("tombe");
+        /*Debug.Log("tombe");
         Transform randomPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
         GameObject instantiated = Instantiate(sprite);
