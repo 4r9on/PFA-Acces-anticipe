@@ -184,91 +184,91 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 17.083334
-    functionName: 
+    functionName: BeginningOfAnim
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 17.25
-    functionName: 
+    functionName: BeginningOfAnim
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 17.416666
-    functionName: 
+    functionName: BeginningOfAnim
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 17.583334
-    functionName: 
+    functionName: BeginningOfAnim
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 17.75
-    functionName: 
+    functionName: BeginningOfAnim
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 17.916666
-    functionName: 
+    functionName: BeginningOfAnim
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 18.083334
-    functionName: 
+    functionName: BeginningOfAnim
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 18.25
-    functionName: 
+    functionName: BeginningOfAnim
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 18.416666
-    functionName: 
+    functionName: BeginningOfAnim
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 18.583334
-    functionName: 
+    functionName: BeginningOfAnim
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 18.75
-    functionName: 
+    functionName: BeginningOfAnim
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 18.916666
-    functionName: 
+    functionName: BeginningOfAnim
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 19.083334
-    functionName: 
+    functionName: BeginningOfAnim
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
