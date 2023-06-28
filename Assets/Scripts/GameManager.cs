@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
     public GameObject JukeboxBroken;
     public GameObject DiskPlayer;
     public bool canTouchCd = true;
+    int antiBugAnimBoutonPause;
 
     //Tableau 3
     public GameObject cog3;
@@ -314,28 +315,38 @@ public class GameManager : MonoBehaviour
         switch (numberOfTouch)
         {
             case 1:
-                Debug.Log("touche une fois");
-                canTouchCd = false;
-                Dialogue();
-                narratorAnimIdle.SetActive(false);
-                narratorsAnim[3].SetActive(true);
-                // timing = 0.5f;
+                if (antiBugAnimBoutonPause == 0)
+                {
+                    antiBugAnimBoutonPause++;
+                    Debug.Log("touche une fois");
+                    canTouchCd = false;
+                    Dialogue();
+                    narratorAnimIdle.SetActive(false);
+                    narratorsAnim[3].SetActive(true);
+                    // timing = 0.5f;
+                }
                 break;
             case 2:
-                Debug.Log("touche une seconde fois");
-                canTouchCd = false;
-                Dialogue();
-                
+                if (antiBugAnimBoutonPause == 1)
+                {
+                    antiBugAnimBoutonPause++;
+                    Debug.Log("touche une seconde fois");
+                    canTouchCd = false;
+                    Dialogue();
 
+                }
                 // timing = 0.4f;
                 break;
             case >=3:
-                Debug.Log("Detruit l'UI");
-                Dialogue();
-                narratorAnimIdle.SetActive(false);
-                narratorsAnim[4].SetActive(true);
-                narratorsAnim[5].SetActive(true);
-
+                if (antiBugAnimBoutonPause == 2)
+                {
+                    antiBugAnimBoutonPause++;
+                    Debug.Log("Detruit l'UI");
+                    Dialogue();
+                    narratorAnimIdle.SetActive(false);
+                    narratorsAnim[4].SetActive(true);
+                    narratorsAnim[5].SetActive(true);
+                }
                 // timing = 0.3f;
                 //nous permet de rendre la souris invisible et non utilisable
 
