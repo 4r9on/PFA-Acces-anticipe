@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour
 
     //Tableau 3
     public GameObject cog3;
+    public GameObject night;
     public List<GameObject> DayNight = new List<GameObject>();
     public GameObject dayLight;
     public GameObject nightLight;
@@ -74,6 +75,7 @@ public class GameManager : MonoBehaviour
 
     //Tableau 4
     public GameObject Egg;
+    public GameObject RopePlay;
     public List<GameObject> narratorsAnim4 = new List<GameObject>();
     public GameObject Hammer;
     public GameObject JukeboxBroken4;
@@ -299,6 +301,9 @@ public class GameManager : MonoBehaviour
             case 6:
                 GetComponent<AudioSource>().volume = 0.5f;
                 break;
+            case 7 :
+                GetComponent<AudioSource>().volume = 0.5f;
+                break;
         }
         GetComponent<AudioSource>().clip = TableauxMusic[MusicTableau - 1];
         GetComponent<AudioSource>().Play();
@@ -413,6 +418,7 @@ public class GameManager : MonoBehaviour
         }
         dayLight.SetActive(false);
         nightLight.SetActive(true);
+        night.SetActive(true);
         LampMask.enabled = true;
     }
 
@@ -495,6 +501,7 @@ public class GameManager : MonoBehaviour
             {
                 phase = 1;
                 Destroy(Egg);
+                Destroy(RopePlay);
             }
             if (JukeBoxHP == 5)
             {
