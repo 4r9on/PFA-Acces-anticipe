@@ -10,6 +10,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public bool canPutObject;
     public bool isPut;
     public int BornWithoutGravity;
+    public int Digicode;
     public GameObject objectToPutOn;
     public GameObject objectCreateAfterFalling;
     public bool painting;
@@ -17,6 +18,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public bool CD;
     public bool Moon;
     public bool child;
+    public bool chest;
     public bool canSlide;
     public bool S2ATSlide;
     public bool Background;
@@ -63,6 +65,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         if (gameObject.tag == "DeadZone" && collision.tag != "Explosion")
         {
             GameObject newExplosion = Instantiate(GameManager.Instance.Explosions[Random.Range(0, GameManager.Instance.Explosions.Count)]);
+            newExplosion.GetComponent<SoundDesign>().PhaseOfSound = 1;
             GameManager.Instance.NewSound(newExplosion, newExplosion.GetComponent<SoundDesign>().TheVolume);
             newExplosion.transform.position = new Vector2(Random.Range(-4.0f, 4.0f), transform.position.y + 1);
             newExplosion.transform.eulerAngles = new Vector3(newExplosion.transform.eulerAngles.x, newExplosion.transform.eulerAngles.y, Random.Range(0, 360));
@@ -76,10 +79,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
         }
 
-        if(gameObject.tag == "Hammer" && collision.tag == "JukeBoxCollider")
-        {
-            GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
-        }
+        
     }
     public IEnumerator DestroyExplosion(GameObject Explosion)
     {
@@ -89,6 +89,10 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (gameObject.tag == "Hammer" && collision.gameObject.tag == "JukeBoxCollider")
+        {
+            GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
+        }
         if (painting)
         {
             foreach (Transform children in transform)

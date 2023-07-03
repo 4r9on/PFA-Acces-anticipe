@@ -429,10 +429,23 @@ public class DragAndDrop : MonoBehaviour
     public void OnClicked()
     {
         if (GameManager.Instance.ObjectHover != null)
-        {
-            if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer" || GameManager.Instance.ObjectHover.tag == "Slider")
+        {   
+            if (GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().chest)
+                {
+                if(GameManager.Instance.Digicode.activeInHierarchy == false)
+                {
+                    GameManager.Instance.Digicode.SetActive(true);
+                }
+                else
+                {
+                    GameManager.Instance.Digicode.SetActive(false);
+                }
+                    
+                }
+            else if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer" || GameManager.Instance.ObjectHover.tag == "Slider")
             {
                 draggedObject = GameManager.Instance.ObjectHover;
+                draggedObject.GetComponent<Rigidbody2D>().gravityScale = 0;
                 if (draggedObject.GetComponent<ObjectToDrag>() != null && GameManager.Instance.ObjectHover.tag != "Slider")
                 {
                     if (draggedObject.GetComponent<ObjectToDrag>().painting)
@@ -561,6 +574,34 @@ public class DragAndDrop : MonoBehaviour
 
                 }
 
+            }
+            else if (GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().Digicode > 0)
+            {
+                bool stopSearch = false;
+                if (GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().Digicode > 10)
+                {
+                    if (GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().Digicode == 11)
+                    {
+                        for (int i = GameManager.Instance.DigicodeView.Count-1; i > -1; i--)
+                        {
+                            if (GameManager.Instance.DigicodeView[i].GetComponent<SpriteRenderer>().sprite != null && !stopSearch)
+                            {
+                                GameManager.Instance.DigicodeView[i].GetComponent<SpriteRenderer>().sprite = null;
+                                stopSearch = true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        GameManager.Instance.SearchSpriteInDigicode(stopSearch);
+                    }
+                }
+                else
+                {
+
+                    GameManager.Instance.SearchSpriteInDigicode(stopSearch);
+                   
+                }
             }
 
             else if (GameManager.Instance.ObjectHover.tag == "ButtonON")
@@ -735,6 +776,10 @@ public class DragAndDrop : MonoBehaviour
     {
         if (draggedObject != null)
         {
+            if (draggedObject.tag == "Object" || draggedObject.tag == "Hammer" || draggedObject.tag == "Slider")
+            {
+                draggedObject.GetComponent<Rigidbody2D>().gravityScale = 1;
+            }
             if (draggedObject.tag == "Slider" && canThrowHandle)
             {
                 GameManager.Instance.CancelLoopingObjects(GameManager.Instance.nameOfLoopingObject);
