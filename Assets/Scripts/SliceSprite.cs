@@ -70,7 +70,6 @@ public class SliceSprite : MonoBehaviour
             GameManager.Instance.DotWeenShakeObject(GameManager.Instance.JukeboxBroken4, 0.2f, 0.06f, 30);
             //Le but ici est de trouver a quel endroit est-ce qu'on a touche l'UI 
             SpriteRenderer thisSprite = GetComponent<SpriteRenderer>();
-            StartCoroutine(destroyAfterFewSeconds());
             if (Mathf.Abs(collision.GetContact(0).normal.x) < Mathf.Abs(collision.GetContact(0).normal.y))
             {
                sliceX(collision, thisSprite);

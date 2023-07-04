@@ -65,7 +65,9 @@ public class GameManager : MonoBehaviour
     public GameObject cog3;
     public GameObject night;
     public List<GameObject> DayNight = new List<GameObject>();
+    public List<GameObject> DigicodeView = new List<GameObject>();
     public GameObject dayLight;
+    public GameObject Digicode;
     public GameObject nightLight;
     public SpriteMask LampMask;
     public GameObject LeftWallAnimation;
@@ -422,6 +424,29 @@ public class GameManager : MonoBehaviour
         LampMask.enabled = true;
     }
 
+    public void SearchSpriteInDigicode(bool stopSearch)
+    {
+        for (int i = 0; i < DigicodeView.Count; i++)
+        {
+            if (DigicodeView[i].GetComponent<SpriteRenderer>().sprite == null && !stopSearch)
+            {
+                if(ObjectHover.GetComponent<ObjectToDrag>().Digicode <= 10)
+                {
+                    DigicodeView[i].GetComponent<SpriteRenderer>().sprite = ObjectHover.GetComponent<SpriteRenderer>().sprite;
+                }
+                stopSearch = true;
+            }
+            else if(i == DigicodeView.Count-1 && !stopSearch && ObjectHover.GetComponent<ObjectToDrag>().Digicode > 10)
+            {
+                foreach(Object obj in DigicodeView)
+                {
+                    obj.GetComponent<SpriteRenderer>().sprite = null;
+                }
+                Debug.Log("Accept Code");
+                stopSearch = true;
+            }
+        }
+    }
     public void FallTheHole(GameObject UVCross)
     {
         UVCross.SetActive(false);
