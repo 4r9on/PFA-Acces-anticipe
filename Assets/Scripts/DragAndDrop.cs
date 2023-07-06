@@ -15,7 +15,7 @@ public class DragAndDrop : MonoBehaviour
     public GameObject ObjectPut;
     public Camera cam;
     bool MovingBar;
-    float lastRotation = 0;
+    public float lastRotation = 0;
     public float value;
     public GameObject cursor;
     public bool CanMoveCursor = true;
@@ -137,73 +137,61 @@ public class DragAndDrop : MonoBehaviour
         {
 
             //Quand l'objet est pose on va pouvoir faire tourner l'objet dans lequel il est introduit
-            if (value < 5.3f && ObjectPut != null)
+            if (value < 500f && ObjectPut != null)
             {
                 GameManager.Instance.lightsOnTableau1[1].intensity = 0;
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.up = ((Camera.main.ScreenToWorldPoint(Input.mousePosition) - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.position).normalized);
-                ObjectPut.transform.up = ((Camera.main.ScreenToWorldPoint(Input.mousePosition) - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.position).normalized);
+                ObjectPut.transform.up = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.position).normalized;
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles = new Vector3(0, 0, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.z);
                 ObjectPut.transform.eulerAngles = new Vector3(0, 0, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.z);
 
                 //On va faire augmenter notre jauge ici
                 if (!firstTimeUseTheLoadingBar)
                 {
-                    if (ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w > lastRotation || (lastRotation - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w > 1 && lastRotation > 0))
+                    if ((ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.eulerAngles.z < lastRotation && lastRotation < 350) || (lastRotation < 30 && ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.eulerAngles.z > 300))
                     {
                         if (GameManager.Instance.nameOfLoopingObject != GameManager.Instance.Gauge.name)
                         {
                             GameManager.Instance.Gauge.GetComponent<SoundDesign>().PhaseOfSound = 1;
                             GameManager.Instance.SoundLoop(GameManager.Instance.Gauge, 0.5f);
                         }
-                        float theValue = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w;
+                        float theValue = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.eulerAngles.z;
 
-                        if (theValue < 0)
+                        if (lastRotation < 30 && ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.eulerAngles.z > 300)
                         {
-                            if (theValue > lastRotation)
-                            {
-                                theValue = lastRotation - theValue;
-                            }
-                            theValue *= -1;
+                            theValue = 360 - theValue + lastRotation;
                         }
                         else
                         {
-                            if (theValue > lastRotation)
-                            {
-                                theValue = theValue - lastRotation;
-                            }
+                            
+                            theValue = lastRotation - theValue;
                         }
-
-                        value += theValue;
+                        value -= theValue;
                     }
 
 
 
                     //On va faire decrementer notre jauge ici
-                    else if (ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w != lastRotation)
+                    else if (ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.eulerAngles.z != lastRotation || (ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.eulerAngles.z < 30 && lastRotation > 300))
                     {
                         if (GameManager.Instance.nameOfLoopingObject != GameManager.Instance.Gauge.name)
                         {
                             GameManager.Instance.Gauge.GetComponent<SoundDesign>().PhaseOfSound = 1;
                             GameManager.Instance.SoundLoop(GameManager.Instance.Gauge, 0.5f);
                         }
-                        float theValue = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w;
 
-                        if (theValue < 0)
+                        float theValue = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.eulerAngles.z;
+
+                        if (ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.eulerAngles.z < 30 && lastRotation > 300)
                         {
-                            if (theValue < lastRotation)
-                            {
-                                theValue = theValue - lastRotation;
-                            }
+                            Debug.Log(theValue);
+                            Debug.Log(lastRotation);
+                            theValue = 360 - lastRotation + theValue;
                         }
                         else
                         {
-                            if (theValue < lastRotation)
-                            {
-                                theValue = lastRotation - theValue;
-                            }
-                            theValue *= -1;
+                            theValue = theValue - lastRotation;
                         }
-
                         value += theValue;
                     }
                     else
@@ -213,7 +201,7 @@ public class DragAndDrop : MonoBehaviour
                     ChangeLoadingBarScale(value, 5.3f, -2.65f);
                     float valuepourcent = (value - -2.65f) / (5.3f - -2.65f);
 
-                    lastRotation = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.w;
+                    lastRotation = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.eulerAngles.z;
 
                     for (int i = 0; i < 3; i++)
                     {
@@ -429,10 +417,10 @@ public class DragAndDrop : MonoBehaviour
     public void OnClicked()
     {
         if (GameManager.Instance.ObjectHover != null)
-        {   
+        {
             if (GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().chest)
-                {
-                if(GameManager.Instance.Digicode.activeInHierarchy == false)
+            {
+                if (GameManager.Instance.Digicode.activeInHierarchy == false)
                 {
                     GameManager.Instance.Digicode.SetActive(true);
                 }
@@ -440,8 +428,8 @@ public class DragAndDrop : MonoBehaviour
                 {
                     GameManager.Instance.Digicode.SetActive(false);
                 }
-                    
-                }
+
+            }
             else if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer" || GameManager.Instance.ObjectHover.tag == "Slider")
             {
                 draggedObject = GameManager.Instance.ObjectHover;
@@ -582,7 +570,7 @@ public class DragAndDrop : MonoBehaviour
                 {
                     if (GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().Digicode == 11)
                     {
-                        for (int i = GameManager.Instance.DigicodeView.Count-1; i > -1; i--)
+                        for (int i = GameManager.Instance.DigicodeView.Count - 1; i > -1; i--)
                         {
                             if (GameManager.Instance.DigicodeView[i].GetComponent<SpriteRenderer>().sprite != null && !stopSearch)
                             {
@@ -600,7 +588,7 @@ public class DragAndDrop : MonoBehaviour
                 {
 
                     GameManager.Instance.SearchSpriteInDigicode(stopSearch);
-                   
+
                 }
             }
 
