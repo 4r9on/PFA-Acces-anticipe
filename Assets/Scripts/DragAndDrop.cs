@@ -163,7 +163,7 @@ public class DragAndDrop : MonoBehaviour
                         }
                         else
                         {
-                            
+
                             theValue = lastRotation - theValue;
                         }
                         value -= theValue;
@@ -433,7 +433,11 @@ public class DragAndDrop : MonoBehaviour
             else if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer" || GameManager.Instance.ObjectHover.tag == "Slider")
             {
                 draggedObject = GameManager.Instance.ObjectHover;
-                draggedObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+                if (draggedObject.GetComponent<Rigidbody2D>() != null)
+                {
+                    draggedObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+                }
+
                 if (draggedObject.GetComponent<ObjectToDrag>() != null && GameManager.Instance.ObjectHover.tag != "Slider")
                 {
                     if (draggedObject.GetComponent<ObjectToDrag>().painting)
@@ -766,7 +770,11 @@ public class DragAndDrop : MonoBehaviour
         {
             if (draggedObject.tag == "Object" || draggedObject.tag == "Hammer" || draggedObject.tag == "Slider")
             {
-                draggedObject.GetComponent<Rigidbody2D>().gravityScale = 1;
+                if (draggedObject.GetComponent<Rigidbody2D>() != null)
+                {
+                    draggedObject.GetComponent<Rigidbody2D>().gravityScale = 1;
+                }
+
             }
             if (draggedObject.tag == "Slider" && canThrowHandle)
             {
