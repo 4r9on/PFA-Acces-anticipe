@@ -82,11 +82,13 @@ public class Narrator : MonoBehaviour
     }
     public void LastLampToLightOn()
     {
+        
         GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
         GameManager.Instance.lightOnScene2.transform.GetChild(3).gameObject.SetActive(true);
         GameManager.Instance.lightOnScene2.transform.GetChild(5).GetComponent<Light2D>().intensity = 0.48f;
         GameManager.Instance.lightOnScene2.transform.GetChild(5).GetComponent<Animator>().enabled = true;
         GameManager.Instance.lightOnScene2.transform.GetChild(6).gameObject.SetActive(true);
+        GameManager.Instance.lightOnScene2.transform.GetChild(7).gameObject.SetActive(true);
         GameManager.Instance.changeMusic(2);
         GameManager.Instance.GetComponent<AudioSource>().volume = 0;
     }

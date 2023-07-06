@@ -20,6 +20,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public bool child;
     public bool chest;
     public bool canSlide;
+    public bool sliderRight;
     public bool S2ATSlide;
     public bool Background;
     public bool wasGravited;

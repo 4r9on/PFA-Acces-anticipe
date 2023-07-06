@@ -30,6 +30,7 @@ public class DragAndDrop : MonoBehaviour
     public Animator animator;
 
     public bool canThrowHandle;
+    public bool goToTheRightBar;
     bool firstTimeUseTheLoadingBar = true;
 
     public float MaxScaleLoadingBar;
@@ -137,11 +138,20 @@ public class DragAndDrop : MonoBehaviour
         {
 
             //Quand l'objet est pose on va pouvoir faire tourner l'objet dans lequel il est introduit
-            if (value < 500f && ObjectPut != null)
+            if (value < 1000f && ObjectPut != null)
             {
                 GameManager.Instance.lightsOnTableau1[1].intensity = 0;
-                ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.up = ((Camera.main.ScreenToWorldPoint(Input.mousePosition) - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.position).normalized);
-                ObjectPut.transform.up = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.position).normalized;
+                if (goToTheRightBar)
+                {
+                    ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.up = ((Camera.main.ScreenToWorldPoint(Input.mousePosition) - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.position).normalized);
+                    ObjectPut.transform.up = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.position).normalized;
+                }
+                else
+                {
+                    ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.up = (ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
+                    ObjectPut.transform.up = (ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
+                }
+
                 ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles = new Vector3(0, 0, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.z);
                 ObjectPut.transform.eulerAngles = new Vector3(0, 0, ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.eulerAngles.z);
 
@@ -198,8 +208,8 @@ public class DragAndDrop : MonoBehaviour
                     {
                         GameManager.Instance.CancelLoopingObjects(GameManager.Instance.nameOfLoopingObject);
                     }
-                    ChangeLoadingBarScale(value, 5.3f, -2.65f);
-                    float valuepourcent = (value - -2.65f) / (5.3f - -2.65f);
+                    ChangeLoadingBarScale(value, 1000f, -500f);
+                    float valuepourcent = (value - -500f) / (1000f - -500f);
 
                     lastRotation = ObjectPut.GetComponent<ObjectToDrag>().objectToPutOn.transform.rotation.eulerAngles.z;
 
@@ -418,6 +428,7 @@ public class DragAndDrop : MonoBehaviour
     {
         if (GameManager.Instance.ObjectHover != null)
         {
+            Debug.Log(GameManager.Instance.ObjectHover.tag);
             if (GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().chest)
             {
                 if (GameManager.Instance.Digicode.activeInHierarchy == false)
@@ -432,7 +443,23 @@ public class DragAndDrop : MonoBehaviour
             }
             else if (GameManager.Instance.ObjectHover.tag == "Object" || GameManager.Instance.ObjectHover.tag == "Hammer" || GameManager.Instance.ObjectHover.tag == "Slider")
             {
-                draggedObject = GameManager.Instance.ObjectHover;
+
+                if (GameManager.Instance.ObjectHover.tag == "Slider" && !canThrowHandle)
+                {
+                    if (GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().sliderRight)
+                    {
+                        goToTheRightBar = true;
+                    }
+                    else
+                    {
+                        goToTheRightBar = false;
+                    }
+                    MovingBar = true;
+                }
+                else
+                {
+                    draggedObject = GameManager.Instance.ObjectHover;
+                }
                 if (draggedObject.GetComponent<Rigidbody2D>() != null)
                 {
                     draggedObject.GetComponent<Rigidbody2D>().gravityScale = 0;
@@ -821,6 +848,8 @@ public class DragAndDrop : MonoBehaviour
                 {
                     draggedObject.GetComponent<SoundDesign>().PhaseOfSound = 3;
                     GameManager.Instance.NewSound(draggedObject, draggedObject.GetComponent<SoundDesign>().TheVolume);
+                    GameManager.Instance.Gauge.layer = 9;
+                    GameManager.Instance.Gauge.GetComponent<ObjectToDrag>().enabled = false;
                 }
                 if (draggedObject == GameManager.Instance.cog3)
                 {
