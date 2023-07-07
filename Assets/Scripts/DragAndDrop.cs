@@ -454,7 +454,10 @@ public class DragAndDrop : MonoBehaviour
                     {
                         goToTheRightBar = false;
                     }
-                    MovingBar = true;
+                    if(ObjectPut != null)
+                    {
+                        MovingBar = true;
+                    }
                 }
                 else
                 {
