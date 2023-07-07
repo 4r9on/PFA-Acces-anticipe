@@ -853,13 +853,23 @@ MonoBehaviour:
   canPutObject: 0
   isPut: 0
   BornWithoutGravity: 1
+  Digicode: 0
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  cog: 0
   CD: 0
+  Moon: 0
   child: 0
+  chest: 0
   canSlide: 0
+  sliderRight: 0
   S2ATSlide: 0
+  Background: 0
+  wasGravited: 0
+  vis: 0
+  canEnterInTheDoor: 0
+  visList: []
 --- !u!1 &6385504504061454411
 GameObject:
   m_ObjectHideFlags: 0
@@ -1388,13 +1398,23 @@ MonoBehaviour:
   canPutObject: 0
   isPut: 0
   BornWithoutGravity: 0
+  Digicode: 0
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  cog: 0
   CD: 0
+  Moon: 0
   child: 0
+  chest: 0
   canSlide: 0
+  sliderRight: 0
   S2ATSlide: 0
+  Background: 0
+  wasGravited: 0
+  vis: 0
+  canEnterInTheDoor: 0
+  visList: []
 --- !u!61 &7816990582036213073
 BoxCollider2D:
   m_ObjectHideFlags: 0
