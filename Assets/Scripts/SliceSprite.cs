@@ -286,7 +286,11 @@ public class SliceSprite : MonoBehaviour
             if (GameManager.Instance.breakableUI.Count == 0)
             {
                 GameManager.Instance.ColliderOfJukeboxBroken.SetActive(true);
-                GameManager.Instance.ChangeDialogueMoment();
+                if (GameManager.Instance.IdDialogueMoment < 3)
+                {
+                    GameManager.Instance.ChangeDialogueMoment();
+                }
+                
                 foreach (Transform child in GameManager.Instance.bocksMomentSpeak.transform)
                 {
                     child.gameObject.SetActive(true);
