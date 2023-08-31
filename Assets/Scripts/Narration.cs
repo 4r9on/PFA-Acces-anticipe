@@ -49,7 +49,7 @@ public class Narration : MonoBehaviour
         FinishTheDialogue = true;
         foreach (Transform child in transform)
         {
-                child.GetComponent<Animator>().SetBool("EndNarration", true);
+            child.GetComponent<Animator>().SetBool("EndNarration", true);
             if (child.gameObject.activeInHierarchy)
             {
                 FinishTheDialogue = false;
