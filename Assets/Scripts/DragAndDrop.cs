@@ -463,11 +463,13 @@ public class DragAndDrop : MonoBehaviour
                 {
                     draggedObject = GameManager.Instance.ObjectHover;
                 }
-                if (draggedObject.GetComponent<Rigidbody2D>() != null)
+                if(draggedObject != null)
                 {
-                    draggedObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+                    if (draggedObject.GetComponent<Rigidbody2D>() != null)
+                    {
+                        draggedObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+                    }
                 }
-
                 if (draggedObject.GetComponent<ObjectToDrag>() != null && GameManager.Instance.ObjectHover.tag != "Slider")
                 {
                     if (draggedObject.GetComponent<ObjectToDrag>().painting)
