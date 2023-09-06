@@ -15,6 +15,9 @@ public class Simon : MonoBehaviour
     public Light2D LightUp;
     public Light2D LightLeft;
     public Light2D LightRight;
+    public GameObject YellowContour;
+    public GameObject RedContour;
+    public GameObject BlueContour;
     bool waitIntro;
     public bool IsShowingLight;
 
@@ -85,6 +88,7 @@ public class Simon : MonoBehaviour
     }
     IEnumerator ShowLight()
     {
+        ShutDownContour();
         IsShowingLight = true;
         int LightID = ID;
         ID++;
@@ -107,6 +111,7 @@ public class Simon : MonoBehaviour
                         LightUp.color = new Color(0.9528302f, 0.0759992f, 0, 1);
                         LightRight.color = new Color(0.9528302f, 0.0759992f, 0, 1);
                         LightLeft.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                        RedContour.SetActive(true);
                         foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                         {
                             if (SimonUI.name == "Button_Play")
@@ -120,6 +125,7 @@ public class Simon : MonoBehaviour
                         LightUp.color = new Color(1, 0.7112604f, 0, 1);
                         LightRight.color = new Color(1, 0.7112604f, 0, 1);
                         LightLeft.color = new Color(1, 0.7112604f, 0, 1);
+                        YellowContour.SetActive(true);
                         foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                         {
                             if (SimonUI.name == "Button_Credit")
@@ -133,6 +139,7 @@ public class Simon : MonoBehaviour
                         LightUp.color = new Color(0, 0.2810159f, 1, 1);
                         LightRight.color = new Color(0, 0.2810159f, 1, 1);
                         LightLeft.color = new Color(0, 0.2810159f, 1, 1);
+                        BlueContour.SetActive(true);
                         foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                         {
                             if (SimonUI.name == "Button_Option")
@@ -144,15 +151,15 @@ public class Simon : MonoBehaviour
                         break;
                 }
                 LightUp.GetComponent<Animator>().enabled = false;
-                LightUp.GetComponent<Animator>().enabled = false;
-                LightUp.GetComponent<Animator>().enabled = false;
+                LightRight.GetComponent<Animator>().enabled = false;
+                LightLeft.GetComponent<Animator>().enabled = false;
                 yield return new WaitForSeconds(0.5f);
                 if (LightID == AllID[AllID.Count - 1])
                 {
 
                     LightUp.GetComponent<Animator>().enabled = true;
-                    LightUp.GetComponent<Animator>().enabled = true;
-                    LightUp.GetComponent<Animator>().enabled = true;
+                    LightRight.GetComponent<Animator>().enabled = true;
+                    LightLeft.GetComponent<Animator>().enabled = true;
                     LightUp.color = AllLight[0];
                     LightRight.color = AllLight[1];
                     LightLeft.color = AllLight[2];
@@ -167,11 +174,12 @@ public class Simon : MonoBehaviour
         {
 
             LightUp.GetComponent<Animator>().enabled = true;
-            LightUp.GetComponent<Animator>().enabled = true;
-            LightUp.GetComponent<Animator>().enabled = true;
+            LightRight.GetComponent<Animator>().enabled = true;
+            LightLeft.GetComponent<Animator>().enabled = true;
             LightUp.color = AllLight[0];
             LightRight.color = AllLight[1];
             LightLeft.color = AllLight[2];
+            ShutDownContour();
             yield return new WaitForSeconds(0.5f);
         }
         if (infiniteGame.Count > 0)
@@ -192,6 +200,7 @@ public class Simon : MonoBehaviour
                         LightUp.color = new Color(0.9528302f, 0.0759992f, 0, 1);
                         LightRight.color = new Color(0.9528302f, 0.0759992f, 0, 1);
                         LightLeft.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                        RedContour.SetActive(true);
                         foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                         {
                             if (SimonUI.name == "Button_Play")
@@ -205,6 +214,7 @@ public class Simon : MonoBehaviour
                         LightUp.color = new Color(1, 0.7112604f, 0, 1);
                         LightRight.color = new Color(1, 0.7112604f, 0, 1);
                         LightLeft.color = new Color(1, 0.7112604f, 0, 1);
+                        YellowContour.SetActive(true);
                         foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                         {
                             if (SimonUI.name == "Button_Credit")
@@ -218,6 +228,7 @@ public class Simon : MonoBehaviour
                         LightUp.color = new Color(0, 0.2810159f, 1, 1);
                         LightRight.color = new Color(0, 0.2810159f, 1, 1);
                         LightLeft.color = new Color(0, 0.2810159f, 1, 1);
+                        BlueContour.SetActive(true);
                         foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                         {
                             if (SimonUI.name == "Button_Option")
@@ -229,18 +240,19 @@ public class Simon : MonoBehaviour
                         break;
                 }
                 LightUp.GetComponent<Animator>().enabled = false;
-                LightUp.GetComponent<Animator>().enabled = false;
-                LightUp.GetComponent<Animator>().enabled = false;
+                LightRight.GetComponent<Animator>().enabled = false;
+                LightLeft.GetComponent<Animator>().enabled = false;
                 yield return new WaitForSeconds(0.5f);
                 IsShowingLight = false;
                 if (LightID == AllID[AllID.Count - 1])
                 {
                     LightUp.GetComponent<Animator>().enabled = true;
-                    LightUp.GetComponent<Animator>().enabled = true;
-                    LightUp.GetComponent<Animator>().enabled = true;
+                    LightRight.GetComponent<Animator>().enabled = true;
+                    LightLeft.GetComponent<Animator>().enabled = true;
                     LightUp.color = AllLight[0];
                     LightRight.color = AllLight[1];
                     LightLeft.color = AllLight[2];
+                    ShutDownContour();
                     yield return new WaitForSeconds(0.5f);
                 }
             }
@@ -315,6 +327,7 @@ public class Simon : MonoBehaviour
 
     IEnumerator PlayWithLight(string ButtonName)
     {
+        ShutDownContour();
         int LightID = ID;
         ID++;
         AllID.Add(LightID);
@@ -324,34 +337,45 @@ public class Simon : MonoBehaviour
                 LightUp.color = new Color(0.9528302f, 0.0759992f, 0, 1);
                 LightRight.color = new Color(0.9528302f, 0.0759992f, 0, 1);
                 LightLeft.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                RedContour.SetActive(true);
                 break;
             case "Button_Credit":
                 LightUp.color = new Color(1, 0.7112604f, 0, 1);
                 LightRight.color = new Color(1, 0.7112604f, 0, 1);
                 LightLeft.color = new Color(1, 0.7112604f, 0, 1);
+                YellowContour.SetActive(true);
                 break;
             case "Button_Option":
                 LightUp.color = new Color(0, 0.2810159f, 1, 1);
                 LightRight.color = new Color(0, 0.2810159f, 1, 1);
                 LightLeft.color = new Color(0, 0.2810159f, 1, 1);
+                BlueContour.SetActive(true);
                 break;
         }
         LightUp.GetComponent<Animator>().enabled = false;
-        LightUp.GetComponent<Animator>().enabled = false;
-        LightUp.GetComponent<Animator>().enabled = false;
+        LightRight.GetComponent<Animator>().enabled = false;
+        LightLeft.GetComponent<Animator>().enabled = false;
         yield return new WaitForSeconds(0.5f);
         if (LightID == AllID[AllID.Count - 1])
         {
             LightUp.GetComponent<Animator>().enabled = true;
-            LightUp.GetComponent<Animator>().enabled = true;
-            LightUp.GetComponent<Animator>().enabled = true;
+            LightRight.GetComponent<Animator>().enabled = true;
+            LightLeft.GetComponent<Animator>().enabled = true;
             LightUp.color = AllLight[0];
             LightRight.color = AllLight[1];
             LightLeft.color = AllLight[2];
+            ShutDownContour();
             yield return new WaitForSeconds(0.5f);
         }
 
 
+    }
+
+    void ShutDownContour()
+    {
+        RedContour.SetActive(false);
+        BlueContour.SetActive(false);
+        YellowContour.SetActive(false);
     }
 
     public void BeginTheSimon()

@@ -172,7 +172,8 @@ public class OpeningChest : MonoBehaviour
         {
             enterChest.transform.position = new Vector3(0, 0, -1);
             Debug.Log("Open");
-
+            enterChest.transform.parent.GetComponent<ObjectToDrag>().chest = false;
+            Destroy(enterChest.transform.parent.GetComponent<ObjectToDrag>());
             enterChest.SetActive(false);
             if (!GameManager.Instance.dAD.flashingHand.activeInHierarchy)
             {
