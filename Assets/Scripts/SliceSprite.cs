@@ -47,6 +47,7 @@ public class SliceSprite : MonoBehaviour
             if (GameManager.Instance.breakableUI.Count == 0 )
             {
                GameManager.Instance.ColliderOfJukeboxBroken.SetActive(true);
+                GameManager.Instance.IdDialogueMoment = 2;
                 GameManager.Instance.ChangeDialogueMoment();
                 foreach (Transform child in GameManager.Instance.bocksMomentSpeak.transform)
                 {
@@ -286,10 +287,8 @@ public class SliceSprite : MonoBehaviour
             if (GameManager.Instance.breakableUI.Count == 0)
             {
                 GameManager.Instance.ColliderOfJukeboxBroken.SetActive(true);
-                if (GameManager.Instance.IdDialogueMoment < 3)
-                {
+                GameManager.Instance.IdDialogueMoment = 2;
                     GameManager.Instance.ChangeDialogueMoment();
-                }
                 
                 foreach (Transform child in GameManager.Instance.bocksMomentSpeak.transform)
                 {
@@ -297,6 +296,7 @@ public class SliceSprite : MonoBehaviour
                 }
             }
         }
+        
         Destroy(gameObject);
     }
 }
