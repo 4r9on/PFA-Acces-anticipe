@@ -177,6 +177,10 @@ public class DragAndDrop : MonoBehaviour
                             theValue = lastRotation - theValue;
                         }
                         value -= theValue;
+                        if (value < -600)
+                        {
+                            value = -600;
+                        }
                     }
 
 
@@ -203,6 +207,10 @@ public class DragAndDrop : MonoBehaviour
                             theValue = theValue - lastRotation;
                         }
                         value += theValue;
+                        if (value < -600)
+                        {
+                            value = -600;
+                        }
                     }
                     else
                     {
