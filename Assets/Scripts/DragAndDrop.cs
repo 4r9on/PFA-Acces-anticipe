@@ -564,6 +564,18 @@ public class DragAndDrop : MonoBehaviour
             else if (GameManager.Instance.ObjectHover.tag == "Simon")
             {
                 GameManager.Instance.ObjectHover.GetComponent<Animator>().SetBool("IsClicked", true);
+                if (GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().isButtonPause)
+                {
+                    if(GameManager.Instance.ObjectHover.GetComponent<Animator>().GetBool("IsChanged") == true)
+                    {
+                        GameManager.Instance.ObjectHover.GetComponent<Animator>().SetBool("IsChanged", false);
+                    }
+                    else
+                    {
+                        GameManager.Instance.ObjectHover.GetComponent<Animator>().SetBool("IsChanged", true);
+                    }
+                }
+                
                 GameManager.Instance.ObjectHover.GetComponent<SoundDesign>().PhaseOfSound = 1;
                 GameManager.Instance.NewSound(GameManager.Instance.ObjectHover, GameManager.Instance.ObjectHover.GetComponent<SoundDesign>().TheVolume);
 

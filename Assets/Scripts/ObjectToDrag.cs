@@ -24,6 +24,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public bool S2ATSlide;
     public bool Background;
     public bool wasGravited;
+    public bool isButtonPause;
     public bool vis;
     public bool canEnterInTheDoor;
 
