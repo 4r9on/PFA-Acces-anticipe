@@ -103,6 +103,14 @@ public class Narrator : MonoBehaviour
             if (SimonUI.name == "Button_Pause")
             {
                 SimonUI.GetComponent<Animator>().SetBool("IsClicked", true);
+                if (SimonUI.GetComponent<Animator>().GetBool("IsChanged") == true)
+                {
+                    SimonUI.GetComponent<Animator>().SetBool("IsChanged", false);
+                }
+                else
+                {
+                    SimonUI.GetComponent<Animator>().SetBool("IsChanged", true);
+                }
                 SimonUI.GetComponent<SoundDesign>().PhaseOfSound = 1;
                 GameManager.Instance.NewSound(SimonUI, SimonUI.GetComponent<SoundDesign>().TheVolume);
             }
