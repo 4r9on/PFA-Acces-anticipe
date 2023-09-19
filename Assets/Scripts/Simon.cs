@@ -281,6 +281,7 @@ public class Simon : MonoBehaviour
             //Permet de comparer le dernier bouton appuyer à la liste de couleur faite au hasard, si le bouton est mauvais alors le jeu es perdu
             if (ComparativeGame[ComparativeGame.Count - 1] != infiniteGame[ComparativeGame.Count - 1])
             {
+                GameManager.Instance.feedbackNegative[Random.Range(0, GameManager.Instance.feedbackNegative.Count)].SetActive(true);
                 GameManager.Instance.GetComponent<AudioSource>().Pause();
                 foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                 {
@@ -293,6 +294,10 @@ public class Simon : MonoBehaviour
                 RemoveStringFromList(infiniteGame);
                 RemoveStringFromList(ComparativeGame);
                 BeginTheSimon();
+            }
+            else
+            {
+                GameManager.Instance.feedbackPositive[Random.Range(0, GameManager.Instance.feedbackPositive.Count)].SetActive(true);
             }
             if (ComparativeGame.Count == infiniteGame.Count)
             {

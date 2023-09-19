@@ -506,7 +506,14 @@ public class DragAndDrop : MonoBehaviour
                             {
                                 draggedObject.transform.parent = draggedObject.transform.parent.parent;
                             }
-                            draggedObject.GetComponent<Rigidbody2D>().gravityScale = 1;
+                            if (draggedObject.GetComponent<ObjectToDrag>().sign)
+                            {
+                                Debug.Log("tombe");
+                            }
+                            else
+                            {
+                                draggedObject.GetComponent<Rigidbody2D>().gravityScale = 1;
+                            }
                             foreach (Transform children in draggedObject.transform)
                             {
                                 children.GetComponent<Rigidbody2D>().gravityScale = 1;
@@ -572,6 +579,7 @@ public class DragAndDrop : MonoBehaviour
                     }
                     else
                     {
+                        Debug.Log("oui");
                         GameManager.Instance.ObjectHover.GetComponent<Animator>().SetBool("IsChanged", true);
                     }
                 }

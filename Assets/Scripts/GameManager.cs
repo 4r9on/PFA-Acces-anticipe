@@ -60,6 +60,8 @@ public class GameManager : MonoBehaviour
     public GameObject DiskPlayer;
     public bool canTouchCd = true;
     int antiBugAnimBoutonPause;
+    public List<GameObject> feedbackPositive = new List<GameObject>();
+    public List<GameObject> feedbackNegative = new List<GameObject>();
 
     //Tableau 3
     public GameObject cog3;

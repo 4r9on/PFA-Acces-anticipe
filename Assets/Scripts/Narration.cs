@@ -84,7 +84,10 @@ public class Narration : MonoBehaviour
 
     public void endOfAnim()
     {
-        gameObject.transform.parent.GetComponent<Narration>().DialoguePlus++;
+        if(gameObject.transform.parent.GetComponent<Narration>() != null)
+        {
+            gameObject.transform.parent.GetComponent<Narration>().DialoguePlus++;
+        }
         gameObject.SetActive(false);
     }
 
