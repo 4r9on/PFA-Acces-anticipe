@@ -508,7 +508,7 @@ public class DragAndDrop : MonoBehaviour
                             }
                             if (draggedObject.GetComponent<ObjectToDrag>().sign)
                             {
-                                Debug.Log("tombe");
+                                draggedObject.GetComponent<Animator>().enabled = true;
                             }
                             else
                             {

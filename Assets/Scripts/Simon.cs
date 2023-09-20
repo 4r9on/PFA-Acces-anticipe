@@ -61,7 +61,7 @@ public class Simon : MonoBehaviour
 
     public void AddLights()
     {
-        if (infiniteGame.Count == 1)
+        if (infiniteGame.Count == 5)
         {
             RemoveStringFromList(infiniteGame);
             GameManager.Instance.AfterGainSimon();
@@ -281,7 +281,19 @@ public class Simon : MonoBehaviour
             //Permet de comparer le dernier bouton appuyer à la liste de couleur faite au hasard, si le bouton est mauvais alors le jeu es perdu
             if (ComparativeGame[ComparativeGame.Count - 1] != infiniteGame[ComparativeGame.Count - 1])
             {
-                GameManager.Instance.feedbackNegative[Random.Range(0, GameManager.Instance.feedbackNegative.Count)].SetActive(true);
+                
+                GameObject newFeedback = Instantiate(GameManager.Instance.feedbackNegative[Random.Range(0, GameManager.Instance.feedbackNegative.Count)]);
+                foreach (Transform child in GameManager.Instance.ObjectHover.transform.parent)
+                {
+                    if(child.name == "Pos")
+                    {
+                        GameObject newChild = Instantiate(child.gameObject);
+                        newChild.transform.position = new Vector2(Random.Range(-1.00f, 1.00f) + newChild.transform.position.x, Random.Range(-1.00f, 1.00f) + newChild.transform.position.y);
+                        newFeedback.transform.parent = newChild.transform;
+                    }
+                }
+                
+
                 GameManager.Instance.GetComponent<AudioSource>().Pause();
                 foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                 {
@@ -297,7 +309,16 @@ public class Simon : MonoBehaviour
             }
             else
             {
-                GameManager.Instance.feedbackPositive[Random.Range(0, GameManager.Instance.feedbackPositive.Count)].SetActive(true);
+                GameObject newFeedback = Instantiate(GameManager.Instance.feedbackPositive[Random.Range(0, GameManager.Instance.feedbackPositive.Count)], GameManager.Instance.ObjectHover.transform.position, Quaternion.identity);
+                foreach (Transform child in GameManager.Instance.ObjectHover.transform.parent)
+                {
+                    if (child.name == "Pos")
+                    {
+                        GameObject newChild = Instantiate(child.gameObject);
+                        newChild.transform.position = new Vector2(Random.Range(-1.00f, 1.00f) + newChild.transform.position.x, Random.Range(-1.00f, 1.00f) + newChild.transform.position.y);
+                        newFeedback.transform.parent = newChild.transform;
+                    }
+                }
             }
             if (ComparativeGame.Count == infiniteGame.Count)
             {

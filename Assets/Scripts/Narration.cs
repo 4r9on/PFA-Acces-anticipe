@@ -91,6 +91,11 @@ public class Narration : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public void endOfFeedback()
+    {
+        Destroy(gameObject.transform.parent.gameObject);
+    }
+
     public void endOfThePhase()
     {
         gameObject.transform.parent.gameObject.SetActive(false);
