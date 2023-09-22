@@ -71,6 +71,7 @@ public class Narration : MonoBehaviour
         }
         else
         {
+            GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
             gameObject.SetActive(false);
         }
         
