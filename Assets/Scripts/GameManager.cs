@@ -68,6 +68,11 @@ public class GameManager : MonoBehaviour
     public GameObject night;
     public List<GameObject> DayNight = new List<GameObject>();
     public List<GameObject> DigicodeView = new List<GameObject>();
+    public List<GameObject> AllBooks = new List<GameObject>();
+    public List<Sprite> BooksSpriteXL = new List<Sprite>();
+    public List<Sprite> BooksSpriteBig = new List<Sprite>();
+    public List<Sprite> BooksSpriteMedium = new List<Sprite>();
+    public List<Sprite> BooksSpriteSmall = new List<Sprite>();
     public GameObject dayLight;
     public GameObject Digicode;
     public GameObject nightLight;
@@ -608,7 +613,6 @@ public class GameManager : MonoBehaviour
                 newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList4[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3.Count)];
                 break;
         }
-
         newSoundDesign.GetComponent<AudioSource>().volume = Volume;
         newSoundDesign.GetComponent<AudioSource>().Play();
     }
@@ -674,6 +678,38 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ChangeSpriteBook(GameObject book)
+    {
+        bool sizeIsFind = false;
+        sizeIsFind = FindTheGoodSize(book, BooksSpriteXL);
+        if (!sizeIsFind)
+        {
+            sizeIsFind = FindTheGoodSize(book, BooksSpriteBig);
+        }
+        if (!sizeIsFind)
+        {
+            sizeIsFind = FindTheGoodSize(book, BooksSpriteMedium);
+        }
+        if (!sizeIsFind)
+        {
+            sizeIsFind = FindTheGoodSize(book, BooksSpriteSmall);
+        }
+    }
 
+    public bool FindTheGoodSize(GameObject book, List<Sprite> BooksSpriteSize)
+    {
+        bool sizeIsFind = false;
+        foreach (Sprite bookSprite in BooksSpriteSize)
+        {
+            if (book.GetComponent<SpriteRenderer>().sprite == bookSprite)
+            {
+                sizeIsFind = true;
+                List<Sprite> booksSprite = new List<Sprite>();
+                booksSprite.Remove(bookSprite);
+                book.GetComponent<SpriteRenderer>().sprite = BooksSpriteSize[Random.Range(0, BooksSpriteSize.Count)];
+            }
+        }
+        return sizeIsFind;
+    }
 }
 

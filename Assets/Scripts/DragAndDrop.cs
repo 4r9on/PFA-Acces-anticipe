@@ -442,6 +442,11 @@ public class DragAndDrop : MonoBehaviour
                 if (GameManager.Instance.Digicode.activeInHierarchy == false)
                 {
                     GameManager.Instance.Digicode.SetActive(true);
+                    GameObject bookToChange = GameManager.Instance.AllBooks[Random.Range(0, GameManager.Instance.AllBooks.Count)];
+                    List<GameObject> ChooseAnotherBook = GameManager.Instance.AllBooks;
+                    ChooseAnotherBook.Remove(bookToChange);
+                    GameManager.Instance.ChangeSpriteBook(bookToChange);
+                    GameManager.Instance.ChangeSpriteBook(ChooseAnotherBook[Random.Range(0, ChooseAnotherBook.Count)]);
                 }
                 else
                 {
@@ -683,6 +688,7 @@ public class DragAndDrop : MonoBehaviour
 
             else if (GameManager.Instance.ObjectHover.tag == "Digi")
             {
+                
                 digicode.SetActive(true);
                 coliderDigiCode.SetActive(true);
 
