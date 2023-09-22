@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
     int antiBugAnimBoutonPause;
     public List<GameObject> feedbackPositive = new List<GameObject>();
     public List<GameObject> feedbackNegative = new List<GameObject>();
+    public GameObject ButtonPause;
 
     //Tableau 3
     public GameObject cog3;
