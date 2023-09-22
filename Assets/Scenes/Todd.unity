@@ -651,6 +651,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  sign: 0
   cog: 0
   CD: 0
   Moon: 0
@@ -661,6 +662,7 @@ MonoBehaviour:
   S2ATSlide: 0
   Background: 0
   wasGravited: 0
+  isButtonPause: 0
   vis: 0
   canEnterInTheDoor: 0
   visList: []
@@ -1165,6 +1167,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  sign: 0
   cog: 0
   CD: 0
   Moon: 0
@@ -1175,6 +1178,7 @@ MonoBehaviour:
   S2ATSlide: 0
   Background: 0
   wasGravited: 0
+  isButtonPause: 0
   vis: 0
   canEnterInTheDoor: 0
   visList: []
@@ -2441,6 +2445,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 840915665}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  sign: 0
   cog: 0
   CD: 0
   Moon: 0
@@ -2451,6 +2456,7 @@ MonoBehaviour:
   S2ATSlide: 0
   Background: 0
   wasGravited: 0
+  isButtonPause: 0
   vis: 0
   canEnterInTheDoor: 0
   visList: []
@@ -10885,6 +10891,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  sign: 0
   cog: 0
   CD: 0
   Moon: 0
@@ -10895,6 +10902,7 @@ MonoBehaviour:
   S2ATSlide: 0
   Background: 0
   wasGravited: 0
+  isButtonPause: 0
   vis: 0
   canEnterInTheDoor: 0
   visList: []
@@ -12153,10 +12161,17 @@ MonoBehaviour:
   JukeboxBroken: {fileID: 0}
   DiskPlayer: {fileID: 0}
   canTouchCd: 1
+  feedbackPositive: []
+  feedbackNegative: []
   cog3: {fileID: 0}
   night: {fileID: 0}
   DayNight: []
   DigicodeView: []
+  AllBooks: []
+  BooksSpriteXL: []
+  BooksSpriteBig: []
+  BooksSpriteMedium: []
+  BooksSpriteSmall: []
   dayLight: {fileID: 0}
   Digicode: {fileID: 0}
   nightLight: {fileID: 0}
@@ -13588,6 +13603,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 370834766}
   objectCreateAfterFalling: {fileID: 0}
   painting: 1
+  sign: 0
   cog: 0
   CD: 0
   Moon: 0
@@ -13598,6 +13614,7 @@ MonoBehaviour:
   S2ATSlide: 0
   Background: 0
   wasGravited: 0
+  isButtonPause: 0
   vis: 0
   canEnterInTheDoor: 0
   visList: []
@@ -15859,6 +15876,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  sign: 0
   cog: 0
   CD: 0
   Moon: 0
@@ -15869,6 +15887,7 @@ MonoBehaviour:
   S2ATSlide: 0
   Background: 0
   wasGravited: 0
+  isButtonPause: 0
   vis: 0
   canEnterInTheDoor: 0
   visList: []
@@ -22076,6 +22095,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  sign: 0
   cog: 0
   CD: 0
   Moon: 0
@@ -22086,6 +22106,7 @@ MonoBehaviour:
   S2ATSlide: 0
   Background: 0
   wasGravited: 0
+  isButtonPause: 0
   vis: 0
   canEnterInTheDoor: 0
   visList: []
@@ -25592,6 +25613,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  sign: 0
   cog: 0
   CD: 0
   Moon: 0
@@ -25602,6 +25624,7 @@ MonoBehaviour:
   S2ATSlide: 0
   Background: 0
   wasGravited: 0
+  isButtonPause: 0
   vis: 0
   canEnterInTheDoor: 0
   visList: []
@@ -28133,6 +28156,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 0}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  sign: 0
   cog: 0
   CD: 0
   Moon: 0
@@ -28143,6 +28167,7 @@ MonoBehaviour:
   S2ATSlide: 0
   Background: 0
   wasGravited: 0
+  isButtonPause: 0
   vis: 0
   canEnterInTheDoor: 0
   visList: []
@@ -36990,6 +37015,7 @@ MonoBehaviour:
   objectToPutOn: {fileID: 20104435}
   objectCreateAfterFalling: {fileID: 0}
   painting: 0
+  sign: 0
   cog: 0
   CD: 0
   Moon: 0
@@ -37000,6 +37026,7 @@ MonoBehaviour:
   S2ATSlide: 0
   Background: 0
   wasGravited: 0
+  isButtonPause: 0
   vis: 0
   canEnterInTheDoor: 0
   visList: []
