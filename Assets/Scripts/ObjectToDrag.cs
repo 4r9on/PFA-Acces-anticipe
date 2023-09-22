@@ -289,4 +289,5 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         GameManager.Instance.cleanScene();
     }
 
+
 }
