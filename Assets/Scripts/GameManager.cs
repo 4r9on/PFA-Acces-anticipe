@@ -613,7 +613,6 @@ public class GameManager : MonoBehaviour
                 newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList4[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3.Count)];
                 break;
         }
-
         newSoundDesign.GetComponent<AudioSource>().volume = Volume;
         newSoundDesign.GetComponent<AudioSource>().Play();
     }
