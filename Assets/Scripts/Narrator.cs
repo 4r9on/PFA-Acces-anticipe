@@ -72,22 +72,21 @@ public class Narrator : MonoBehaviour
 
     public void firstLampToLightOn()
     {
-       GameManager.Instance.lightOnScene2.transform.GetChild(2).gameObject.SetActive(true);
+       GameManager.Instance.lightOnScene2.transform.GetChild(3).gameObject.SetActive(true);
         GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
     }
     public void SecondLampToLightOn()
     {
-        GameManager.Instance.lightOnScene2.transform.GetChild(4).gameObject.SetActive(true);
+        GameManager.Instance.lightOnScene2.transform.GetChild(5).gameObject.SetActive(true);
         GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
     }
     public void LastLampToLightOn()
     {
         
         GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
-        GameManager.Instance.lightOnScene2.transform.GetChild(3).gameObject.SetActive(true);
+        GameManager.Instance.lightOnScene2.transform.GetChild(4).gameObject.SetActive(true);
         GameManager.Instance.lightOnScene2.transform.GetChild(5).GetComponent<Light2D>().intensity = 0.48f;
         GameManager.Instance.lightOnScene2.transform.GetChild(5).GetComponent<Animator>().enabled = true;
-        GameManager.Instance.lightOnScene2.transform.GetChild(6).gameObject.SetActive(true);
         GameManager.Instance.lightOnScene2.transform.GetChild(7).gameObject.SetActive(true);
         GameManager.Instance.changeMusic(2);
         GameManager.Instance.GetComponent<AudioSource>().volume = 0;
@@ -104,6 +103,14 @@ public class Narrator : MonoBehaviour
             if (SimonUI.name == "Button_Pause")
             {
                 SimonUI.GetComponent<Animator>().SetBool("IsClicked", true);
+                if (SimonUI.GetComponent<Animator>().GetBool("IsChanged") == true)
+                {
+                    SimonUI.GetComponent<Animator>().SetBool("IsChanged", false);
+                }
+                else
+                {
+                    SimonUI.GetComponent<Animator>().SetBool("IsChanged", true);
+                }
                 SimonUI.GetComponent<SoundDesign>().PhaseOfSound = 1;
                 GameManager.Instance.NewSound(SimonUI, SimonUI.GetComponent<SoundDesign>().TheVolume);
             }

@@ -14,6 +14,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public GameObject objectToPutOn;
     public GameObject objectCreateAfterFalling;
     public bool painting;
+    public bool sign;
     public bool cog;
     public bool CD;
     public bool Moon;
@@ -24,6 +25,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public bool S2ATSlide;
     public bool Background;
     public bool wasGravited;
+    public bool isButtonPause;
     public bool vis;
     public bool canEnterInTheDoor;
 

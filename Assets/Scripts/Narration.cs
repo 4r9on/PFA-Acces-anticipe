@@ -7,6 +7,7 @@ public class Narration : MonoBehaviour
     public int DialogueMax;
     public int DialogueActual;
     public Animation anim;
+    public bool NeedToPass;
     public int DialoguePlus   // property
     {
         get { return DialogueActual; }   // get method
@@ -49,7 +50,7 @@ public class Narration : MonoBehaviour
         FinishTheDialogue = true;
         foreach (Transform child in transform)
         {
-                child.GetComponent<Animator>().SetBool("EndNarration", true);
+            child.GetComponent<Animator>().SetBool("EndNarration", true);
             if (child.gameObject.activeInHierarchy)
             {
                 FinishTheDialogue = false;
@@ -63,8 +64,16 @@ public class Narration : MonoBehaviour
 
     public void BeginningOfAnim()
     {
-        gameObject.GetComponent<SoundDesign>().PhaseOfSound = 1;
-        GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
+        if(GameManager.Instance.dialogueList[GameManager.Instance.IdDialogue-1] == transform.parent.gameObject || !NeedToPass)
+        {
+            gameObject.GetComponent<SoundDesign>().PhaseOfSound = 1;
+            GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+        
     }
 
     public void endSoundOfAnim()
@@ -75,8 +84,16 @@ public class Narration : MonoBehaviour
 
     public void endOfAnim()
     {
-        gameObject.transform.parent.GetComponent<Narration>().DialoguePlus++;
+        if(gameObject.transform.parent.GetComponent<Narration>() != null)
+        {
+            gameObject.transform.parent.GetComponent<Narration>().DialoguePlus++;
+        }
         gameObject.SetActive(false);
+    }
+
+    public void endOfFeedback()
+    {
+        Destroy(gameObject.transform.parent.gameObject);
     }
 
     public void endOfThePhase()

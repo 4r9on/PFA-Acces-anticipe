@@ -177,6 +177,10 @@ public class DragAndDrop : MonoBehaviour
                             theValue = lastRotation - theValue;
                         }
                         value -= theValue;
+                        if (value < -600)
+                        {
+                            value = -600;
+                        }
                     }
 
 
@@ -203,6 +207,10 @@ public class DragAndDrop : MonoBehaviour
                             theValue = theValue - lastRotation;
                         }
                         value += theValue;
+                        if (value < -600)
+                        {
+                            value = -600;
+                        }
                     }
                     else
                     {
@@ -498,7 +506,14 @@ public class DragAndDrop : MonoBehaviour
                             {
                                 draggedObject.transform.parent = draggedObject.transform.parent.parent;
                             }
-                            draggedObject.GetComponent<Rigidbody2D>().gravityScale = 1;
+                            if (draggedObject.GetComponent<ObjectToDrag>().sign)
+                            {
+                                draggedObject.GetComponent<Animator>().enabled = true;
+                            }
+                            else
+                            {
+                                draggedObject.GetComponent<Rigidbody2D>().gravityScale = 1;
+                            }
                             foreach (Transform children in draggedObject.transform)
                             {
                                 children.GetComponent<Rigidbody2D>().gravityScale = 1;
@@ -556,6 +571,19 @@ public class DragAndDrop : MonoBehaviour
             else if (GameManager.Instance.ObjectHover.tag == "Simon")
             {
                 GameManager.Instance.ObjectHover.GetComponent<Animator>().SetBool("IsClicked", true);
+                if (GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().isButtonPause)
+                {
+                    if(GameManager.Instance.ObjectHover.GetComponent<Animator>().GetBool("IsChanged") == true)
+                    {
+                        GameManager.Instance.ObjectHover.GetComponent<Animator>().SetBool("IsChanged", false);
+                    }
+                    else
+                    {
+                        Debug.Log("oui");
+                        GameManager.Instance.ObjectHover.GetComponent<Animator>().SetBool("IsChanged", true);
+                    }
+                }
+                
                 GameManager.Instance.ObjectHover.GetComponent<SoundDesign>().PhaseOfSound = 1;
                 GameManager.Instance.NewSound(GameManager.Instance.ObjectHover, GameManager.Instance.ObjectHover.GetComponent<SoundDesign>().TheVolume);
 
