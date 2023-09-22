@@ -20,15 +20,16 @@ public class SoundDesign : MonoBehaviour
         if (GetComponent<AudioSource>() != null)
         {
             audioSource = GetComponent<AudioSource>();
-        }
-        if (!DisapearAfterOne)
-        {
 
-            InvokeRepeating("SoundIsLooping", 0.1f, audioSource.clip.length + Timing);
-        }
-        else
-        {
-            Invoke("JustOneSound", audioSource.clip.length);
+            if (!DisapearAfterOne)
+            {
+
+                InvokeRepeating("SoundIsLooping", 0.1f, audioSource.clip.length + Timing);
+            }
+            else
+            {
+                Invoke("JustOneSound", audioSource.clip.length);
+            }
         }
     }
 

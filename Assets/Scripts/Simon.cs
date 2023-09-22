@@ -305,7 +305,6 @@ public class Simon : MonoBehaviour
                 }
                 RemoveStringFromList(infiniteGame);
                 RemoveStringFromList(ComparativeGame);
-                BeginTheSimon();
             }
             else
             {
@@ -335,7 +334,7 @@ public class Simon : MonoBehaviour
                         if (nbrCorrect == ComparativeGame.Count)
                         {
                             RemoveStringFromList(ComparativeGame);
-                            AddLights();
+                            StartCoroutine(AddTimeAfterWin());
                         }
                     }
                 }
@@ -430,5 +429,10 @@ public class Simon : MonoBehaviour
             waitIntro = false;
         }
        
+    }
+    IEnumerator AddTimeAfterWin()
+    {
+            yield return new WaitForSeconds(0.7f);
+            AddLights();
     }
 }
