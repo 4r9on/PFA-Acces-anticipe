@@ -288,6 +288,10 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         GameManager.Instance.Door.SetActive(false);
         GameManager.Instance.cleanScene();
     }
+    public void StopTheClicked()
+    {
+        GetComponent<Animator>().SetBool("IsChanged", true);
+    }
 
 
 }

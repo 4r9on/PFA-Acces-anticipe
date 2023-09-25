@@ -91,6 +91,8 @@ public class GameManager : MonoBehaviour
     public GameObject JukeboxBroken4;
     public GameObject ColliderOfJukeboxBroken;
     public List<GameObject> JukeboxPhase = new List<GameObject>();
+    public List<GameObject> AllOriginalToBreak = new List<GameObject>();
+    public bool StopPass;
     int JukeBoxHP = 20;
 
     //Tableau 5

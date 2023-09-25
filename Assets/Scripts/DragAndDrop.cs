@@ -883,7 +883,7 @@ public class DragAndDrop : MonoBehaviour
                     }
                 }
 
-                if (draggedObject == GameManager.Instance.cog1)
+                if (draggedObject == GameManager.Instance.cog1 && GameManager.Instance.ObjectHover == GameManager.Instance.Gauge)
                 {
                     draggedObject.GetComponent<SoundDesign>().PhaseOfSound = 3;
                     GameManager.Instance.NewSound(draggedObject, draggedObject.GetComponent<SoundDesign>().TheVolume);
