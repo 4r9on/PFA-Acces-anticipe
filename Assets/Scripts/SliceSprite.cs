@@ -20,9 +20,9 @@ public class SliceSprite : MonoBehaviour
     }
     void Start()
     {
-        
-     /*   mySprite = Sprite.Create(tex, new Rect( 0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100.0f);
-        sr.sprite = mySprite;*/
+
+        /*   mySprite = Sprite.Create(tex, new Rect( 0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 100.0f);
+           sr.sprite = mySprite;*/
         StartCoroutine(WaitToBreakIt());
         if (!original)
         {
@@ -33,7 +33,7 @@ public class SliceSprite : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
 
@@ -44,18 +44,19 @@ public class SliceSprite : MonoBehaviour
         {
             GameManager.Instance.DotWeenShakeCamera(0.2f, 0.06f, 30);
             GameManager.Instance.breakableUI.Remove(gameObject);
-            if (GameManager.Instance.breakableUI.Count == 0 )
+            if (GameManager.Instance.breakableUI.Count == 0 && !GameManager.Instance.StopPass)
             {
-               GameManager.Instance.ColliderOfJukeboxBroken.SetActive(true);
+                GameManager.Instance.ColliderOfJukeboxBroken.SetActive(true);
                 GameManager.Instance.IdDialogueMoment = 2;
                 GameManager.Instance.ChangeDialogueMoment();
+                GameManager.Instance.StopPass = true;
                 foreach (Transform child in GameManager.Instance.bocksMomentSpeak.transform)
                 {
                     child.gameObject.SetActive(true);
                 }
                 for (int i = 0; i < 5; i++)
                 {
-                   
+
                     GameManager.Instance.loseHP();
                 }
             }
@@ -71,55 +72,63 @@ public class SliceSprite : MonoBehaviour
             GameManager.Instance.DotWeenShakeObject(GameManager.Instance.JukeboxBroken4, 0.2f, 0.06f, 30);
             //Le but ici est de trouver a quel endroit est-ce qu'on a touche l'UI 
             SpriteRenderer thisSprite = GetComponent<SpriteRenderer>();
+            if (original)
+            {
+                GameManager.Instance.AllOriginalToBreak.Remove(gameObject);
+                if (GameManager.Instance.AllOriginalToBreak.Count == 0)
+                {
+                    StartCoroutine(PassToTheNextDialogue());
+                }
+            }
             if (Mathf.Abs(collision.GetContact(0).normal.x) < Mathf.Abs(collision.GetContact(0).normal.y))
             {
-               sliceX(collision, thisSprite);
+                sliceX(collision, thisSprite);
             }
             else
             {
-               sliceY(collision, thisSprite);
+                sliceY(collision, thisSprite);
             }
-          /*  // Debug.Log(collision.contacts.LongLength);
-            float pourcentOfSliceX = (collision.GetContact(0).point.x - thisSprite.bounds.min.x) / (thisSprite.bounds.max.x - thisSprite.bounds.min.x);
+            /*  // Debug.Log(collision.contacts.LongLength);
+              float pourcentOfSliceX = (collision.GetContact(0).point.x - thisSprite.bounds.min.x) / (thisSprite.bounds.max.x - thisSprite.bounds.min.x);
 
-            //On va creer un morceau de notre UI en enlevant l'autre partie
-            mySprite = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * pourcentOfSliceX), tex.height), new Vector2(0.5f/pourcentOfSliceX/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3*//*, 0.5f), 100.0f);
-            sr.sprite = mySprite;
-            
-            //On va faire suivre le collider pour eviter d'avoir un collider qui ne suit pas le morceau d'UI
-            BoxCollider2D theCollider = GetComponent<BoxCollider2D>();
-            float sizeXTotal = theCollider.size.x;
-            theCollider.size = (mySprite.bounds.size);
-            theCollider.offset = new Vector2((-sizeXTotal + theCollider.size.x)/2, 0);
+              //On va creer un morceau de notre UI en enlevant l'autre partie
+              mySprite = Sprite.Create(tex, new Rect(0, 0, (int)(tex.width * pourcentOfSliceX), tex.height), new Vector2(0.5f/pourcentOfSliceX/*((thisSprite.bounds.max.x - thisSprite.bounds.min.x)/3*//*, 0.5f), 100.0f);
+              sr.sprite = mySprite;
+
+              //On va faire suivre le collider pour eviter d'avoir un collider qui ne suit pas le morceau d'UI
+              BoxCollider2D theCollider = GetComponent<BoxCollider2D>();
+              float sizeXTotal = theCollider.size.x;
+              theCollider.size = (mySprite.bounds.size);
+              theCollider.offset = new Vector2((-sizeXTotal + theCollider.size.x)/2, 0);
 
 
-            //On va creer notre seconde partie de l'UI
-            Debug.Log("another one");
-            GameObject newUI = Instantiate(NewUI);
-            newUI.transform.parent = transform.parent;
-            newUI.transform.position = transform.position;
-            Sprite newSprite = newUI.GetComponent<SliceSprite>().mySprite;
+              //On va creer notre seconde partie de l'UI
+              Debug.Log("another one");
+              GameObject newUI = Instantiate(NewUI);
+              newUI.transform.parent = transform.parent;
+              newUI.transform.position = transform.position;
+              Sprite newSprite = newUI.GetComponent<SliceSprite>().mySprite;
 
-            newSprite = Sprite.Create(tex, new Rect(0, 0, -(int)(tex.width - tex.width * pourcentOfSliceX), tex.height), new Vector2(0.5f / (1-pourcentOfSliceX), 0.5f), 100.0f);
-            
-            newUI.GetComponent<SliceSprite>().sr.sprite = newSprite;
+              newSprite = Sprite.Create(tex, new Rect(0, 0, -(int)(tex.width - tex.width * pourcentOfSliceX), tex.height), new Vector2(0.5f / (1-pourcentOfSliceX), 0.5f), 100.0f);
 
-            newUI.GetComponent<BoxCollider2D>().size = (newSprite.bounds.size);
-            newUI.GetComponent<BoxCollider2D>().offset = new Vector2((sizeXTotal - newUI.GetComponent<BoxCollider2D>().size.x) / 2, 0);
-            // GetComponent<Rigidbody2D>().gravityScale = 1.0f;
+              newUI.GetComponent<SliceSprite>().sr.sprite = newSprite;
 
-            tex = new Texture2D((int)mySprite.rect.width, (int)mySprite.rect.height);
-            Color[] TexturePixels = mySprite.texture.GetPixels((int)mySprite.textureRect.x, (int)mySprite.textureRect.y, (int)mySprite.textureRect.width, (int)mySprite.textureRect.height);
-            tex.SetPixels(TexturePixels);
-            tex.filterMode = FilterMode.Point;
-            tex.Apply();
+              newUI.GetComponent<BoxCollider2D>().size = (newSprite.bounds.size);
+              newUI.GetComponent<BoxCollider2D>().offset = new Vector2((sizeXTotal - newUI.GetComponent<BoxCollider2D>().size.x) / 2, 0);
+              // GetComponent<Rigidbody2D>().gravityScale = 1.0f;
 
-            Texture2D newTex = newUI.GetComponent<SliceSprite>().tex;
-            newTex = new Texture2D(-(int)newSprite.rect.width, (int)newSprite.rect.height);
-            Color[] newTexturePixels = newSprite.texture.GetPixels((int)newSprite.textureRect.x, (int)newSprite.textureRect.y, -(int)newSprite.textureRect.width, (int)newSprite.textureRect.height);
-            newTex.SetPixels(newTexturePixels);
-            newTex.filterMode = FilterMode.Point;
-            newTex.Apply();*/
+              tex = new Texture2D((int)mySprite.rect.width, (int)mySprite.rect.height);
+              Color[] TexturePixels = mySprite.texture.GetPixels((int)mySprite.textureRect.x, (int)mySprite.textureRect.y, (int)mySprite.textureRect.width, (int)mySprite.textureRect.height);
+              tex.SetPixels(TexturePixels);
+              tex.filterMode = FilterMode.Point;
+              tex.Apply();
+
+              Texture2D newTex = newUI.GetComponent<SliceSprite>().tex;
+              newTex = new Texture2D(-(int)newSprite.rect.width, (int)newSprite.rect.height);
+              Color[] newTexturePixels = newSprite.texture.GetPixels((int)newSprite.textureRect.x, (int)newSprite.textureRect.y, -(int)newSprite.textureRect.width, (int)newSprite.textureRect.height);
+              newTex.SetPixels(newTexturePixels);
+              newTex.filterMode = FilterMode.Point;
+              newTex.Apply();*/
         }
 
         // Debug.Log(transformA.position);
@@ -175,16 +184,16 @@ public class SliceSprite : MonoBehaviour
         newUI.GetComponent<BoxCollider2D>().size = (newSprite.bounds.size);
         newUI.GetComponent<BoxCollider2D>().offset = new Vector2((sizeXTotal - newUI.GetComponent<BoxCollider2D>().size.x) / 2, 0);
         // GetComponent<Rigidbody2D>().gravityScale = 1.0f;
-        
+
 
         tex = new Texture2D((int)mySprite.rect.width, (int)mySprite.rect.height);
         Color[] TexturePixels = mySprite.texture.GetPixels((int)mySprite.textureRect.x, (int)mySprite.textureRect.y, (int)mySprite.textureRect.width, (int)mySprite.textureRect.height);
         tex.SetPixels(TexturePixels);
         tex.filterMode = FilterMode.Point;
         tex.Apply();
-        
+
         Texture2D newTex = newUI.GetComponent<SliceSprite>().tex;
-        
+
         newUI.GetComponent<SliceSprite>().tex = new Texture2D(-(int)newSprite.rect.width, (int)newSprite.rect.height);
         Color[] newTexturePixels = newSprite.texture.GetPixels((int)newSprite.textureRect.x, (int)newSprite.textureRect.y, -(int)newSprite.textureRect.width, (int)newSprite.textureRect.height);
         newUI.GetComponent<SliceSprite>().tex.SetPixels(newTexturePixels);
@@ -203,7 +212,7 @@ public class SliceSprite : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = new Vector2(-1, -2) * 5;
             newUI.GetComponent<Rigidbody2D>().velocity = new Vector2(1, -2) * 5;
         }
-       
+
     }
     void sliceY(Collision2D collision, SpriteRenderer thisSprite)
     {
@@ -231,7 +240,7 @@ public class SliceSprite : MonoBehaviour
         newUI.GetComponent<SliceSprite>().sr.sprite = newSprite;
 
         newUI.GetComponent<BoxCollider2D>().size = (newSprite.bounds.size);
-        newUI.GetComponent<BoxCollider2D>().offset = new Vector2(0, (sizeTotal - newUI.GetComponent<BoxCollider2D>().size.y) / 2);  
+        newUI.GetComponent<BoxCollider2D>().offset = new Vector2(0, (sizeTotal - newUI.GetComponent<BoxCollider2D>().size.y) / 2);
 
         tex = new Texture2D((int)mySprite.rect.width, (int)mySprite.rect.height);
         Color[] TexturePixels = mySprite.texture.GetPixels((int)mySprite.textureRect.x, (int)mySprite.textureRect.y, (int)mySprite.textureRect.width, (int)mySprite.textureRect.height);
@@ -247,7 +256,7 @@ public class SliceSprite : MonoBehaviour
         newUI.GetComponent<SliceSprite>().tex.Apply();
         // newUI.GetComponent<SliceSprite>().tex = newTex;
 
-        
+
 
 
         GetComponent<Rigidbody2D>().gravityScale = 1.0f;
@@ -265,7 +274,7 @@ public class SliceSprite : MonoBehaviour
             Debug.Log("x.-");
         }
 
-       
+
 
 
 
@@ -281,22 +290,40 @@ public class SliceSprite : MonoBehaviour
     IEnumerator destroyAfterFewSeconds()
     {
         yield return new WaitForSeconds(5);
-        if(gameObject != null)
+        if (gameObject != null)
         {
             GameManager.Instance.breakableUI.Remove(gameObject);
-            if (GameManager.Instance.breakableUI.Count == 0)
+            if (GameManager.Instance.breakableUI.Count == 0 && !GameManager.Instance.StopPass)
             {
                 GameManager.Instance.ColliderOfJukeboxBroken.SetActive(true);
                 GameManager.Instance.IdDialogueMoment = 2;
-                    GameManager.Instance.ChangeDialogueMoment();
-                
+                GameManager.Instance.ChangeDialogueMoment();
+                GameManager.Instance.StopPass = true;
                 foreach (Transform child in GameManager.Instance.bocksMomentSpeak.transform)
                 {
                     child.gameObject.SetActive(true);
                 }
             }
         }
-        
+
         Destroy(gameObject);
+    }
+    IEnumerator PassToTheNextDialogue()
+    {
+        yield return new WaitForSeconds(5);
+        if (!GameManager.Instance.StopPass)
+        {
+            GameManager.Instance.ColliderOfJukeboxBroken.SetActive(true);
+            GameManager.Instance.IdDialogueMoment = 2;
+            GameManager.Instance.ChangeDialogueMoment();
+            GameManager.Instance.StopPass = true;
+            foreach (Transform child in GameManager.Instance.bocksMomentSpeak.transform)
+            {
+                child.gameObject.SetActive(true);
+            }
+        }
+        
+
+
     }
 }
