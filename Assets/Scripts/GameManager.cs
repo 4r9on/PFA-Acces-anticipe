@@ -153,7 +153,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        PlayerPrefs.SetInt("GetCrashed", 1);
         if (PlayerPrefs.GetInt("GetCrashed") == 1)
         {
             PlayerPrefs.SetInt("GetCrashed", 0);
