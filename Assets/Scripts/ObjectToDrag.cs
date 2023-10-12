@@ -10,18 +10,24 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public bool canPutObject;
     public bool isPut;
     public int BornWithoutGravity;
+    public int Digicode;
     public GameObject objectToPutOn;
     public GameObject objectCreateAfterFalling;
     public bool painting;
+    public bool sign;
     public bool cog;
     public bool CD;
     public bool Moon;
     public bool child;
+    public bool chest;
     public bool canSlide;
+    public bool sliderRight;
     public bool S2ATSlide;
     public bool Background;
     public bool wasGravited;
+    public bool isButtonPause;
     public bool vis;
+    public bool canEnterInTheDoor;
 
     public List<GameObject> visList;
 
@@ -62,6 +68,8 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         if (gameObject.tag == "DeadZone" && collision.tag != "Explosion")
         {
             GameObject newExplosion = Instantiate(GameManager.Instance.Explosions[Random.Range(0, GameManager.Instance.Explosions.Count)]);
+            newExplosion.GetComponent<SoundDesign>().PhaseOfSound = 1;
+            GameManager.Instance.NewSound(newExplosion, newExplosion.GetComponent<SoundDesign>().TheVolume);
             newExplosion.transform.position = new Vector2(Random.Range(-4.0f, 4.0f), transform.position.y + 1);
             newExplosion.transform.eulerAngles = new Vector3(newExplosion.transform.eulerAngles.x, newExplosion.transform.eulerAngles.y, Random.Range(0, 360));
             StartCoroutine(DestroyExplosion(newExplosion));
@@ -71,8 +79,10 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
                 GameManager.Instance.blackSquare.SetActive(true);
             }
             Destroy(collision.gameObject);
-            
+
         }
+
+        
     }
     public IEnumerator DestroyExplosion(GameObject Explosion)
     {
@@ -82,6 +92,10 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (gameObject.tag == "Hammer" && collision.gameObject.tag == "JukeBoxCollider")
+        {
+            GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
+        }
         if (painting)
         {
             foreach (Transform children in transform)
@@ -93,7 +107,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         if (painting && collision.gameObject.tag == "Ground")
         {
             gameObject.GetComponent<SoundDesign>().PhaseOfSound = 2;
-            GameManager.Instance.NewSound(gameObject);
+            GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
             GameManager.Instance.DotWeenShakeCamera(0.2f, 0.1f, 30);
             /*  children.GetComponent<Rigidbody2D>().gravityScale = 0;
               children.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
@@ -105,7 +119,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             if (gameObject == GameManager.Instance.StockCD)
             {
-                GameManager.Instance.NewSound(gameObject);
+                GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
             }
             if (BornWithoutGravity > 0)
             {
@@ -157,7 +171,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         else if (collision.gameObject.tag == "Ground" && gameObject == GameManager.Instance.cog1)
         {
             gameObject.GetComponent<SoundDesign>().PhaseOfSound = 2;
-            GameManager.Instance.NewSound(gameObject);
+            GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
         }
     }
 
@@ -211,15 +225,13 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             GameManager.Instance.ObjectHover = gameObject;
 
-            if(gameObject.transform.childCount > 0)
+            if (gameObject.transform.childCount > 0)
             {
                 if (gameObject.transform.GetChild(0).GetComponent<HammerPhysics>() != null)
                 {
                     GameManager.Instance.GetComponent<DragAndDrop>().StopClick();
                 }
             }
-           
-
         }
 
         else if (GameManager.Instance.GetComponent<DragAndDrop>().draggedObject == gameObject)
@@ -248,25 +260,37 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         }
 
     }
-    
-    
-
-            
-        
-
-    
 
     public void shakeCameraAnim()
     {
         GameManager.Instance.DotWeenShakeCamera(0.1f, 0.6f, 30);
         GetComponent<SoundDesign>().PhaseOfSound = 4;
-        GameManager.Instance.NewSound(gameObject);
+        GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
     }
 
     public void DestroyTheCog()
     {
         GameManager.Instance.cog3.SetActive(true);
         Destroy(GameManager.Instance.cog1);
+    }
+
+    public void NowYouCanEnterInTheDoor()
+    {
+        canEnterInTheDoor = true;
+    }
+    public void YouEnterInTheDoor()
+    {
+        foreach (GameObject Credits in GameManager.Instance.Credit)
+        {
+            Credits.SetActive(true);
+        }
+        GameManager.Instance.ChangeDialogueMoment();
+        GameManager.Instance.Door.SetActive(false);
+        GameManager.Instance.cleanScene();
+    }
+    public void StopTheClicked()
+    {
+        GetComponent<Animator>().SetBool("IsChanged", true);
     }
 
 

@@ -15,6 +15,9 @@ public class Simon : MonoBehaviour
     public Light2D LightUp;
     public Light2D LightLeft;
     public Light2D LightRight;
+    public GameObject YellowContour;
+    public GameObject RedContour;
+    public GameObject BlueContour;
     bool waitIntro;
     public bool IsShowingLight;
 
@@ -85,6 +88,7 @@ public class Simon : MonoBehaviour
     }
     IEnumerator ShowLight()
     {
+        ShutDownContour();
         IsShowingLight = true;
         int LightID = ID;
         ID++;
@@ -107,12 +111,13 @@ public class Simon : MonoBehaviour
                         LightUp.color = new Color(0.9528302f, 0.0759992f, 0, 1);
                         LightRight.color = new Color(0.9528302f, 0.0759992f, 0, 1);
                         LightLeft.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                        RedContour.SetActive(true);
                         foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                         {
                             if (SimonUI.name == "Button_Play")
                             {
                                 SimonUI.GetComponent<SoundDesign>().PhaseOfSound = 2;
-                                GameManager.Instance.NewSound(SimonUI);
+                                GameManager.Instance.NewSound(SimonUI, SimonUI.GetComponent<SoundDesign>().TheVolume);
                             }
                         }
                         break;
@@ -120,12 +125,13 @@ public class Simon : MonoBehaviour
                         LightUp.color = new Color(1, 0.7112604f, 0, 1);
                         LightRight.color = new Color(1, 0.7112604f, 0, 1);
                         LightLeft.color = new Color(1, 0.7112604f, 0, 1);
+                        YellowContour.SetActive(true);
                         foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                         {
                             if (SimonUI.name == "Button_Credit")
                             {
                                 SimonUI.GetComponent<SoundDesign>().PhaseOfSound = 2;
-                                GameManager.Instance.NewSound(SimonUI);
+                                GameManager.Instance.NewSound(SimonUI, SimonUI.GetComponent<SoundDesign>().TheVolume);
                             }
                         }
                         break;
@@ -133,26 +139,27 @@ public class Simon : MonoBehaviour
                         LightUp.color = new Color(0, 0.2810159f, 1, 1);
                         LightRight.color = new Color(0, 0.2810159f, 1, 1);
                         LightLeft.color = new Color(0, 0.2810159f, 1, 1);
+                        BlueContour.SetActive(true);
                         foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                         {
                             if (SimonUI.name == "Button_Option")
                             {
                                 SimonUI.GetComponent<SoundDesign>().PhaseOfSound = 2;
-                                GameManager.Instance.NewSound(SimonUI);
+                                GameManager.Instance.NewSound(SimonUI, SimonUI.GetComponent<SoundDesign>().TheVolume);
                             }
                         }
                         break;
                 }
                 LightUp.GetComponent<Animator>().enabled = false;
-                LightUp.GetComponent<Animator>().enabled = false;
-                LightUp.GetComponent<Animator>().enabled = false;
+                LightRight.GetComponent<Animator>().enabled = false;
+                LightLeft.GetComponent<Animator>().enabled = false;
                 yield return new WaitForSeconds(0.5f);
                 if (LightID == AllID[AllID.Count - 1])
                 {
 
                     LightUp.GetComponent<Animator>().enabled = true;
-                    LightUp.GetComponent<Animator>().enabled = true;
-                    LightUp.GetComponent<Animator>().enabled = true;
+                    LightRight.GetComponent<Animator>().enabled = true;
+                    LightLeft.GetComponent<Animator>().enabled = true;
                     LightUp.color = AllLight[0];
                     LightRight.color = AllLight[1];
                     LightLeft.color = AllLight[2];
@@ -167,11 +174,12 @@ public class Simon : MonoBehaviour
         {
 
             LightUp.GetComponent<Animator>().enabled = true;
-            LightUp.GetComponent<Animator>().enabled = true;
-            LightUp.GetComponent<Animator>().enabled = true;
+            LightRight.GetComponent<Animator>().enabled = true;
+            LightLeft.GetComponent<Animator>().enabled = true;
             LightUp.color = AllLight[0];
             LightRight.color = AllLight[1];
             LightLeft.color = AllLight[2];
+            ShutDownContour();
             yield return new WaitForSeconds(0.5f);
         }
         if (infiniteGame.Count > 0)
@@ -192,12 +200,13 @@ public class Simon : MonoBehaviour
                         LightUp.color = new Color(0.9528302f, 0.0759992f, 0, 1);
                         LightRight.color = new Color(0.9528302f, 0.0759992f, 0, 1);
                         LightLeft.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                        RedContour.SetActive(true);
                         foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                         {
                             if (SimonUI.name == "Button_Play")
                             {
                                 SimonUI.GetComponent<SoundDesign>().PhaseOfSound = 2;
-                                GameManager.Instance.NewSound(SimonUI);
+                                GameManager.Instance.NewSound(SimonUI, SimonUI.GetComponent<SoundDesign>().TheVolume);
                             }
                         }
                         break;
@@ -205,12 +214,13 @@ public class Simon : MonoBehaviour
                         LightUp.color = new Color(1, 0.7112604f, 0, 1);
                         LightRight.color = new Color(1, 0.7112604f, 0, 1);
                         LightLeft.color = new Color(1, 0.7112604f, 0, 1);
+                        YellowContour.SetActive(true);
                         foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                         {
                             if (SimonUI.name == "Button_Credit")
                             {
                                 SimonUI.GetComponent<SoundDesign>().PhaseOfSound = 2;
-                                GameManager.Instance.NewSound(SimonUI);
+                                GameManager.Instance.NewSound(SimonUI, SimonUI.GetComponent<SoundDesign>().TheVolume);
                             }
                         }
                         break;
@@ -218,29 +228,31 @@ public class Simon : MonoBehaviour
                         LightUp.color = new Color(0, 0.2810159f, 1, 1);
                         LightRight.color = new Color(0, 0.2810159f, 1, 1);
                         LightLeft.color = new Color(0, 0.2810159f, 1, 1);
+                        BlueContour.SetActive(true);
                         foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                         {
                             if (SimonUI.name == "Button_Option")
                             {
                                 SimonUI.GetComponent<SoundDesign>().PhaseOfSound = 2;
-                                GameManager.Instance.NewSound(SimonUI);
+                                GameManager.Instance.NewSound(SimonUI, SimonUI.GetComponent<SoundDesign>().TheVolume);
                             }
                         }
                         break;
                 }
                 LightUp.GetComponent<Animator>().enabled = false;
-                LightUp.GetComponent<Animator>().enabled = false;
-                LightUp.GetComponent<Animator>().enabled = false;
+                LightRight.GetComponent<Animator>().enabled = false;
+                LightLeft.GetComponent<Animator>().enabled = false;
                 yield return new WaitForSeconds(0.5f);
                 IsShowingLight = false;
                 if (LightID == AllID[AllID.Count - 1])
                 {
                     LightUp.GetComponent<Animator>().enabled = true;
-                    LightUp.GetComponent<Animator>().enabled = true;
-                    LightUp.GetComponent<Animator>().enabled = true;
+                    LightRight.GetComponent<Animator>().enabled = true;
+                    LightLeft.GetComponent<Animator>().enabled = true;
                     LightUp.color = AllLight[0];
                     LightRight.color = AllLight[1];
                     LightLeft.color = AllLight[2];
+                    ShutDownContour();
                     yield return new WaitForSeconds(0.5f);
                 }
             }
@@ -269,18 +281,43 @@ public class Simon : MonoBehaviour
             //Permet de comparer le dernier bouton appuyer à la liste de couleur faite au hasard, si le bouton est mauvais alors le jeu es perdu
             if (ComparativeGame[ComparativeGame.Count - 1] != infiniteGame[ComparativeGame.Count - 1])
             {
+                
+                GameObject newFeedback = Instantiate(GameManager.Instance.feedbackNegative[Random.Range(0, GameManager.Instance.feedbackNegative.Count)]);
+                foreach (Transform child in GameManager.Instance.ObjectHover.transform.parent)
+                {
+                    if(child.name == "Pos")
+                    {
+                        GameObject newChild = Instantiate(child.gameObject);
+                        newChild.transform.position = new Vector2(Random.Range(-1.00f, 1.00f) + newChild.transform.position.x, Random.Range(-1.00f, 1.00f) + newChild.transform.position.y);
+                        newFeedback.transform.parent = newChild.transform;
+                    }
+                }
+                
+
                 GameManager.Instance.GetComponent<AudioSource>().Pause();
                 foreach (GameObject SimonUI in GameManager.Instance.SimonUI)
                 {
                     if (SimonUI.name == "Button_Pause")
                     {
                         SimonUI.GetComponent<SoundDesign>().PhaseOfSound = 3;
-                        GameManager.Instance.NewSound(SimonUI);
+                        GameManager.Instance.NewSound(SimonUI, SimonUI.GetComponent<SoundDesign>().TheVolume);
                     }
                 }
                 RemoveStringFromList(infiniteGame);
                 RemoveStringFromList(ComparativeGame);
-                BeginTheSimon();
+            }
+            else
+            {
+                GameObject newFeedback = Instantiate(GameManager.Instance.feedbackPositive[Random.Range(0, GameManager.Instance.feedbackPositive.Count)], GameManager.Instance.ObjectHover.transform.position, Quaternion.identity);
+                foreach (Transform child in GameManager.Instance.ObjectHover.transform.parent)
+                {
+                    if (child.name == "Pos")
+                    {
+                        GameObject newChild = Instantiate(child.gameObject);
+                        newChild.transform.position = new Vector2(Random.Range(-1.00f, 1.00f) + newChild.transform.position.x, Random.Range(-1.00f, 1.00f) + newChild.transform.position.y);
+                        newFeedback.transform.parent = newChild.transform;
+                    }
+                }
             }
             if (ComparativeGame.Count == infiniteGame.Count)
             {
@@ -297,7 +334,7 @@ public class Simon : MonoBehaviour
                         if (nbrCorrect == ComparativeGame.Count)
                         {
                             RemoveStringFromList(ComparativeGame);
-                            AddLights();
+                            StartCoroutine(AddTimeAfterWin());
                         }
                     }
                 }
@@ -315,6 +352,7 @@ public class Simon : MonoBehaviour
 
     IEnumerator PlayWithLight(string ButtonName)
     {
+        ShutDownContour();
         int LightID = ID;
         ID++;
         AllID.Add(LightID);
@@ -324,34 +362,45 @@ public class Simon : MonoBehaviour
                 LightUp.color = new Color(0.9528302f, 0.0759992f, 0, 1);
                 LightRight.color = new Color(0.9528302f, 0.0759992f, 0, 1);
                 LightLeft.color = new Color(0.9528302f, 0.0759992f, 0, 1);
+                RedContour.SetActive(true);
                 break;
             case "Button_Credit":
                 LightUp.color = new Color(1, 0.7112604f, 0, 1);
                 LightRight.color = new Color(1, 0.7112604f, 0, 1);
                 LightLeft.color = new Color(1, 0.7112604f, 0, 1);
+                YellowContour.SetActive(true);
                 break;
             case "Button_Option":
                 LightUp.color = new Color(0, 0.2810159f, 1, 1);
                 LightRight.color = new Color(0, 0.2810159f, 1, 1);
                 LightLeft.color = new Color(0, 0.2810159f, 1, 1);
+                BlueContour.SetActive(true);
                 break;
         }
         LightUp.GetComponent<Animator>().enabled = false;
-        LightUp.GetComponent<Animator>().enabled = false;
-        LightUp.GetComponent<Animator>().enabled = false;
+        LightRight.GetComponent<Animator>().enabled = false;
+        LightLeft.GetComponent<Animator>().enabled = false;
         yield return new WaitForSeconds(0.5f);
         if (LightID == AllID[AllID.Count - 1])
         {
             LightUp.GetComponent<Animator>().enabled = true;
-            LightUp.GetComponent<Animator>().enabled = true;
-            LightUp.GetComponent<Animator>().enabled = true;
+            LightRight.GetComponent<Animator>().enabled = true;
+            LightLeft.GetComponent<Animator>().enabled = true;
             LightUp.color = AllLight[0];
             LightRight.color = AllLight[1];
             LightLeft.color = AllLight[2];
+            ShutDownContour();
             yield return new WaitForSeconds(0.5f);
         }
 
 
+    }
+
+    void ShutDownContour()
+    {
+        RedContour.SetActive(false);
+        BlueContour.SetActive(false);
+        YellowContour.SetActive(false);
     }
 
     public void BeginTheSimon()
@@ -362,7 +411,7 @@ public class Simon : MonoBehaviour
             if (SimonUI.name == "Button_Pause")
             {
                 SimonUI.GetComponent<SoundDesign>().PhaseOfSound = 2;
-                GameManager.Instance.NewSound(SimonUI);
+                GameManager.Instance.NewSound(SimonUI, SimonUI.GetComponent<SoundDesign>().TheVolume);
             }
         }
         RemoveStringFromList(infiniteGame);
@@ -380,5 +429,10 @@ public class Simon : MonoBehaviour
             waitIntro = false;
         }
        
+    }
+    IEnumerator AddTimeAfterWin()
+    {
+            yield return new WaitForSeconds(0.7f);
+            AddLights();
     }
 }

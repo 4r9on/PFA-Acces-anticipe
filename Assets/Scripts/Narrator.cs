@@ -51,7 +51,7 @@ public class Narrator : MonoBehaviour
     {
         GameManager.Instance.DotWeenShakeCamera(0.2f, 1f, 40);
         GameManager.Instance.narratorsAnim[9].SetActive(true);
-        GameManager.Instance.NewSound(gameObject);
+        GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
         GameManager.Instance.Dialogue();
         GameManager.Instance.GetComponent<AudioSource>().Pause();
         foreach (GameObject obj in GameManager.Instance.SimonUI)
@@ -72,21 +72,22 @@ public class Narrator : MonoBehaviour
 
     public void firstLampToLightOn()
     {
-       GameManager.Instance.lightOnScene2.transform.GetChild(2).gameObject.SetActive(true);
-        GameManager.Instance.NewSound(gameObject);
+       GameManager.Instance.lightOnScene2.transform.GetChild(3).gameObject.SetActive(true);
+        GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
     }
     public void SecondLampToLightOn()
     {
-        GameManager.Instance.lightOnScene2.transform.GetChild(4).gameObject.SetActive(true);
-        GameManager.Instance.NewSound(gameObject);
+        GameManager.Instance.lightOnScene2.transform.GetChild(5).gameObject.SetActive(true);
+        GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
     }
     public void LastLampToLightOn()
     {
-        GameManager.Instance.NewSound(gameObject);
-        GameManager.Instance.lightOnScene2.transform.GetChild(3).gameObject.SetActive(true);
+        
+        GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
+        GameManager.Instance.lightOnScene2.transform.GetChild(4).gameObject.SetActive(true);
         GameManager.Instance.lightOnScene2.transform.GetChild(5).GetComponent<Light2D>().intensity = 0.48f;
         GameManager.Instance.lightOnScene2.transform.GetChild(5).GetComponent<Animator>().enabled = true;
-        GameManager.Instance.lightOnScene2.transform.GetChild(6).gameObject.SetActive(true);
+        GameManager.Instance.lightOnScene2.transform.GetChild(7).gameObject.SetActive(true);
         GameManager.Instance.changeMusic(2);
         GameManager.Instance.GetComponent<AudioSource>().volume = 0;
     }
@@ -102,8 +103,16 @@ public class Narrator : MonoBehaviour
             if (SimonUI.name == "Button_Pause")
             {
                 SimonUI.GetComponent<Animator>().SetBool("IsClicked", true);
+                if (SimonUI.GetComponent<Animator>().GetBool("IsChanged") == true)
+                {
+                    SimonUI.GetComponent<Animator>().SetBool("IsChanged", false);
+                }
+                else
+                {
+                    SimonUI.GetComponent<Animator>().SetBool("IsChanged", true);
+                }
                 SimonUI.GetComponent<SoundDesign>().PhaseOfSound = 1;
-                GameManager.Instance.NewSound(SimonUI);
+                GameManager.Instance.NewSound(SimonUI, SimonUI.GetComponent<SoundDesign>().TheVolume);
             }
         }
         GameManager.Instance.GetComponent<AudioSource>().Pause();
@@ -144,7 +153,7 @@ public class Narrator : MonoBehaviour
     }
     public void ExplosionSound()
     {
-        GameManager.Instance.NewSound(gameObject);
+        GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
         GameManager.Instance.GetComponent<AudioSource>().Pause();
         Camera.main.transform.parent.GetComponent<Animator>().enabled = true;
     }
@@ -216,7 +225,7 @@ public class Narrator : MonoBehaviour
     public void HammerIsPutted()
     {
         GameManager.Instance.Hammer.SetActive(true);
-        GameManager.Instance.NewSound(gameObject);
+        GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
         endOfScene4();
     }
 
@@ -260,6 +269,12 @@ public class Narrator : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public void NarratorWantUsToLeftTheGame()
+    {
+        GameManager.Instance.changeMusic(7);
+         gameObject.GetComponent<Narration>().endSoundOfAnim();
+    }
+
     public void NarratorTalkAboutTheDoor()
     {
         GameManager.Instance.TalkingAboutDoor.SetActive(true);
@@ -283,7 +298,7 @@ public class Narrator : MonoBehaviour
     public void OpenButton(int id)
     {
         gameObject.GetComponent<SoundDesign>().PhaseOfSound = id;
-        GameManager.Instance.NewSound(gameObject);
+        GameManager.Instance.NewSound(gameObject, gameObject.GetComponent<SoundDesign>().TheVolume);
     }
 
     public void afterOpencurtain()

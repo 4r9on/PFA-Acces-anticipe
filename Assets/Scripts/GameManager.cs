@@ -60,11 +60,22 @@ public class GameManager : MonoBehaviour
     public GameObject DiskPlayer;
     public bool canTouchCd = true;
     int antiBugAnimBoutonPause;
+    public List<GameObject> feedbackPositive = new List<GameObject>();
+    public List<GameObject> feedbackNegative = new List<GameObject>();
+    public GameObject ButtonPause;
 
     //Tableau 3
     public GameObject cog3;
+    public GameObject night;
     public List<GameObject> DayNight = new List<GameObject>();
+    public List<GameObject> DigicodeView = new List<GameObject>();
+    public List<GameObject> AllBooks = new List<GameObject>();
+    public List<Sprite> BooksSpriteXL = new List<Sprite>();
+    public List<Sprite> BooksSpriteBig = new List<Sprite>();
+    public List<Sprite> BooksSpriteMedium = new List<Sprite>();
+    public List<Sprite> BooksSpriteSmall = new List<Sprite>();
     public GameObject dayLight;
+    public GameObject Digicode;
     public GameObject nightLight;
     public SpriteMask LampMask;
     public GameObject LeftWallAnimation;
@@ -74,11 +85,14 @@ public class GameManager : MonoBehaviour
 
     //Tableau 4
     public GameObject Egg;
+    public GameObject RopePlay;
     public List<GameObject> narratorsAnim4 = new List<GameObject>();
     public GameObject Hammer;
     public GameObject JukeboxBroken4;
     public GameObject ColliderOfJukeboxBroken;
     public List<GameObject> JukeboxPhase = new List<GameObject>();
+    public List<GameObject> AllOriginalToBreak = new List<GameObject>();
+    public bool StopPass;
     int JukeBoxHP = 20;
 
     //Tableau 5
@@ -299,6 +313,9 @@ public class GameManager : MonoBehaviour
             case 6:
                 GetComponent<AudioSource>().volume = 0.5f;
                 break;
+            case 7 :
+                GetComponent<AudioSource>().volume = 0.5f;
+                break;
         }
         GetComponent<AudioSource>().clip = TableauxMusic[MusicTableau - 1];
         GetComponent<AudioSource>().Play();
@@ -361,7 +378,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         S2ATWithWriting.GetComponent<Animator>().enabled = true;
-        NewSound(S2ATWithWriting);
+        NewSound(S2ATWithWriting, S2ATWithWriting.GetComponent<SoundDesign>().TheVolume);
         S2ATWithWriting.transform.localScale = Vector3.one;
         S2ATWithWriting.transform.localPosition = new Vector3(0.013f, 1.752f, S2ATWithWriting.transform.position.z);
         GetComponent<DragAndDrop>().MinScale = S2AT.transform.localScale.y;
@@ -408,14 +425,38 @@ public class GameManager : MonoBehaviour
             ObjetcsDay.GetComponent<Animator>().enabled = true;
             if (ObjetcsDay.GetComponent<SoundDesign>() != null)
             {
-                NewSound(ObjetcsDay);
+                NewSound(ObjetcsDay, ObjetcsDay.GetComponent<SoundDesign>().TheVolume);
             }
         }
         dayLight.SetActive(false);
         nightLight.SetActive(true);
+        night.SetActive(true);
         LampMask.enabled = true;
     }
 
+    public void SearchSpriteInDigicode(bool stopSearch)
+    {
+        for (int i = 0; i < DigicodeView.Count; i++)
+        {
+            if (DigicodeView[i].GetComponent<SpriteRenderer>().sprite == null && !stopSearch)
+            {
+                if(ObjectHover.GetComponent<ObjectToDrag>().Digicode <= 10)
+                {
+                    DigicodeView[i].GetComponent<SpriteRenderer>().sprite = ObjectHover.GetComponent<SpriteRenderer>().sprite;
+                }
+                stopSearch = true;
+            }
+            else if(i == DigicodeView.Count-1 && !stopSearch && ObjectHover.GetComponent<ObjectToDrag>().Digicode > 10)
+            {
+                foreach(Object obj in DigicodeView)
+                {
+                    obj.GetComponent<SpriteRenderer>().sprite = null;
+                }
+                Debug.Log("Accept Code");
+                stopSearch = true;
+            }
+        }
+    }
     public void FallTheHole(GameObject UVCross)
     {
         UVCross.SetActive(false);
@@ -433,7 +474,7 @@ public class GameManager : MonoBehaviour
             {
                 child.gameObject.SetActive(true);
                 child.GetComponent<Animator>().enabled = true;
-                NewSound(child.gameObject);
+                NewSound(child.gameObject, child.gameObject.GetComponent<SoundDesign>().TheVolume);
             }
             else
             {
@@ -495,6 +536,7 @@ public class GameManager : MonoBehaviour
             {
                 phase = 1;
                 Destroy(Egg);
+                Destroy(RopePlay);
             }
             if (JukeBoxHP == 5)
             {
@@ -574,7 +616,6 @@ public class GameManager : MonoBehaviour
                 newSoundDesign.GetComponent<AudioSource>().clip = gameObjectWithTheSound.GetComponent<SoundDesign>().clipList4[Random.Range(0, gameObjectWithTheSound.GetComponent<SoundDesign>().clipList3.Count)];
                 break;
         }
-
         newSoundDesign.GetComponent<AudioSource>().volume = Volume;
         newSoundDesign.GetComponent<AudioSource>().Play();
     }
@@ -640,6 +681,38 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ChangeSpriteBook(GameObject book)
+    {
+        bool sizeIsFind = false;
+        sizeIsFind = FindTheGoodSize(book, BooksSpriteXL);
+        if (!sizeIsFind)
+        {
+            sizeIsFind = FindTheGoodSize(book, BooksSpriteBig);
+        }
+        if (!sizeIsFind)
+        {
+            sizeIsFind = FindTheGoodSize(book, BooksSpriteMedium);
+        }
+        if (!sizeIsFind)
+        {
+            sizeIsFind = FindTheGoodSize(book, BooksSpriteSmall);
+        }
+    }
 
+    public bool FindTheGoodSize(GameObject book, List<Sprite> BooksSpriteSize)
+    {
+        bool sizeIsFind = false;
+        foreach (Sprite bookSprite in BooksSpriteSize)
+        {
+            if (book.GetComponent<SpriteRenderer>().sprite == bookSprite)
+            {
+                sizeIsFind = true;
+                List<Sprite> booksSprite = new List<Sprite>();
+                booksSprite.Remove(bookSprite);
+                book.GetComponent<SpriteRenderer>().sprite = BooksSpriteSize[Random.Range(0, BooksSpriteSize.Count)];
+            }
+        }
+        return sizeIsFind;
+    }
 }
 
