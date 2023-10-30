@@ -701,9 +701,9 @@ public class DragAndDrop : MonoBehaviour
 
             else if (GameManager.Instance.ObjectHover.tag == "Button")
             {
-
                 GameManager.Instance.breakingTheWall();
                 GameManager.Instance.NewSound(GameManager.Instance.ObjectHover, GameManager.Instance.ObjectHover.GetComponent<SoundDesign>().TheVolume);
+                //GameManager.Instance.UvCrash.gameObject.SetActive(false);
             }
 
             else if (GameManager.Instance.ObjectHover.tag == "UV")
@@ -713,13 +713,6 @@ public class DragAndDrop : MonoBehaviour
 
             else if (GameManager.Instance.ObjectHover.tag == "Vis")
             {
-                Debug.Log("on est kla");
-               /*tits
-                * int a = -10;
-               
-                animator.SetBool("Visser", true);
-
-                vis1.AddForce(transform.up * a);*/
                 if(GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().valueVisRotation < GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().maxValueVisRotation)
                 {
                     GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().letsTurnVis = true;

@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviour
     public GameObject ButtonInWall;
     public GameObject BackgroundTableau4;
     public GameObject leftWall;
+    public List<GameObject> UvCrash =new();
 
     //Tableau 4
     public GameObject Egg;
@@ -461,7 +462,7 @@ public class GameManager : MonoBehaviour
     }
     public void FallTheHole(GameObject UVCross)
     {
-        UVCross.SetActive(false);
+        UVCross.layer = 9;
         ObjectHover = null;
         Raycaster2D.eventMask = 503;
         LeftWallAnimation.GetComponent<Animator>().enabled = true;
@@ -470,6 +471,11 @@ public class GameManager : MonoBehaviour
 
     public void breakingTheWall()
     {
+        for(int i = 0; i<UvCrash.Count; i++)
+        {
+            UvCrash[i].gameObject.SetActive(false);
+        }
+    
         foreach (Transform child in LeftWallAnimation.transform.parent)
         {
             if (child.gameObject != LeftWallAnimation)
