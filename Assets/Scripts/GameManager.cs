@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     public GameObject ObjectLoopingSound;
     public string nameOfLoopingObject;
     public List<GameObject> LoopingObjects = new List<GameObject>();
+    public List<GameObject> visList = new List<GameObject>();
+    public GameObject IronPlateOption;
 
     //Tableau 1
     public GameObject Gauge;

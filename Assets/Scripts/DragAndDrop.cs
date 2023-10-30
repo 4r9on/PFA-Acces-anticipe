@@ -12,6 +12,7 @@ public class DragAndDrop : MonoBehaviour
 {
     public bool dragged = false;
     public GameObject draggedObject;
+    public GameObject draggedVis;
     public GameObject ObjectPut;
     public Camera cam;
     bool MovingBar;
@@ -436,7 +437,6 @@ public class DragAndDrop : MonoBehaviour
     {
         if (GameManager.Instance.ObjectHover != null)
         {
-            Debug.Log(GameManager.Instance.ObjectHover.tag);
             if (GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().chest)
             {
                 if (GameManager.Instance.Digicode.activeInHierarchy == false)
@@ -713,14 +713,19 @@ public class DragAndDrop : MonoBehaviour
 
             else if (GameManager.Instance.ObjectHover.tag == "Vis")
             {
-                int a = -10;
-                //animator.SetBool("Visser", true);
-                Debug.Log("fgh");
+                Debug.Log("on est kla");
+               /*tits
+                * int a = -10;
+               
+                animator.SetBool("Visser", true);
 
-                vis1.AddForce(transform.up * a);
-                Debug.Log("f");
-
-
+                vis1.AddForce(transform.up * a);*/
+                if(GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().valueVisRotation < GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().maxValueVisRotation)
+                {
+                    GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>().letsTurnVis = true;
+                }
+                GameManager.Instance.ObjectHover.GetComponent<ObjectToDrag>();
+                 draggedVis = GameManager.Instance.ObjectHover;
             }
 
             else if (GameManager.Instance.ObjectHover.tag == "Door")
@@ -832,6 +837,15 @@ public class DragAndDrop : MonoBehaviour
     }
     public void StopClick()
     {
+        if (draggedVis != null)
+        {
+            if (draggedVis.tag == "Vis")
+            {
+                
+                draggedVis.GetComponent<ObjectToDrag>().letsTurnVis = false;
+            }
+        }
+        
         if (draggedObject != null)
         {
             if (draggedObject.tag == "Object" || draggedObject.tag == "Hammer" || draggedObject.tag == "Slider")
@@ -842,6 +856,7 @@ public class DragAndDrop : MonoBehaviour
                 }
 
             }
+            
             if (draggedObject.tag == "Slider" && canThrowHandle)
             {
                 GameManager.Instance.CancelLoopingObjects(GameManager.Instance.nameOfLoopingObject);
