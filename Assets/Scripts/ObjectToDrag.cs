@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
 public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -29,7 +30,11 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     public bool vis;
     public bool canEnterInTheDoor;
 
-    public List<GameObject> visList;
+    public float valueVisRotation;
+    public float maxValueVisRotation;
+    public float lastRotation;
+    public bool letsTurnVis;
+    
 
     private int click;
     // Start is called before the first frame update
@@ -51,9 +56,42 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
             {
                 MakeTheCogRoll(900);
             }
-
             transform.GetChild(0).GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             transform.GetChild(0).position = transform.position;
+        }
+        if(letsTurnVis)
+        {
+            if (valueVisRotation < maxValueVisRotation)
+            {
+                transform.Rotate(Vector3.forward * 100 * Time.deltaTime, Space.Self);
+                if (transform.rotation.z > 0)
+                {
+                    valueVisRotation = valueVisRotation + transform.rotation.z;
+                }
+                else
+                {
+                    valueVisRotation = valueVisRotation - transform.rotation.z;
+                }
+            }
+            else
+            {
+                GetComponent<Rigidbody2D>().gravityScale = 1;
+                letsTurnVis = false;
+                int numberOfDevis = 0;
+                foreach(GameObject aVis in GameManager.Instance.visList)
+                {
+                    if (aVis.GetComponent<Rigidbody2D>().gravityScale == 1)
+                    {
+                        numberOfDevis++;
+                    }
+                }
+                if(numberOfDevis == 4)
+                {
+                    GameManager.Instance.IronPlateOption.GetComponent<Rigidbody2D>().gravityScale = 1;
+                }
+            }
+            
+            
         }
     }
 
@@ -219,7 +257,11 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
                 GameManager.Instance.GetComponent<DragAndDrop>().StopClick();
             }
         }
-        GameManager.Instance.Raycaster2D.eventMask = 503;
+        if (gameObject.tag == "Vis")
+        {
+            GameManager.Instance.GetComponent<DragAndDrop>().StopClick();
+        }
+            GameManager.Instance.Raycaster2D.eventMask = 503;
 
         if (gameObject.layer == 6)
         {
