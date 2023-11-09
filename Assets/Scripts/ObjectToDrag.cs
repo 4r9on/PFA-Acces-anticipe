@@ -63,7 +63,7 @@ public class ObjectToDrag : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         {
             if (valueVisRotation < maxValueVisRotation)
             {
-                transform.Rotate(Vector3.forward * 100 * Time.deltaTime, Space.Self);
+                transform.Rotate(Vector3.forward * 200 * Time.deltaTime, Space.Self);
                 if (transform.rotation.z > 0)
                 {
                     valueVisRotation = valueVisRotation + transform.rotation.z;
