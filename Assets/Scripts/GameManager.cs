@@ -256,6 +256,7 @@ public class GameManager : MonoBehaviour
         }
         else if (dAD.TableauActual == 2)
         {
+            IdDialogueMoment = 0;
             ChangeDialogueMoment();
             tableau2.SetActive(true);
             forground.transform.Translate(-17.58f, 0, 0);
