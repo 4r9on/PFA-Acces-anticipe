@@ -84,8 +84,8 @@ public class GameManager : MonoBehaviour
     public GameObject ButtonInWall;
     public GameObject BackgroundTableau4;
     public GameObject leftWall;
-    public List<GameObject> UvCrash =new();
-
+    public GameObject UvCrash;
+    public GameObject UvButton;
     //Tableau 4
     public GameObject Egg;
     public GameObject RopePlay;
@@ -256,6 +256,7 @@ public class GameManager : MonoBehaviour
         }
         else if (dAD.TableauActual == 2)
         {
+            IdDialogueMoment = 0;
             ChangeDialogueMoment();
             tableau2.SetActive(true);
             forground.transform.Translate(-17.58f, 0, 0);
@@ -467,15 +468,13 @@ public class GameManager : MonoBehaviour
         Raycaster2D.eventMask = 503;
         LeftWallAnimation.GetComponent<Animator>().enabled = true;
         LeftWallAnimation.transform.GetChild(0).gameObject.SetActive(true);
+        UvButton.SetActive(false);
     }
 
     public void breakingTheWall()
     {
-        for(int i = 0; i<UvCrash.Count; i++)
-        {
-            UvCrash[i].gameObject.SetActive(false);
-        }
-    
+        UvCrash.SetActive(false);
+
         foreach (Transform child in LeftWallAnimation.transform.parent)
         {
             if (child.gameObject != LeftWallAnimation)
@@ -677,12 +676,18 @@ public class GameManager : MonoBehaviour
         switch (tags)
         {
             case "ButtonLangue":
-                bocksMomentSpeak.SetActive(true);
+                if(bocksMomentSpeak!= null)
+                {
+                    bocksMomentSpeak.SetActive(true);
+                }
                 IdDialogue = 0;
                 Dialogue();
                 break;
             case "ButtonMusic":
-                bocksMomentSpeak.SetActive(true);
+                if (bocksMomentSpeak != null)
+                {
+                    bocksMomentSpeak.SetActive(true);
+                }
                 IdDialogue = 1;
                 Dialogue();
                 break;

@@ -782,14 +782,19 @@ public class DragAndDrop : MonoBehaviour
                 else
                 {
                     settingsWindow.SetActive(true);
-                    if (GameManager.Instance.dialogueList[GameManager.Instance.IdDialogue - 1] != null)
+                    if(GameManager.Instance.IdDialogue != 0)
                     {
-                        foreach (Transform child in GameManager.Instance.dialogueList[GameManager.Instance.IdDialogue - 1].transform)
+                        if (GameManager.Instance.dialogueList[GameManager.Instance.IdDialogue - 1] != null)
                         {
-                            // Debug.Log(child.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).ToString());
-                            child.GetComponent<Animator>().SetFloat("Speed", 0f);
-                            AnimPaused.Add(child.gameObject);
+                            foreach (Transform child in GameManager.Instance.dialogueList[GameManager.Instance.IdDialogue - 1].transform)
+                            {
+                                // Debug.Log(child.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).ToString());
+                                child.GetComponent<Animator>().SetFloat("Speed", 0f);
+                                AnimPaused.Add(child.gameObject);
+                            }
                         }
+                    }
+                    
                         GameManager.Instance.LastIdDialogueMoment = GameManager.Instance.IdDialogueMoment - 1;
                         GameManager.Instance.LastIdDialogue = GameManager.Instance.IdDialogue;
 
@@ -803,7 +808,7 @@ public class DragAndDrop : MonoBehaviour
                         GameManager.Instance.animWasStop = true;
 
 
-                    }
+                    
 
 
                 }
